@@ -1,0 +1,244 @@
+<!-- hungnx 06062018 start -->
+<style>
+	.no-padding {
+		padding: 0
+	}
+	.form-control::placeholder {
+		color: #999 !important;
+		font-style: italic;
+	}
+</style>
+<div data-ng-controller="rpConstructionController as vm">
+	<p class="text-brecum">{{vm.String}}</p>
+	<form class="form-horizontal row" role="form">
+
+		<div class="form-body">
+			<div class="portlet light bordered">
+				<div class="portlet-title background-title">
+					<div class="caption">
+						<span class="caption-subject bold lowercase" translate>Thông
+							tin tìm kiếm </span>
+
+					</div>
+					<div class="text-right margin-row-title">
+						<i data-toggle="collapse" data-target="#constructionTask"
+							class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+					</div>
+				</div>
+				<div id="constructionTask" class="collapse in from-search">
+					<div class="clearfix position-relative">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Nội dung
+									tìm kiếm</label>
+								<div class="col-md-8">
+									<div class="col-md-5 no-padding">
+										<input id="keySearch" class=" form-control width100"
+											type="text" ng-enter="vm.doSearch()"
+											ng-model="vm.searchForm.keySearch"
+											placeholder="Mã công trình" />
+									</div>
+									<div class="col-md-2">
+<!-- 									<div class="One_icon"> -->
+<!-- 										<i class="fa fa-times" aria-hidden="true" -->
+<!-- 											ng-click="vm.deleteListData(6)"></i> -->
+<!-- 									</div> -->
+									</div>
+									
+									<div class="col-md-5 no-padding position-relative">
+										<div class="input-icon right">
+										<i class="fa fa-search directive"
+										ng-click="vm.openContractOut()" style="cursor: pointer;"></i>
+										
+                                   		 <input class="form-control width100" type="text"
+										k-options="vm.patternContractOutOptions" kendo-auto-complete
+										name="contractOut" ng-enter="vm.doSearch()"
+										ng-model="vm.searchForm.cntContractCode"
+										maxlength="200" id="cntContractOut" />
+										</div>
+									</div>
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="vm.deleteListData(7)"></i>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Loại công trình</label>
+								<div class="col-md-8" ng-enter="vm.doSearch()">
+									<select kendo-multi-select style="width: 100%" ng-model="vm.searchForm.listCatConstructionType"
+                                                k-data-text-field="'name'" k-data-value-field="'id'"
+                                                k-data-source="vm.catConstructionTypeDataList">
+                                    </select>
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="vm.deleteListData(2)"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Ngày khởi công</label>
+								<div class="col-md-8" ng-enter="vm.doSearch()">
+									<div class="col-md-5 no-padding position-relative">
+										<input name="startingDateFromConstr" id="startingDateFromConstr" class="form-control" ng-model="vm.searchForm.startingDateFrom" kendo-date-picker date-time k-format="'dd/MM/yyyy'"/>
+									</div>
+									<div class="col-md-2" style="text-align: center;"><label class="control-label" translate>đến</label></div>
+									<div class="col-md-5 no-padding position-relative">
+										<input name="startingDateToConstr" id="startingDateToConstr" class="form-control" ng-model="vm.searchForm.startingDateTo" kendo-date-picker date-time k-format="'dd/MM/yyyy'"/>
+									</div>
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="vm.deleteListData(1)"></i>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Ngày hoàn thành</label>
+								<div class="col-md-8" ng-enter="vm.doSearch()">
+									<div class="col-md-5 no-padding position-relative">
+										<input id="completeDateFromConstr" class="form-control" ng-model="vm.searchForm.completeDateFrom" kendo-date-picker date-time k-format="'dd/MM/yyyy'"/>
+									</div>
+									<div class="col-md-2" style="text-align: center;"><label class="control-label" translate>đến</label></div>
+									<div class="col-md-5 no-padding position-relative">
+										<input id="completeDateToConstr" class="form-control" ng-model="vm.searchForm.completeDateTo" kendo-date-picker date-time k-format="'dd/MM/yyyy'"/>
+									</div>
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="vm.deleteListData(3)"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix position-relative">
+							 <div class="form-group col-md-6">
+                                    <label class="col-md-4 control-label" translate>Trạng thái công trình</label>
+                                    <div class="col-md-8" ng-enter="vm.doSearch()">
+                                        <select kendo-multi-select style="width: 100%" ng-model="vm.searchForm.listStatus"
+                                                k-data-text-field="'name'" k-data-value-field="'id'"
+                                                k-data-source="vm.statusDataList" >
+                                        </select>
+                                        <div class="One_icon">
+                                            <i class="fa fa-times" aria-hidden="true"
+                                               ng-click="vm.deleteListData(4)"></i>
+                                        </div>
+                                    </div>
+                              </div>
+                              <div class="form-group col-md-6">
+                                    <label class="col-md-4 control-label" translate>File mã trạm</label>
+                                    <div class="col-md-8" ng-enter="vm.doSearch()">
+                                        <input type="file" id="fileSearchStation"
+                                        accept=".xls, .xlsx">
+                                        <div class="One_icon">
+                                            <i class="fa fa-times" aria-hidden="true"
+                                               ng-click="vm.deleteListData(5)"></i>
+                                        </div>
+                                    </div>
+                                    <div style="position: absolute;top: 3px;right: -50px;font-size: 11px"><a href="" ng-click="vm.getStationCodeTemplate()"><u>Tải biểu mẫu</u></a></div>
+                              </div>
+						</div>
+						<div class="clearfix position-relative">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 form-horizontal control-label " translate>Tỉnh</label>
+								<div class="col-md-8">
+									<div class="input-icon right ">
+										<i class="fa fa-search directive" ng-click="vm.openCatProvincePopup()"></i>
+									</div>
+									<input kendo-auto-complete k-options="vm.provinceOptions" class=" form-control width100" type="text" id="provincename" ng-model="vm.searchForm.catProvinceName" name="provincename" />
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" ng-click="vm.clearProvince()"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="clearfix form-actions margin-top">
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<button type="button" id="doSearchTrans"
+									class="btn btn-qlk padding-search-right padding-lable noteQLK"
+									ng-click="vm.doSearch()" translate>Xem trước</button>
+								<button type="button" id="excel" ng-disabled="vm.disableBtnExcel"
+									class="btn btn-qlk padding-search-right padding-lable excelQLK"
+									ng-click="vm.exportexcel()" translate>Xuất excel</button>
+								<button type="button" id="pdf" ng-disabled="vm.disableBtnPDF"
+									class="btn btn-qlk padding-search-right  pdfQLK"
+									ng-click="vm.exportpdf()" translate>Xuất pdf</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div align="center">
+				<div id="loadingReportConstr" style="height: 30px;"></div>
+			</div>
+		</div>
+	</form>
+	<div class="portlet light bordered">
+		<div class="portlet-title background-title">
+			<div class="caption">
+				<span class="caption-subject bold lowercase" translate>Kết
+					quả tìm kiếm: </span>&nbsp;<label class="control-label bold lowercase"
+					id="appCount">{{vm.count}}</label><label
+					class="control-label bold lowercase">&nbsp;bản ghi</label>
+			</div>
+			<div class="text-right margin-row-title">
+				<i data-toggle="collapse" data-target="#constructionTaskGrid"
+					class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+			</div>
+		</div>
+		<div id="constructionTaskGrid" class="collapse in from-search">
+			<div class="clearfix position-relative">
+				<div style="text-align: right;">
+					<div class="btn-group margin_top_button">
+						<i data-toggle="dropdown" class="tooltip1" aria-expanded="false"><span
+							class="tooltipArrow"></span><span style="left: unset; right: 0;"
+							class="tooltiptext">Cài đặt</span><i class="fa fa-cog"
+							aria-hidden="true"></i></i>
+						<div style="left: unset; right: 0;" uib-tooltip="Ẩn/hiện cột"
+							class="dropdown-menu hold-on-click dropdown-checkboxes"
+							role="menu">
+							<label
+								ng-repeat="column in vm.constructionReport.columns| filter: vm.gridColumnShowHideFilter">
+								<input type="checkbox" checked="column.hidden"
+								ng-click="vm.showHideEntangledGrid1Column(column)">
+								{{column.title}}
+							</label>
+						</div>
+					</div>
+				</div>
+				<div id="constructionTaskGrid" kendo-grid="vm.constructionReport"
+					k-options="vm.constructionTaskGridOptions"></div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		$('#constructionTaskSearchId').keypress(
+				function(event) {
+					$("input").change(function() {
+						$(this).val($.trim($(this).val()));
+					});
+					document.onkeydown = keyDown;
+					function keyDown(e) {
+						switch (e.keyCode) {
+						case 27:
+							$("#cancel").click();
+							break;
+						case 13:
+							if ($('.k-widget.k-window.fix-footer').css(
+									'display') !== 'block') {
+								$("#constructionTask").click();
+							}
+							break;
+
+						}
+					}
+				});
+	</script>
+	<!-- hungnx 06062018 end -->

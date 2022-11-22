@@ -1,0 +1,23 @@
+// Jenkins example checkout and buid code maven (EXP : AIO Project)
+pipeline {
+    agent any
+    tools {
+		maven 'Maven 3.8.4'
+        jdk 'jdk_8u221'
+	}
+	stages {
+		stage('Check out') {
+			steps {
+				//Get code from git
+				git branch: 'master', credentialsId: 'cac5d81f-3d91-4b4f-9f54-c0b849afcf47', url: 'http://10.248.242.236/tatph1/coms.git'
+		   }
+		}
+		
+		stage('Buid App') {
+			steps {
+				//Get code from git
+				sh 'mvn package -Dmaven.test.skip=true -f /var/lib/jenkins/workspace/PROD_COMS_PMKD/COMS_WEB/coms-web/pom.xml'
+			}	
+		}
+	}
+}

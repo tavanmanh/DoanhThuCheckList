@@ -1,0 +1,141 @@
+<div data-ng-controller="rpDailyTaskController as vm">
+	<div>
+	<p class="text-brecum">{{vm.String}}</p>
+	<form class="form-horizontal row" role="form" id="rpDailyTaskId">
+		<div class="form-body">
+			<div class="portlet light bordered">
+				<div class="portlet-title background-title">
+					<div class="caption">
+						<span class="caption-subject bold lowercase" translate>Thông tin tìm kiếm </span>
+					</div>
+					<div class="text-right margin-row-title">
+						<i data-toggle="collapse" data-target="#constructionTask" class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+					</div>
+				</div>
+				<div id="constructionTask" class="collapse in from-search">
+					<div class="clearfix position-relative">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Ngày thực hiện</label>
+								<div class="col-md-8 position-relative">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'" style="width: 100%;" date name="updateTime" id="updateTime" ng-model="vm.rpDailyTaskSearch.updateTime" ng-change="vm.checkErrDate()" />
+									<span data-for='updateTime' id="errImpReq1" class='k-invalid-msg'></span>
+									<span style="color: red" id="errImpReqMess1">{{vm.errMessage1}}</span>
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" ng-click="vm.clearSearchDate()"></i>
+									</div>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 form-horizontal control-label " translate>Người thực hiện</label>
+								<div class="col-md-8">
+									<div class="input-icon right ">
+										<i class="fa fa-search directive" ng-click="vm.openUser()"></i>
+									</div>
+									<input kendo-auto-complete k-options="vm.patternSignerOptions" class=" form-control width100" type="text" id="signerGroup" ng-model="vm.rpDailyTaskSearch.userName" name="username" />
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" ng-click="vm.clearUser()"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="clearfix position-relative">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 form-horizontal control-label " translate>Loại công trình</label>
+								<div class="col-md-8">
+									<div class="input-icon right ">
+										<i class="fa fa-search directive" ng-click="vm.openCatConstructionTypePopup()"></i>
+									</div>
+									<input kendo-auto-complete k-options="vm.patternConstructOptions" class=" form-control width100" type="text" id="constructionType" ng-model="vm.rpDailyTaskSearch.constructiontypename" name="constructionType" />
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" ng-click="vm.clearConstructionType()"></i>
+									</div>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 form-horizontal control-label " translate>Công trình</label>
+								<div class="col-md-8">
+									<div class="input-icon right ">
+										<i class="fa fa-search directive" ng-click="vm.openComsConstructionPopup()"></i>
+									</div>
+									<input kendo-auto-complete k-options="vm.constructionOptions" class=" form-control width100" type="text" id="constructionName" ng-model="vm.rpDailyTaskSearch.constructionName" name="constructionName" />
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" ng-click="vm.clearConstruction()"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="clearfix position-relative">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 form-horizontal control-label " translate>Hạng mục</label>
+								<div class="col-md-8">
+									<div class="input-icon right ">
+										<i class="fa fa-search directive" ng-click="vm.openComsWorkItemPopup()"></i>
+									</div>
+									<input kendo-auto-complete k-options="vm.workItemOptions" class=" form-control width100" type="text" id="workItemName" ng-model="vm.rpDailyTaskSearch.workItemName" name="workItemName" />
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" ng-click="vm.clearWorkItem()"></i>
+									</div>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 form-horizontal control-label " translate>Tỉnh</label>
+								<div class="col-md-8">
+									<div class="input-icon right ">
+										<i class="fa fa-search directive" ng-click="vm.openCatProvincePopup()"></i>
+									</div>
+									<input kendo-auto-complete k-options="vm.provinceOptions" class=" form-control width100" type="text" id="provincename" ng-model="vm.rpDailyTaskSearch.provincename" name="provincename" />
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" ng-click="vm.clearProvince()"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="clearfix form-actions margin-top">
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<button type="button" class="btn btn-qlk padding-search-right padding-lable noteQLK" ng-click="vm.doSearch()" translate>Xem trước</button>
+								<button type="button" class="btn btn-qlk padding-search-right padding-lable excelQLK" ng-click="vm.exportFile()" translate>Xuất excel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	</div>
+	<div class="portlet light bordered">
+		<div class="portlet-title background-title">
+			<div class="caption">
+				<span class="caption-subject bold lowercase" translate>Kết quả tìm kiếm: </span>&nbsp;
+				<label class="control-label bold lowercase" id="appCount">{{vm.count}}</label>
+				<label class="control-label bold lowercase">&nbsp;bản ghi</label>
+			</div>
+			<div class="text-right margin-row-title">
+				<i data-toggle="collapse" data-target="#constructionTaskGrid" class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+			</div>
+		</div>
+		<div id="rpDailyTask" class="collapse in from-search">
+			<div class="clearfix position-relative">
+				<div id="constructionTaskGrid" kendo-grid="vm.constructionTaskGrid" k-options="vm.constructionTaskGridOptions"></div>
+			</div>
+		</div>
+		
+	</div>
+</div>
+<!-- <script>
+	function displayLoading(target) {
+		var element = $(target);
+			kendo.ui.progress(element, true);
+		setTimeout(function() {
+			kendo.ui.progress(element, false);
+			var grid = $("#constructionTaskGrid").data("kendoGrid").dataSource.read();
+		});	
+	}
+	displayLoading(".tab-content");
+</script> -->

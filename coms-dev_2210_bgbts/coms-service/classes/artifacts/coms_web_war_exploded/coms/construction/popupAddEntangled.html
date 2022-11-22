@@ -1,0 +1,89 @@
+  <form class="form-horizontal row" role="form">
+        <div class="form-body">
+            <div class="portlet light bordered">
+                <div id="24" class="collapse in from-search">
+                    <div class="clearfix form-actions margin-top">
+                        <div class="row" style="margin-bottom: 5px">
+                            <label class="col-md-2 control-label " translate>Mã công trình</label>
+                            <div class="col-md-4">
+                                <input style="border:none;"class=" form-control width100 " type="text"
+                                       ng-model="caller.constrObj.code" disabled/>
+                            </div>
+                            <label class="col-md-2 control-label " translate>Tên công trình</label>
+                            <div class="col-md-4">
+                                <input style="border:none;"class=" form-control width100 " type="text"
+                                       ng-model="caller.constrObj.name" disabled/>
+                            </div>
+                        </div>
+                    </div>
+                    <label class="bold row">Thông tin vướng</label>
+                    <div class="padding-width18">
+                        <div class="border-gray">
+                            <div class="clearfix form-actions margin-top">
+                                <div class="row">
+                                    <label class="col-md-2 control-label text-right req" translate>Nội dung vướng</label>
+                                    <div class="col-md-10">
+                                        <textarea class="form-control" id="content"maxlength="2000" name="content" ng-model="caller.addVuongItem.obstructedContent"
+                                                  rows="3">
+                                        </textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix row margin-top">
+                                <label class="col-md-2 control-label req" translate>Xác nhận</label>
+                                <div class="col-md-10 margin_top">
+                                    <input style="float: left;" type="radio" id="xn1"
+                                           name="status"
+                                           ng-model="caller.addVuongItem.obstructedState"
+                                           ng-checked="caller.addVuongItem.obstructedState == 2"
+                                           value="2" /> <label for="xn1" class="padding_radio">Đã có xác nhận của CNT</label>
+                                    <input style="float: left;" type="radio" id="xn2"
+                                           name="status"
+                                           ng-model="caller.addVuongItem.obstructedState"
+                                           ng-checked="caller.addVuongItem.obstructedState  == 1"
+                                           value="1" /> <label for="xn2" class="padding_radio">Chưa có xác nhận của CNT</label>
+                                    <input style="float: left;" type="radio" id="xn3"
+                                           name="status"
+                                           ng-model="caller.addVuongItem.obstructedState"
+                                           ng-checked="caller.addVuongItem.obstructedState  == 0"
+                                           value="0" /> <label for="xn3" class="padding_radio">Hết vướng</label>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    <label class="bold row">Danh sách file đính kèm</label>
+                    <div class="padding-width18">
+                        <div class="border-gray">
+                            <div class="wrapper-input">
+                                <center><span style="color:gray; margin: auto;">Dung lượng &#60;&#61; 100MB, định dạng xls, xlsx, docx, doc, pdf</span>
+                                </center>
+                                <div class="k-button k-upload-button">
+                                    <input class="file-input k-valid" name="fileVuongPopup" type="file"
+                                           kendo-upload="" id="fileVuongPopup" tabindex="10" onchange="angular.element(this).scope().onSelectVuongFile()"
+                                           data-role="upload" multiple="multiple" autocomplete="off">
+                                    <span id="fileNameVuong">Kéo thả các file vào đây hoặc click để chọn file</span>
+                                </div>
+                            </div>
+                            <div class="clearfix position-relative">
+                                <div id="vuongGrid"
+                                     kendo-grid="caller.vuongGrid" k-editable="false"
+                                     k-options="caller.vuongGridOptions">
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="modal-footer" >
+                    <div class="clearfix">
+                        <button type="button"
+                                class="btn btn-qlk padding-search-right closeQLK" id="cancel"
+                                ng-click="caller.cancelVuongPopup()"translate>Hủy bỏ</button>
+                        <button type="button"
+                                class="btn btn-qlk padding-search-right btn pull-right nextQLK"
+                                ng-click="caller.updateVuongItem()" ng-disabled="caller.disabled ||caller.construction"  translate>Ghi lại
+                        </button>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </form> 

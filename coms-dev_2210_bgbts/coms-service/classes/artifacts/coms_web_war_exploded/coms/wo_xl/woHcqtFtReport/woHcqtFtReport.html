@@ -1,0 +1,118 @@
+<style>
+
+.amcharts-chart-div a {
+	display: none !important;
+}
+.form-group{
+	margin-top: 1em;
+	border-radius: 5px;
+}
+
+.display-block{
+	display: block;
+	width: 100%;
+}
+
+.from-search{
+	margin-top: 0px !important;
+}
+.k-pager-wrap .k-link{
+	margin-top: 4px;
+}
+.icon-table{
+	font-size: 20px;
+	padding: 5px;
+	color: #E0D014;
+	text-align:center;
+}
+i:hover{
+	color: #011995;
+}
+
+.no-padding{
+	padding:0;
+}
+.position-relative{
+	position: relative;
+}
+</style>
+<div data-ng-controller="woHcqtFtReportController as vm">
+	<p class="text-brecum">{{vm.String}}</p>
+	<form class="form-horizontal row" role="form">
+	
+		<div class="form-body">
+			<div class="portlet light bordered">
+				<div class="portlet-title background-title">
+					<div class="caption" style="width: 100%">
+						<span class="caption-subject bold lowercase" translate>Thông tin tìm kiếm </span>
+						<!--<div class="pull-right">-->
+							<!--<input type="checkbox" ng-model="advanceSearch">-->
+							<!--<span class="caption-subject bold lowercase" style="font-size: 14px; margin-left: 5px; margin-right: 10px;" translate>Nâng cao</span>-->
+						<!--</div>-->
+					</div>
+				</div>
+				<div id="workItem1" class="collapse in from-search">
+					<div class="clearfix position-relative">
+
+						<div class="collapse in from-search">
+							<div class="clearfix position-relative">
+								<div class="clearfix">
+
+									<div class="row">
+										<div class="form-group col-md-4">
+											<div class="col-md-4">
+												<label class="form-horizontal control-label " translate>Từ ngày</label><span style="color: red">*</span>
+											</div>
+											<div class="col-md-8">
+												<input class="form-control display-block" kendo-date-picker k-format="'dd/MM/yyyy'" ng-model="vm.searchForm.dateFrom" min-year="1000" date-time />
+											</div>
+										</div>
+										<div class="form-group col-md-4">
+											<div class="col-md-4">
+												<label class="form-horizontal control-label" translate>Đến ngày</label><span style="color: red">*</span>
+											</div>
+											<div class="col-md-8">
+												<input class="form-control display-block" kendo-date-picker k-format="'dd/MM/yyyy'" ng-model="vm.searchForm.dateTo" min-year="1000" date-time />
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+						<div id="borderCount"></div>
+						<div class="clearfix form-actions margin-top">
+							<div class="row">
+								<div class="col-md-12 text-center">
+									<button type="button" ng-click="vm.genReport()"
+										class="btn btn-qlk padding-search-right searchQLK" translate> Báo cáo </button>
+									<button type="button" ng-click="vm.exportexcel()" style="width: 120px;" ng-disabled="vm.disableBtnExcel"
+											class="btn btn-qlk padding-search-right excelQLK" translate> Xuất excel </button>
+								</div>
+							</div>
+                            <div class="row">
+                                <div align="center">
+                                    <div id="loadingReportConstr" style="height: 30px;"></div>
+                                </div>
+                            </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<div class="portlet light bordered">
+		<div class="portlet-title background-title">
+			<div class="caption">
+				<span class="caption-subject bold lowercase" translate>Kết quả báo cáo</span>
+			</div>
+		</div>
+
+		<div id="grid" class="collapse in from-search" >
+			<div class="clearfix position-relative">
+				<div kendo-grid="vm.hcqtFtReportTable" k-options="vm.hcqtFtReportTableOptions"></div>
+			</div>
+		</div>
+	</div>
+</div>

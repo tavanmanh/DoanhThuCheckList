@@ -1,0 +1,94 @@
+<style>
+.form-control[]: {
+	background-color: #e5e5e5 !important;
+}
+</style>
+
+<div id="assignHandoverPopup">
+	<form class="form-horizontal row" role="form" name="addForm"
+		id="addForm" k-options="validatorOptions">
+		<div class="form-body padding10">
+			<div class="portlet light bordered">
+				<div class="form-body padding10">
+					<div class="row caption" id="thongTinChungSpan">
+						<span class="caption-subject bold lowercase"
+							style="margin-left: 1px !important;" translate>Thông tin
+							chung</span>
+					</div>
+					<div class="portlet light bordered collapse in from-search"
+						id="thongTinChung">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Mã công trình</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text" ng-disabled = "caller.isCreate == false"
+										id="constructionCode"
+										ng-model="caller.addForm.constructionCode"
+										name="constructionCode" />
+									
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Mã
+									VTTB</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text" ng-disabled = "caller.isCreate == false"
+										id="stationCode" 
+										ng-model="caller.addForm.vttbCode"
+										name="stationCode" />
+								</div>
+							</div>
+						</div>
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Số lượng thi công thực tế</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text" id="soLuongSuDung" 
+										ng-model="caller.addForm.soLuongSuDung" name="soLuongSuDung" />
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Giá trị thi công thực tế</label>
+								<div class="col-md-8 margin_top">
+									<input class=" form-control width100" type="text" id="giaTriSuDung" 
+										ng-model="caller.addForm.giaTriSuDung" name="giaTriSuDung" />
+								</div>
+								
+							</div>
+						</div>
+
+					</div>
+
+
+
+
+
+
+
+
+
+					<!-- ---------------- -->
+					<div class="clearfix form-actions" align="right">
+						<button type="button" id="saveData" 
+							class="btn btn-qlk   padding-search-right btn pull-right  saveQLK"
+							ng-click="caller.save()" translate>Ghi lại</button>
+						<button type="button" id="cancel"
+							class="btn btn-qlk padding-search-right margin_right10 closeQLK btn pull-right"
+							ng-click="caller.cancel()" translate>Hủy bỏ</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<script>
+	$(document)
+			.ready(
+					function() {
+						var caller = angular.element(
+								document.getElementById('addForm')).scope().caller;
+						//Disabled form
+
+					});
+</script>

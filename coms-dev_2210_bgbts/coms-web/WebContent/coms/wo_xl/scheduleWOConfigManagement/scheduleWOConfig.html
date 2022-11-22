@@ -1,0 +1,212 @@
+<style>
+
+.amcharts-chart-div a {
+	display: none !important;
+}
+.form-group{
+	margin-top: 1em;
+	border-radius: 5px;
+}
+
+.from-search{
+	margin-top: 0px !important;
+}
+.k-pager-wrap .k-link{
+	margin-top: 4px;
+}
+
+.icon-table{
+	font-size: 20px;
+	padding: 5px;
+	color: #E0D014;
+	text-align:center;
+}
+
+i:hover{
+	color: #011995;
+}
+</style>
+<div data-ng-controller="scheduleWOConfigController as vm">
+	<p class="text-brecum">{{vm.String}}</p>
+	<form class="form-horizontal row" role="form" id="scheduleWOConfigId">
+
+		<div class="form-body">
+			<div class="portlet light bordered">
+				<div class="portlet-title background-title">
+					<div class="caption">
+						<span class="caption-subject bold lowercase" translate>Thông
+							tin tìm kiếm </span>
+
+					</div>
+				</div>
+				<div id="workItem1" class="collapse in from-search">
+					<div class="clearfix position-relative">
+						<div class="clearfix">
+							<div class="row">
+							<div class="form-group col-md-4">
+								<label class="col-md-4 control-label-custom" translate>Tên cấu hình công việc định kỳ</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										ng-model="vm.searchForm.scheduleConfigName" required />
+								</div>
+							</div>
+                            <div class="form-group col-md-4">
+                                <label class="col-md-4 control-label-custom" translate>Ngày bắt đầu từ</label>
+                                <div class="col-md-8">
+                                    <input kendo-date-picker k-format="'dd/MM/yyyy'" ng-enter="vm.searchWI()"
+                                           name="startDateFrom" id="startDateFrom"
+                                           ng-model="vm.searchForm.startDateFrom" style="width: 100%;"
+                                           min-year="1000" date-time />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label class="col-md-4 control-label-custom" translate>Ngày bắt đầu đến</label>
+                                <div class="col-md-8">
+                                    <input kendo-date-picker k-format="'dd/MM/yyyy'" ng-enter="vm.searchWI()"
+                                           name="startDateTo" id="startDateTo"
+                                           ng-model="vm.searchForm.startDateTo" style="width: 100%;"
+                                           min-year="1000" date-time />
+                                </div>
+                            </div>
+                            </div>
+                            
+                            <div class="row">
+							<div class="form-group col-md-4">
+								<label class="col-md-4 control-label-custom" translate>CD level 2</label>
+								<div class="col-md-8">
+									<input class="form-control display-block" type="text"
+                                           k-options="autoCompleteCdLevel2OptionsSearch" kendo-auto-complete
+                                           ng-model="vm.searchForm.cdLevel2Name" style="width: 100%"/>
+								</div>
+								
+							</div>
+                            <div class="form-group col-md-4">
+                                <label class="col-md-4 control-label-custom" translate>Ngày kết thúc từ</label>
+                                <div class="col-md-8">
+                                    <input kendo-date-picker k-format="'dd/MM/yyyy'" ng-enter="vm.searchWI()"
+                                           name="endDateFrom" id="endDateFrom"
+                                           ng-model="vm.searchForm.endDateFrom" style="width: 100%;"
+                                           min-year="1000" date-time />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label class="col-md-4 control-label-custom" translate>Ngày kết thúc đến</label>
+                                <div class="col-md-8">
+                                    <input kendo-date-picker k-format="'dd/MM/yyyy'" ng-enter="vm.searchWI()"
+                                           name="endDateTo" id="endDateTo"
+                                           ng-model="vm.searchForm.endDateTo" style="width: 100%;"
+                                           min-year="1000" date-time />
+                                </div>
+                            </div>
+                            </div>
+                            
+                            <div class="row">
+							<div class="form-group col-md-4">
+								<label class="col-md-4 control-label-custom" translate>Trạng thái</label>
+								<div class="col-md-8">
+									<select ng-model="vm.searchForm.statusS" class="form-control display-block"
+                                            ng-options="status.value as status.name for status in statusList">
+                                        <option></option>
+                                    </select>
+								</div>
+							</div>
+							<div class="form-group col-md-4">
+								<label class="col-md-4 control-label-custom" translate>Loại chu kỳ</label>
+								<div class="col-md-8">
+									<select ng-model="vm.searchForm.cycleType" class="form-control display-block" ng-disabled="isEditingAll"
+                                            ng-options="cycleType.value as cycleType.name for cycleType in cycleTypeList">
+                                        <option></option>
+                                    </select>
+								</div>
+							</div>
+                            
+                            </div>
+
+							<div class="col-md-12 text-center"">
+								<button type="button" id="doSearchQuantity"
+										ng-click="vm.searchWI()"
+										class="btn btn-qlk padding-search-right searchQLK" translate>Tìm kiếm</button>
+							</div>
+						</div>
+						<div id="borderCount"></div>
+<!--						<div class="clearfix form-actions margin-top">-->
+<!--							<div class="row">-->
+<!--								<div class="col-md-12 text-center">-->
+<!--									<button type="button" id="doSearchQuantity"-->
+<!--										ng-click="vm.searchWI()"-->
+<!--										class="btn btn-qlk padding-search-right searchQLK" translate>Tìm kiếm</button>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--						</div>-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<div class="portlet light bordered">
+		<div class="portlet-title background-title">
+			<div class="caption">
+				<span class="caption-subject bold lowercase" translate>Kết quả tìm kiếm</span>
+			</div>
+		</div>
+		<div class="row mt5">
+			<div class="col-md-12">
+				<div class="portlet-body pull-left" >
+					<button type="button" title="Thêm mới"  style="margin-left:0.6em;" ng-click="vm.createConfigWorkItem()"
+							class="btn btn-default padding-button padding-search-right box-shadow">
+						<i class="icon-plus"></i>Thêm cấu hình công việc định kỳ
+					</button>
+<!--					<input class="file-input" #file name="files" type="file" id="files" tabindex="10" style="display: none"  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"/>-->
+<!--					<button type="button" ng-click="vm.importFile()" class="btn btn-qlk excelQLK padding-search-right" translate> Import</button>-->
+<!--					<button type="button" ng-click="vm.downloadTemplate()" class="btn btn-qlk excelQLK padding-search-right" translate> Tải file mẫu</button>-->
+<!--					<input class="file-input" #file name="files" type="file" id="hcqtFile" tabindex="10" style="display: none"  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"/>-->
+				</div>
+<!--				<div class="btn-group pull-right margin_top_button ">-->
+<!--					<i id="xuatExcel" class="tooltip1 action-button excelQLK" ng-disabled="vm.disableExportExcel" ng-click="vm.exportWoExcel()"  aria-expanded="false"><span class="tooltipArrow"></span><span class="tooltiptext">Xuất Excel</span></i>-->
+<!--				</div>-->
+				<div class="pull-left" style="margin-left: 5px; margin-top: 8px;">
+					<button type="button" ng-click="vm.importConfig()" class="btn btn-qlk excelQLK padding-search-right" translate> Import</button>
+				</div>
+				<!-- taotq start 05052021 -->
+				<div class="portlet-body pull-right" >
+					<i id="xuatExcel" class="tooltip1 action-button excelQLK" ng-disabled="vm.disableExportExcel" ng-click="vm.exportConfigWorkItemList()" aria-expanded="false">
+                        <span class="tooltipArrow"></span><span class="tooltiptext">Xuất Excel</span></i>
+				</div>
+				<!-- taotq end 05052021 -->
+				
+			</div>
+		</div>
+<!--		trTypeListTable-->
+
+		<div id="grid" class="collapse in from-search" >
+			<div class="clearfix position-relative">
+				<div kendo-grid="vm.workItemConfigListTable" k-options="vm.workItemConfigListTableOptions"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$('#scheduleWOConfigId').keypress(function(event) {
+						$("input").change(function() {
+							$(this).val($.trim($(this).val()));
+						});
+						document.onkeydown = keyDown;
+						function keyDown(e) {
+							switch (e.keyCode) {
+							case 27:
+								$("#cancel").click();
+								break;
+							case 13:
+								if ($('.k-widget.k-window.fix-footer').css(
+										'display') !== 'block') {
+									$("searchWI").click();
+								}
+								break;
+
+							}
+						}
+					});
+</script>

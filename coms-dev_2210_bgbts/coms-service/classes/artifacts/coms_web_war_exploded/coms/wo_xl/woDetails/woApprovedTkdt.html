@@ -1,0 +1,197 @@
+<style>
+.modal-content {
+	padding: 0px !important;
+	width: 100% !important;
+}
+</style>
+
+<div class="modal-header" style="background-color: #33CCCC;">
+	<h5 class="modal-title">Đóng WO</h5>
+</div>
+<div class="modal-body">
+	<form class="form-horizontal row" role="form">
+		<div class="form-body">
+			<div class="col-md-12">
+				<label class="display-block control-label"
+					style="text-align: left !important;" translate>Hợp đồng (*)</label>
+				<input class="form-control display-block" type="text" readonly
+					k-options="autoCompleteFilterContractOptions" kendo-auto-complete
+					ng-model="vm.searchForm.contractCode" id="autoCompleteContract" />
+
+				<label class="display-block control-label"
+					style="text-align: left !important;" translate>Công trình
+					(*)</label> <input class="form-control display-block" type="text"
+					k-options="autoCompleteConstructionOptions" kendo-auto-complete
+					ng-model="vm.searchForm.constructionCode" maxlength="200" readonly
+					ng-change="vm.changeItem(vm.searchForm.constructionCode)" />
+			</div>
+			<br>
+			<div class="caption">
+				<span class="caption-subject bold lowercase ng-scope" translate="">Danh
+					sách hạng mục giao WO ĐBHT của công trình</span>
+			</div>
+			<div class="portlet light col-md-12">
+				<div class="border-gray">
+					<!-- <div class="clearfix  position-relative">
+						<div class="form-group">
+							<div class="col-md-4 pull-right">
+								<div class="input-icon right  " style="margin-right: 29px">
+									<i class="fa fa-search directive"
+										ng-click="vm.openPurchaseContract()"
+										style="cursor: pointer;"></i> 
+										<input
+										class=" form-control width100 " type="text"
+										k-options="vm.workItemComplete" kendo-auto-complete
+										name="workItemMap" ng-model="vm.searchForm.workItemMap"
+										maxlength="200" id="workItemMap" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="clearfix">
+						<div id="demoapp2" class="collapse in from-search">
+							<div class="clearfix position-relative">
+								<div id="workItemGridContract" kendo-grid="vm.workItemGridContract" k-editable="true"
+								k-options="vm.workItemOptionsMap" k-rebind="vm.workItemOptionsMap"
+								k-on-change="vm.onGridChange(kendoEvent, { selected: selected }, data)"></div>
+							</div>
+						</div>
+					</div> -->
+					<div class="clearfix">
+						<div class="form-group row">
+							<label class="col-md-2 control-label" translate>Hạng mục</label>
+							<div class="col-md-3">
+								<input class="form-control" name="code" readonly
+									value="Tủ nguồn" />
+							</div>
+							<div class="col-md-4">
+								<select class="display-block form-control"
+									ng-model="vm.objectTuNguon.name"
+									ng-options="item.code as item.name for item in vm.lstTuNguon"
+									ng-selected="vm.objectTuNguon.name == item.code">
+									<option></option>
+								</select>
+							</div>
+							<div class="col-md-3">
+								<input type="numbers" ng-model="vm.objectTuNguon.workItemValue"
+									class="form-control display-block" placeholder="triệu VNĐ"
+									only-numbers />
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-md-2 control-label" translate>Hạng mục</label>
+							<div class="col-md-3">
+								<input class="form-control" name="code" readonly
+									value="Xây dựng nhà" />
+							</div>
+							<div class="col-md-4">
+								<select class="display-block form-control"
+									ng-model="vm.objectXayDungNha.name"
+									ng-options="item.code as item.name for item in vm.lstXayDungNha"
+									ng-selected="vm.objectXayDungNha.name == item.code">
+									<option></option>
+								</select>
+							</div>
+							<div class="col-md-3">
+								<input type="numbers" ng-model="vm.objectXayDungNha.workItemValue"
+									class="form-control display-block" placeholder="triệu VNĐ"
+									only-numbers />
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-md-2 control-label" translate>Hạng mục</label>
+							<div class="col-md-3">
+								<input class="form-control" name="code" readonly
+									value="Xây dựng móng" />
+							</div>
+							<div class="col-md-4">
+								<select class="display-block form-control"
+									ng-model="vm.objectXayDungMong.name"
+									ng-options="item.code as item.name for item in vm.lstXayDungMong"
+									ng-selected="vm.objectXayDungMong.name == item.code">
+									<option></option>
+								</select>
+							</div>
+							<div class="col-md-3">
+								<input type="numbers" ng-model="vm.objectXayDungMong.workItemValue"
+									class="form-control display-block" placeholder="triệu VNĐ"
+									only-numbers />
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-md-2 control-label" translate>Hạng mục</label>
+							<div class="col-md-3">
+								<input class="form-control" name="code" readonly
+									value="Thi công" />
+							</div>
+							<div class="col-md-4">
+								<select class="display-block form-control"
+									ng-model="vm.objectThiCong.name"
+									ng-options="item.code as item.name for item in vm.lstThiCong"
+									ng-selected="vm.objectThiCong.name == item.code">
+									<option></option>
+								</select>
+							</div>
+							<div class="col-md-3">
+								<input type="numbers" ng-model="vm.objectThiCong.workItemValue"
+									class="form-control display-block" placeholder="triệu VNĐ"
+									only-numbers />
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-md-2 control-label" translate>Hạng mục</label>
+							<div class="col-md-3">
+								<input class="form-control" name="code" readonly
+									value="Lắp dựng" />
+							</div>
+							<div class="col-md-4">
+								<select class="display-block form-control"
+									ng-model="vm.objectLapDung.name"
+									ng-options="item.code as item.name for item in vm.lstLapDung"
+									ng-selected="vm.objectLapDung.name == item.code">
+									<option></option>
+								</select>
+							</div>
+							<div class="col-md-3">
+								<input type="numbers" ng-model="vm.objectLapDung.workItemValue"
+									class="form-control display-block" placeholder="triệu VNĐ"
+									only-numbers />
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-md-2 control-label" translate>Hạng mục</label>
+							<div class="col-md-3">
+								<input class="form-control" name="code" readonly
+									value="Điện AC" />
+							</div>
+							<div class="col-md-4">
+								<select class="display-block form-control"
+									ng-model="vm.objectDienAc.name"
+									ng-options="item.code as item.name for item in vm.lstDienAc"
+									ng-selected="vm.objectDienAc.name == item.code">
+									<option></option>
+								</select>
+							</div>
+							<div class="col-md-3">
+								<input type="numbers" ng-model="vm.objectDienAc.workItemValue"
+									class="form-control display-block" placeholder="triệu VNĐ"
+									only-numbers />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="modal-footer">
+	<button type="button" class="btn btn-secondary" data-dismiss="modal"
+		ng-click="$dismiss()">
+		<i class="fa fa-ban"></i> Hủy bỏ
+	</button>
+	<button type="button" class="btn btn-secondary"
+		ng-click="vm.validateApprovedTkdt()?$close():return;">
+		<i class="fa fa-floppy-o azure"></i> Lưu
+	</button>
+</div>

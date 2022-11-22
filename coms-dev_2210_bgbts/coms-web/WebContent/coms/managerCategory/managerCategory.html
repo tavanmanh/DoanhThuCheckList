@@ -1,0 +1,401 @@
+<style>
+.display-none {
+	display: none;
+}
+
+.mt-3 {
+	margin-top: 5px;
+}
+
+.mr-3 {
+	margin-right: 15px;
+}
+
+.display-flex {
+	display: flex;
+	justify-content: end;
+}
+
+.form-check-label {
+	font-size: 13px;
+}
+
+.group-btn {
+	display: flex;
+	justify-content: end;
+}
+
+.wrap-btn {
+	margin-right: 15px;
+}
+.btn-span{
+	border: 1px solid;
+    padding: 2px 5px;
+    background-color: #efefef;
+    cursor: pointer;
+}
+
+.col-md-4{
+	text-align: right;
+}
+</style>
+
+<div data-ng-controller="manageMEController as vm"
+	id="manageMEController">
+	<div>
+		<p class="text-brecum">{{vm.String}}</p>
+
+		<form class="form-horizontal row" role="form">
+			<div class="form-body">
+				<div class="portlet light bordered">
+					<div class="portlet-title background-title">
+						<div class="caption">
+							<span class="caption-subject bold lowercase" translate>Thông
+								tin tìm kiếm </span>
+						</div>
+						<div class="text-right margin-row-title">
+							<i data-toggle="collapse" data-target="#demoapp"
+								class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+						</div>
+					</div>
+
+					<div id="demoapp" class="collapse in from-search"
+						style="position: relative">
+
+						<i data-toggle="dropdown"
+							class="tooltip1  tooltipshow_search_advance"
+							aria-expanded="false">
+							<button style="overflow: hidden;" class="search_advance"
+								ng-show="vm.iconDiss" ng-click="vm.iconDiss=!vm.iconDiss">
+								<span class="tooltiptext">Mở rộng</span>
+							</button>
+
+						</i> <i data-toggle="dropdown"
+							class="tooltip1 tooltiphide_search_advance" aria-expanded="false">
+							<button style="overflow: hidden;" class="search_advance"
+								ng-show="!vm.iconDiss" ng-click="vm.iconDiss=!vm.iconDiss">
+								<span class="tooltiptext">Rút gọn</span>
+							</button>
+						</i>
+
+						<div class="clearfix position-relative">
+							<div class="clearfix">
+								<div class="form-group col-md-6">
+									<!-- thay đổi nội dung ở đây -->
+									<!--  input cho danh mục người dùng -->
+									<div class="row" id="searchUser"
+										ng-show="vm.radio===0"
+										>
+										<div class="row ">
+											<div class="col-lg-6 col-md-12 mt-3">
+												<label class="col-md-4 control-label" translate>Tên
+													đăng nhập</label>
+												<div class="col-md-8">
+										<input kendo-auto-complete k-options="vm.userOptions"
+											class=" form-control width100" type="text" ng-enter="vm.doSearch()"
+											ng-model="vm.userDirectorySearch.loginName" id="user"
+											name="user" />
+									</div>
+											</div>
+											<div class="col-lg-6 col-md-12 mt-3">
+												<label class="col-md-4 control-label" translate>Tên
+													đầy đủ</label>
+												<div class="col-md-8">
+													<input id="keySearch" ng-enter="vm.doSearch()"
+														class=" form-control width100" type="text"
+														autofocus="true" ng-model="vm.userDirectorySearch.fullName"
+													    placeholder="Tên đầy đủ" />
+												</div>
+											</div>
+											<div class="col-lg-6 col-md-12 mt-3">
+												<label class="col-md-4 control-label" translate>Đơn
+													vị</label>
+												<div class="col-md-8">
+													<input id="keySearch" ng-enter="vm.doSearch()"
+														class=" form-control width100" type="text"
+														autofocus="true" ng-model="vm.userDirectorySearch.unitName"
+														placeholder="Đơn vị" />
+												</div>
+											</div>
+											<div class="col-lg-6 col-md-12 mt-3">
+												<label class="col-md-4 control-label" translate>Số
+													điện thoại</label>
+												<div class="col-md-8">
+													<input id="keySearch" ng-enter="vm.doSearch()"
+														class=" form-control width100" type="text"
+														autofocus="true" ng-model="vm.userDirectorySearch.phone"
+														placeholder="Số điện thoại" />
+												</div>
+											</div>
+											<!-- <div class="col-lg-6 col-md-12 mt-3">
+												<label class="col-md-4 control-label" translate>Nhân viên QL</label>
+												<div class="col-md-8" ng-enter="vm.doSearch(0)">
+													<input kendo-auto-complete k-options="vm.userManagerOptions"
+														class=" form-control width100" type="text"
+														ng-model="vm.userDirectorySearch.managerName" id="userManager"
+														name="userManager" />
+												</div>
+											</div> -->
+										</div>
+										<div class="row mt-3">
+											<div class="col-md-6 group-btn">
+												<div class="wrap-btn">
+													<button type="button" id="findParam"
+														ng-click="vm.doSearch()"
+														class="btn btn-qlk padding-search-right searchQLK"
+														translate>Tìm kiếm</button>
+												</div>
+											</div>
+											<div class="col-md-6 group-btn">
+												<div class="wrap-btn">
+													<button type="button" id="findParam" ng-click="vm.cleanAll()"
+														class="btn btn-qlk padding-search-right fa fa-refresh" translate> Làm
+														mới</button>
+												</div>
+												<div class="wrap-btn">
+													<button type="button" id="findParam" ng-click="vm.save()"
+														class="btn btn-qlk padding-search-right fa fa-floppy-o" translate> Ghi
+														lại</button>
+												</div>
+												<div class="wrap-btn">
+													<button type="button" id="findParam" ng-click="vm.exportFile()"
+														class="btn btn-qlk padding-search-right fa fa-download" translate> Tải
+														về</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--  input cho danh mục đơn vị -->
+									<div class="row" id="unitList"
+										ng-show="vm.radio===1">
+										<div class="row">
+											<div class="col-lg-6 col-md-12 mt-3">
+												<label class="col-md-4 control-label" translate>Khu
+													vực</label>
+												<div class="col-md-8" ng-enter="vm.doSearch()">
+													<select kendo-drop-down-list style="width: 100%"
+														ng-model="vm.MESearch.areaCode" k-data-text-field="'name'"
+														k-data-value-field="'name'" k-data-source="vm.areaCode"></select>
+												</div>
+											</div>
+											<div class="col-lg-6 col-md-12 mt-3">
+												<label class="col-md-4 control-label" translate>Mã
+													đơn vị</label>
+												<div class="col-md-8">
+													<input id="keySearch" ng-enter="vm.doSearch()"
+														class=" form-control width100" type="text"
+														autofocus="true" ng-model="vm.MESearch.unitCode"
+														ng-disabled = "true"
+														placeholder="Mã đơn vị" />
+												</div>
+											</div>
+											<div class="col-lg-6 col-md-12 mt-3">
+												<label class="col-md-4 control-label" translate>Tên
+													đơn vị</label>
+												<div class="col-md-8">
+													<input id="keySearch" ng-enter="vm.doSearch()"
+														class=" form-control width100" type="text"
+														kendo-auto-complete k-options="vm.unitOptions"
+														autofocus="true" ng-model="vm.MESearch.unitName"
+														/>
+												</div>
+											</div>
+										</div>
+										<div class="row mt-3">
+											<div class="col-md-6 group-btn">
+												<div class="wrap-btn">
+													<button type="button" id="findParam"
+														ng-click="vm.doSearch(0)"
+														class="btn btn-qlk padding-search-right searchQLK"
+														translate>Tìm kiếm</button>
+												</div>
+											</div>
+											<div class="col-md-6 group-btn">
+												<div class="wrap-btn">
+													<button type="button" id="findParam" ng-click="vm.cleanAll()"
+														class="btn btn-qlk padding-search-right fa fa-refresh" translate> Làm
+														mới</button>
+												</div>
+												<div class="wrap-btn">
+													<button type="button" id="findParam" ng-click="vm.save()"
+														class="btn btn-qlk padding-search-right fa fa-floppy-o" translate> Ghi
+														lại</button>
+												</div>
+												<div class="wrap-btn">
+													<button type="button" id="findParam" ng-click="vm.exportFile()"
+														class="btn btn-qlk padding-search-right fa fa-download" translate> Tải
+														về</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--  input cho quản lý tài liệu -->
+									<div class="row" id="docunmentManagement"
+										ng-show="vm.radio===2">
+										<div class="row">
+											<div class="col-lg-6 col-md-12 mt-3">
+												<label class="col-md-4 control-label req" translate>Lĩnh vực</label>
+												<div class="col-md-8">
+													<input id="keySearch"
+														class=" form-control width100" type="text" required
+														autofocus="true" ng-model="vm.docManagementSearch.field"
+														placeholder="Lĩnh vực" />
+												</div>
+											</div>
+											<div class="col-lg-6 col-md-12 mt-3">
+												<label class="col-md-4 control-label req" translate>Loại tài liệu</label>
+												<div class="col-md-8">
+													<input id="keySearch"
+														class=" form-control width100" type="text" required
+														autofocus="true" ng-model="vm.docManagementSearch.documentType"
+														placeholder="Loại văn bản" />
+												</div>
+											</div>
+											<div class="col-lg-6 col-md-12 mt-3">
+												<label class="col-md-4 control-label req" translate>Mã tài liệu</label>
+												<div class="col-md-8">
+													<input id="keySearch"
+														class=" form-control width100" type="text" required
+														autofocus="true" ng-model="vm.docManagementSearch.documentCode"
+														placeholder="Mã tài liệu" />
+												</div>
+											</div>
+											<div class="col-lg-6 col-md-12 mt-3">
+												<label class="col-md-4 control-label" translate>Ngày
+													ban hành</label>
+												<div class="col-md-8">
+													<div class="col-md-12 position-relative" style="padding: 0;">
+														<input class=" form-control width100"
+															ng-model="vm.docManagementSearch.dateIssued" style="width: 100%;"
+															id="dateFrom" min-year="1500" type="date" />
+													</div>
+												</div>
+											</div>
+											<div class="col-lg-6 col-md-12 mt-3">
+												<label class="col-md-4 control-label req" translate>Đơn vị</label>
+												<div class="col-md-8">
+													<input id="keySearch" required
+														class=" form-control width100" type="text"
+														autofocus="true" ng-model="vm.docManagementSearch.issuingUnit"
+														placeholder="Đơn vị ban hành" />
+												</div>
+											</div>
+											<div class="col-lg-6 col-md-12 mt-3">
+												<label class="col-md-4 control-label" translate>Mô tả tài liệu</label>
+												<div class="col-md-8">
+													<input id="keySearch"
+														class=" form-control width100" type="text"
+														autofocus="true" ng-model="vm.docManagementSearch.description"
+														placeholder="Mô tả tài liệu" />
+												</div>
+											</div>
+											<div class="col-lg-6 col-md-12 mt-3">
+												<label class="col-md-4 control-label req" translate>Chọn tài liệu</label>
+												<div class="col-md-8">
+													<input 
+														type="file" list-file-type="xls,xlsx,doc,docx,pdf"
+														id="attachFile" name="attachFile"
+														ng-change="vm.handleChange()" ng-model="vm.docManagementSearch.attachFileName"
+													/>
+												</div>
+											</div>
+											<div class="col-lg-6 col-md-12 mt-3">
+												<div class="col-md-4">
+													<span class="btn-span" ng-click="vm.submitAttachFile()" >Tải lên</span>
+												</div>
+												<div class="col-md-8">
+													<span id="fileName">Chưa có file tải lên</span>
+												</div>
+											</div>
+										</div>
+										<div class="row mt-3">
+										<div class="col-md-6 group-btn"></div>
+											<div class="col-md-6 group-btn">
+												<div class="wrap-btn">
+													<button type="button" ng-click="vm.cleanAll()"
+														class="btn btn-qlk padding-search-right fa fa-refresh" translate> Làm
+														mới</button>
+												</div>
+												<div class="wrap-btn">
+													<button type="submit" ng-click="vm.save()"
+														class="btn btn-qlk padding-search-right fa fa-floppy-o" translate> Ghi lại</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group col-md-6">
+									<div class="col-md-4" ng-repeat="option in vm.optionList">
+										<label class="form-check-label"> <input type="radio"
+											class="form-check-input" name="typeOfCategory" ng-click="vm.cleanAll()"
+											ng-model="vm.radio" ng-value="option.id"> {{
+											option.name }}
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+	</form>
+
+	<div class="portlet light bordered">
+		<div class="portlet-title background-title">
+			<div class="caption">
+				<span class="caption-subject bold lowercase" translate>Kết
+					quả tìm kiếm: </span>&nbsp; 
+					<label class="control-label bold lowercase" ng-show="vm.radio===0">{{vm.countUser}}</label>
+					<label class="control-label bold lowercase"  ng-show="vm.radio===1">{{vm.countUnit}}</label>
+					<label class="control-label bold lowercase"  ng-show="vm.radio===2">{{ vm.countDoc }}</label>
+				<label class="control-label bold lowercase">&nbsp;bản ghi</label>
+			</div>
+			<div class="text-right margin-row-title">
+				<i data-toggle="collapse" data-target="#demoapp2"
+					class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+			</div>
+		</div>
+		<div id="demoapp2" class="collapse in from-search">
+			<div class="clearfix position-relative"
+				ng-show="vm.radio===0">
+				<div id="vm.userDirectoryGrid" kendo-grid="vm.userDirectoryGrid"
+					k-editable="false" k-options="vm.userDirectoryGridOptions"></div>
+			</div>
+			<div class="clearfix position-relative"
+				ng-show="vm.radio===1">
+				<div id="unitListGrid" kendo-grid="vm.unitListGrid"
+					k-editable="false" k-options="vm.unitListGridOptions"></div>
+			</div>
+			<div class="clearfix position-relative"
+				ng-show="vm.radio===2">
+				<div id="docManagementGrid" kendo-grid="vm.docManagementGrid"
+					k-editable="false" k-options="vm.docManagementGridOptions"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	
+	$('#appIdSearch')
+			.keypress(
+					function(event) {
+						$("input").change(function() {
+							$(this).val($.trim($(this).val()));
+						});
+						document.onkeydown = keyDown;
+						function keyDown(e) {
+							switch (e.keyCode) {
+							case 27:
+								$("#cancel").click();
+								break;
+							case 13:
+								if ($('.k-widget.k-window.fix-footer').css(
+										'display') !== 'block') {
+									$("#findParam").click();
+								}
+								break;
+							}
+						}
+					});
+</script>

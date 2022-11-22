@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.viettel.ktts.vps</groupId>
+  <artifactId>vps_client_ktts</artifactId>
+  <versioning>
+    <versions>
+      <version>1.0-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20170811034206</lastUpdated>
+  </versioning>
+</metadata>

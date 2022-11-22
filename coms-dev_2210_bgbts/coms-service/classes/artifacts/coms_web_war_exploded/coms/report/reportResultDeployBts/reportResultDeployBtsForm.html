@@ -1,0 +1,126 @@
+<style>
+html {
+	overflow-y: scroll;
+}
+</style>
+<div data-ng-controller="reportResultDeployBtsController as vm">
+	<p class="text-brecum">{{vm.String}}</p>
+	<form class="form-horizontal row" role="form" id="searchForm"
+		name="searchForm">
+		<div class="form-body">
+			<div class="portlet light bordered">
+				<div class="portlet-title background-title">
+					<div class="caption">
+						<span class="caption-subject bold lowercase" translate>Thông
+							tin tìm kiếm </span>
+					</div>
+					<div class="text-right margin-row-title">
+						<i data-toggle="collapse" data-target="#dataSearch"
+							class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+					</div>
+				</div>
+				<div id="dataSearch" class="collapse in from-search">
+					<div class="clearfix position-relative" ng-enter="vm.doSearch()">
+
+						<!--row 1-->
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Nội dung
+									tìm kiếm</label>
+								<div class="col-md-8">
+									<input id="keySearch" class=" form-control width100"
+										type="text" ng-model="vm.searchForm.keySearch"
+										placeholder="Mã trạm/Dự án" />
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Tỉnh</label>
+								<div class="col-md-8">
+									<input kendo-auto-complete k-options="vm.proviceOptions"
+										id="aio_rpgt_province" name="aio_rpgt_province"
+										class="form-control width100"
+										data-ng-model="vm.searchForm.provinceName" />
+								</div>
+							</div>
+						</div>
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Loại
+									ngày</label>
+								<div class="col-md-8">
+									<select kendo-drop-down-list style="width: 100%"
+										ng-model="vm.searchForm.dateType" k-data-text-field="'name'"
+										k-data-value-field="'code'" id="dateType"
+										k-data-source="vm.dateTypeList">
+									</select>
+								</div>
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Từ ngày</label>
+								<div class="clearfix position-relative col-md-8 "
+									style="padding: 0px" id="aio_cm_date">
+									<div class="col-md-5 position-relative">
+										<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+											min-year="1000" ng-model="vm.searchForm.dateFrom"
+											id="aio_cm_dateFrom" name="aio_cm_dateFrom"
+											style="width: 100%;" />
+									</div>
+									<div class="col-md-2" style="text-align: center;">
+										<label class="control-label" translate>đến ngày</label>
+									</div>
+									<div class="col-md-5 position-relative">
+										<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+											min-year="1000" ng-model="vm.searchForm.dateTo"
+											id="aio_cm_dateTo" name="aio_cm_dateTo" style="width: 100%;" />
+									</div>
+								</div>
+								<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="vm.resetFormField('date')"></i>
+									</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="clearfix form-actions margin-top">
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<button type="button" ng-click="vm.doSearch()"
+									class="btn btn-qlk padding-search-right searchQLK" translate>Tìm
+									kiếm</button>
+								<button type="button" id="excel"
+									class="btn btn-qlk padding-search-right  excelQLK"
+									ng-click="vm.exportFile()" translate>Xuất excel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<div class="portlet light bordered">
+		<div class="portlet-title background-title">
+			<div class="caption">
+				<span class="caption-subject bold lowercase" translate>Kết
+					quả tìm kiếm: </span>&nbsp;<label class="control-label bold lowercase"
+					id="appCountResultDeployBts">{{vm.reportResultDeployBts}}</label><label
+					class="control-label bold lowercase">&nbsp;bản ghi</label>
+
+			</div>
+			<div class="text-right margin-row-title">
+				<i data-toggle="collapse" data-target="#grid"
+					class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+			</div>
+		</div>
+		<div id="grid" class="collapse in from-search">
+			<div class="clearfix position-relative">
+				<div id="reportResultDeployBtsGrid"
+					kendo-grid="vm.reportResultDeployBtsGrid"
+					k-options="vm.reportResultDeployBtsGridOptions"></div>
+			</div>
+		</div>
+	</div>
+
+</div>

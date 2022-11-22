@@ -1,0 +1,23 @@
+<style>
+	.display-block{
+		display: block;
+		width: 100%;
+	}
+
+	.input-half{
+		width: 48%;
+		display: inline;
+	}
+
+	.grey{
+		color: #333;
+	}
+
+	.text-breadcrumb{
+		margin-left: 10px;
+	}
+</style>
+<div data-ng-controller="woCreateNewController as vm">
+	<p class="text-breadcrumb" ng-bind-html="vm.breadcrumb"></p>
+	<div data-ng-include="'coms/wo_xl/woCreateNew/woCreateEditTemplate.html'"></div>
+</div>

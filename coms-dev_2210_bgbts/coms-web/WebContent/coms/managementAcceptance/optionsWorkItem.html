@@ -1,0 +1,77 @@
+<style>
+.wrap {
+	width: 100%;
+	margin-top: 10px;
+	overflow: auto;
+}
+
+.fleftDepartMent {
+	float: left;
+	width: 30%;
+	height: 700px;
+	border-top: 1px solid #D3D3D3;
+	border-bottom: 1px solid #D3D3D3;
+	background: #FFFFFF;
+}
+
+.frightDepartMent {
+	border-left: 1px solid #D3D3D3;
+	border-top: 1px solid #D3D3D3;
+	border-bottom: 1px solid #D3D3D3;
+	padding-top: 10px;
+	height: 700px;
+	background: #FFFFFF;
+}
+</style>
+<div class="wrap" id="provinceSearchPop">
+	<div class="frightDepartMent col-md-12">
+		<div class="clearfix">
+			<div class="form-group col-md-10">
+				<label class="col-md-3 control-label" translate>Nhập tên</label>
+				<div class="col-md-9">
+					<input id="provinceName" name="provinceName"
+						class=" form-control width100" type="text" maxlength="100"
+						ng-model="caller.acceptanceObj.keySearch" placeholder="Mã công trình/tên hạng mục"/>
+				</div>
+			</div>
+			<div class="form-group col-md-2">
+				<button type="button" id="find"
+					class="btn btn-qlk btn-outline padding-search-right searchQLK"
+					ng-click="caller.doSearchWorkItem()" translate>Tìm kiếm</button>
+			</div>
+		</div>
+		<div class="portlet light bordered">
+			<div class="portlet-title ">
+				<div class="caption">
+					<span class="caption-subject bold lowercase" translate>Danh
+						sách hạng mục</span>
+				</div>
+				<div class="text-right margin-row-title">
+					<i data-toggle="collapse" data-target="#demo3"
+						class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+				</div>
+			</div>
+			<div id="demo3" class="collapse in from-search">
+				<div id="gridWorkItemView" kendo-grid="caller.gridWorkItemView"
+					k-options="caller.gridWorkItemOptions"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	document.onkeydown = keyDown;
+	function keyDown(e) {
+		switch (e.keyCode) {
+		case 27:
+			$("#cancel").click();
+			break;
+		case 13:
+			$("#find").click();
+			break;
+		}
+	}
+	$("#gridView").delegate("tbody>tr", "dblclick", function() {
+		$("#submit").click();
+	});
+</script>

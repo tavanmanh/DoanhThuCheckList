@@ -1,0 +1,8 @@
+<div data-ng-controller="constructionLandHandPlanController as vm">
+    <div ng-show="!vm.showDetail" style="clear: both;">
+        <div data-ng-include="'coms/constructionLandHandPlan/constructionLandHandPlanList.html'"></div>
+    </div>
+    <div ng-show="vm.showDetail" style="clear: both;">
+            <div data-ng-include="'coms/constructionLandHandPlan/constructionLandHandPlanForm.html'"></div>
+    </div>
+</div>

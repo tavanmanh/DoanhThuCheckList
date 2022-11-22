@@ -1,0 +1,42 @@
+<form class="form-horizontal row" novalidate="" name="form" xmlns="http://www.w3.org/1999/html">
+    <div class="form-body" style="padding-bottom: 100px;">
+        <div class="portlet light">
+            <div id="part1" class="collapse in from-search">
+                <div class="padding-width18">
+                    <div class="border-gray">
+                        <div class="clearfix position-relative">
+                            <div class="clearfix form-group">
+
+                                <div class="clearfix position-relative">
+                                    <label class="col-md-4 control-label req" translate>Lý do xác nhận</label>
+                                    <div class="col-md-8">
+                                        <textarea class=" form-control width100" type="text" id="quantity" name="quantity"required data-required-msg="Lý do xác nhận không được để trống"
+                                               ng-model="caller.constructionTaskDaily.approveDescription"/></textarea>
+                                        <span style=" color: red;"
+                                              ng-if="form.quantity.$invalid && !form.quantity.$pristine">Lý do xác nhận không được để trống</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row modal-footer">
+        <div class="col-md-12 text-right">
+            <button type="button"
+                    class="btn btn-qlk padding-search-right closeQLK" id="cancel"
+                    ng-click="caller.cancelConfirmPopup()" translate>Hủy bỏ
+            </button>
+            <button type="button" id="savepopupCancel"
+                    class="btn btn-qlk padding-search-right saveQLK"
+                    ng-click="caller.saveCancelConfirmPopup()" translate>Ghi lại
+            </button>
+        </div>
+
+    </div>
+</form>
+
+

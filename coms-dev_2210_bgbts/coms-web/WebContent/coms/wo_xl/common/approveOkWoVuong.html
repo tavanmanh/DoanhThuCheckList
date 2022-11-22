@@ -1,0 +1,45 @@
+<style>
+    .modal-content{
+        width: 100%;
+        padding: 0;
+    }
+
+    .close-modal-x{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    .light-border{
+        border: 1px solid #333;
+    }
+</style>
+
+<div class="modal-header" style="background-color: #33CCCC;">
+    <h5 class="modal-title" ng-bind-html="label.headerText" style="color: whitesmoke"></h5>
+    <button type="button" class="close close-modal-x" data-dismiss="modal" aria-label="Close" ng-click="$dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+	<div class="row">
+		<div class="form-group col-md-10">
+			<label class="col-md-4 control-label-custom" translate>Ngày
+				kết thúc</label>
+			<div class="col-md-8">
+				<input kendo-date-picker k-format="'dd/MM/yyyy'" name="finishDate" id="finishDate"
+					ng-model="confirmWO.finishDate" style="width: 100%;"
+					min-year="1000" date-time />
+			</div>
+		</div>
+	</div>
+
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="$dismiss()">
+        <i class="fa fa-ban"></i> Hủy bỏ
+    </button>
+    <button type="button" class="btn btn-secondary" ng-click="validateWoVuong()?$close():return;">
+        <i class="fa fa-floppy-o azure"></i> Ghi lại
+    </button>
+</div>

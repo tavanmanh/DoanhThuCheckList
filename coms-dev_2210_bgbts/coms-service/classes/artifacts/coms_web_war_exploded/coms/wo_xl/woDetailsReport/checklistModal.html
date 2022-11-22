@@ -1,0 +1,51 @@
+<style>
+    .modal-content{
+        width: 800px;
+        padding: 0;
+    }
+
+    .close-modal-x{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    .light-border{
+        border: 1px solid #333;
+    }
+</style>
+
+<div class="modal-header" style="background-color: #33CCCC;">
+    <h5 class="modal-title" style="color: whitesmoke">Chi tiết thực hiện WO</h5>
+    <button type="button" class="close close-modal-x" data-dismiss="modal" aria-label="Close" ng-click="$dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="collapse in from-search">
+        <div class="clearfix">
+
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <label class="control-label" style="text-align: left !important;" ng-if="vm.workingWO.catWorkItemTypeName" translate>Tên hạng mục: </label><span ng-bind-html="vm.workingWO.catWorkItemTypeName"></span>
+                    <label class="display-block control-label" style="text-align: left !important;" ng-bind-html="vm.label.executeChecklist" translate>Trình tự thực hiện công việc</label>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="collapse in from-search">
+                    <div class="clearfix position-relative">
+                        <div id="woCheckList" kendo-grid="vm.woCheckList" k-options="vm.woCheckListOptions" ng-if="vm.workingWO.woTypeCode != 'HCQT' "></div>
+                        <div id="woHCQTCheckList" kendo-grid="vm.woHCQTCheckList" k-options="vm.woHCQTCheckListOptions" ng-if="vm.workingWO.woTypeCode == 'HCQT' "></div>
+                        <input class="file-input" #file name="files" type="file" id="imgUpload" tabindex="10" style="display: none"  accept="image/x-png,image/gif,image/jpeg"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="$dismiss()">
+        <i class="fa fa-ban"></i> Đóng
+    </button>
+</div>

@@ -1,0 +1,19 @@
+<form name="form" class="form-horizontal row " role="form"
+      id="yearPlan" kendo-validator="validator"
+      k-options="validatorOptions" style="">
+    <div class="clearfix position-relative">
+        Kế hoạch tháng {{caller.detailMonthPlan.month}}/{{caller.detailMonthPlan.year}} của đơn vị {{caller.detailMonthPlan.sysGroupName}}
+    </div>
+    <div class="clearfix position-relative">
+        <div id="planDetailOSGrid" kendo-grid="caller.planDetailOSGrid"
+             k-options="caller.planDetailOSGridOptions"
+                ></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <button type="button"
+                    class="btn btn-qlk padding-search-right closeQLK" id="cancel"
+                    ng-click="caller.cancelPopupDetail()" translate>Hủy bỏ</button>
+        </div>
+    </div>
+</form>

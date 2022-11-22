@@ -1,0 +1,57 @@
+<style>
+    .wrap {
+        width: 100%;
+        margin-top:10px;
+        overflow: auto;
+    }
+</style>
+<form name="form" class="form-horizontal row " role="form"
+      id="yearPlan" kendo-validator="validator"
+      k-options="validatorOptions" style="">
+    <div class="clearfix position-relative">
+        <label class="col-md-2 control-label text-right " style="margin-top: 5px" translate>Danh sách đơn vị đối tác</label>
+        <div class="col-md-9">
+            <input id="deptCode" style="margin-top: 5px" class=" form-control width100"  type="text" maxlength="100" ng-enter="doSearch()"
+                   ng-model="searchItem.keySearch" placeholder="Tên đối tác/Mã đối tác..." />
+            <div class="One_icon">
+                <i class="fa fa-times" aria-hidden="true" style="margin-top: 5px"
+                   ng-click="cancelHandover('text')"></i>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix position-relative">
+        <div class="col-md-12 text-center">
+            <button type="button" id="find"
+                    class="btn btn-qlk btn-outline padding-search-right searchQLK"
+                    ng-click="doSearchCatpartner()" translate>
+                Tìm kiếm
+            </button>
+
+        </div>
+    </div>
+    <div class="clearfix position-relative">
+        <div id="deliveryUnitGrid" kendo-grid="deliveryUnitGrid"
+             k-options="caller.deliveryUnitOptions"
+             k-editable="false" k-cache="false"></div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    document.onkeydown= keyDown;
+    function keyDown(e){
+        switch(e.keyCode) {
+            case 27:
+                $("#cancel").click();
+                break;
+            case 13:
+                $("#find").click();
+                break;
+        }
+    }
+
+    $("#deliveryUnitGrid").delegate("tbody>tr", "dblclick", function(){
+        $("#submit").click();});
+
+
+    /* filterTree */
+</script>

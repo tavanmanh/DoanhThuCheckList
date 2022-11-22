@@ -1,0 +1,199 @@
+<style>
+.form-control[]: {
+	background-color: #e5e5e5 !important;
+}
+</style>
+
+<div id="assignHandoverPopup">
+	<form class="form-horizontal row" role="form" name="addForm"
+		id="addForm" k-options="validatorOptions">
+		<div class="form-body padding10">
+			<div class="portlet light bordered">
+				<div class="form-body padding10">
+					<div class="row caption" id="thongTinChungSpan">
+						<span class="caption-subject bold lowercase"
+							style="margin-left: 1px !important;" translate>Thông tin
+							chung</span>
+					</div>
+					<div class="portlet light bordered collapse in from-search"
+						id="thongTinChung">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Hợp
+									đồng</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										ng-disabled="caller.isCreate == false" id="cntContractCode"
+										ng-model="caller.addForm.cntContractCode"
+										name="cntContractCode" />
+									<!-- 	<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" ng-hide="caller.checkStatus"
+											ng-click="caller.resetFormAdd('constructionCode')"></i>
+									</div> -->
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Mã
+									công trình</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										id="constructionCode" ng-disabled="caller.isCreate == false"
+										ng-model="caller.addForm.constructionCode"
+										name="constructionCode" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"  
+											ng-click="caller.resetFormAdd('hdContractCode')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Số
+									hóa đơn</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text" id="billCode"
+										ng-disabled="caller.isCreate == false" 
+										ng-model="caller.addForm.billCode" name="billCode" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"  
+											ng-click="caller.resetFormAdd('hdSignDate')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Ngày
+									hóa đơn</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'" ng-disabled = "caller.isReject == true"
+										min-year="1000" id="createdBillDate" name="createdBillDate"
+										style="width: 100%;" ng-disabled="caller.isCreate == false"
+										ng-model="caller.addForm.createdBillDate" />
+
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Giá
+									trị hóa đơn</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text" ng-disabled = "caller.isReject == true"
+										id="hdPerformDay" ng-disabled="caller.isCreate == false"
+										ng-model="caller.addForm.billValue" name="billValue" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"  
+											ng-click="caller.resetFormAdd('hdPerformDay')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Người
+									thực hiện</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text" ng-disabled = "caller.isReject == true"
+										id="performerName" kendo-auto-complete
+										k-options="caller.catTaskOptions1"
+										ng-model="caller.addForm.performerName" name="performerName" />
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('performer')"></i>
+									</div>
+								</div>
+								<input class=" form-control width100" type="hidden"
+									id="performerId" ng-model="caller.addForm.performerId"
+									name="performerId" />
+
+							</div>
+
+
+						</div>
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Thời
+									gian bắt đầu</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'" ng-disabled = "caller.isReject == true"
+										min-year="1000" id="startDate" name="startDate"
+										style="width: 100%;" ng-model="caller.addForm.startDate" />
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('startDate')"></i>
+									</div>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Thời
+									gian hoàn thành thu tiền</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'" ng-disabled = "caller.isReject == true"
+										min-year="1000" id="endDate" name="endDate"
+										style="width: 100%;" ng-model="caller.addForm.endDate" />
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('endDate')"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label " translate>Ghi chú</label>
+								<div class="col-md-8">
+									<textarea class=" form-control width100" type="text" ng-disabled = "caller.isReject == true"
+										id="description" rows="3"
+										ng-model="caller.addForm.description" name="description" />
+								</div>
+							</div>
+							
+							<div class="form-group col-md-6" ng-show = "caller.isReject == true">
+								<label class="col-md-4 control-label req" translate>Lý do</label>
+								<div class="col-md-8">
+									<textarea class=" form-control width100" type="text"
+										id="description" rows="3"
+										ng-model="caller.addForm.reasonReject" name="description" />
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+
+
+
+
+
+
+
+
+					<!-- ---------------- -->
+					<div class="clearfix form-actions" align="right">
+						<button type="button" id="saveData" ng-hide = "caller.isReject == true"
+							class="btn btn-qlk   padding-search-right btn pull-right  saveQLK"
+							ng-click="caller.save()" translate>Ghi lại</button>
+						<button type="button" id="saveData" ng-show = "caller.isReject == true"
+							class="btn btn-qlk   padding-search-right btn pull-right  iconHuyNT"
+							ng-click="caller.reject()" translate>Từ chối</button>
+						<button type="button" id="cancel"
+							class="btn btn-qlk padding-search-right margin_right10 closeQLK btn pull-right"
+							ng-click="caller.cancel()" translate>Hủy bỏ</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<script>
+	$(document)
+			.ready(
+					function() {
+						var caller = angular.element(
+								document.getElementById('addForm')).scope().caller;
+						//Disabled form
+
+					});
+</script>

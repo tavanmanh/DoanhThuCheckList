@@ -1,0 +1,115 @@
+<style>
+
+/* #lineBorder {
+	border: 2px dotted #f39c12;
+} */
+
+</style>
+<div data-ng-controller="tongHopVTTBController  as vm">
+	<p class="text-brecum">{{vm.String}}</p>
+	<form class="form-horizontal row" role="form" id="chartReportSearch">
+		<div class="form-body">
+			<div class="portlet light bordered">
+				<div class="portlet-title background-title">
+					<div class="caption">
+						<span class="caption-subject bold lowercase" translate>Thông
+							tin tìm kiếm </span>
+
+					</div>
+				</div>
+				<div id="workItem1" class="collapse in from-search">
+					<div class="clearfix position-relative">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 form-horizontal control-label " translate>Thôn tin tìm kiếm</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										ng-model="vm.searchForm.keySearch" name="keySearch"
+										id="keySearch" placeholder="Nhập mã công trình"/>
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="vm.cancelInput('dept')"></i>
+									</div>
+									<script>
+									function reset_msg() {
+										document.getElementById('msg').innerHTML = '';
+									}
+								</script>
+								</div>
+							</div>
+							
+							<div class="col-md-6">
+									<label class="col-md-3 control-label req" translate>Ngày
+										hoàn thành từ ngày</label>
+									<div class="col-md-4 margin_top">
+
+										<input kendo-date-picker k-format="'dd/MM/yyyy'"
+											min-year="1000" id="startDate" name="startDate"
+											style="width: 100%;" ng-model="vm.searchForm.startDate" />
+
+									</div>
+									<label class="col-md-1 control-label req" translate>đến
+										ngày</label>
+									<div class="col-md-4 margin_top">
+
+										<input kendo-date-picker k-format="'dd/MM/yyyy'"
+											min-year="1000" id="endDate" name="endDate"
+											style="width: 100%;" ng-model="vm.searchForm.endDate" />
+
+									</div>
+									
+								</div>
+
+						</div>
+						<div class="clearfix">
+							<div class="form-group col-md-6" style="margin-top: 5px;">
+									<label class="col-md-4 control-label " translate>Tỉnh</label>
+									<div class="col-md-8 position-relative">
+										<select kendo-multi-select class="form-control"
+												id="statusList" style="width: 100%"
+												name="statusList" ng-model="vm.searchForm.provinceIds"
+												k-data-text-field="'name'" k-data-value-field="'catProvinceId'"
+												k-data-source="vm.provinceList">
+										<!-- 	<option value="1">Còn hiệu lực</option>
+											<option value="2">Chờ xác nhận</option> -->
+										</select>
+										<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" ng-click="vm.searchForm.provinceIds=[]"></i>
+									</div>
+									</div>
+									
+								</div>
+						</div>
+						<div class="clearfix form-actions margin-top">
+							<div class="row">
+								<div class="col-md-12 text-center">
+									<button type="button" id="doSearchQuantity"
+										ng-click="vm.doSearch()"
+										class="btn btn-qlk padding-search-right searchQLK" translate>Tìm
+										kiếm</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<div class="portlet light bordered">
+		<div class="portlet-title background-title">
+			<div class="caption">
+				<span class="caption-subject bold lowercase" translate>Kết
+					quả tìm kiếm: </span>&nbsp;<label class="control-label bold lowercase"
+					id="appCount">{{vm.count}}</label><label
+					class="control-label bold lowercase">&nbsp;bản ghi</label>
+
+			</div>
+		</div>
+		<div id="grid" class="collapse in from-search">
+			<div class="clearfix position-relative">
+				<div id="reportKpi45DaysId" kendo-grid="vm.reportKpi45DaysGrid"
+					k-options="vm.reportKpi45DaysGridOptions"></div>
+			</div>
+		</div>
+	</div>
+</div>

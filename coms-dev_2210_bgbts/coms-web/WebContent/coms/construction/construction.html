@@ -1,0 +1,4374 @@
+<div data-ng-controller="constructionController as vm">
+
+	<style>
+.k-upload-files, .k-upload-status {
+	display: none;
+}
+.k-floatwrap .k-header .k-gantt-toolbar {
+	display: none !important;
+}
+
+.k-task-single {
+	background-color: #1A75CE !important;
+}
+
+.k-task-complete {
+	background: #5FA2DD 0 -257px none repeat-x !important;
+}
+
+.k-task-summary-complete {
+	background: #34D075 !important;
+}
+
+.k-task-summary {
+	background: #80EDC4 !important;
+}
+
+/*change icon*/
+.k-icon .k-i-collapse:before {
+	font-family: FontAwesome !important;
+	display: inline-block !important;
+	padding-right: 6px !important;
+	vertical-align: middle !important;
+}
+
+.k-icon .k-i-collapse:before {
+	content: "\f07c" !important;
+}
+
+#ganttTC .k-gantt-toolbar, .k-gantt-toolbar .k-button {
+	background: #3F51B5 !important;
+}
+
+.k-gantt>.k-header .k-link {
+	color: #fff !important;
+}
+
+.k-gantt-toolbar>ul>li:first-child+li {
+	border-left-width: 0px !important;
+}
+
+.k-grid-header th.k-header {
+	vertical-align: middle
+}
+
+.k-grid tr td {
+	border-width: 1px 0px 0px 1px !important;
+}
+
+.k-grid-content tr td {
+	border-left-width: 1px !important;
+}
+
+button.k-gantt-toggle {
+	display: none !important;
+	float: left !important;
+	margin-right: .5em !important;
+}
+
+.k-gantt-toolbar>.k-gantt-views>li.k-current-view {
+	display: none !important;
+}
+
+#ganttTC .k-gantt-toolbar .k-button {
+	background-color: #3f51b5 !important;
+	border-color: #3f51b5 !important;
+}
+
+.k-gantt-toolbar .k-button {
+	color: #fff !important;
+	box-shadow: none !important;
+}
+
+.k-icon {
+	margin-top: 0px !important;
+}
+
+/*button*/
+.k-gantt-toolbar .k-button {
+	color: #fff !important;
+}
+
+/*right*/
+/*.k-header{background-color: #3f51b5 !important;border-color: #e6e6e6 !important;font-weight: 500 !important;color: #fff !important;}*/
+.k-gantt>.k-header li {
+	color: #fff !important;
+	background-color: #3f51b5 !important;
+	border-color: #3f51b5 !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+.k-gantt-toolbar>.k-gantt-views>li.k-state-selected {
+	border-bottom-color: #fff !important;
+}
+
+.k-state-selected {
+	background-image: none !important;
+}
+
+.k-gantt-toolbar>.k-gantt-views>li.k-state-selected a:active {
+	text-decoration: none !important;
+}
+
+.k-gantt-toolbar li .k-link {
+	color: #fff !important;
+	background-color: #3f51b5 !important;
+	border-color: #3f51b5 !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+/*task*/
+.k-gantt .k-task-summary-complete:after, .k-gantt .k-task-summary-complete:before,
+	.k-gantt .k-task-summary:after, .k-gantt .k-task-summary:before {
+	border-width: 0 !important;
+}
+
+.k-task-summary-complete:before, .k-task-summary:before {
+	left: 0 !important;
+	border-left-color: inherit !important;
+}
+
+.k-task-summary-complete:after, .k-task-summary-complete:before,
+	.k-task-summary:after, .k-task-summary:before {
+	content: "" !important;
+	position: absolute !important;
+	top: 0 !important;
+	width: 0 !important;
+	height: 0 !important;
+	border-style: solid !important;
+	border-width: 8px !important;
+	border-color: transparent !important;
+}
+
+/*search*/
+/*.k-widget{position: inherit !important;}*/
+.grantt-search {
+	position: absolute;
+	margin: 0px auto 0px 13%;
+	left: 8%;
+	width: 77%;
+	top: 1.5%;
+	z-index: 9999 !important;
+}
+
+.input-grantt {
+	background: transparent !important;
+	color: #fff;
+}
+
+::placeholder {
+	color: #fff !important;
+	opacity: 1;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+	color: #fff !important;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+	color: #fff !important;
+}
+
+.grantt-statistic {
+	float: right;
+	margin-top: 7px
+}
+
+.badge {
+	font-weight: bold !important;
+}
+/*cusbutton*/
+.k-gantt-actions {
+	margin-top: 6px
+}
+
+/*search*/
+.view-grantt {
+	position: relative !important
+}
+/*style button*/
+.k-edit-buttons .k-state-default .k-primary {
+	color: #000 !important;
+	background: #ccc 1px solid !important;
+}
+
+.k-edit-form-container .k-button {
+	color: #000 !important;
+}
+
+#ganttTC .k-grid-content .k-auto-scrollable {
+	height: 300px !important;
+}
+</style>
+
+	<script type="text/x-kendo-template" id="myTemplate">
+
+            <div style="padding:8px;border-radius: 8px;">
+
+                <div style="font-weight: bold; font-size: 14px;text-align: left;margin-bot:5px">Công việc: #: task.title #</div>
+                <div style="font-weight: bold; font-size: 14px;text-align: left;margin-bot:5px">Tiến độ: #: task.percentComplete+'%' #</div>
+                <div style="font-weight: bold; font-size: 14px;text-align: left;margin-bot:5px">Bắt đầu: #: task.start.toLocaleDateString("vi-VN") #</div>
+                <div style="font-weight: bold; font-size: 14px;text-align: left;margin-bot:5px">Kết thúc: #: task.end.toLocaleDateString("vi-VN") #</div>
+            </div>
+
+    </script>
+
+	<script id="editor1" type="text/x-kendo-template">
+
+       <form style="padding:25px;" >
+    <div class="clearfix">
+        <div class="row ">
+          <div class="form-group col-md-12">
+            <label class="col-md-4 control-label text-right" translate>Công việc</label>
+            <div class="col-md-8">
+                <input class=" form-control width100" type="text" name="title" />
+            </div>
+            </div>
+        </div>
+        <div class="row ">
+         <div class="form-group col-md-12">
+            <label class="col-md-4 control-label text-right" translate>Bắt đầu</label>
+            <div class="col-md-8">
+                <!--<input class=" form-control width100" data-role="datetimepicker" name="start" />-->
+                <input class="width100 form-control date" kendo-date-time-picker
+                       name="start" id="start"
+                       k-format="'dd/MM/yyyy HH:mm'"/>
+            </div>
+         </div>
+        </div>
+        <div class="row " >
+         <div class="form-group col-md-12">
+            <label class="col-md-4 control-label text-right" translate>Kết thúc</label>
+            <div class="col-md-8">
+                <input class="width100 form-control date" kendo-date-time-picker
+                       name="end" id="end"
+                        k-format="'dd/MM/yyyy HH:mm'"/>
+                <!--<input class=" form-control width100" data-type="date" data-role="datetimepicker" name="end" />-->
+            </div>
+         </div>
+        </div>
+        <div class="row " >
+        <div class="form-group col-md-12">
+            <label class="col-md-4 control-label text-right" translate>% Hoàn thành</label>
+            <div class="col-md-8">
+                <input class="k-input form-control width100" maxlength="5" data-role="numerictextbox" aria-valuemin="0" aria-valuemax="100" name="percentComplete" min="0" max="100" step="0.1" data-type="number" type="text" data-bind="value:percentComplete" role="spinbutton" id="numerictextbox" />
+            </div>
+            </div>
+        </div>
+    </div>
+</form>
+</script>
+	<style type="text/css">
+.template {
+	height: 100%;
+	overflow: hidden;
+}
+
+.progress1 {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 0%;
+	height: 100%;
+	background: rgba(228, 231, 245, 0.62);
+}
+</style>
+
+	<script id="template1" type="text/x-kendo-template">
+                <div class="template" >
+                <div >
+                    <strong style="float:left;" class="title">#= title # </strong>
+                    <strong style="float:right" class="percentComplete">#= percentComplete + '%' # </strong>
+
+                </div>
+                <div class="progress1" style="width:#= (parseFloat(percentComplete)) #%"> </div>
+                </div>
+        </script>
+	<div ng-show="!vm.showDetail" style="clear: both;">
+		<div data-ng-include="'coms/construction/constructionList.html'"></div>
+	</div>
+	<div ng-show="vm.showDetail" style="clear: both;">
+		<form novalidate="" name="form">
+
+			<p class="text-brecum">{{vm.String}}</p>
+			<div class="form-body">
+				<div class="portlet light bordered">
+					<div class="portlet-title background-title">
+						<div class="caption">
+							<span class="caption-subject bold lowercase" translate>Thông
+								tin chi tiết công trình</span>
+						</div>
+						<div class="text-right margin-row-title">
+							<!-- <i data-toggle="collapse" data-target="#tabDetail" ng-click="vm.cancel(form)" class="fa fa-times"
+								aria-hidden="true"></i> -->
+							 <i ng-click="vm.cancel(form)" class="fa fa-times"
+								aria-hidden="true"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="tabDetail" class="collapse in from-search row">
+			<!-- <div class="collapse in from-search row"> -->
+
+				<div class="row border-popup-management" style="display: flex">
+					<div class="col-md-12 col-lg-2 border-right ">
+						<div class="padding-height-20 form-horizontal row">
+							<div class="form-body">
+								<div class="row button-header">
+									<a class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10"
+										tabindex="1" ng-click="vm.chooseTab(1)"
+										ng-class="{'active':vm.constructDetailValue==1}"> <label
+										class="stt_radio1">1. Thông tin đầu vào</label>
+									</a> <a
+										class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 childTabCus "
+										ng-show="vm.constructDetailValue==1||vm.isForce" tabindex="2"
+										ng-click="vm.chooseTab(11)"
+										ng-class="{'active':vm.constructDetailValue==11}"> <label
+										class="stt_radio1">1.1 Thông tin chung</label>
+									</a> <a
+										class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 childTabCus"
+										ng-show="vm.constructDetailValue==1||vm.isForce" tabindex="3"
+										ng-click="vm.chooseTab(12)"
+										ng-class="{'active':vm.constructDetailValue==12}"> <label
+										class="stt_radio1">1.2 Hạng mục</label>
+									</a> <a
+										class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 childTabCus"
+										ng-show="vm.constructDetailValue==1||vm.isForce" tabindex="4"
+										ng-click="vm.chooseTab(13)"
+										ng-class="{'active':vm.constructDetailValue==13}"> <label
+										class="stt_radio1">1.3 Hợp đồng đầu ra</label>
+									</a> <a
+										class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 childTabCus"
+										ng-show="vm.constructDetailValue==1||vm.isForce" tabindex="5"
+										ng-click="vm.chooseTab(14)"
+										ng-class="{'active':vm.constructDetailValue==14}"> <label
+										class="stt_radio1">1.4 Phiếu xuất kho</label>
+									</a> <a class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 "
+										tabindex="6" ng-click="vm.chooseTab(2)"
+										ng-class="{'active':vm.constructDetailValue==2}"> <label
+										class="stt_radio1">2. Thông tin thực hiện</label>
+									</a> <a
+										class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 childTabCus"
+										ng-show="vm.constructDetailValue==2||vm.isForce1" tabindex="7"
+										ng-click="vm.chooseTab(21)"
+										ng-class="{'active':vm.constructDetailValue==21}"> <label
+										class="stt_radio1">2.1 Bàn giao mặt bằng</label>
+									</a> <a
+										class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 childTabCus"
+										ng-show="vm.constructDetailValue==2||vm.isForce1" tabindex="8"
+										ng-click="vm.chooseTab(22)"
+										ng-class="{'active':vm.constructDetailValue==22}"> <label
+										class="stt_radio1">2.2 Khởi công</label>
+									</a> <a
+										class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 childTabCus"
+										ng-show="vm.constructDetailValue==2||vm.isForce1" tabindex="9"
+										ng-click="vm.chooseTab(23)"
+										ng-class="{'active':vm.constructDetailValue==23}"> <label
+										class="stt_radio1">2.3 Thi công</label>
+									</a> <a
+										class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 childTabCus"
+										ng-show="vm.constructDetailValue==2||vm.isForce1"
+										tabindex="10" ng-click="vm.chooseTab(24)"
+										ng-class="{'active':vm.constructDetailValue==24}"> <label
+										class="stt_radio1">2.4 Vướng</label>
+									</a> <a
+										class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 childTabCus"
+										ng-show="vm.constructDetailValue==2||vm.isForce1"
+										tabindex="11" ng-click="vm.chooseTab(25)"
+										ng-class="{'active':vm.constructDetailValue==25}"> <label
+										class="stt_radio1">2.5 Hoàn thành</label>
+									</a> <a
+										class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 childTabCus"
+										ng-show="vm.constructDetailValue==2||vm.isForce1"
+										tabindex="12" ng-click="vm.chooseTab(26)"
+										ng-class="{'active':vm.constructDetailValue==26}"> <label
+										class="stt_radio1">2.6 Nghiệm thu</label>
+									</a> <a
+										class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 childTabCus"
+										ng-show="vm.constructDetailValue==2||vm.isForce1"
+										tabindex="13" ng-click="vm.chooseTab(27)"
+										ng-class="{'active':vm.constructDetailValue==27}"> <label
+										class="stt_radio1">2.7 Hoàn trả</label>
+									</a> <a
+										class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 childTabCus"
+										ng-show="vm.constructDetailValue==2||vm.isForce1"
+										tabindex="13" ng-click="vm.chooseTab(28)"
+										ng-class="{'active':vm.constructDetailValue==28}"> <label
+										class="stt_radio1">2.8 Giấy phép xây dựng </label>
+									</a> <a
+										class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 childTabCus"
+										ng-show="vm.constructDetailValue==2||vm.isForce1"
+										tabindex="13" ng-click="vm.chooseTab(29)"
+										ng-class="{'active':vm.constructDetailValue==29}"> <label
+										class="stt_radio1">2.9 Thiết kế xây dựng  </label>
+									</a> <a class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 "
+										tabindex="14" ng-click="vm.chooseTab(3)"
+										ng-class="{'active':vm.constructDetailValue==3}"> <label
+										class="stt_radio1">3. Thông tin đầu ra</label>
+									</a> <a
+										class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 childTabCus"
+										ng-show="vm.constructDetailValue==3||vm.isForce2"
+										tabindex="15" ng-click="vm.chooseTab(31)"
+										ng-class="{'active':vm.constructDetailValue==31}"> <label
+										class="stt_radio1">3.1 Hợp đồng đầu vào</label>
+									</a> </a> <a
+										class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 childTabCus"
+										ng-show="vm.constructDetailValue==3||vm.isForce2"
+										tabindex="15" ng-click="vm.chooseTab(32)"
+										ng-class="{'active':vm.constructDetailValue==32}"> <label
+										class="stt_radio1">3.2 Thông tin phát sóng</label>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div
+						class="form-horizontal  padding-height-20  col-md-12 col-lg-10"
+						role="form">
+						<div class="form-body"
+							ng-show="vm.constructDetailValue==11||vm.constructDetailValue==1">
+
+							<div id="creExtReMa1" class="collapse in from-search row">
+								<div class="row border-popup-management" style="display: flex">
+									<div class="col-md-12 col-lg-2 border-right ">
+										<form class="padding-height-20 form-horizontal row"
+											role="form" id="form">
+											<div class="form-body">
+												<div class="portlet-title light">
+													<div class="caption">
+														<span class="bold lowercase" translate>Loại công trình</span>
+													</div>
+												</div>
+
+												<div class="row">
+													<div
+														class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10">
+														<label class="stt_radio"><input type="radio"
+															value="1"
+															ng-change="vm.checkboxAction(vm.constrObj.catConstructionTypeId)"
+															ng-disabled="vm.disOpt||vm.checkNumberHangMuc"
+															ng-model="vm.constrObj.catConstructionTypeId" /> 1. Công
+															trình BTS</label>
+													</div>
+													<div
+														class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10">
+														<label class="stt_radio"><input type="radio"
+															value="2"
+															ng-change="vm.checkboxAction(vm.constrObj.catConstructionTypeId)"
+															ng-disabled="vm.disOpt||vm.checkNumberHangMuc"
+															ng-model="vm.constrObj.catConstructionTypeId" /> 2. Công
+															trình tuyến</label>
+													</div>
+													<div
+														class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10">
+														<label class="stt_radio"><input type="radio"
+															value="3"
+															ng-change="vm.checkboxAction(vm.constrObj.catConstructionTypeId)"
+															ng-disabled="vm.disOpt||vm.checkNumberHangMuc"
+															ng-model="vm.constrObj.catConstructionTypeId" /> 3. Công
+															trình GPON</label>
+													</div>
+													<div
+														class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10">
+														<label class="stt_radio"><input type="radio"
+															value="4"
+															ng-change="vm.checkboxAction(vm.constrObj.catConstructionTypeId)"
+															ng-disabled="vm.disOpt||vm.checkNumberHangMuc"
+															ng-model="vm.constrObj.catConstructionTypeId" /> 4. Công
+															trình lẻ</label>
+													</div>
+													<div
+															class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10">
+														<label class="stt_radio"><input type="radio"
+																						value="5"
+																						ng-change="vm.checkboxAction(vm.constrObj.catConstructionTypeId)"
+																						ng-disabled="vm.disOpt||vm.checkNumberHangMuc"
+																						ng-model="vm.constrObj.catConstructionTypeId" /> 5. Công
+															trình gia cố</label>
+													</div>
+
+													<div
+															class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10">
+														<label class="stt_radio"><input type="radio"
+																						value="6"
+																						ng-change="vm.checkboxAction(vm.constrObj.catConstructionTypeId)"
+																						ng-disabled="vm.disOpt||vm.checkNumberHangMuc"
+																						ng-model="vm.constrObj.catConstructionTypeId" /> 6. Công
+															trình nhà máy nổ</label>
+													</div>
+													<div
+														class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10">
+														<label class="stt_radio"><input type="radio"
+															value="7"
+															ng-change="vm.checkboxAction(vm.constrObj.catConstructionTypeId)"
+															ng-disabled="vm.disOpt||vm.checkNumberHangMuc"
+															ng-model="vm.constrObj.catConstructionTypeId" /> 7. Công
+															trình Năng lượng mặt trời</label>
+													</div>
+
+													<div
+														class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10">
+														<label class="stt_radio"><input type="radio"
+															value="8"
+															ng-change="vm.checkboxAction(vm.constrObj.catConstructionTypeId)"
+															ng-disabled="vm.disOpt||vm.checkNumberHangMuc"
+															ng-model="vm.constrObj.catConstructionTypeId" /> 8. Công
+															trình XDDD</label>
+													</div>
+
+												</div>
+
+											</div>
+										</form>
+									</div>
+									<div
+										class="form-horizontal  padding-height-20  col-md-12 col-lg-10">
+										<div class="form-body ">
+											<div class="portlet-title">
+												<div class="caption">
+													<span class="caption-subject bold lowercase" translate>Thông
+														tin công trình</span>
+												</div>
+											</div>
+
+											<div class="padding-width18">
+												<div class="border-gray">
+													<div ng-show="vm.option1Show">
+														<div class="clearfix">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Mã
+																	trạm</label>
+																<div class="col-md-8">
+																	<!-- <input kendo-auto-complete
+																		k-options="vm.catStationOptions1"
+																		ng-blur="vm.changeDataAuto('dept')"
+																		class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.catStationCode"
+																		ng-disabled="vm.checkTotalPxk"
+																		name="catStationCode" onclick="reset_msg();"
+																		data-required-msg="Mã trạm không được để trống" /> -->
+																		<input kendo-auto-complete
+																		k-options="vm.catStationOptions1"
+																		ng-blur="vm.changeDataAuto('dept')"
+																		class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.catStationCode"
+																		ng-disabled="!vm.roleEditConstructionAdmin"
+																		name="catStationCode" onclick="reset_msg();"
+																		data-required-msg="Mã trạm không được để trống" /> <span
+																		id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+
+																	<div class="One_icon">
+																		<i ng-hide="vm.checkTotalPxk" class="fa fa-times" aria-hidden="true"
+																			ng-click="vm.cancelStationInput('catStationCode')"></i>
+																	</div>
+																</div>
+															</div>
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Mã
+																	công trình</label>
+
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.code" ng-blur="vm.checkCodeConstr()"
+																		data-required-msg="Mã công trình không được để trống" />
+																</div>
+															</div>
+														</div>
+
+														<div class="clearfix">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Tên
+																	công trình</label>
+
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.name"
+																		data-required-msg="Tên công trình không được để trống" />
+																</div>
+															</div>
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Vùng
+																	miền</label>
+
+																<div class="col-md-8">
+																	<select kendo-drop-down-list style="width: 100%"
+																		ng-model="vm.constrObj.region"
+																		k-data-text-field="'name'" k-data-value-field="'code'"
+																		k-option-label="'---Chọn---'"
+																		k-data-source="vm.regionDataList">
+																	</select>
+																</div>
+															</div>
+														</div>
+
+														<div class="clearfix">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label" translate>Ngày
+																	khởi công dự kiến</label>
+
+																<div class="col-md-8">
+																	<input kendo-date-picker k-format="'dd/MM/yyyy'"
+																		date-time id="excpectedStartingDate1"
+																		name="excpectedStartingDate1"
+																		ng-model="vm.constrObj.excpectedStartingDate"
+																		style="width: 100%;"
+																		ng-blur="validateDate(vm.constrObj.excpectedStartingDate,null,null,form.excpectedStartingDate1)"
+																		placeholder="DD/MM/YYYY" />
+																	<div class="One_icon">
+																		<i class="fa fa-times" aria-hidden="true"
+																			ng-click="vm.cancelInput('excpectedStartingDate',form.excpectedStartingDate1)"></i>
+																	</div>
+																	<div class="error"
+																		ng-messages="form.excpectedStartingDate1.$error"
+																		ng-if="form.excpectedStartingDate1.$invalid && form.excpectedStartingDate1.$dirty">
+																		<label ng-message="date" class="control-data"
+																			translate>Ngày khởi công dự kiến không hợp lệ</label>
+																	</div>
+																</div>
+
+															</div>
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label" translate>Hình
+																	thức thi công</label>
+
+																<div class="col-md-8">
+
+																	<select kendo-drop-down-list style="width: 100%"
+																		ng-model="vm.constrObj.catConstructionDeployId"
+																		k-data-text-field="'name'" k-data-value-field="'id'"
+																		k-option-label="'---Chọn---'"
+																		k-data-source="vm.catConstructionDeployDataList">
+																	</select>
+
+																</div>
+															</div>
+														</div>
+														<div class="clearfix">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Đơn
+																	vị thi công</label>
+																<div class="col-md-8">
+																	<div class="input-icon right ">
+																		<i class="fa fa-search directive"
+																			ng-click="vm.openDepartmentTo('dept1')"></i>
+																	</div>
+																	<input kendo-auto-complete k-options="vm.deprtOptions1"
+																		ng-blur="vm.changeDataAuto('deptGroup')"
+																		class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.sysGroupName" name="dept"
+																		onclick="reset_msg();"
+																		data-required-msg="Đơn vị không để trống" /> <span
+																		id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+																	<div class="One_icon">
+																		<i class="fa fa-times" aria-hidden="true"
+																			ng-click="vm.cancelInput('dept1')"></i>
+																	</div>
+																</div>
+															</div>
+
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Mã
+																	dự án</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.projectCode" readonly />
+																</div>
+															</div>
+														</div>
+														<!-- HienLT56 start 19032021 -->
+														<div class="clearfix">
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Tên
+																	dự án</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.projectName" readonly />
+																</div>
+															</div>
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Ngày thi công công trình</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.completeDate" readonly />
+																</div>
+															</div>
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Tên đơn vị tư vấn khảo sát</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.cntContractTVKS" readonly />
+																</div>
+															</div>
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Tên đơn vị tư vấn thiết kế</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.cntContractTVTK" readonly />
+																</div>
+															</div>
+														</div>
+														<!-- HienLT56 end 19032021 -->
+														<div class="clearfix">
+															<div class="form-group col-md-12">
+																<div class="form-group col-md-12">
+																	<label class="col-md-2 control-label" translate>Ghi
+																		chú</label>
+
+																	<div class="col-md-10">
+																		<textarea class=" form-control width100"
+																			ng-model="vm.constrObj.description"></textarea>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-- Huypq-start-check GPXD -->
+														<div class="clearfix">
+															<div class="form-group col-md-12">
+																<div class="form-group col-md-12">
+																	<label class="col-md-2 control-label" translate>Cần GPXD</label>
+																	<div class="col-md-10">
+																		<input type="checkbox" ng-true-value="1" ng-false-value="null"
+																		ng-click="vm.handleCheck(dataItem)" ng-model="vm.constrObj.isBuildingPermit" />
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-- Huypq-end-check GPXD -->
+
+														<!-- hienvd: Add 5-8-2019 -->
+														<div class="clearfix" ng-show="vm.constrObj.isStationHtct==1">
+															<div class="form-group col-md-6" >
+																<label class="col-md-4 control-label" translate>Hạ tầng cho thuê</label>
+																<div class="col-md-8">
+																	<input type="checkbox" id="checkRental" name="checkRental" disabled
+																		   ng-click="vm.selectCheckRental()" ng-model="vm.constrObj.checkHTCT"
+																		   class="ng-untouched ng-valid ng-dirty ng-valid-parse">
+																</div>
+															</div>
+
+															<div class="form-group col-md-6" ng-show="vm.constrObj.isStationHtct==1">
+																<label class="col-md-4 control-label" translate>Vị trí</label>
+																<div class="col-md-8">
+																	<select kendo-drop-down-list style="width: 100%"
+																			ng-model="vm.constrObj.locationHTCT" k-data-text-field="'name'"
+																			k-data-value-field="'code'" k-option-label="'---Chọn---'"
+																			k-data-source="vm.locationDataList">
+																	</select>
+																</div>
+															</div>
+														</div>
+
+<!--														<div class="clearfix" id="highHTCT" style="visibility: hidden">-->
+<!--															<div class="form-group col-md-6">-->
+<!--																<label class="col-md-4 control-label" translate>Chiều cao</label>-->
+<!--																<div class="col-md-8">-->
+<!--																	<input class=" form-control width100" type="text"-->
+<!--																		   ng-model="vm.constrObj.highHTCT"-->
+<!--																		   data-required-msg="Chiều cao không được để trống" />-->
+<!--																</div>-->
+<!--															</div>-->
+<!--															<div class="form-group col-md-6">-->
+<!--																<label class="col-md-4 control-label" translate>Tổng capex tạm tính</label>-->
+<!--																<div class="col-md-8">-->
+<!--																	<input class=" form-control width100" type="text"-->
+<!--																		   ng-model="vm.constrObj.capexHTCT"-->
+<!--																		   data-required-msg="Tổng capex tạm tính không được để trống" />-->
+<!--																</div>-->
+<!--															</div>-->
+<!--															&lt;!&ndash;										<div class="form-group col-md-6">&ndash;&gt;-->
+<!--															&lt;!&ndash;											<label class="col-md-4 control-label" translate>Chiều cao</label>&ndash;&gt;-->
+<!--															&lt;!&ndash;											<div class="col-md-8">&ndash;&gt;-->
+<!--															&lt;!&ndash;												<input class=" form-control width100" type="text"&ndash;&gt;-->
+<!--															&lt;!&ndash;													   ng-model="vm.constrObj.highHTCT"&ndash;&gt;-->
+<!--															&lt;!&ndash;													   data-required-msg="Chiều cao không được để trống" />&ndash;&gt;-->
+<!--															&lt;!&ndash;											</div>&ndash;&gt;-->
+<!--															&lt;!&ndash;										</div>&ndash;&gt;-->
+<!--															&lt;!&ndash;										<div class="form-group col-md-6">&ndash;&gt;-->
+<!--															&lt;!&ndash;											<label class="col-md-4 control-label" translate>Tổng capex tạm tính</label>&ndash;&gt;-->
+<!--															&lt;!&ndash;											<div class="col-md-8">&ndash;&gt;-->
+<!--															&lt;!&ndash;												<input class=" form-control width100" type="text"&ndash;&gt;-->
+<!--															&lt;!&ndash;													   ng-model="vm.constrObj.capexHTCT"&ndash;&gt;-->
+<!--															&lt;!&ndash;													   data-required-msg="Tổng capex tạm tính không được để trống" />&ndash;&gt;-->
+<!--															&lt;!&ndash;											</div>&ndash;&gt;-->
+<!--															&lt;!&ndash;										</div>&ndash;&gt;-->
+<!--														</div>-->
+
+														<div class="clearfix">
+															<div class="form-group col-md-6" id="highHTCT" ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Chiều cao</label>
+																<div class="col-md-8">
+																	<input class="form-control width100" ng-blur="focusOut()" name="conHighHTCT"
+																		   id="conHighHTCT" maxlength="19"
+																		   ng-model="vm.constrObj.highHTCT"
+																		   data-required-msg="Chiều cao không được để trống"
+																		   ng-keydown="vm.checkNum()"
+																		   ng-change="vm.addComma('constrObj','conHighHTCT')" /> <span
+																		data-for='quantity' class='k-invalid-msg'></span>
+																</div>
+															</div>
+
+															<div class="form-group col-md-6" id="capexHTCT" ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Tổng capex tạm tính</label>
+																<div class="col-md-8">
+																	<input class="form-control width100" ng-blur="focusOut()" name="conCapexHTCT"
+																		   id="conCapexHTCT" maxlength="19"
+																		   data-required-msg="Tổng capex tạm tính không được để trống"
+																		   ng-model="vm.constrObj.capexHTCT"
+																		   ng-keydown="vm.checkNum()"
+																		   ng-change="vm.addComma('constrObj','conCapexHTCT')" /> <span
+																		data-for='price' class='k-invalid-msg'></span>
+																</div>
+															</div>
+														</div>
+														<!-- <div class="clearfix" id="projectCode" ng-show = "vm.constrObj.checkHTCT == true">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label" translate>Mã dự án</label>
+																<div class="col-md-8">
+																	<input class="form-control width100" ng-blur="focusOut()" name="projectCode"
+																		   id="projectCode" maxlength="19" ng-disabled = "vm.constrObj.checkHTCT == true"
+																		   ng-model="vm.constrObj.projectCode"
+																		   />
+																</div>
+															</div>
+
+
+														</div> -->
+
+														<!-- hienvd: End 5-8-2019 -->
+													</div>
+
+													<div ng-show="vm.option2Show">
+														<div class="clearfix">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Mã
+																	tuyến</label>
+																<div class="col-md-8">
+																	<input kendo-auto-complete
+																		k-options="vm.catStationOptions2"
+																		ng-blur="vm.changeDataAuto('deptEdit')"
+																		ng-disabled="!vm.roleEditConstructionAdmin"
+																		class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.catStationCode"
+																		name="catStationCode" onclick="reset_msg();"
+																		data-required-msg="Mã tuyến không được để trống" /> <span
+																		id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+																	<div class="One_icon">
+																		<i ng-hide="vm.checkTotalPxk" class="fa fa-times" aria-hidden="true"
+																			ng-click="vm.cancelStationInput('catStationCode')"></i>
+																	</div>
+																</div>
+
+															</div>
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Mã
+																	công trình</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.code" ng-blur="vm.checkCodeConstr()"/>
+																</div>
+															</div>
+														</div>
+
+														<div class="clearfix">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Tên
+																	công trình</label>
+
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.name" />
+																</div>
+															</div>
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Loại
+																	tuyến</label>
+																<div class="col-md-8">
+																	<select kendo-drop-down-list style="width: 100%"
+																		ng-model="vm.constrObj.deployType"
+																		k-data-text-field="'name'" k-data-value-field="'code'"
+																		k-option-label="'---Chọn---'"
+																		k-data-source="vm.lineTypeDataList">
+																	</select>
+																</div>
+															</div>
+														</div>
+														<div class="clearfix">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label" translate>Ngày
+																	khởi công dự kiến</label>
+																<div class="col-md-8">
+																	<input kendo-date-picker k-format="'dd/MM/yyyy'"
+																		date-time id="excpectedStartingDate2"
+																		name="excpectedStartingDate2"
+																		ng-model="vm.constrObj.excpectedStartingDate"
+																		style="width: 100%;"
+																		ng-blur="validateDate(vm.constrObj.excpectedStartingDate,null,null,form.excpectedStartingDate2)"
+																		placeholder="DD/MM/YYYY" />
+																	<div class="One_icon">
+																		<i class="fa fa-times" aria-hidden="true"
+																			ng-click="vm.cancelInput('excpectedStartingDate',form.excpectedStartingDate2)"></i>
+																	</div>
+																	<div class="error"
+																		ng-messages="form.excpectedStartingDate2.$error"
+																		ng-if="form.excpectedStartingDate2.$invalid && form.excpectedStartingDate2.$dirty">
+																		<label ng-message="date" class="control-data"
+																			translate>Ngày khởi công dự kiến không hợp lệ</label>
+																	</div>
+																</div>
+															</div>
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Đơn
+																	vị thi công</label>
+																<div class="col-md-8">
+																	<div class="input-icon right ">
+																		<i class="fa fa-search directive"
+																			ng-click="vm.openDepartmentTo('dept1')"></i>
+																	</div>
+																	<input kendo-auto-complete k-options="vm.deprtOptions1"
+																		ng-blur="vm.changeDataAuto('dept')"
+																		class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.sysGroupName" name="dept"
+																		onclick="reset_msg();"
+																		data-required-msg="Đơn vị không để trống" /> <span
+																		id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+																	<div class="One_icon">
+																		<i class="fa fa-times" aria-hidden="true"
+																			ng-click="vm.cancelInput('dept')"></i>
+																	</div>
+																</div>
+															</div>
+														</div>
+<!-- 									hungnx 20180621 start -->
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Khối lượng (mét)</label>
+											<div class="col-md-8">
+												<input id="amount" class=" form-control" type="text" maxlength="19"
+													ng-model="vm.constrObj.amount"ng-keydown="vm.checkNum()" />
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Giá</label>
+											<div class="col-md-4">
+												<input id="price" class="form-control style-number" name="price" maxlength="19"
+												ng-keydown="vm.checkNum()" ng-model="vm.constrObj.price"
+												ng-change="vm.addComma('constrObj','price')" />
+											</div>
+											<div class="col-md-4" style="padding: 5px 0px 0px 8px;">
+												(Triệu VND/mét)
+												<!-- <select style="padding-left: 8px;" class="form-control" id="moneyType" name="moneyType" ng-model="vm.constrObj.moneyType">
+												<option ng-repeat="x in vm.moneyType" value="{{x.code}}">{{x.name}}</option>
+												</select> -->
+											</div>
+										</div>
+									</div>
+<!-- 									hungnx 20180621 end -->
+									<!-- hoangnh start -->
+									<!-- <div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Khối lượng cáp thi công TT</label>
+											<div class="col-md-8">
+												<input id="amountCableLive" class=" form-control width100" type="text" maxlength="19"
+													ng-model="vm.constrObj.amountCableLive"ng-keydown="vm.checkNum()" />
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Khối lượng cáp thuê ngoài</label>
+											<div class="col-md-8">
+												<input id="amountCableRent" class=" form-control width100" type="text" maxlength="19"
+													ng-model="vm.constrObj.amountCableRent"ng-keydown="vm.checkNum()" />
+											</div>
+										</div>
+									</div> -->
+									<!-- hoangnh end -->
+														<div class="clearfix">
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Mã
+																	dự án</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.projectCode" readonly />
+																</div>
+															</div>
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Tên
+																	dự án</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.projectName" readonly />
+																</div>
+															</div>
+														</div>
+														<!-- HienLT56 start 22032021 -->
+														<div class="clearfix">
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Tên đơn vị tư vấn khảo sát</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.cntContractTVKS" readonly />
+																</div>
+															</div>
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Tên đơn vị tư vấn thiết kế</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.cntContractTVTK" readonly />
+																</div>
+															</div>
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Ngày thi công công trình</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.completeDate" readonly />
+																</div>
+															</div>
+														</div>
+														<!-- HienLT56 end 22032021 -->
+														<div class="clearfix">
+															<div class="form-group col-md-12">
+																<div class="form-group col-md-12">
+																	<label class="col-md-2 control-label" translate>Ghi
+																		chú</label>
+
+																	<div class="col-md-10">
+																		<textarea class=" form-control width100"
+																			ng-model="vm.constrObj.description"></textarea>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-- Huypq-start-check GPXD -->
+														<div class="clearfix">
+															<div class="form-group col-md-12">
+																<div class="form-group col-md-12">
+																	<label class="col-md-2 control-label" translate>Cần GPXD</label>
+																	<div class="col-md-10">
+																		<input type="checkbox" ng-true-value="1" ng-false-value="null"
+																		ng-click="vm.handleCheck(dataItem)" ng-model="vm.constrObj.isBuildingPermit" />
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-- Huypq-end-check GPXD -->
+
+														<!-- HuyPQ-20190918-start -->
+														<div class="clearfix" ng-show="vm.constrObj.isStationHtct==1">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label" translate>Hạ tầng cho thuê</label>
+																<div class="col-md-8">
+																	<input type="checkbox" id="checkRental" name="checkRental" disabled
+																		   ng-click="vm.selectCheckRental()" ng-model="vm.constrObj.checkHTCT"
+																		   class="ng-untouched ng-valid ng-dirty ng-valid-parse">
+																</div>
+															</div>
+
+															<div class="form-group col-md-6" ng-show="vm.constrObj.isStationHtct==1">
+																<label class="col-md-4 control-label" translate>Vị trí</label>
+																<div class="col-md-8">
+																	<select kendo-drop-down-list style="width: 100%"
+																			ng-model="vm.constrObj.locationHTCT" k-data-text-field="'name'"
+																			k-data-value-field="'code'" k-option-label="'---Chọn---'"
+																			k-data-source="vm.locationDataList">
+																	</select>
+																</div>
+															</div>
+														</div>
+
+														<div class="clearfix">
+															<div class="form-group col-md-6" ng-show="vm.constrObj.isStationHtct==1">
+																<label class="col-md-4 control-label" translate>Chiều cao</label>
+																<div class="col-md-8">
+																	<input class="form-control width100" ng-blur="focusOut()" name="conHighHTCT"
+																		   id="conHighHTCT" maxlength="19"
+																		   ng-model="vm.constrObj.highHTCT"
+																		   data-required-msg="Chiều cao không được để trống"
+																		   ng-keydown="vm.checkNum()"
+																		   ng-change="vm.addComma('constrObj','conHighHTCT')" /> <span
+																		data-for='quantity' class='k-invalid-msg'></span>
+																</div>
+															</div>
+
+															<div class="form-group col-md-6" ng-show="vm.constrObj.isStationHtct==1">
+																<label class="col-md-4 control-label" translate>Tổng capex tạm tính</label>
+																<div class="col-md-8">
+																	<input class="form-control width100" ng-blur="focusOut()" name="conCapexHTCT"
+																		   id="conCapexHTCT" maxlength="19"
+																		   data-required-msg="Tổng capex tạm tính không được để trống"
+																		   ng-model="vm.constrObj.capexHTCT"
+																		   ng-keydown="vm.checkNum()"
+																		   ng-change="vm.addComma('constrObj','conCapexHTCT')" /> <span
+																		data-for='price' class='k-invalid-msg'></span>
+																</div>
+															</div>
+														</div>
+														<!-- Huypq-end -->
+														<!-- <div class="clearfix" id="projectCode" ng-show = "vm.constrObj.checkHTCT == true">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label" translate>Mã dự án</label>
+																<div class="col-md-8">
+																	<input class="form-control width100" ng-blur="focusOut()" name="projectCode"
+																		   id="projectCode" maxlength="19" ng-disabled = "vm.constrObj.checkHTCT == true"
+																		   ng-model="vm.constrObj.projectCode"
+																		   />
+																</div>
+															</div>
+
+
+														</div> -->
+													</div>
+
+													<div ng-show="vm.option3Show">
+														<div class="clearfix">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Mã
+																	trạm</label>
+
+																<div class="col-md-8">
+
+																	<input kendo-auto-complete
+																		k-options="vm.catStationOptions1"
+																		ng-blur="vm.changeDataAuto('dept')"
+																		ng-disabled="!vm.roleEditConstructionAdmin"
+																		class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.catStationCode"
+																		name="catStationCode" onclick="reset_msg();"
+																		data-required-msg="Mã trạm không được để trống" /> <span
+																		id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+
+																	<div class="One_icon">
+																		<i ng-hide="vm.checkTotalPxk" class="fa fa-times" aria-hidden="true"
+																			ng-click="vm.cancelStationInput('catStationCode')"></i>
+																	</div>
+																</div>
+
+															</div>
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Mã
+																	công trình</label>
+
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.code" ng-blur="vm.checkCodeConstr()"/>
+																</div>
+															</div>
+														</div>
+
+														<div class="clearfix">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Tên
+																	công trình</label>
+
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.name" />
+																</div>
+															</div>
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Loại GPON</label>
+
+																<div class="col-md-8">
+																	<select kendo-drop-down-list style="width: 100%"
+																		ng-model="vm.constrObj.deployType"
+																		k-data-text-field="'name'" k-data-value-field="'code'"
+																		k-option-label="'---Chọn---'"
+																		k-data-source="vm.gponTypeDataList">
+																	</select>
+																</div>
+
+															</div>
+														</div>
+
+														<div class="clearfix">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label" translate>Ngày
+																	khởi công dự kiến</label>
+
+																<div class="col-md-8">
+																	<input kendo-date-picker k-format="'dd/MM/yyyy'"
+																		date-time id="excpectedStartingDate3"
+																		name="excpectedStartingDate3"
+																		ng-model="vm.constrObj.excpectedStartingDate"
+																		style="width: 100%;"
+																		ng-blur="validateDate(vm.constrObj.excpectedStartingDate,null,null,form.excpectedStartingDate3)"
+																		placeholder="DD/MM/YYYY" />
+																	<div class="One_icon">
+																		<i class="fa fa-times" aria-hidden="true"
+																			ng-click="vm.cancelInput('excpectedStartingDate',form.excpectedStartingDate3)"></i>
+																	</div>
+																	<div class="error"
+																		ng-messages="form.excpectedStartingDate3.$error"
+																		ng-if="form.excpectedStartingDate3.$invalid && form.excpectedStartingDate3.$dirty">
+																		<label ng-message="date" class="control-data"
+																			translate>Ngày khởi công dự kiến không hợp lệ</label>
+																	</div>
+																</div>
+
+															</div>
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Đơn
+																	vị thi công</label>
+																<div class="col-md-8">
+																	<div class="input-icon right ">
+																		<i class="fa fa-search directive"
+																			ng-click="vm.openDepartmentTo('dept1')"></i>
+																	</div>
+																	<input kendo-auto-complete k-options="vm.deprtOptions1"
+																		ng-blur="vm.changeDataAuto('dept')"
+																		class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.sysGroupName" name="dept"
+																		onclick="reset_msg();"
+																		data-required-msg="Đơn vị không để trống" /> <span
+																		id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+																	<div class="One_icon">
+																		<i class="fa fa-times" aria-hidden="true"
+																			ng-click="vm.cancelInput('dept')"></i>
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<!-- hoangnh start -->
+									<!-- <div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Tổng khối lượng cáp toàn tuyến</label>
+											<div class="col-md-8">
+												<input id="totalAmount" class=" form-control width100" type="text" maxlength="19"
+													ng-model="vm.constrObj.amount"ng-keydown="vm.checkNum()" />
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Đơn giá thi công cáp</label>
+												<div class="col-md-5">
+												<input id="price" class="form-control style-number" name="price" maxlength="19"
+												ng-keydown="vm.checkNum()" ng-model="vm.constrObj.price"
+												ng-change="vm.addComma('constrObj','price')" />
+											</div>
+											<div class="col-md-3" style="padding-left: 0;">
+												<select ng-init="vm.constrObj.moneyType='1'" class="form-control" id="moneyType" name="moneyType" ng-model="vm.constrObj.moneyType">
+												<option ng-repeat="x in vm.moneyType" value="{{x.code}}">{{x.name}}</option>
+												</select>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Tổng số tủ</label>
+											<div class="col-md-8">
+												<input id="totalAmountChest" class=" form-control width100" type="text" maxlength="19"
+													ng-model="vm.constrObj.totalAmountChest"ng-keydown="vm.checkNum()" />
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Đơn giá thi công tủ</label>
+												<div class="col-md-5">
+												<input id="priceChest" class="form-control style-number" name="price" maxlength="19"
+												ng-keydown="vm.checkNum()" ng-model="vm.constrObj.priceChest"
+												ng-change="vm.addComma('constrObj','priceChest')" />
+											</div>
+											<div class="col-md-3" style="padding-left: 0;">
+												<select ng-init="vm.constrObj.moneyType='1'" class="form-control" id="moneyType" name="moneyType" ng-model="vm.constrObj.moneyType">
+												<option ng-repeat="x in vm.moneyType" value="{{x.code}}">{{x.name}}</option>
+												</select>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Tổng số cổng</label>
+											<div class="col-md-8">
+												<input id="totalAmountGate" class=" form-control width100" type="text" maxlength="19"
+													ng-model="vm.constrObj.totalAmountGate"ng-keydown="vm.checkNum()" />
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Đơn giá thi công cổng</label>
+												<div class="col-md-5">
+												<input id="priceGate" class="form-control style-number" name="price" maxlength="19"
+												ng-keydown="vm.checkNum()" ng-model="vm.constrObj.priceGate"
+												ng-change="vm.addComma('constrObj','priceGate')" />
+											</div>
+											<div class="col-md-3" style="padding-left: 0;">
+												<select ng-init="vm.constrObj.moneyType='1'" class="form-control" id="moneyType" name="moneyType" ng-model="vm.constrObj.moneyType">
+												<option ng-repeat="x in vm.moneyType" value="{{x.code}}">{{x.name}}</option>
+												</select>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Khối lượng cáp thi công TT</label>
+											<div class="col-md-8">
+												<input id="amountCableLiveS" class=" form-control width100" type="text" maxlength="19"
+													ng-model="vm.constrObj.amountCableLive"ng-keydown="vm.checkNum()" />
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Khối lượng cáp thuê ngoài</label>
+											<div class="col-md-8">
+												<input id="amountCableRentS" class=" form-control width100" type="text" maxlength="19"
+													ng-model="vm.constrObj.amountCableRent"ng-keydown="vm.checkNum()" />
+											</div>
+										</div>
+									</div> -->
+									<!-- hoangnh end -->
+									<!-- Huypq-17082020-start -->
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Khối lượng (mét)</label>
+											<div class="col-md-8">
+												<input id="amount" class=" form-control width100" type="text" maxlength="19"
+													ng-model="vm.constrObj.amount"ng-keydown="vm.checkNum()" />
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Giá</label>
+												<div class="col-md-4">
+												<input id="price" class="form-control style-number" name="price" maxlength="19"
+												ng-keydown="vm.checkNum()" ng-model="vm.constrObj.price"
+												ng-change="vm.addComma('constrObj','price')" />
+											</div>
+											<label class="col-md-4 control-label" translate>(Triệu VNĐ/mét)</label>
+										</div>
+									</div>
+									<!-- Huy-end -->
+														<div class="clearfix">
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Mã
+																	dự án</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.projectCode" readonly />
+																</div>
+															</div>
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Tên
+																	dự án</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.projectName" readonly />
+																</div>
+															</div>
+														</div>
+														<!-- HienLT56 start 22032021 -->
+														<div class="clearfix">
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Tên đơn vị tư vấn khảo sát</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.cntContractTVKS" readonly />
+																</div>
+															</div>
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Tên đơn vị tư vấn thiết kế</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.cntContractTVTK" readonly />
+																</div>
+															</div>
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Ngày thi công công trình</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.completeDate" readonly />
+																</div>
+															</div>
+														</div>
+														<!-- HienLT56 end 22032021 -->
+														<div class="clearfix">
+															<div class="form-group col-md-12">
+																<div class="form-group col-md-12">
+																	<label class="col-md-2 control-label" translate>Ghi
+																		chú</label>
+
+																	<div class="col-md-10">
+																		<textarea class=" form-control width100"
+																			ng-model="vm.constrObj.description"></textarea>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-- Huypq-start-check GPXD -->
+														<div class="clearfix">
+															<div class="form-group col-md-12">
+																<div class="form-group col-md-12">
+																	<label class="col-md-2 control-label" translate>Cần GPXD</label>
+																	<div class="col-md-10">
+																		<input type="checkbox" ng-true-value="1" ng-false-value="null"
+																		ng-click="vm.handleCheck(dataItem)" ng-model="vm.constrObj.isBuildingPermit" />
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-- Huypq-end-check GPXD -->
+
+														<!-- HuyPQ-20190918-start -->
+														<div class="clearfix" ng-show="vm.constrObj.isStationHtct==1">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label" translate>Hạ tầng cho thuê</label>
+																<div class="col-md-8">
+																	<input type="checkbox" id="checkRental" name="checkRental" disabled
+																		   ng-click="vm.selectCheckRental()" ng-model="vm.constrObj.checkHTCT"
+																		   class="ng-untouched ng-valid ng-dirty ng-valid-parse">
+																</div>
+															</div>
+
+															<div class="form-group col-md-6" ng-show="vm.constrObj.isStationHtct==1">
+																<label class="col-md-4 control-label" translate>Vị trí</label>
+																<div class="col-md-8">
+																	<select kendo-drop-down-list style="width: 100%"
+																			ng-model="vm.constrObj.locationHTCT" k-data-text-field="'name'"
+																			k-data-value-field="'code'" k-option-label="'---Chọn---'"
+																			k-data-source="vm.locationDataList">
+																	</select>
+																</div>
+															</div>
+														</div>
+
+														<div class="clearfix">
+															<div class="form-group col-md-6" ng-show="vm.constrObj.isStationHtct==1">
+																<label class="col-md-4 control-label" translate>Chiều cao</label>
+																<div class="col-md-8">
+																	<input class="form-control width100" ng-blur="focusOut()" name="conHighHTCT"
+																		   id="conHighHTCT" maxlength="19"
+																		   ng-model="vm.constrObj.highHTCT"
+																		   data-required-msg="Chiều cao không được để trống"
+																		   ng-keydown="vm.checkNum()"
+																		   ng-change="vm.addComma('constrObj','conHighHTCT')" /> <span
+																		data-for='quantity' class='k-invalid-msg'></span>
+																</div>
+															</div>
+
+															<div class="form-group col-md-6" ng-show="vm.constrObj.isStationHtct==1">
+																<label class="col-md-4 control-label" translate>Tổng capex tạm tính</label>
+																<div class="col-md-8">
+																	<input class="form-control width100" ng-blur="focusOut()" name="conCapexHTCT"
+																		   id="conCapexHTCT" maxlength="19"
+																		   data-required-msg="Tổng capex tạm tính không được để trống"
+																		   ng-model="vm.constrObj.capexHTCT"
+																		   ng-keydown="vm.checkNum()"
+																		   ng-change="vm.addComma('constrObj','conCapexHTCT')" /> <span
+																		data-for='price' class='k-invalid-msg'></span>
+																</div>
+															</div>
+														</div>
+														<!-- Huypq-end -->
+														<!-- <div class="clearfix" id="projectCode" ng-show = "vm.constrObj.checkHTCT == true">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label" translate>Mã dự án</label>
+																<div class="col-md-8">
+																	<input class="form-control width100" ng-blur="focusOut()" name="projectCode"
+																		   id="projectCode" maxlength="19" ng-disabled = "vm.constrObj.checkHTCT == true"
+																		   ng-model="vm.constrObj.projectCode"
+																		   />
+																</div>
+															</div>
+
+
+														</div> -->
+													</div>
+
+													<div ng-show="vm.option4Show">
+														<div class="clearfix">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Mã
+																	trạm</label>
+
+																<div class="col-md-8">
+
+																	<input kendo-auto-complete
+																		k-options="vm.catStationOptions1"
+																		ng-blur="vm.changeDataAuto('dept')"
+																		ng-disabled="!vm.roleEditConstructionAdmin"
+																		class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.catStationCode"
+																		name="catStationCode" onclick="reset_msg();"
+																		data-required-msg="Mã trạm không được để trống" /> <span
+																		id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+
+																	<div class="One_icon">
+																		<i ng-hide="vm.checkTotalPxk" class="fa fa-times" aria-hidden="true"
+																			ng-click="vm.cancelStationInput('catStationCode')"></i>
+																	</div>
+																</div>
+															</div>
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Mã
+																	công trình</label>
+
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.code" ng-blur="vm.checkCodeConstr()"/>
+																</div>
+															</div>
+														</div>
+
+														<div class="clearfix">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Tên
+																	công trình</label>
+
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.name" />
+																</div>
+															</div>
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Loại
+																	công trình lẻ</label>
+
+																<div class="col-md-8">
+																	<select kendo-drop-down-list style="width: 100%"
+																		ng-model="vm.constrObj.deployType"
+																		k-data-text-field="'name'" k-data-value-field="'code'"
+																		k-option-label="'---Chọn---'"
+																		k-data-source="vm.otherTypeDataList">
+																	</select>
+																</div>
+															</div>
+														</div>
+														<div class="clearfix">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label" translate>Ngày
+																	khởi công dự kiến</label>
+
+																<div class="col-md-8">
+																	<input kendo-date-picker k-format="'dd/MM/yyyy'"
+																		date-time id="excpectedStartingDate4"
+																		name="excpectedStartingDate4"
+																		ng-model="vm.constrObj.excpectedStartingDate"
+																		style="width: 100%;"
+																		ng-blur="validateDate(vm.constrObj.excpectedStartingDate,null,null,form.excpectedStartingDate4)"
+																		placeholder="DD/MM/YYYY" />
+																	<div class="One_icon">
+																		<i class="fa fa-times" aria-hidden="true"
+																			ng-click="vm.cancelInput('excpectedStartingDate',form.excpectedStartingDate4)"></i>
+																	</div>
+																	<div class="error"
+																		ng-messages="form.excpectedStartingDate4.$error"
+																		ng-if="form.excpectedStartingDate4.$invalid && form.excpectedStartingDate4.$dirty">
+																		<label ng-message="date" class="control-data"
+																			translate>Ngày khởi công dự kiến không đúng
+																			định dạng dd/mm/yyyy</label>
+																	</div>
+																</div>
+															</div>
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Đơn
+																	vị thi công</label>
+																<div class="col-md-8">
+																	<div class="input-icon right ">
+																		<i class="fa fa-search directive"
+																			ng-click="vm.openDepartmentTo('dept1')"></i>
+																	</div>
+																	<input kendo-auto-complete k-options="vm.deprtOptions1"
+																		ng-blur="vm.changeDataAuto('dept')"
+																		class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.sysGroupName" name="dept"
+																		onclick="reset_msg();"
+																		data-required-msg="Đơn vị không để trống" /> <span
+																		id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+																	<div class="One_icon">
+																		<i class="fa fa-times" aria-hidden="true"
+																			ng-click="vm.cancelInput('dept')"></i>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="clearfix">
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Mã
+																	dự án</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.projectCode" readonly />
+																</div>
+															</div>
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Tên
+																	dự án</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.projectName" readonly />
+																</div>
+															</div>
+														</div>
+														<!-- HienLT56 start 22032021 -->
+														<div class="clearfix">
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Tên đơn vị tư vấn khảo sát</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.cntContractTVKS" readonly />
+																</div>
+															</div>
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Tên đơn vị tư vấn thiết kế</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.cntContractTVTK" readonly />
+																</div>
+															</div>
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Ngày thi công công trình</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.completeDate" readonly />
+																</div>
+															</div>
+														</div>
+														<!-- HienLT56 end 22032021 -->
+														<div class="clearfix">
+															<div class="form-group col-md-12">
+																<div class="form-group col-md-12">
+																	<label class="col-md-2 control-label" translate>Ghi
+																		chú</label>
+
+																	<div class="col-md-10">
+																		<textarea class=" form-control width100"
+																			ng-model="vm.constrObj.description"></textarea>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-- Huypq-start-check GPXD -->
+														<div class="clearfix">
+															<div class="form-group col-md-12">
+																<div class="form-group col-md-12">
+																	<label class="col-md-2 control-label" translate>Cần GPXD</label>
+																	<div class="col-md-10">
+																		<input type="checkbox" ng-true-value="1" ng-false-value="null"
+																		ng-click="vm.handleCheck(dataItem)" ng-model="vm.constrObj.isBuildingPermit" />
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-- Huypq-end-check GPXD -->
+
+														<!-- HuyPQ-20190918-start -->
+														<div class="clearfix" ng-show="vm.constrObj.isStationHtct==1">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label" translate>Hạ tầng cho thuê</label>
+																<div class="col-md-8">
+																	<input type="checkbox" id="checkRental" name="checkRental" disabled
+																		   ng-click="vm.selectCheckRental()" ng-model="vm.constrObj.checkHTCT"
+																		   class="ng-untouched ng-valid ng-dirty ng-valid-parse">
+																</div>
+															</div>
+
+															<div class="form-group col-md-6" ng-show="vm.constrObj.isStationHtct==1">
+																<label class="col-md-4 control-label" translate>Vị trí</label>
+																<div class="col-md-8">
+																	<select kendo-drop-down-list style="width: 100%"
+																			ng-model="vm.constrObj.locationHTCT" k-data-text-field="'name'"
+																			k-data-value-field="'code'" k-option-label="'---Chọn---'"
+																			k-data-source="vm.locationDataList">
+																	</select>
+																</div>
+															</div>
+														</div>
+
+														<div class="clearfix">
+															<div class="form-group col-md-6" ng-show="vm.constrObj.isStationHtct==1">
+																<label class="col-md-4 control-label" translate>Chiều cao</label>
+																<div class="col-md-8">
+																	<input class="form-control width100" ng-blur="focusOut()" name="conHighHTCT"
+																		   id="conHighHTCT" maxlength="19"
+																		   ng-model="vm.constrObj.highHTCT"
+																		   data-required-msg="Chiều cao không được để trống"
+																		   ng-keydown="vm.checkNum()"
+																		   ng-change="vm.addComma('constrObj','conHighHTCT')" /> <span
+																		data-for='quantity' class='k-invalid-msg'></span>
+																</div>
+															</div>
+
+															<div class="form-group col-md-6" ng-show="vm.constrObj.isStationHtct==1">
+																<label class="col-md-4 control-label" translate>Tổng capex tạm tính</label>
+																<div class="col-md-8">
+																	<input class="form-control width100" ng-blur="focusOut()" name="conCapexHTCT"
+																		   id="conCapexHTCT" maxlength="19"
+																		   data-required-msg="Tổng capex tạm tính không được để trống"
+																		   ng-model="vm.constrObj.capexHTCT"
+																		   ng-keydown="vm.checkNum()"
+																		   ng-change="vm.addComma('constrObj','conCapexHTCT')" /> <span
+																		data-for='price' class='k-invalid-msg'></span>
+																</div>
+															</div>
+														</div>
+														<!-- Huypq-end -->
+														<!-- <div class="clearfix" id="projectCode" ng-show = "vm.constrObj.checkHTCT == true">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label" translate>Mã dự án</label>
+																<div class="col-md-8">
+																	<input class="form-control width100" ng-blur="focusOut()" name="projectCode"
+																		   id="projectCode" maxlength="19" ng-disabled ="vm.constrObj.checkHTCT == true"
+																		   ng-model="vm.constrObj.projectCode"
+																		   />
+																</div>
+															</div>
+
+
+														</div> -->
+													</div>
+
+													<!--hienvd:  START 18-7-2019-->
+													<div ng-show="vm.option5Show">
+														<div class="clearfix">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Mã
+																	trạm</label>
+																<div class="col-md-8">
+																	<input kendo-auto-complete
+																		   k-options="vm.catStationOptions1"
+																		   ng-blur="vm.changeDataAuto('dept')"
+																		   class=" form-control width100" type="text"
+																		   ng-model="vm.constrObj.catStationCode"
+																		   ng-disabled="!vm.roleEditConstructionAdmin"
+																		   name="catStationCode" onclick="reset_msg();"
+																		   data-required-msg="Mã trạm không được để trống" /> <span
+																		id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+
+																	<div class="One_icon">
+																		<i ng-hide="vm.checkTotalPxk" class="fa fa-times" aria-hidden="true"
+																		   ng-click="vm.cancelStationInput('catStationCode')"></i>
+																	</div>
+																</div>
+															</div>
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Mã
+																	công trình</label>
+
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		   ng-model="vm.constrObj.code" ng-blur="vm.checkCodeConstr()"
+																		   data-required-msg="Mã công trình không được để trống" />
+																</div>
+															</div>
+														</div>
+
+														<div class="clearfix">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Tên
+																	công trình</label>
+
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text"
+																		   ng-model="vm.constrObj.name"
+																		   data-required-msg="Tên công trình không được để trống" />
+																</div>
+															</div>
+
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Đơn
+																	vị thi công</label>
+																<div class="col-md-8">
+																	<div class="input-icon right ">
+																		<i class="fa fa-search directive"
+																		   ng-click="vm.openDepartmentTo('dept1')"></i>
+																	</div>
+																	<input kendo-auto-complete k-options="vm.deprtOptions1"
+																		   ng-blur="vm.changeDataAuto('deptGroup')"
+																		   class=" form-control width100" type="text"
+																		   ng-model="vm.constrObj.sysGroupName" name="dept"
+																		   onclick="reset_msg();"
+																		   data-required-msg="Đơn vị không để trống" /> <span
+																		id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+																	<div class="One_icon">
+																		<i class="fa fa-times" aria-hidden="true"
+																		   ng-click="vm.cancelInput('dept1')"></i>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="clearfix">
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Mã
+																	dự án</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.projectCode" readonly />
+																</div>
+															</div>
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Tên
+																	dự án</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.projectName" readonly />
+																</div>
+															</div>
+														</div>
+														<!-- HienLT56 start 22032021 -->
+														<div class="clearfix">
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Tên đơn vị tư vấn khảo sát</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.cntContractTVKS" readonly />
+																</div>
+															</div>
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Tên đơn vị tư vấn thiết kế</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.cntContractTVTK" readonly />
+																</div>
+															</div>
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Ngày thi công công trình</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.completeDate" readonly />
+																</div>
+															</div>
+														</div>
+														<!-- HienLT56 end 22032021 -->
+														<div class="clearfix">
+															<div class="form-group col-md-12">
+																<div class="form-group col-md-12">
+																	<label class="col-md-2 control-label" translate>Ghi
+																		chú</label>
+
+																	<div class="col-md-10">
+																		<textarea class=" form-control width100"
+																				  ng-model="vm.constrObj.description"></textarea>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="clearfix">
+															<div class="form-group col-md-12">
+																<div class="form-group col-md-12">
+																	<label class="col-md-2 control-label" translate>Cần GPXD</label>
+																	<div class="col-md-10">
+																		<input type="checkbox" ng-true-value="1" ng-false-value="null"
+																			   ng-click="vm.handleCheck(dataItem)" ng-model="vm.constrObj.isBuildingPermit" />
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<!-- HuyPQ-20190918-start -->
+														<div class="clearfix" ng-show="vm.constrObj.isStationHtct==1">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label" translate>Hạ tầng cho thuê</label>
+																<div class="col-md-8">
+																	<input type="checkbox" id="checkRental" name="checkRental" disabled
+																		   ng-click="vm.selectCheckRental()" ng-model="vm.constrObj.checkHTCT"
+																		   class="ng-untouched ng-valid ng-dirty ng-valid-parse">
+																</div>
+															</div>
+
+															<div class="form-group col-md-6" ng-show="vm.constrObj.isStationHtct==1">
+																<label class="col-md-4 control-label" translate>Vị trí</label>
+																<div class="col-md-8">
+																	<select kendo-drop-down-list style="width: 100%"
+																			ng-model="vm.constrObj.locationHTCT" k-data-text-field="'name'"
+																			k-data-value-field="'code'" k-option-label="'---Chọn---'"
+																			k-data-source="vm.locationDataList">
+																	</select>
+																</div>
+															</div>
+														</div>
+
+														<div class="clearfix">
+															<div class="form-group col-md-6" ng-show="vm.constrObj.isStationHtct==1">
+																<label class="col-md-4 control-label" translate>Chiều cao</label>
+																<div class="col-md-8">
+																	<input class="form-control width100" ng-blur="focusOut()" name="conHighHTCT"
+																		   id="conHighHTCT" maxlength="19"
+																		   ng-model="vm.constrObj.highHTCT"
+																		   data-required-msg="Chiều cao không được để trống"
+																		   ng-keydown="vm.checkNum()"
+																		   ng-change="vm.addComma('constrObj','conHighHTCT')" /> <span
+																		data-for='quantity' class='k-invalid-msg'></span>
+																</div>
+															</div>
+
+															<div class="form-group col-md-6" ng-show="vm.constrObj.isStationHtct==1">
+																<label class="col-md-4 control-label" translate>Tổng capex tạm tính</label>
+																<div class="col-md-8">
+																	<input class="form-control width100" ng-blur="focusOut()" name="conCapexHTCT"
+																		   id="conCapexHTCT" maxlength="19"
+																		   data-required-msg="Tổng capex tạm tính không được để trống"
+																		   ng-model="vm.constrObj.capexHTCT"
+																		   ng-keydown="vm.checkNum()"
+																		   ng-change="vm.addComma('constrObj','conCapexHTCT')" /> <span
+																		data-for='price' class='k-invalid-msg'></span>
+																</div>
+															</div>
+														</div>
+														<!-- Huypq-end -->
+														<!-- <div class="clearfix" id="projectCode" ng-show = "vm.constrObj.checkHTCT == true">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label" translate>Mã dự án</label>
+																<div class="col-md-8">
+																	<input class="form-control width100" ng-blur="focusOut()" name="projectCode"
+																		   id="projectCode" maxlength="19" ng-disabled = "vm.constrObj.checkHTCT == true"
+																		   ng-model="vm.constrObj.projectCode"
+																		   />
+																</div>
+															</div>
+
+
+														</div> -->
+													</div>
+
+													<div ng-show="vm.option6Show">
+														<div class="clearfix">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Mã
+																	trạm</label>
+																<div class="col-md-8">
+																	<input kendo-auto-complete
+																		   k-options="vm.catStationOptions1"
+																		   ng-blur="vm.changeDataAuto('dept')"
+																		   class=" form-control width100" type="text"
+																		   ng-model="vm.constrObj.catStationCode"
+																		   ng-disabled="!vm.roleEditConstructionAdmin"
+																		   name="catStationCode" onclick="reset_msg();"
+																		   data-required-msg="Mã trạm không được để trống" /> <span
+																		id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+
+																	<div class="One_icon">
+																		<i ng-hide="vm.checkTotalPxk" class="fa fa-times" aria-hidden="true"
+																		   ng-click="vm.cancelStationInput('catStationCode')"></i>
+																	</div>
+																</div>
+															</div>
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Mã
+																	công trình</label>
+
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		   ng-model="vm.constrObj.code" ng-blur="vm.checkCodeConstr()"
+																		   data-required-msg="Mã công trình không được để trống" />
+																</div>
+															</div>
+														</div>
+
+														<div class="clearfix">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Tên
+																	công trình</label>
+
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text"
+																		   ng-model="vm.constrObj.name"
+																		   data-required-msg="Tên công trình không được để trống" />
+																</div>
+															</div>
+
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Đơn
+																	vị thi công</label>
+																<div class="col-md-8">
+																	<div class="input-icon right ">
+																		<i class="fa fa-search directive"
+																		   ng-click="vm.openDepartmentTo('dept1')"></i>
+																	</div>
+																	<input kendo-auto-complete k-options="vm.deprtOptions1"
+																		   ng-blur="vm.changeDataAuto('deptGroup')"
+																		   class=" form-control width100" type="text"
+																		   ng-model="vm.constrObj.sysGroupName" name="dept"
+																		   onclick="reset_msg();"
+																		   data-required-msg="Đơn vị không để trống" /> <span
+																		id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+																	<div class="One_icon">
+																		<i class="fa fa-times" aria-hidden="true"
+																		   ng-click="vm.cancelInput('dept1')"></i>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="clearfix">
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Mã
+																	dự án</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.projectCode" readonly />
+																</div>
+															</div>
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Tên
+																	dự án</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.projectName" readonly />
+																</div>
+															</div>
+														</div>
+														<!-- HienLT56 start 22032021 -->
+														<div class="clearfix">
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Tên đơn vị tư vấn khảo sát</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.cntContractTVKS" readonly />
+																</div>
+															</div>
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Tên đơn vị tư vấn thiết kế</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.cntContractTVTK" readonly />
+																</div>
+															</div>
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Ngày thi công công trình</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.completeDate" readonly />
+																</div>
+															</div>
+														</div>
+														<!-- HienLT56 end 22032021 -->
+														<div class="clearfix">
+															<div class="form-group col-md-12">
+																<div class="form-group col-md-12">
+																	<label class="col-md-2 control-label" translate>Ghi
+																		chú</label>
+
+																	<div class="col-md-10">
+																		<textarea class=" form-control width100"
+																				  ng-model="vm.constrObj.description"></textarea>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="clearfix">
+															<div class="form-group col-md-12">
+																<div class="form-group col-md-12">
+																	<label class="col-md-2 control-label" translate>Cần GPXD</label>
+																	<div class="col-md-10">
+																		<input type="checkbox" ng-true-value="1" ng-false-value="null"
+																			   ng-click="vm.handleCheck(dataItem)" ng-model="vm.constrObj.isBuildingPermit" />
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<!-- HuyPQ-20190918-start -->
+														<div class="clearfix" ng-show="vm.constrObj.isStationHtct==1">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label" translate>Hạ tầng cho thuê</label>
+																<div class="col-md-8">
+																	<input type="checkbox" id="checkRental" name="checkRental" disabled
+																		   ng-click="vm.selectCheckRental()" ng-model="vm.constrObj.checkHTCT"
+																		   class="ng-untouched ng-valid ng-dirty ng-valid-parse">
+																</div>
+															</div>
+
+															<div class="form-group col-md-6" ng-show="vm.constrObj.isStationHtct==1">
+																<label class="col-md-4 control-label" translate>Vị trí</label>
+																<div class="col-md-8">
+																	<select kendo-drop-down-list style="width: 100%"
+																			ng-model="vm.constrObj.locationHTCT" k-data-text-field="'name'"
+																			k-data-value-field="'code'" k-option-label="'---Chọn---'"
+																			k-data-source="vm.locationDataList">
+																	</select>
+																</div>
+															</div>
+														</div>
+
+														<div class="clearfix">
+															<div class="form-group col-md-6" ng-show="vm.constrObj.isStationHtct==1">
+																<label class="col-md-4 control-label" translate>Chiều cao</label>
+																<div class="col-md-8">
+																	<input class="form-control width100" ng-blur="focusOut()" name="conHighHTCT"
+																		   id="conHighHTCT" maxlength="19"
+																		   ng-model="vm.constrObj.highHTCT"
+																		   data-required-msg="Chiều cao không được để trống"
+																		   ng-keydown="vm.checkNum()"
+																		   ng-change="vm.addComma('constrObj','conHighHTCT')" /> <span
+																		data-for='quantity' class='k-invalid-msg'></span>
+																</div>
+															</div>
+
+															<div class="form-group col-md-6" ng-show="vm.constrObj.isStationHtct==1">
+																<label class="col-md-4 control-label" translate>Tổng capex tạm tính</label>
+																<div class="col-md-8">
+																	<input class="form-control width100" ng-blur="focusOut()" name="conCapexHTCT"
+																		   id="conCapexHTCT" maxlength="19"
+																		   data-required-msg="Tổng capex tạm tính không được để trống"
+																		   ng-model="vm.constrObj.capexHTCT"
+																		   ng-keydown="vm.checkNum()"
+																		   ng-change="vm.addComma('constrObj','conCapexHTCT')" /> <span
+																		data-for='price' class='k-invalid-msg'></span>
+																</div>
+															</div>
+														</div>
+														<!-- Huypq-end -->
+														<!-- <div class="clearfix" id="projectCode" ng-show = "vm.constrObj.checkHTCT == true">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label" translate>Mã dự án</label>
+																<div class="col-md-8">
+																	<input class="form-control width100" ng-blur="focusOut()" name="projectCode"
+																		   id="projectCode" maxlength="19" ng-disabled = "vm.constrObj.checkHTCT == true"
+																		   ng-model="vm.constrObj.projectCode"
+																		   />
+																</div>
+															</div>
+
+
+														</div> -->
+													</div>
+
+												<!--hienvd: 1807109 end -->
+												<!-- Huypq-05102020-start -->
+													<!-- Công trình NLMT -->
+													<div ng-show="vm.option7Show">
+														<div class="clearfix">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Mã
+																	trạm</label>
+																<div class="col-md-8">
+																	<input kendo-auto-complete
+																		k-options="vm.catStationOptions1"
+																		ng-blur="vm.changeDataAuto('dept')"
+																		class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.catStationCode"
+																		ng-disabled="!vm.roleEditConstructionAdmin"
+																		name="catStationCode" onclick="reset_msg();"
+																		data-required-msg="Mã trạm không được để trống" /> <span
+																		id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+
+																	<div class="One_icon">
+																		<i ng-hide="vm.checkTotalPxk" class="fa fa-times" aria-hidden="true"
+																			ng-click="vm.cancelStationInput('catStationCode')"></i>
+																	</div>
+																</div>
+															</div>
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Mã
+																	công trình</label>
+
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.code" ng-blur="vm.checkCodeConstr()"
+																		data-required-msg="Mã công trình không được để trống" />
+																</div>
+															</div>
+														</div>
+
+														<div class="clearfix">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Tên
+																	công trình</label>
+
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.name"
+																		data-required-msg="Tên công trình không được để trống" />
+																</div>
+															</div>
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Vùng
+																	miền</label>
+
+																<div class="col-md-8">
+																	<select kendo-drop-down-list style="width: 100%"
+																		ng-model="vm.constrObj.region"
+																		k-data-text-field="'name'" k-data-value-field="'code'"
+																		k-option-label="'---Chọn---'"
+																		k-data-source="vm.regionDataList">
+																	</select>
+																</div>
+															</div>
+														</div>
+
+														<div class="clearfix">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label" translate>Ngày
+																	khởi công dự kiến</label>
+
+																<div class="col-md-8">
+																	<input kendo-date-picker k-format="'dd/MM/yyyy'"
+																		date-time id="excpectedStartingDate1"
+																		name="excpectedStartingDate1"
+																		ng-model="vm.constrObj.excpectedStartingDate"
+																		style="width: 100%;"
+																		ng-blur="validateDate(vm.constrObj.excpectedStartingDate,null,null,form.excpectedStartingDate1)"
+																		placeholder="DD/MM/YYYY" />
+																	<div class="One_icon">
+																		<i class="fa fa-times" aria-hidden="true"
+																			ng-click="vm.cancelInput('excpectedStartingDate',form.excpectedStartingDate1)"></i>
+																	</div>
+																	<div class="error"
+																		ng-messages="form.excpectedStartingDate1.$error"
+																		ng-if="form.excpectedStartingDate1.$invalid && form.excpectedStartingDate1.$dirty">
+																		<label ng-message="date" class="control-data"
+																			translate>Ngày khởi công dự kiến không hợp lệ</label>
+																	</div>
+																</div>
+
+															</div>
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label" translate>Hình
+																	thức thi công</label>
+
+																<div class="col-md-8">
+
+																	<select kendo-drop-down-list style="width: 100%"
+																		ng-model="vm.constrObj.catConstructionDeployId"
+																		k-data-text-field="'name'" k-data-value-field="'id'"
+																		k-option-label="'---Chọn---'"
+																		k-data-source="vm.catConstructionDeployDataList">
+																	</select>
+
+																</div>
+															</div>
+														</div>
+														<div class="clearfix">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Đơn
+																	vị thi công</label>
+																<div class="col-md-8">
+																	<div class="input-icon right ">
+																		<i class="fa fa-search directive"
+																			ng-click="vm.openDepartmentTo('dept1')"></i>
+																	</div>
+																	<input kendo-auto-complete k-options="vm.deprtOptions1"
+																		ng-blur="vm.changeDataAuto('deptGroup')"
+																		class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.sysGroupName" name="dept"
+																		onclick="reset_msg();"
+																		data-required-msg="Đơn vị không để trống" /> <span
+																		id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+																	<div class="One_icon">
+																		<i class="fa fa-times" aria-hidden="true"
+																			ng-click="vm.cancelInput('dept1')"></i>
+																	</div>
+																</div>
+															</div>
+
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Mã
+																	dự án</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.projectCode" readonly />
+																</div>
+															</div>
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Tên
+																	dự án</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.projectName" readonly />
+																</div>
+															</div>
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Ngày thi công công trình</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.completeDate" readonly />
+																</div>
+															</div>
+														</div>
+														<!-- HienLT56 start 22032021 -->
+														<div class="clearfix">
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Tên đơn vị tư vấn thiết kế</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.cntContractTVTK" readonly />
+																</div>
+															</div>
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Tên đơn vị tư vấn khảo sát</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.cntContractTVKS" readonly />
+																</div>
+															</div>
+														</div>
+														<!-- HienLT56 end 22032021 -->
+														<div class="clearfix">
+															<div class="form-group col-md-12">
+																<div class="form-group col-md-12">
+																	<label class="col-md-2 control-label" translate>Ghi
+																		chú</label>
+
+																	<div class="col-md-10">
+																		<textarea class=" form-control width100"
+																			ng-model="vm.constrObj.description"></textarea>
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<div class="clearfix">
+															<div class="form-group col-md-12">
+																<div class="form-group col-md-12">
+																	<label class="col-md-2 control-label" translate>Cần GPXD</label>
+																	<div class="col-md-10">
+																		<input type="checkbox" ng-true-value="1" ng-false-value="null"
+																		ng-click="vm.handleCheck(dataItem)" ng-model="vm.constrObj.isBuildingPermit" />
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<div class="clearfix" ng-show="vm.constrObj.isStationHtct==1">
+															<div class="form-group col-md-6" >
+																<label class="col-md-4 control-label" translate>Hạ tầng cho thuê</label>
+																<div class="col-md-8">
+																	<input type="checkbox" id="checkRental" name="checkRental" disabled
+																		   ng-click="vm.selectCheckRental()" ng-model="vm.constrObj.checkHTCT"
+																		   class="ng-untouched ng-valid ng-dirty ng-valid-parse">
+																</div>
+															</div>
+
+															<div class="form-group col-md-6" ng-show="vm.constrObj.isStationHtct==1">
+																<label class="col-md-4 control-label" translate>Vị trí</label>
+																<div class="col-md-8">
+																	<select kendo-drop-down-list style="width: 100%"
+																			ng-model="vm.constrObj.locationHTCT" k-data-text-field="'name'"
+																			k-data-value-field="'code'" k-option-label="'---Chọn---'"
+																			k-data-source="vm.locationDataList">
+																	</select>
+																</div>
+															</div>
+														</div>
+
+														<div class="clearfix">
+															<div class="form-group col-md-6" id="highHTCT" ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Chiều cao</label>
+																<div class="col-md-8">
+																	<input class="form-control width100" ng-blur="focusOut()" name="conHighHTCT"
+																		   id="conHighHTCT" maxlength="19"
+																		   ng-model="vm.constrObj.highHTCT"
+																		   data-required-msg="Chiều cao không được để trống"
+																		   ng-keydown="vm.checkNum()"
+																		   ng-change="vm.addComma('constrObj','conHighHTCT')" /> <span
+																		data-for='quantity' class='k-invalid-msg'></span>
+																</div>
+															</div>
+
+															<div class="form-group col-md-6" id="capexHTCT" ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Tổng capex tạm tính</label>
+																<div class="col-md-8">
+																	<input class="form-control width100" ng-blur="focusOut()" name="conCapexHTCT"
+																		   id="conCapexHTCT" maxlength="19"
+																		   data-required-msg="Tổng capex tạm tính không được để trống"
+																		   ng-model="vm.constrObj.capexHTCT"
+																		   ng-keydown="vm.checkNum()"
+																		   ng-change="vm.addComma('constrObj','conCapexHTCT')" /> <span
+																		data-for='price' class='k-invalid-msg'></span>
+																</div>
+															</div>
+														</div>
+													</div>
+
+													<!-- Công trình XDDD -->
+													<div ng-show="vm.option8Show">
+														<div class="clearfix">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Mã
+																	trạm</label>
+																<div class="col-md-8">
+																	<input kendo-auto-complete
+																		k-options="vm.catStationOptions1"
+																		ng-blur="vm.changeDataAuto('dept')"
+																		class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.catStationCode"
+																		ng-disabled="!vm.roleEditConstructionAdmin || !vm.roleXDDD"
+																		name="catStationCode" onclick="reset_msg();"
+																		data-required-msg="Mã trạm không được để trống" /> <span
+																		id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+
+																	<div class="One_icon" ng-show="vm.roleXDDD">
+																		<i ng-hide="vm.checkTotalPxk" class="fa fa-times" aria-hidden="true"
+																			ng-click="vm.cancelStationInput('catStationCode')"></i>
+																	</div>
+																</div>
+															</div>
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Mã
+																	công trình</label>
+
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.code" ng-blur="vm.checkCodeConstr()"
+																		data-required-msg="Mã công trình không được để trống" />
+																</div>
+															</div>
+														</div>
+
+														<div class="clearfix">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Tên
+																	công trình</label>
+
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.name" ng-disabled="!vm.roleXDDD"
+																		data-required-msg="Tên công trình không được để trống" />
+																</div>
+															</div>
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Vùng
+																	miền</label>
+
+																<div class="col-md-8">
+																	<select kendo-drop-down-list style="width: 100%"
+																		ng-model="vm.constrObj.region" ng-disabled="!vm.roleXDDD"
+																		k-data-text-field="'name'" k-data-value-field="'code'"
+																		k-option-label="'---Chọn---'"
+																		k-data-source="vm.regionDataList">
+																	</select>
+																</div>
+															</div>
+														</div>
+
+														<div class="clearfix">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label" translate>Ngày
+																	khởi công dự kiến</label>
+
+																<div class="col-md-8">
+																	<input kendo-date-picker k-format="'dd/MM/yyyy'"
+																		date-time id="excpectedStartingDate1"
+																		name="excpectedStartingDate1"
+																		ng-model="vm.constrObj.excpectedStartingDate"
+																		style="width: 100%;" ng-disabled="!vm.roleXDDD"
+																		ng-blur="validateDate(vm.constrObj.excpectedStartingDate,null,null,form.excpectedStartingDate1)"
+																		placeholder="DD/MM/YYYY" />
+																	<div class="One_icon">
+																		<i class="fa fa-times" aria-hidden="true" ng-show="vm.roleXDDD"
+																			ng-click="vm.cancelInput('excpectedStartingDate',form.excpectedStartingDate1)"></i>
+																	</div>
+																	<div class="error"
+																		ng-messages="form.excpectedStartingDate1.$error"
+																		ng-if="form.excpectedStartingDate1.$invalid && form.excpectedStartingDate1.$dirty">
+																		<label ng-message="date" class="control-data"
+																			translate>Ngày khởi công dự kiến không hợp lệ</label>
+																	</div>
+																</div>
+
+															</div>
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label" translate>Hình
+																	thức thi công</label>
+
+																<div class="col-md-8">
+
+																	<select kendo-drop-down-list style="width: 100%"
+																		ng-model="vm.constrObj.catConstructionDeployId"
+																		k-data-text-field="'name'" k-data-value-field="'id'"
+																		k-option-label="'---Chọn---'" ng-disabled="!vm.roleXDDD"
+																		k-data-source="vm.catConstructionDeployDataList">
+																	</select>
+
+																</div>
+															</div>
+														</div>
+														<div class="clearfix">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>Đơn
+																	vị thi công</label>
+																<div class="col-md-8">
+																	<div class="input-icon right ">
+																		<i class="fa fa-search directive" ng-show="vm.roleXDDD"
+																			ng-click="vm.openDepartmentTo('dept1')"></i>
+																	</div>
+																	<input kendo-auto-complete k-options="vm.deprtOptions1"
+																		ng-blur="vm.changeDataAuto('deptGroup')"
+																		class=" form-control width100" type="text"
+																		ng-model="vm.constrObj.sysGroupName" name="dept"
+																		onclick="reset_msg();" ng-disabled="!vm.roleXDDD"
+																		data-required-msg="Đơn vị không để trống" /> <span
+																		id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+																	<div class="One_icon">
+																		<i class="fa fa-times" aria-hidden="true" ng-show="vm.roleXDDD"
+																			ng-click="vm.cancelInput('dept1')"></i>
+																	</div>
+																</div>
+															</div>
+
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Mã
+																	dự án</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" ng-disabled="!vm.roleXDDD"
+																		ng-model="vm.constrObj.projectCode" readonly />
+																</div>
+															</div>
+														</div>
+														<!-- HienLT56 start 22032021 -->
+														<div class="clearfix">
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Tên
+																	dự án</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" ng-disabled="!vm.roleXDDD"
+																		ng-model="vm.constrObj.projectName" readonly />
+																</div>
+															</div>
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Ngày thi công công trình</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.completeDate" readonly />
+																</div>
+															</div>
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Tên đơn vị tư vấn khảo sát</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.cntContractTVKS" readonly />
+																</div>
+															</div>
+															<div class="form-group col-md-6"
+																ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Tên đơn vị tư vấn thiết kế</label>
+																<div class="col-md-8">
+																	<input class=" form-control width100" type="text" disabled
+																		ng-model="vm.constrObj.cntContractTVTK" readonly />
+																</div>
+															</div>
+														</div>
+														<!-- HienLT56 end 22032021 -->
+														<div class="clearfix">
+															<div class="form-group col-md-6">
+																<label class="col-md-4 control-label req" translate>B2B/B2C</label>
+																<div class="col-md-8">
+																	<select kendo-drop-down-list id="b2bB2c"
+																		ng-model="vm.constrObj.b2bB2c" ng-disabled="!vm.roleXDDD"
+																		k-data-text-field="'name'" k-data-value-field="'code'"
+																		k-data-source="vm.b2bB2cList"
+																		class="form-control width100" ng-disabled = "vm.checkB2BB2C">
+																	</select>
+																</div>
+															</div>
+														</div>
+														<div class="clearfix">
+															<div class="form-group col-md-12">
+																<div class="form-group col-md-12">
+																	<label class="col-md-2 control-label" translate>Ghi
+																		chú</label>
+
+																	<div class="col-md-10">
+																		<textarea class=" form-control width100" ng-disabled="!vm.roleXDDD"
+																			ng-model="vm.constrObj.description"></textarea>
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<div class="clearfix">
+															<div class="form-group col-md-12">
+																<div class="form-group col-md-12">
+																	<label class="col-md-2 control-label" translate>Cần GPXD</label>
+																	<div class="col-md-10">
+																		<input type="checkbox" ng-true-value="1" ng-false-value="null" ng-disabled="!vm.roleXDDD"
+																		ng-click="vm.handleCheck(dataItem)" ng-model="vm.constrObj.isBuildingPermit" />
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<div class="clearfix" ng-show="vm.constrObj.isStationHtct==1">
+															<div class="form-group col-md-6" >
+																<label class="col-md-4 control-label" translate>Hạ tầng cho thuê</label>
+																<div class="col-md-8">
+																	<input type="checkbox" id="checkRental" name="checkRental" disabled
+																		   ng-click="vm.selectCheckRental()" ng-model="vm.constrObj.checkHTCT"
+																		   class="ng-untouched ng-valid ng-dirty ng-valid-parse">
+																</div>
+															</div>
+
+															<div class="form-group col-md-6" ng-show="vm.constrObj.isStationHtct==1">
+																<label class="col-md-4 control-label" translate>Vị trí</label>
+																<div class="col-md-8">
+																	<select kendo-drop-down-list style="width: 100%" ng-disabled="!vm.roleXDDD"
+																			ng-model="vm.constrObj.locationHTCT" k-data-text-field="'name'"
+																			k-data-value-field="'code'" k-option-label="'---Chọn---'"
+																			k-data-source="vm.locationDataList">
+																	</select>
+																</div>
+															</div>
+														</div>
+
+														<div class="clearfix">
+															<div class="form-group col-md-6" id="highHTCT" ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Chiều cao</label>
+																<div class="col-md-8">
+																	<input class="form-control width100" ng-blur="focusOut()" name="conHighHTCT"
+																		   id="conHighHTCT" maxlength="19" ng-disabled="!vm.roleXDDD"
+																		   ng-model="vm.constrObj.highHTCT"
+																		   data-required-msg="Chiều cao không được để trống"
+																		   ng-keydown="vm.checkNum()"
+																		   ng-change="vm.addComma('constrObj','conHighHTCT')" /> <span
+																		data-for='quantity' class='k-invalid-msg'></span>
+																</div>
+															</div>
+
+															<div class="form-group col-md-6" id="capexHTCT" ng-show="vm.constrObj.checkHTCT">
+																<label class="col-md-4 control-label" translate>Tổng capex tạm tính</label>
+																<div class="col-md-8">
+																	<input class="form-control width100" ng-blur="focusOut()" name="conCapexHTCT"
+																		   id="conCapexHTCT" maxlength="19" ng-disabled="!vm.roleXDDD"
+																		   data-required-msg="Tổng capex tạm tính không được để trống"
+																		   ng-model="vm.constrObj.capexHTCT"
+																		   ng-keydown="vm.checkNum()"
+																		   ng-change="vm.addComma('constrObj','conCapexHTCT')" /> <span
+																		data-for='price' class='k-invalid-msg'></span>
+																</div>
+															</div>
+														</div>
+													</div>
+												<!-- Huy-end -->
+												<div class="clearfix">
+															<div class="form-group col-md-6" id="highHTCT" ng-show="vm.constrObj.isStationHtct==1">
+																<label class="col-md-4 control-label" translate>Đơn vị nhà thầu thi công</label>
+																<div class="col-md-8">
+																	<input type="checkbox" id="checkHTCTPopup" ng-disabled="vm.constrObj.disable || (vm.option8Show && !vm.roleXDDD)" name="checkDVNTTC"
+																		   ng-model="vm.constrObj.checkDVNTTC"
+																		   class="ng-untouched ng-valid ng-dirty ng-valid-parse">
+																</div>
+															</div>
+
+															<div class="form-group col-md-6" id="capexHTCT" ng-show="vm.constrObj.checkDVNTTC==true">
+																<label class="col-md-4 control-label req" translate>Tên đơn vị nhà thầu thi công</label>
+																<div class="col-md-8">
+																	<input class="form-control width100" ng-blur="focusOut()" name="conCapexHTCT"
+																		   id="conCapexHTCT" maxlength="250" ng-disabled="!vm.roleXDDD && vm.option8Show"
+																		   data-required-msg="Tên đơn vị nhà thầu thi công không được để trống"
+																		   ng-model="vm.constrObj.unitConstructionName"/> <span
+																		data-for='price' class='k-invalid-msg'></span>
+																</div>
+															</div>
+														</div>
+<div class="portlet light">
+		<div class="portlet-title background-title">
+			<div class="caption">
+				<span class="caption-subject bold lowercase ng-scope" translate="">Danh
+					sách file đính kèm</span>
+			</div>
+			<div class="text-right margin-row-title">
+				<i data-toggle="collapse" data-target="#upload"
+					class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+			</div>
+		</div>
+		<div id="upload"
+			class="portlet light bordered collapse in from-search">
+			<div>
+				<div id="upload2" class="portlet light  collapse in from-search">
+					<div>
+						<div>
+							<center>Kéo thả các file vào đây hoặc click để chọn file
+							</center>
+						</div>
+						<div class="clearfix">
+							<div class="form-group col-md-12" ng-hide="vm.option8Show && !vm.roleXDDD">
+								<div class="col-md-12 k-content">
+									<input class="col-md-12" name="attachfiles" id="attachfilesEdit" kendo-upload=""
+										type="file" onchange="angular.element(this).scope().vm.submitAttachFileEdit()"
+										list-file-type="xls,xlsx,doc,docx,pdf" />
+
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							<center>
+								<span style="color: gray">Dung lượng &#60;&#61; 100MB,
+									định dạng xls,xlsx,doc,docx,pdf</span>
+							</center>
+							<div class="clearfix">
+								<div id="contractFileEditGrid" kendo-grid="vm.contractFileEditGrid"
+									k-options="vm.gridFileEditOptions" k-editable="false"
+									k-on-change="onGridChange(kendoEvent, { selected: selected }, data)"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+<!-- 							hungnx 070618 end file -->
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer" align="right">
+								<button type="button"
+									class="btn btn-qlk   padding-search-right btn pull-right  saveQLK"
+									ng-disabled="vm.disabled || vm.infomation" ng-click="vm.updateConstruction()"
+									translate>Ghi lại</button>
+								<button type="button"
+									class="btn btn-qlk padding-search-right margin_right10 closeQLK btn pull-right"
+									ng-click="vm.cancel(form)" translate>Hủy bỏ</button>
+							</div>
+
+						</div>
+						<!-- 1.2 hang muc -->
+						<div class="form-body" ng-show="vm.constructDetailValue==12">
+							<div class="form-body">
+								<div class="portlet light bordered">
+									<div class="portlet-title background-title">
+										<div class="caption">
+											<span class="caption-subject bold lowercase" translate>Thông
+												tin tìm kiếm </span>
+										</div>
+										<div class="text-right margin-row-title">
+											<i data-toggle="collapse" data-target="#121"
+												class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+										</div>
+									</div>
+									<div id="121" class="collapse in from-search">
+										<div class="clearfix position-relative">
+											<div class="clearfix">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Mã
+														công trình</label>
+
+													<div class="col-md-8">
+														<label class="control-data">{{vm.constrObj.code}}</label>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Tên
+														công trình</label>
+
+													<div class="col-md-8">
+														<label class="control-data">{{vm.constrObj.name}}</label>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Nội
+														dung tìm kiếm</label>
+
+													<div class="col-md-8">
+														<input id="" class=" form-control width100" type="text"
+															ng-model="vm.workItemSearch.keySearch"
+															ng-enter="vm.doSearchWorkItem()"
+															placeholder="Nhập hạng mục, loại hạng mục" />
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix form-actions margin-top">
+												<div class="row">
+													<div class="col-md-12 text-center">
+														<button type="button" id="findParam"
+															ng-click="vm.doSearchWorkItem()"
+															class="btn btn-qlk padding-search-right searchQLK"
+															translate>Tìm kiếm</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="portlet light bordered">
+								<div class="portlet-title background-title">
+									<div class="caption">
+										<span class="caption-subject bold lowercase" translate>Kết
+											quả tìm kiếm: </span>&nbsp;<label
+											class="control-label bold lowercase">{{vm.countWorkItem}}</label><label
+											class="control-label bold lowercase">&nbsp;bản ghi</label>
+									</div>
+									<div class="text-right margin-row-title">
+										<i data-toggle="collapse" data-target="#122"
+											class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+									</div>
+								</div>
+								<div id="122" class="collapse in from-search">
+									<div class="clearfix position-relative">
+										<div id="workItemTable" kendo-grid="vm.workItemGrid"
+											k-editable="false" k-options="vm.workItemGridOptions"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- 1.3 hợp đồng đầu ra  -->
+						<div class="form-body" ng-show="vm.constructDetailValue==13">
+							<div class="form-body">
+								<div class="portlet light bordered">
+									<div class="portlet-title background-title">
+										<div class="caption">
+											<span class="caption-subject bold lowercase" translate>Thông
+												tin công trình</span>
+										</div>
+										<div class="text-right margin-row-title">
+											<i data-toggle="collapse" data-target="#131"
+												class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+										</div>
+									</div>
+									<div id="131" class="collapse in from-search">
+										<div class="clearfix position-relative">
+											<div class="clearfix">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Mã
+														công trình</label>
+
+													<div class="col-md-8">
+														<label class="control-data">{{vm.constrObj.code}}</label>
+
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Tên
+														công trình</label>
+													<div class="col-md-8">
+														<label class="control-data">{{vm.constrObj.name}}</label>
+
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ngày
+														hoàn thành</label>
+													<div class="col-md-8">
+														<label class="control-data">{{vm.constrObj.completeDate}}</label>
+
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="portlet light bordered">
+								<div class="portlet-title background-title">
+									<div class="caption">
+										<span class="caption-subject bold lowercase" translate>Danh
+											sách hạng mục: </span>&nbsp;<label
+											class="control-label bold lowercase">{{vm.covenantSearchCout}}</label><label
+											class="control-label bold lowercase">&nbsp;bản ghi</label>
+									</div>
+									<div class="text-right margin-row-title">
+										<i data-toggle="collapse" data-target="#132"
+											class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+									</div>
+								</div>
+								<div id="132" class="collapse in from-search">
+									<div class="clearfix position-relative">
+										<div id="covenant" kendo-grid="vm.covenantGrid"
+											k-editable="false" k-options="vm.covenantGridOptions"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- end 1.3 hop đồng đồng đầu ra -->
+						<!-- 1.4 phiếu xk -->
+						<div class="form-body" ng-show="vm.constructDetailValue==14">
+							<form class="form-horizontal row" role="form">
+								<div class="form-body">
+									<div class="portlet light bordered">
+										<div class="portlet-title background-title">
+											<div class="caption">
+												<span class="caption-subject bold lowercase" translate>Thông
+													tin tìm kiếm </span>
+											</div>
+											<div class="text-right margin-row-title">
+												<i data-toggle="collapse" data-target="#141"
+													class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+											</div>
+										</div>
+										<div id="141" class="collapse in from-search">
+											<div class="clearfix position-relative">
+												<div class="clearfix">
+													<div class="form-group col-md-6">
+														<label class="col-md-4 control-label" translate>Mã
+															công trình</label>
+
+														<div class="col-md-8">
+															<label class="control-data">{{vm.constrObj.code}}</label>
+
+														</div>
+													</div>
+													<div class="form-group col-md-6">
+														<label class="col-md-4 control-label" translate>Tên
+															công trình</label>
+
+														<div class="col-md-8">
+															<label class="control-data">{{vm.constrObj.name}}</label>
+
+														</div>
+													</div>
+													<div class="form-group col-md-6">
+														<label class="col-md-4 control-label" translate>Nội
+															dung tìm kiếm</label>
+														<div class="col-md-8">
+															<input class=" form-control width100" type="text"
+																ng-model="vm.deliveryBillSearch.keySearch"
+																ng-enter="vm.doSearchDeliveryBill1()"
+																placeholder="Mã yêu cầu/Mã phiếu/Kho xuất/Người xuất" />
+														</div>
+													</div>
+													<div class="form-group col-md-6">
+														<label class="col-md-4 control-label" translate>Loại
+															phiếu xuất</label>
+														<div class="col-md-8">
+															<select kendo-drop-down-list id="typeExport"
+																style="width: 100%" name="typeExport"
+																ng-model="vm.deliveryBillSearch.typeExport"
+																k-options="vm.typeExport" required>
+															</select>
+														</div>
+													</div>
+												</div>
+												<div class="clearfix form-actions margin-top">
+													<div class="row">
+														<div class="col-md-12 text-center">
+															<button type="button"
+																ng-click="vm.doSearchDeliveryBill1()"
+																class="btn btn-qlk padding-search-right searchQLK"
+																translate>Tìm kiếm</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+							<div class="portlet light bordered">
+								<div class="portlet-title background-title">
+									<div class="caption">
+										<span class="caption-subject bold lowercase" translate>Kết
+											quả tìm kiếm: </span>&nbsp;<label
+											class="control-label bold lowercase">{{vm.deliveryBillSearchCout}}</label><label
+											class="control-label bold lowercase">&nbsp;bản ghi</label>
+									</div>
+									<div class="text-right margin-row-title">
+										<i data-toggle="collapse" data-target="#142"
+											class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+									</div>
+								</div>
+								<div id="142" class="collapse in from-search">
+									<div class="clearfix position-relative">
+										<div id="deliveryBillTable" kendo-grid="vm.deliveryBillTable"
+											k-editable="false" k-options="vm.deliveryBillGridOptions"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- 1.4 end -->
+						<!-- 2.1 bàn gian mặt bằng begin -->
+						<div class="form-body"
+							ng-show="vm.constructDetailValue==21||vm.constructDetailValue==2">
+							<div class="form-body">
+								<div class="portlet light bordered">
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Mã
+												công trình</label>
+
+											<div class="col-md-8">
+												<label class="control-data">{{vm.constrObj.code}}</label>
+
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Tên
+												công trình</label>
+
+											<div class="col-md-8">
+												<label class="control-data">{{vm.constrObj.name}}</label>
+
+											</div>
+										</div>
+									</div>
+									<div class="portlet-title background-title">
+										<div class="caption">
+											<span class="caption-subject bold lowercase" translate>Thông
+												tin bàn giao </span>
+										</div>
+										<div class="text-right margin-row-title">
+											<i data-toggle="collapse" data-target="#211"
+												class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+										</div>
+									</div>
+									<div id="211" class="collapse in from-search">
+<!--										<div class="clearfix position-relative">-->
+<!--											<div class="clearfix">-->
+<!--												<div class="form-group col-md-6">-->
+<!--													<label class="col-md-4 control-label req" translate>Loại mặt bằng</label>-->
+<!--													<div class="col-md-8">-->
+<!--														<div class = "col-md-6">-->
+<!--															<input type = "radio" name = "handoverType" ng-model = "vm.constrObj.handoverType" ng-checked = "{{vm.constrObj.handoverDateElectric == null}}" value = '1'> Mặt bằng xây dựng-->
+<!--														</div>-->
+<!--														<div class = "col-md-6">-->
+<!--															<input type = "radio" name = "handoverType" ng-model = "vm.constrObj.handoverType" ng-checked = "{{vm.constrObj.handoverDateElectric != null}}" value = '2'> Mặt bằng điện-->
+<!--														</div>-->
+<!--													</div>-->
+<!--												</div>-->
+<!--											</div>-->
+<!--											<div class="clearfix">-->
+<!--												<div class="form-group col-md-6">-->
+<!--													<label class="col-md-4 control-label req" translate>Ngày-->
+<!--														bàn giao MB</label>-->
+
+<!--													<div id="handoverDate1" class="col-md-8">-->
+<!--														<input kendo-date-picker k-format="'dd/MM/yyyy'" date-time-->
+<!--															id="handoverDate" name="handoverDate"-->
+<!--															ng-model="vm.constrObj.handoverDate" style="width: 100%;"-->
+<!--															ng-blur="validateDate(vm.constrObj.handoverDate,null,null,form.handoverDate,21)"-->
+<!--															placeholder="DD/MM/YYYY" />-->
+<!--														<div class="One_icon">-->
+<!--															<i class="fa fa-times" aria-hidden="true"-->
+<!--																ng-click="vm.cancelInput('handoverDate',form.handoverDate)"></i>-->
+<!--														</div>-->
+<!--														<div class="error" ng-messages="form.handoverDate.$error"-->
+<!--															ng-if="form.handoverDate.$invalid && form.handoverDate.$dirty">-->
+<!--															<label ng-message="date" class="control-data" translate>Ngày-->
+<!--																bàn giao MB không hợp lệ</label>-->
+<!--														</div>-->
+<!--													</div>-->
+<!--												</div>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--										<div class="clearfix">-->
+<!--											<div class="form-group col-md-12">-->
+<!--												<div class="form-group col-md-12">-->
+<!--													<label class="col-md-2 control-label" translate>Ghi-->
+<!--														chú</label>-->
+
+<!--													<div class="col-md-10">-->
+<!--														<textarea class=" form-control width100"-->
+<!--															ng-model="vm.constrObj.handoverNote"></textarea>-->
+<!--													</div>-->
+<!--												</div>-->
+<!--											</div>-->
+<!--										</div>-->
+
+									<!--hienvd: START 2/7/2019-->
+										<div class="clearfix position-relative" style="margin-top: 4px">
+											<div class="clearfix">
+												<div class="form-group col-md-6" style="margin-top: 4px">
+													<label class="col-md-4 control-label req" translate>Ngày
+														bàn giao MB</label>
+													<div id="handoverDate1" class="col-md-8">
+														<input kendo-date-picker k-format="'dd/MM/yyyy'" date-time
+															   id="handoverDate" name="handoverDate"
+															   ng-model="vm.constrObj.handoverDateBuild" style="width: 100%;"
+															   ng-blur="validateDate(vm.constrObj.handoverDate,null,null,form.handoverDate,21)"
+															   placeholder="DD/MM/YYYY" readonly/>
+														<div class="error" ng-messages="form.handoverDate.$error"
+															 ng-if="form.handoverDate.$invalid && form.handoverDate.$dirty">
+															<label ng-message="date" class="control-data" translate>Ngày
+																bàn giao MB không hợp lệ</label>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									<!--hienvd: END 2/7/2019-->
+									</div>
+								</div>
+							</div>
+							<div class="portlet light bordered">
+								<div class="portlet-title background-title">
+									<div class="caption">
+										<span class="caption-subject bold lowercase" translate>Danh sách file đính kèm</span>
+									</div>
+									<div class="text-right margin-row-title">
+										<i data-toggle="collapse" data-target="#212"
+											class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+									</div>
+								</div>
+								<div id="212_BGMB" class="collapse in from-search">
+									<div class="wrapper-input">
+										<center>
+											<span style="color: gray; margin: auto;">Dung lượng
+												&#60;&#61; 100MB, định dạng xls, xlsx, docx, doc, pdf</span>
+										</center>
+										<div class="k-button k-upload-button">
+											<input class="file-input k-valid" name="fileBGMB" type="file"
+												kendo-upload="" id="fileBGMB" tabindex="10"
+												onchange="angular.element(this).scope().onSelectBGMBFile()"
+												data-role="upload" multiple="multiple" autocomplete="off">
+											<span id="fileNameBGMB">Kéo thả các file vào đây hoặc click để chọn file</span>
+										</div>
+									</div>
+									<div class="clearfix position-relative">
+										<div id="BGMBgrid" kendo-grid="vm.BGMBgrid" k-editable="false"
+											k-options="vm.BGMBgridOptions"></div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer" align="right">
+								<button type="button"
+									class="btn btn-qlk   padding-search-right btn pull-right  saveQLK"
+									ng-disabled="vm.disabled || vm.handover|| !isTrueBGMB"
+									ng-click="vm.updateBGMBItem()" translate>Ghi lại</button>
+							</div>
+
+							<!-- hienvd5: start 1/7/2019 -->
+							<div class="portlet light">
+								<div class="portlet-title background-title" style="">
+									<div class="caption">
+										<span class="caption-subject bold lowercase" translate>Lịch sử cập nhật bàn giao mặt bằng</span>
+									</div>
+									<div class="text-right margin-row-title">
+										<i data-toggle="collapse" data-target="#partBGMB"
+										   class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+									</div>
+								</div>
+								<div id="partBGMB" class="collapse in from-search" ng-if="listImageBGMB.length > 0">
+									<div class="padding-width18">
+										<div class="border-gray">
+											<div class="clearfix position-relative">
+												<div>
+													<div style="width: 350px; height: 350px; margin: auto;">
+														<img class="image-cus" ng-model="imageSelectedBGMB" ng-src="data:image/jpg;base64,{{imageSelectedBGMB.base64String}}">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="padding-width18">
+										<div class="border-gray">
+											<div class="clearfix position-relative">
+												<div ng-repeat="image in listImageBGMB">
+													<div class="wrap-image" ng-click="changeImageBGMB(image)">
+														<img class="image-cus" ng-src="data:image/jpg;base64,{{image.base64String}}">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- hienvd5: end-->
+						</div>
+						<!-- 2.1 bàn gian mặt bằng end -->
+
+						<!-- 2.2 khời công begin -->
+						<div class="form-body" ng-show="vm.constructDetailValue==22">
+							<div class="form-body">
+								<div class="portlet light bordered">
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Mã
+												công trình</label>
+
+											<div class="col-md-8">
+												<label class="control-data">{{vm.constrObj.code}}</label>
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Tên
+												công trình</label>
+
+											<div class="col-md-8">
+												<label class="control-data">{{vm.constrObj.name}}</label>
+
+											</div>
+										</div>
+									</div>
+									<div class="portlet-title background-title">
+										<div class="caption">
+											<span class="caption-subject bold lowercase" translate>Thông
+												tin khởi công </span>
+										</div>
+										<div class="text-right margin-row-title">
+											<i data-toggle="collapse" data-target="#221"
+												class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+										</div>
+									</div>
+<!--									<div id="221" class="collapse in from-search">-->
+<!--										<div class="clearfix position-relative">-->
+<!--											<div class="clearfix">-->
+<!--												<div class="form-group col-md-6">-->
+<!--													<label class="col-md-4 control-label req" translate>Ngày-->
+<!--														khởi công</label>-->
+<!--													<div id="startingDate1" class="col-md-8">-->
+<!--														<input kendo-date-picker k-format="'dd/MM/yyyy'" date-time-->
+<!--															id="startingDate" name="startingDate"-->
+<!--															ng-model="vm.constrObj.startingDate" style="width: 100%;"-->
+<!--															ng-blur="validateDate(vm.constrObj.startingDate,null,vm.constrObj.excpectedCompleteDate,form.startingDate, 22)"-->
+<!--															placeholder="DD/MM/YYYY" />-->
+<!--														<div class="One_icon">-->
+<!--															<i class="fa fa-times" aria-hidden="true"-->
+<!--																ng-click="vm.cancelInput('startingDate',form.startingDate)"></i>-->
+<!--														</div>-->
+<!--														<div class="error" ng-messages="form.startingDate.$error"-->
+<!--															ng-if="form.startingDate.$invalid && form.startingDate.$dirty">-->
+<!--															<label ng-message="date" class="control-data" translate>Ngày-->
+<!--																khởi công không hợp lệ</label> <label ng-message="max"-->
+<!--																class="control-data" translate>Ngày khởi công-->
+<!--																không được lớn hơn Ngày kết thúc dự kiến</label>-->
+<!--														</div>-->
+<!--													</div>-->
+<!--												</div>-->
+<!--												<div class="form-group col-md-6">-->
+<!--													<label class="col-md-4 control-label req" translate>Ngày-->
+<!--														kết thúc dự kiến</label>-->
+
+<!--													<div id="excpectedCompleteDate1" class="col-md-8">-->
+<!--														<input kendo-date-picker k-format="'dd/MM/yyyy'" date-time-->
+<!--															id="excpectedCompleteDate" name="excpectedCompleteDate"-->
+<!--															ng-model="vm.constrObj.excpectedCompleteDate"-->
+<!--															style="width: 100%;"-->
+<!--															ng-blur="validateDate(vm.constrObj.excpectedCompleteDate,vm.constrObj.startingDate,null,form.excpectedCompleteDate, 22)"-->
+<!--															placeholder="DD/MM/YYYY" />-->
+<!--														<div class="One_icon">-->
+<!--															<i class="fa fa-times" aria-hidden="true"-->
+<!--																ng-click="vm.cancelInput('excpectedCompleteDate',form.excpectedCompleteDate)"></i>-->
+<!--														</div>-->
+<!--														<div class="error"-->
+<!--															ng-messages="form.excpectedCompleteDate.$error"-->
+<!--															ng-if="form.excpectedCompleteDate.$invalid && form.excpectedCompleteDate.$dirty">-->
+<!--															<label ng-message="date" class="control-data" translate>Ngày-->
+<!--																kết thúc dự kiến không hợp lệ</label> <label ng-message="min"-->
+<!--																class="control-data" translate> Ngày khởi công-->
+<!--																phải nhỏ hơn hoặc bằng ngày kết thúc dự kiến</label>-->
+<!--														</div>-->
+<!--													</div>-->
+<!--												</div>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--										<div class="clearfix">-->
+<!--											<div class="form-group col-md-12">-->
+<!--												<div class="form-group col-md-12">-->
+<!--													<label class="col-md-2 control-label" translate>Ghi-->
+<!--														chú</label>-->
+<!--													<div class="col-md-10">-->
+<!--														<textarea class=" form-control width100"-->
+<!--															ng-model="vm.constrObj.startingNote"></textarea>-->
+<!--													</div>-->
+<!--												</div>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--										-->
+<!--										-->
+<!--									</div>-->
+
+<!--								hienvd: START 2/7/2019-->
+									<div class="clearfix position-relative" style="margin-top: 4px">
+										<div class="clearfix">
+											<div class="form-group col-md-6" style="margin-top: 4px">
+												<label class="col-md-4 control-label req" translate>Ngày
+													khởi công</label>
+												<div id="startingDate1" class="col-md-8">
+
+													<input kendo-date-picker k-format="'dd/MM/yyyy'" date-time
+														   id="startingDate" name="startingDate"
+														   ng-model="vm.constrObj.startingDate" style="width: 100%;"
+														   ng-blur="validateDate(vm.constrObj.startingDate,null,null,form.startingDate,21)"
+														   placeholder="DD/MM/YYYY" readonly/>
+
+													<div class="error" ng-messages="form.startingDate.$error"
+														 ng-if="form.startingDate.$invalid && form.startingDate.$dirty">
+														<label ng-message="date" class="control-data" translate>Ngày
+															khởi công không hợp lệ</label> <label ng-message="max"
+																								  class="control-data" translate>Ngày khởi công
+														không được lớn hơn Ngày kết thúc dự kiến</label>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+<!--							hien vd: END-->
+								</div>
+							</div>
+							<div class="portlet light bordered">
+								<div class="portlet-title background-title">
+									<div class="caption">
+										<span class="caption-subject bold lowercase" translate>Danh
+											sách file đính kèm</span>
+									</div>
+									<div class="text-right margin-row-title">
+										<i data-toggle="collapse" data-target="#222"
+											class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+									</div>
+								</div>
+								<div id="222" class="collapse in from-search">
+									<div class="wrapper-input">
+										<center>
+											<span style="color: gray; margin: auto;">Dung lượng
+												&#60;&#61; 100MB, định dạng xls, xlsx, docx, doc, pdf</span>
+										</center>
+										<div class="k-button k-upload-button">
+											<input class="file-input k-valid" name="fileBGMB" type="file"
+												kendo-upload="" id="fileStart" tabindex="10"
+												onchange="angular.element(this).scope().onSelectStartFile()"
+												data-role="upload" multiple="multiple" autocomplete="off">
+											<span id="fileNameStart">Kéo thả các file vào đây hoặc
+												click để chọn file</span>
+										</div>
+									</div>
+									<div class="clearfix position-relative">
+										<div id="startgrid" kendo-grid="vm.startgrid"
+											k-editable="false" k-options="vm.startgridOptions"></div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer" align="right">
+								<button type="button"
+									class="btn btn-qlk   padding-search-right btn pull-right  saveQLK"
+									ng-disabled="vm.disabled|| vm.infoDisable || !isTrue"
+									ng-click="vm.updateStartItem()" translate>Ghi lại</button>
+							</div>
+							<!-- hienvd5: start 1/7/2019 -->
+							<div class="portlet light">
+								<div class="portlet-title background-title" style="">
+									<div class="caption">
+										<span class="caption-subject bold lowercase" translate>Lịch sử cập nhật tiến độ</span>
+									</div>
+									<div class="text-right margin-row-title">
+										<i data-toggle="collapse" data-target="#part3"
+										   class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+									</div>
+								</div>
+								<div id="part3" class="collapse in from-search" ng-if="listImage.length > 0">
+									<div class="padding-width18">
+										<div class="border-gray">
+											<div class="clearfix position-relative">
+												<div>
+													<div style="width: 350px; height: 350px; margin: auto;">
+														<img class="image-cus" ng-model="imageSelected" ng-src="data:image/jpg;base64,{{imageSelected.base64String}}">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="padding-width18">
+										<div class="border-gray">
+											<div class="clearfix position-relative">
+												<div ng-repeat="image in listImage">
+													<div class="wrap-image" ng-click="changeImage(image)">
+														<img class="image-cus" ng-src="data:image/jpg;base64,{{image.base64String}}">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- hienvd5: end-->
+						</div>
+						<!-- 2.2 khời công begin -->
+						<!-- 2.3 thi công begin -->
+						<div class="view-grantt" ng-if="vm.constructDetailValue==23">
+							<div class="row grantt-search"
+								style="left: 0% !important; width: 80% !important;">
+								<div class="col-md-3">
+									<button ng-click="vm.openPopupTC()"
+										ng-disabled="vm.disabled || vm.construction"
+										style="margin-top: 3px;">Thêm
+				                        công việc</button>
+								</div>
+								<div class="col-md-3">
+									<input class=" form-control width100 input-grantt" type="text"
+										ng-model="vm.granttSearch.keyword"
+										ng-enter="vm.searchGrantt()"
+										placeholder="Tên công việc/Người thực hiện" />
+								</div>
+								<div class="col-md-6 text-left" style="text-align: left; padding-right:30px;">
+									<ul class="list-inline grantt-statistic text-left" style="margin-top:2px">
+										<li><span class="badge"
+											style="background-color: #BFF0F0 !important; color: #000 !important; font-weight: bold !important;cursor: pointer;"
+                                            ng-click="vm.viewGrantAll()"
+											uib-tooltip="Tất cả công việc">{{taskAll}}</span></li>
+										<li><span class="badge"
+											style="background-color: #CDCDCD !important; color: #000 !important; font-weight: bold !important;cursor: pointer;"
+                                            ng-click="vm.viewGrantUnfulfilled()"
+											uib-tooltip="Công việc chưa thực hiện">{{taskUnfulfilled}}</span></li>
+										<li><span class="badge"
+											style="background-color: #FF0000 !important; color: #000 !important; font-weight: bold !important;cursor: pointer;"
+                                            ng-click="vm.viewGrantProgress()"
+											uib-tooltip="Công việc chậm tiến độ">{{taskSlow}}</span></li>
+										<li><span class="badge"
+											style="background-color: #FFFF00 !important; color: #000 !important; font-weight: bold !important; cursor: pointer;"
+                                            ng-click="vm.viewGrantStop()"
+											uib-tooltip="Công việc tạm dừng">{{taskPause}}</span></li>
+									</ul>
+								</div>
+							</div>
+							<div id="ganttTC" kendo-gantt k-options="vm.ganttOptions"></div>
+						</div>
+						<!-- 2.3 thi công end -->
+
+						<!-- 2.4 vướng begin -->
+						<div class="form-body" ng-show="vm.constructDetailValue==24">
+							<!-- phucvx vuong-->
+							<div class="form-body">
+								<div class="portlet light bordered">
+									<div class="portlet-title background-title">
+										<div class="caption">
+											<span class="caption-subject bold lowercase" translate>Thông
+												tin tìm kiếm </span>
+										</div>
+										<div class="text-right margin-row-title">
+											<i data-toggle="collapse" data-target="#241"
+												class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+										</div>
+									</div>
+									<div id="241" class="collapse in from-search">
+										<div class="clearfix position-relative">
+											<div class="clearfix">
+												<div class="form-group col-md-7">
+													<label class="col-md-4 control-label" translate>Nội
+														dung tìm kiếm</label>
+													<div class="col-md-8">
+														<input class=" form-control width100" type="text"
+															ng-model="vm.entangledSearch.keySearch"
+															ng-enter="vm.doSearchEl()"
+															placeholder="Nội dung/Người tạo ..." />
+													</div>
+												</div>
+												<div class="form-group col-md-5">
+													<label class="col-md-4 control-label" translate>Trạng
+														thái vướng</label>
+													<div class="col-md-8">
+														<select kendo-drop-down-list id="statusEntangled"
+															style="width: 100%" name="statusEntangled"
+															ng-model="vm.entangledSearch.obstructedState"
+															k-options="vm.statusEntangled" required>
+														</select>
+													</div>
+												</div>
+												<div class="form-group col-md-7">
+													<label class="col-md-4 control-label" translate>Ngày
+														tạo từ ngày</label>
+													<div class="col-md-3">
+														<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+															name="createFrom" id="createFrom"
+															ng-model="vm.entangledSearch.createdFrom"
+															ng-blur="validateDate(vm.entangledSearch.createdFrom,null,vm.entangledSearch.createdTo,form.createFrom)"
+															style="width: 100%;" date-time />
+														<div class="One_icon">
+															<i class="fa fa-times" aria-hidden="true"
+																ng-click="vm.cancelInput('createFrom',form.createFrom)"></i>
+														</div>
+														<div class="error" ng-messages="form.createFrom.$error">
+															<label ng-message="date" class="control-data" translate>Ngày
+																tạo từ ngày không hợp lệ</label> <label ng-message="max"
+																class="control-data" translate>Ngày tạo từ ngày
+																không được lớn hơn Ngày tạo đến ngày </label>
+														</div>
+													</div>
+													<label class="col-md-2 control-label" translate
+														style="padding: 0px;">Đến ngày</label>
+													<div class="col-md-3 ">
+														<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+															name="createTo" id="createTo"
+															ng-model="vm.entangledSearch.createdTo"
+															ng-blur="validateDate(vm.entangledSearch.createdTo,vm.entangledSearch.createdFrom,null,form.createTo)"
+															style="width: 100%;" date-time />
+														<div class="One_icon ">
+															<i class="fa fa-times" aria-hidden="true"
+																ng-click="vm.cancelInput('createTo',form.createTo)"></i>
+														</div>
+														<div class="error" ng-messages="form.createTo.$error"
+															ng-if="form.createTo.$invalid && form.createTo.$dirty">
+															<label ng-message="date" class="control-data" translate>Ngày
+																tạo đến ngày không hợp lệ</label> <label ng-message="min"
+																class="control-data" translate>Ngày tạo đến ngày
+																không được nhỏ hơn Ngày tạo từ ngày</label>
+														</div>
+													</div>
+												</div>
+												<div class="clearfix form-actions margin-top form-group">
+													<div class="row">
+														<div class="col-md-12 text-center">
+															<button type="button" ng-click="vm.doSearchEl()"
+																class="btn btn-qlk padding-search-right searchQLK"
+																translate>Tìm kiếm</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="portlet light bordered">
+									<div class="portlet-title background-title">
+										<div class="caption">
+											<span class="caption-subject bold lowercase" translate>Kết
+												quả tìm kiếm: </span>&nbsp;<label
+												class="control-label bold lowercase">{{vm.entangledlSearchCout}}</label><label
+												class="control-label bold lowercase">&nbsp;bản ghi</label>
+										</div>
+										<div class="text-right margin-row-title">
+											<i data-toggle="collapse" data-target="#242"
+												class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+										</div>
+									</div>
+									<div id="242" class="collapse in from-search">
+										<div class="clearfix position-relative">
+											<div id="entangledTable" kendo-grid="vm.entangledGrid1"
+												k-editable="false" k-options="vm.entangledGridOptions"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- 2.4 vướng end -->
+
+						<!-- 2.5 hoàn thành begin -->
+						<div class="form-body" ng-show="vm.constructDetailValue==25">
+							<form class="form-horizontal row" role="form">
+								<div class="form-body">
+									<div class="portlet light bordered">
+										<div class="portlet-title background-title">
+											<div class="caption">
+												<span class="caption-subject bold lowercase" translate>Thông
+													tin công trình</span>
+											</div>
+											<div class="text-right margin-row-title">
+												<i data-toggle="collapse" data-target="#1251"
+													class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+											</div>
+										</div>
+										<div id="1251" class="collapse in from-search">
+											<div class="clearfix position-relative">
+												<div class="clearfix">
+													<div class="form-group col-md-6">
+														<label class="col-md-4 control-label" translate>Mã
+															công trình</label>
+
+														<div class="col-md-8">
+															<label class="control-data">{{vm.constrObj.code}}</label>
+
+														</div>
+													</div>
+													<div class="form-group col-md-6">
+														<label class="col-md-4 control-label" translate>Tên
+															công trình</label>
+														<div class="col-md-8">
+															<label class="control-data">{{vm.constrObj.name}}</label>
+
+														</div>
+													</div>
+													<div class="form-group col-md-6">
+														<label class="col-md-4 control-label" translate>Ngày
+															hoàn thành</label>
+														<div class="col-md-8">
+															<label class="control-data">{{vm.constrObj.completeDate}}</label>
+
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+							<div class="portlet light bordered">
+								<div class="portlet-title background-title">
+									<div class="caption">
+
+										<span class="caption-subject bold lowercase" translate>Danh
+											sách hạng mục: </span>&nbsp;<label
+											class="control-label bold lowercase">{{vm.CompleteSearchCount}}</label><label
+											class="control-label bold lowercase">&nbsp;bản ghi</label>
+									</div>
+									<div class="text-right margin-row-title">
+										<i data-toggle="collapse" data-target="#1252"
+											class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+									</div>
+								</div>
+								<div id="1252" class="collapse in from-search">
+									<div class="clearfix position-relative">
+										<div id="completeGrid" kendo-grid="vm.completeGrid"
+											k-editable="false" k-options="vm.completeGridOptions"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- 2.5 hoàn thành end -->
+
+						<!-- 2.6 nghiệm thu begin-->
+						<div class="form-body" ng-show="vm.constructDetailValue==26">
+							<div class="form-body">
+								<div class="portlet light bordered">
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Mã
+												công trình</label>
+
+											<div class="col-md-8">
+												<label class=" control-data width100">{{vm.constrObj.code}}</label>
+
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Tên
+												công trình</label>
+
+											<div class="col-md-8">
+												<label class=" control-data width100">{{vm.constrObj.name}}</label>
+
+											</div>
+										</div>
+									</div>
+									<div class="portlet-title background-title">
+										<div class="caption">
+											<span class="caption-subject bold lowercase" translate>Thông
+												tin chung </span>
+										</div>
+										<div class="text-right margin-row-title">
+											<i data-toggle="collapse" data-target="#261"
+												class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+										</div>
+									</div>
+									<div id="261" class="collapse in from-search" style="padding-right: 30px;">
+										<div class="clearfix position-relative">
+											<div class="clearfix">
+												<!-- <div class="form-group col-md-6"> -->
+													<label class="col-md-2 control-label req" style="padding-left : 0px !important;"translate>Người
+														nhập thông tin</label>
+													<div class="col-md-2">
+														<input class=" form-control " type="text"
+															ng-model="vm.certObj.importer" />
+													</div>
+												<!-- </div> -->
+												<!-- <div class="form-group col-md-6"> -->
+													<label class="col-md-2 control-label req" translate>Nghiệm thu từ ngày</label>
+
+													<div class="col-md-2">
+														<input kendo-date-picker k-format="'dd/MM/yyyy'" date-time
+															id="cStartingDate" name="cStartingDate"
+															ng-model="vm.certObj.startingDate" style="width: 100%;"
+															ng-blur="validateDate(vm.certObj.startingDate,null,vm.certObj.completeDate,form.cStartingDate, 26)"
+															placeholder="DD/MM/YYYY" />
+														<div class="One_icon">
+															<i class="fa fa-times" aria-hidden="true"
+																ng-click="vm.cancelInput('cStartingDate',form.cStartingDate)"></i>
+														</div>
+														<div class="error" ng-messages="form.cStartingDate.$error"
+															ng-if="form.cStartingDate.$invalid && form.cStartingDate.$dirty">
+															<label ng-message="date" class="control-data" translate>Ngày
+																hoàn thành từ không hợp lệ</label> <label ng-message="max"
+																class="control-data" translate>Ngày hoàn thành
+																từ không được lớn hơn Ngày hoàn thành đến</label>
+														</div>
+													</div>
+													<label class="col-md-2 control-label" style="padding: 0px;" translate>Đến
+														ngày</label>
+
+													<div class="col-md-2 pull-right">
+														<input kendo-date-picker k-format="'dd/MM/yyyy'" date-time
+															id="cCompleteDate" name="cCompleteDate"
+															ng-model="vm.certObj.completeDate" style="width: 100%;"
+															ng-blur="validateDate(vm.certObj.completeDate,vm.certObj.startingDate,null,form.cCompleteDate, 26)"
+															placeholder="DD/MM/YYYY" />
+														<div class="One_icon">
+															<i class="fa fa-times" aria-hidden="true"
+																ng-click="vm.cancelInput('cCompleteDate',form.cCompleteDate)"></i>
+														</div>
+														<div class="error" ng-messages="form.cCompleteDate.$error"
+															ng-if="form.cCompleteDate.$invalid && form.cCompleteDate.$dirty">
+															<label ng-message="date" class="control-data" translate>Ngày
+																hoàn thành đến không hợp lệ</label> <label ng-message="min"
+																class="control-data" translate>Ngày hoàn thành
+																đến không được nhỏ hơn ngày hoàn thành từ</label>
+														</div>
+													</div>
+												<!-- </div> -->
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="portlet light bordered">
+								<div class="portlet-title background-title">
+									<div class="caption">
+										<span class="caption-subject bold lowercase" translate>Thông
+											tin hàng hóa, công việc nghiệm thu</span>
+									</div>
+									<div class="text-right margin-row-title">
+										<i data-toggle="collapse" data-target="#262"
+											class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+									</div>
+								</div>
+							</div>
+							<div id="262" class="collapse in from-search">
+								<div class="col-md-12 col-lg-2 ">
+									<form class="padding-height-20 form-horizontal row" role="form"
+										id="form1">
+										<div class="form-body">
+											<div class="row button-header">
+												<a class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10"
+													ng-click="vm.showVTTB(1)"
+													ng-class="{'active':vm.showTabVT==1}"> <label
+													class="stt_radio1">VTTB Bên A</label>
+												</a> <a
+													class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 "
+													ng-click="vm.showVTTB(2)"
+													ng-class="{'active':vm.showTabVT==2}"> <label
+													class="stt_radio1">VTTB Bên B</label>
+												</a> <a
+													class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 "
+													ng-click="vm.showVTTB(3)"
+													ng-class="{'active':vm.showTabVT==3}"> <label
+													class="stt_radio1">VTTB Bên thầu phụ</label>
+												</a>
+
+											</div>
+										</div>
+									</form>
+								</div>
+								<div class="col-md-12 col-lg-10  " ng-show="vm.showTabVT==1">
+									<form class="padding-height-20 form-horizontal row" role="form"
+										id="form1">
+										<div class="form-body">
+											<div class="portlet-title">
+												<div class="caption">
+													<span class="caption-subject bold lowercase" translate>Danh
+														sách vật tư</span>
+												</div>
+											</div>
+											<div class="padding-width18">
+												<div id="DSVTA" kendo-grid="vm.DSVTAGrid"
+													k-options="vm.DSVTAGridOptions"></div>
+											</div>
+											<div class="portlet-title">
+												<div class="caption">
+													<span class="caption-subject bold lowercase" translate>Danh
+														sách thiết bị</span>
+												</div>
+											</div>
+											<div class="padding-width18">
+												<div id="DSTBA" kendo-grid="vm.DSTBAGrid" k-editable="false"
+													k-options="vm.DSTBAGridOptions" ></div>
+											</div>
+										</div>
+									</form>
+								</div>
+								<div class="col-md-12 col-lg-10  " ng-show="vm.showTabVT==2">
+									<form class="padding-height-20 form-horizontal row" role="form">
+										<div class="form-body">
+											<div class="portlet-title">
+												<div class="caption">
+													<span class="caption-subject bold lowercase" translate>Danh
+														sách vật tư</span>
+												</div>
+											</div>
+											<div class="padding-width18">
+												<div id="DSVTB" kendo-grid="vm.DSVTBGrid"
+													k-options="vm.DSVTBGridOptions"></div>
+											</div>
+											<div class="portlet-title">
+												<div class="caption">
+													<span class="caption-subject bold lowercase" translate>Danh
+														sách thiết bị</span>
+												</div>
+											</div>
+											<div class="padding-width18">
+												<div id="DSTBB" kendo-grid="vm.DSTBBGrid"
+													k-options="vm.DSTBBGridOptions"></div>
+											</div>
+										</div>
+									</form>
+								</div>
+								<div class="col-md-12 col-lg-10  " ng-show="vm.showTabVT==3">
+									<form class="padding-height-20 form-horizontal row" role="form">
+										<div class="form-body">
+											<div class="row">
+												<label class="col-md-1 control-label req" translate>Tên
+													VTTB</label>
+												<div class="col-md-2">
+													<input class=" form-control " type="text"
+														ng-model="vm.TBObj.goodsName" />
+												</div>
+												<label class="col-md-1 control-label " translate>Serial</label>
+												<div class="col-md-2">
+													<input class=" form-control " type="text"
+														ng-model="vm.TBObj.serial" />
+												</div>
+												<label class="col-md-1 control-label req" translate>SL sử dụng</label>
+												<div class="col-md-2">
+													<input class=" form-control " is-number type="text"
+														ng-model="vm.TBObj.quantity" />
+												</div>
+												<label class="col-md-1 control-label req" translate>Đơn
+													vị tính</label>
+												<div class="col-md-2">
+													<input class=" form-control " type="text"
+														ng-model="vm.TBObj.goodsUnitName" />
+												</div>
+											</div>
+											<div class="row" style="margin-top: 10px">
+												<div class="col-md-12 text-center">
+													<button type="button" ng-click="vm.importThauPhu()"
+														class="btn btn-qlk padding-search-right excelQLK ng-scope">Import</button>
+													<button type="button" ng-click="vm.addVTTBTP(vm.TBObj)"
+														class="btn btn-qlk padding-search-right bosung ng-scope">Bổ
+														sung</button>
+												</div>
+											</div>
+											<div class="portlet-title">
+												<div class="caption">
+													<span class="caption-subject bold lowercase" translate>Danh
+														sách vật tư - thiết bị</span>
+												</div>
+											</div>
+											<div class="padding-width18">
+												<div id="TP" kendo-grid="vm.TPGrid"
+													k-options="vm.TPGridOptions"></div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+
+							<div class="modal-footer" align="right">
+								<button ng-show="vm.showTabVT==3" type="button"
+									class="btn btn-qlk   padding-search-right btn pull-right  saveQLK"
+									ng-disabled="vm.checkStatus || vm.disableSubmit"
+									ng-click="vm.saveThauphu()" translate>Ghi lại</button>
+								<button ng-show="vm.showTabVT==3" type="button"
+									class="btn btn-qlk   padding-search-right btn pull-right  closeQLK "
+									style="margin-right: 5px;"
+									ng-disabled="vm.checkStatus"
+									ng-click="vm.cancelThauPhu()"
+									translate>Hủy bỏ</button>
+							</div>
+							<!--huy nghiem thu-->
+							<div>
+								<div class="modal-footer" align="right"
+									style="border-top: 1px solid #ccc !important;">
+									<button type="button"
+										class="btn btn-qlk text-Btn  padding-search-right btn pull-right saveQLK"
+										ng-disabled="vm.checkStatus || vm.disableSubmit"
+										ng-click="vm.saveMerchandise()" translate>Ghi lại</button>
+									<button type="button"
+										class="btn btn-qlk text-Btn  padding-search-right btn pull-right  inBienBan"
+										ng-disabled="vm.checkStatus"
+										ng-click="vm.PrintProtocol()" translate>In biên bản</button>
+									<button type="button" style="margin: 0px !important;"
+										class="btn btn-qlk text-Btn  padding-search-right btn pull-right iconHuyNT "
+										ng-disabled="vm.checkStatus"
+										ng-click="vm.PrintProtocol()" translate>Hủy nghiệm
+										thu</button>
+								</div>
+							</div>
+
+
+						</div>
+						<!-- 2.6 nghiệm thu end-->
+
+						<!-- 2.7 hoàn trả begin -->
+						<div class="form-body" ng-show="vm.constructDetailValue==27">
+							<div class="form-body">
+								<div class="portlet light bordered">
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Mã
+												công trình</label>
+
+											<div class="col-md-8">
+												<label class="control-data">{{vm.constrObj.code}}</label>
+
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Tên
+												công trình</label>
+
+											<div class="col-md-8">
+												<label class="control-data">{{vm.constrObj.name}}</label>
+
+											</div>
+										</div>
+									</div>
+									<div class="portlet-title background-title">
+										<div class="caption">
+											<span class="caption-subject bold lowercase" translate>Thông
+												tin chung </span>
+										</div>
+										<div class="text-right margin-row-title">
+											<i data-toggle="collapse" data-target="#271"
+												class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+										</div>
+									</div>
+									<div id="271" class="collapse in from-search">
+										<div class="clearfix position-relative">
+											<div class="clearfix">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label req" translate>Người
+														hoàn trả</label>
+													<div class="col-md-8">
+														<input class=" form-control width100" type="text"
+															ng-model="vm.constrObj.returner" />
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label req" translate>Ngày
+														hoàn trả</label>
+													<div class="col-md-8">
+														<input kendo-date-picker k-format="'dd/MM/yyyy'" date-time
+															id="returnDate" name="returnDate"
+															ng-model="vm.constrObj.returnDate" style="width: 100%;"
+															ng-blur="validateDate(vm.constrObj.returnDate,null,null,form.returnDate, 27)"
+															placeholder="DD/MM/YYYY" />
+														<div class="One_icon">
+															<i class="fa fa-times" aria-hidden="true"
+																ng-click="vm.cancelInput('returnDate',form.returnDate)"></i>
+														</div>
+														<div class="error" ng-messages="form.returnDate.$error"
+															ng-if="form.returnDate.$invalid && form.returnDate.$dirty">
+															<label ng-message="date" class="control-data" translate>Ngày
+																hoàn trả không hợp lệ</label>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="portlet light bordered">
+								<div class="portlet-title background-title">
+									<div class="caption">
+										<span class="caption-subject bold lowercase" translate>Danh
+											sách file đính kèm</span>
+									</div>
+									<div class="text-right margin-row-title">
+										<i data-toggle="collapse" data-target="#272"
+											class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+									</div>
+								</div>
+								<div id="272" class="collapse in from-search">
+									<div class="wrapper-input">
+										<center>
+											<span style="color: gray; margin: auto;">Dung lượng
+												&#60;&#61; 100MB, định dạng xls, xlsx, docx, doc, pdf</span>
+										</center>
+										<div class="k-button k-upload-button">
+											<input class="file-input k-valid" name="fileMerchandise"
+												type="file" kendo-upload="" id="fileMerchandise"
+												tabindex="10"
+												onchange="angular.element(this).scope().onSelectMerchandiseFile()"
+												data-role="upload" multiple="multiple" autocomplete="off">
+											<span id="fileNameMerchandise">Kéo thả các file vào
+												đây hoặc click để chọn file</span>
+										</div>
+									</div>
+									<div class="clearfix position-relative">
+										<div id="Merchandisegrid" kendo-grid="vm.merchandisegrid"
+											k-editable="false" k-options="vm.merchandisegridOptions">
+										</div>
+									</div>
+									<div class="portlet-title">
+										<div class="caption">
+											<span class="caption-subject bold lowercase" translate>Danh
+												sách vật tư hoàn trả</span>
+										</div>
+										<div class="padding-width18">
+											<div class="border-gray">
+												<div class="collapse in from-search">
+													<div class="clearfix position-relative">
+														<div kendo-grid="vm.merchandisegrid1" k-editable="false"
+															k-options="vm.merchandisegridOptions1"></div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="portlet-title">
+										<div class="caption">
+											<span class="caption-subject bold lowercase" translate>Danh
+												sách thiết bị hoàn trả</span>
+										</div>
+										<div class="padding-width18">
+											<div class="border-gray">
+												<div class="collapse in from-search">
+													<div class="clearfix position-relative">
+														<div id="merchandisegrid2"
+															kendo-grid="vm.merchandisegrid2" k-editable="false"
+															k-options="vm.merchandisegridOptions2"></div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="modal-footer" align="right">
+								<button type="button" id="nextStep"
+									class="btn btn-qlk   padding-search-right btn pull-right  saveQLK"
+									ng-disabled="vm.allowAction || vm.disabled || form.returnDate.$invalid "
+									ng-click="vm.updateMerchandiseItem()" translate>Ghi
+									lại</button>
+							</div>
+						</div>
+						<!-- 2.7 hoàn trả end -->
+
+						<!-- 2.8 Giấy phép xây dựng begin -->
+						<div class="form-body"
+							ng-show="vm.constructDetailValue==28">
+							<div class="form-body">
+								<div class="portlet light bordered">
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Mã
+												công trình</label>
+
+											<div class="col-md-8">
+												<label class="control-data">{{vm.constrObj.code}}</label>
+
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Tên
+												công trình</label>
+
+											<div class="col-md-8">
+												<label class="control-data">{{vm.constrObj.name}}</label>
+
+											</div>
+										</div>
+									</div>
+									<div class="portlet-title background-title">
+										<div class="caption">
+											<span class="caption-subject bold lowercase" translate>Thông
+												tin giấy phép xây dựng </span>
+										</div>
+										<div class="text-right margin-row-title">
+											<i data-toggle="collapse" data-target="#211"
+												class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+										</div>
+									</div>
+									<div id="211" class="collapse in from-search">
+										<div class="clearfix position-relative">
+											<div class="clearfix">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label req" translate>Ngày nhận</label>
+
+													<div id="handoverDate1" class="col-md-8">
+														<input kendo-date-picker k-format="'dd/MM/yyyy'" date-time
+															id="buildingPermitDate" name="buildingPermitDate"
+															ng-model="vm.constrObj.buildingPermitDate" style="width: 100%;"
+															ng-blur="validateDate(vm.constrObj.buildingPermitDate,null,null,form.buildingPermitDate,21)"
+															placeholder="DD/MM/YYYY" />
+														<div class="One_icon">
+															<i class="fa fa-times" aria-hidden="true"
+																ng-click="vm.cancelInput('buildingPermitDate',form.buildingPermitDate)"></i>
+														</div>
+														<div class="error" ng-messages="form.buildingPermitDate.$error"
+															ng-if="form.buildingPermitDate.$invalid && form.buildingPermitDate.$dirty">
+															<label ng-message="date" class="control-data" translate>Ngày
+																nhận không hợp lệ</label>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="portlet light bordered">
+								<div class="portlet-title background-title">
+									<div class="caption">
+										<span class="caption-subject bold lowercase" translate>Danh
+											sách file đính kèm</span>
+									</div>
+									<div class="text-right margin-row-title">
+										<i data-toggle="collapse" data-target="#212"
+											class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+									</div>
+								</div>
+								<div id="212" class="collapse in from-search">
+									<div class="wrapper-input">
+										<center>
+											<span style="color: gray; margin: auto;">Dung lượng
+												&#60;&#61; 100MB, định dạng xls, xlsx, docx, doc, pdf</span>
+										</center>
+										<div class="k-button k-upload-button">
+											<input class="file-input k-valid" name="fileConstrLicence" type="file"
+												kendo-upload="" id="fileConstrLicence" tabindex="10"
+												onchange="angular.element(this).scope().onSelectConstrLicenceFile()"
+												data-role="upload" multiple="multiple" autocomplete="off">
+											<span id="fileNameConstrLicence">Kéo thả các file vào đây hoặc
+												click để chọn file</span>
+										</div>
+									</div>
+									<div class="clearfix position-relative">
+										<div id="ConstrLicencegrid" kendo-grid="vm.ConstrLicencegrid" k-editable="false"
+											k-options="vm.ConstrLicencegridOptions"></div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer" align="right">
+								<button type="button"
+									class="btn btn-qlk   padding-search-right btn pull-right  saveQLK"
+									ng-disabled="vm.disabled || vm.handover || vm.constrObj.isBuildingPermit != 1"
+									ng-click="vm.updateConstrLicence()" translate>Ghi lại</button>
+							</div>
+						</div>
+						<!-- 2.8 Giấy phép xây dựng end -->
+
+						<!-- 2.9 Thiết kế xây dựng  begin -->
+						<div class="form-body"
+							ng-show="vm.constructDetailValue==29">
+							<div class="form-body">
+								<div class="portlet light bordered">
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Mã
+												công trình</label>
+
+											<div class="col-md-8">
+												<label class="control-data">{{vm.constrObj.code}}</label>
+
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Tên
+												công trình</label>
+
+											<div class="col-md-8">
+												<label class="control-data">{{vm.constrObj.name}}</label>
+
+											</div>
+										</div>
+									</div>
+									<div class="portlet-title background-title">
+										<div class="caption">
+											<span class="caption-subject bold lowercase" translate>Thông tin chung </span>
+										</div>
+										<div class="text-right margin-row-title">
+											<i data-toggle="collapse" data-target="#211"
+												class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+										</div>
+									</div>
+									<div id="211" class="collapse in from-search">
+										<div class="clearfix position-relative">
+											<div class="clearfix">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label req" translate>Ngày
+														hoàn thành</label>
+													<div id="handoverDate1" class="col-md-8">
+														<input kendo-date-picker k-format="'dd/MM/yyyy'" date-time
+															id="blueprintDate" name="blueprintDate"
+															ng-model="vm.constrObj.blueprintDate" style="width: 100%;"
+															placeholder="DD/MM/YYYY" />
+														<div class="One_icon">
+															<i class="fa fa-times" aria-hidden="true"
+																ng-click="vm.cancelInput('blueprintDate',form.blueprintDate)"></i>
+														</div>
+														<div class="error" ng-messages="form.blueprintDate.$error"
+															ng-if="form.blueprintDate.$invalid && form.blueprintDate.$dirty">
+															<label ng-message="date" class="control-data" translate>Ngày
+																hoàn thành không hợp lệ</label>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="portlet light bordered">
+								<div class="portlet-title background-title">
+									<div class="caption">
+										<span class="caption-subject bold lowercase" translate>Danh
+											sách file đính kèm</span>
+									</div>
+									<div class="text-right margin-row-title">
+										<i data-toggle="collapse" data-target="#212"
+											class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+									</div>
+								</div>
+								<div id="212" class="collapse in from-search">
+									<div class="wrapper-input">
+										<center>
+											<span style="color: gray; margin: auto;">Dung lượng
+												&#60;&#61; 100MB, định dạng xls, xlsx, docx, doc, pdf</span>
+										</center>
+										<div class="k-button k-upload-button">
+											<input class="file-input k-valid" name="fileConstrDesign" type="file"
+												kendo-upload="" id="fileConstrDesign" tabindex="10"
+												onchange="angular.element(this).scope().onSelectConstrDesign()"
+												data-role="upload" multiple="multiple" autocomplete="off">
+											<span id="fileNameConstrDesign">Kéo thả các file vào đây hoặc
+												click để chọn file</span>
+										</div>
+									</div>
+									<div class="clearfix position-relative">
+										<div id="constrDesignGrid" kendo-grid="vm.constrDesignGrid" k-editable="false"
+											k-options="vm.constrDesignGridOptions"></div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer" align="right">
+								<button type="button"
+									class="btn btn-qlk   padding-search-right btn pull-right  saveQLK"
+									ng-disabled="vm.disabled || vm.handover"
+									ng-click="vm.updateConstrDesign()" translate>Ghi lại</button>
+							</div>
+						</div>
+						<!-- 2.9 Thiết kế xây dựng end -->
+
+						<!-- 3.1 hợp đồng đầu ra -->
+						<div class="form-body"
+							ng-show="vm.constructDetailValue==31||vm.constructDetailValue==3">
+							<form class="form-horizontal row" role="form">
+								<div class="form-body">
+									<div class="portlet light bordered">
+										<div class="portlet-title background-title">
+											<div class="caption">
+												<span class="caption-subject bold lowercase" translate>Thông
+													tin công trình</span>
+											</div>
+											<div class="text-right margin-row-title">
+												<i data-toggle="collapse" data-target="#311"
+													class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+											</div>
+										</div>
+										<div id="311" class="collapse in from-search">
+											<div class="clearfix position-relative">
+												<div class="clearfix">
+													<div class="form-group col-md-6">
+														<label class="col-md-4 control-label" translate>Mã
+															công trình</label>
+
+														<div class="col-md-8">
+															<label class="control-data">{{vm.constrObj.code}}</label>
+
+														</div>
+													</div>
+													<div class="form-group col-md-6">
+														<label class="col-md-4 control-label" translate>Tên
+															công trình</label>
+														<div class="col-md-8">
+															<label class="control-data">{{vm.constrObj.name}}</label>
+
+														</div>
+													</div>
+													<div class="form-group col-md-6">
+														<label class="col-md-4 control-label" translate>Ngày
+															hoàn thành</label>
+														<div class="col-md-8">
+															<label class="control-data">{{vm.constrObj.completeDate}}</label>
+
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+							<div class="portlet light bordered">
+								<div class="portlet-title background-title">
+									<div class="caption">
+										<span class="caption-subject bold lowercase" translate>Danh
+											sách hạng mục: </span>&nbsp;<label
+											class="control-label bold lowercase">{{vm.contractInputSearchCout}}</label><label
+											class="control-label bold lowercase">&nbsp;bản ghi</label>
+									</div>
+									<div class="text-right margin-row-title">
+										<i data-toggle="collapse" data-target="#312"
+											class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+									</div>
+								</div>
+								<div id="312" class="collapse in from-search">
+									<div class="clearfix position-relative">
+										<div id="contractInput" kendo-grid="vm.contractInput"
+											k-editable="false" k-options="vm.contractInputGridOptions"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-body" ng-show="vm.constructDetailValue==32">
+							<form class="form-horizontal row" role="form">
+								<div class="form-body">
+									<div class="portlet light bordered">
+										<div class="clearfix">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label" translate>Mã
+													công trình</label>
+
+												<div class="col-md-8">
+													<label class="control-data">{{vm.constrObj.code}}</label>
+
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label" translate>Tên
+													công trình</label>
+
+												<div class="col-md-8">
+													<label class="control-data">{{vm.constrObj.name}}</label>
+
+												</div>
+											</div>
+										</div>
+										<div class="portlet-title background-title">
+											<div class="caption">
+												<span class="caption-subject bold lowercase" translate>Thông
+													tin bàn giao </span>
+											</div>
+											<div class="text-right margin-row-title">
+												<i data-toggle="collapse" data-target="#321"
+													class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+											</div>
+										</div>
+										<div id="321" class="collapse in from-search">
+											<div class="clearfix position-relative">
+												<div class="clearfix">
+													<div class="form-group col-md-6">
+														<label class="col-md-4 control-label " translate>Ngày
+															phát sóng</label> <label class="col-md-48 control-data" translate>{{vm.constrObj.broadcastingDate!=null?vm.constrObj.broadcastingDate:""}}</label>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</form>
+	</div>

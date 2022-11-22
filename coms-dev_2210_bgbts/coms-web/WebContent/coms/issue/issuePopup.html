@@ -1,0 +1,292 @@
+<div class="portlet light">
+	<div class="row button-header">
+		<a class="col-md-1 text-center" style="margin-right: 2px;"
+			tabindex="1" ng-click="caller.gotoTabOnePopUp()"
+			ng-class="{'active':caller.tab1}"> <label class="stt_radio1">Xử
+				lý</label>
+		</a> <a class="col-md-1 text-center" tabindex="2"
+			ng-click="caller.gotoTabTwoPopUp()" ng-class="{'active':caller.tab2}">
+			<label class="stt_radio1">Lịch sử</label>
+		</a>
+	</div>
+</div>
+<div ng-show="caller.tab1" class="cus-panel">
+	<form class="form-horizontal padding-height-20" role="form">
+		<div class="form-body">
+			<div class="caption clearfix">
+				<span class="caption-subject bold lowercase  pull-left" translate>Thông
+					tin phản ánh</span>
+                <div class="margin-row-title pull-right">
+                    <i data-toggle="collapse" data-target="#TTPA"
+                       class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div id="TTPA" class="padding-width18 clearfix collapse in from-search">
+                <div class="border-gray">
+                    <div class="clearfix">
+                        <label class="col-md-2 control-label" translate>Mã công trình</label>
+
+						<div class="col-md-2">
+							<label class="control-label" style="font-weight: bold;"
+								ng-bind="data.constructionCode"></label>
+						</div>
+						<label class="col-md-2 control-label" translate>Mã trạm</label>
+
+						<div class="col-md-2">
+							<label class="control-label" style="font-weight: bold;"
+								ng-bind="data.catStationCode"></label>
+						</div>
+						<label class="col-md-2 control-label" translate>Hạng mục</label>
+
+						<div class="col-md-2">
+							<label class="control-label" style="font-weight: bold;"
+								ng-bind="data.workItemName"></label>
+						</div>
+					</div>
+					<div class="clearfix">
+						<label class="col-md-2 control-label" translate>Người phản
+							ánh</label>
+
+						<div class="col-md-2">
+							<label class="control-label" style="font-weight: bold;"
+								ng-bind="data.createdUserName"></label>
+						</div>
+						<label class="col-md-2 control-label" translate>Số điện
+							thoại</label>
+
+						<div class="col-md-2">
+							<label class="control-label" style="font-weight: bold;"
+								ng-bind="data.createdPhoneNumber"></label>
+						</div>
+					</div>
+					<div class="clearfix">
+						<label class="col-md-2 control-label" translate>Nội dung
+							phản ánh</label>
+
+						<div class="col-md-2">
+							<label class="control-label" style="font-weight: bold;"
+								ng-bind="data.content"></label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="caption clearfix">
+				<span class="caption-subject bold lowercase  pull-left" translate>Thông
+					tin xử lý</span>
+
+                <div class="margin-row-title pull-right">
+                    <i data-toggle="collapse" data-target="#TTXL"
+                       class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div id="TTXL" class="padding-width18 clearfix collapse in from-search">
+                <div class="border-gray">
+                    <div class="clearfix">
+                        <label class="col-md-2 control-label" translate>Người xử lý</label>
+
+						<div class="col-md-2">
+							<label class="control-label" ng-bind="userInfo.fullName"></label>
+						</div>
+						<label class="col-md-2 control-label" translate>Số điện
+							thoại</label>
+
+						<div class="col-md-2">
+							<label class="control-label" ng-bind="userInfo.phoneNumber"></label>
+						</div>
+					</div>
+					<div class="clearfix">
+						<label class="col-md-2 control-label" translate>Nội dung
+							xử lý</label>
+
+                        <div class="col-md-10" style="margin-bottom: 5px;">
+                            <textarea class=" form-control width100" id="content" type="text" autofocus="true" cols="3"
+                                      ng-model="caller.issueItem.processContent" maxlength="1000"
+                                      placeholder="Nhập nội dụng xử lý"></textarea>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <label class="col-md-2 control-label" translate>Chuyển người xử lý</label>
+
+						<div class="col-md-4">
+							<div class="input-icon right ">
+								<i class="fa fa-search directive" ng-click="caller.openPopup()"></i>
+							</div>
+							<input class=" form-control width100" type="text"
+								ng-blur="caller.changeDataAuto('handingUser')"
+								ng-model="caller.issueItem.currentHandingUserNameNew"
+								kendo-auto-complete k-options="caller.handingUserOptions" />
+
+							<div class="One_icon">
+								<i class="fa fa-times" aria-hidden="true"
+									ng-click="caller.clearInput('1')"></i>
+							</div>
+						</div>
+						<label class="col-md-2 control-label" translate>Trạng thái
+							phản ánh</label>
+
+						<div class="col-md-4 margin_top">
+							<input style="float: left;" type="radio" id="status12"
+								name="status12" ng-model="caller.issueItem.status"
+								ng-checked="caller.issueItem.status == 1" value="1"> <label
+								style="font-weight: 400" for="status12" class="padding_radio">Mở</label>
+
+							<input style="float: left;" type="radio" id="status22"
+								name="status22" ng-model="caller.issueItem.status"
+								ng-checked="caller.issueItem.status == 0" value="0"> <label
+								style="font-weight: 400" for="status22" class="padding_radio">Đóng</label>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="caption clearfix">
+				<span class="caption-subject bold lowercase  pull-left" translate>Thảo
+					luận</span>
+
+                <div class="margin-row-title pull-right">
+                    <i data-toggle="collapse" data-target="#TL"
+                       class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div id="TL" class="padding-width18 clearfix collapse in from-search">
+                <div class="border-gray">
+                    <div class="clearfix">
+                        <div class="col-md-12">
+                            <textarea class=" form-control width100" type="text" autofocus="true" cols="3"
+                                      ng-model="caller.issueItem.discussContent" maxlength="1000"
+                                      placeholder="Nhập thảo luận"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="caption clearfix">
+                <span class="caption-subject bold lowercase  pull-left" translate>Lịch sử thảo luận</span>
+
+                <div class="margin-row-title pull-right">
+                    <i data-toggle="collapse" data-target="#LSTL"
+                       class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div id="LSTL" class="padding-width18 clearfix collapse in from-search">
+                <div class="border-gray" style="margin-bottom: 30px;">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="">
+                                    <div ng-repeat="discuss in caller.issueDiscussList">
+                                    <ul class="chat">
+                                        <li class="left clearfix">
+                                <span class="chat-img pull-left">
+                                    <img src="style/img/user_image.png" alt="User Avatar" class="img-circle"/>
+                                </span>
+                                            <div class="chat-body clearfix">
+                                                <div class="header">
+                                                    <strong class="primary-font">{{discuss.createdUserName}}</strong>
+                                                    <small class=" text-muted" style="font-size: 100% !important; margin-left: 55px">
+                                                        <span class="glyphicon glyphicon-time"></span>{{discuss.createdDateStr}}
+                                                    </small>
+                                                </div>
+                                                <div class="col-md-12 content">
+                                                <label class="control-label"
+                                                       ng-bind="discuss.content "></label>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    </div>
+                                    <a  ng-show="caller.issueDiscussList.length!=0"style="margin-left: 60px;" class=" text-muted" ng-click="caller.loadMoreIssueDiscuss()"> Xem thêm...
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div ng-show="caller.tab2" class="cus-panel">
+	<form class="form-horizontal padding-height-20" role="form">
+		<div class="form-body">
+			<div class="caption clearfix">
+				<span class="caption-subject bold lowercase  pull-left" translate>Lịch
+					sử xử lý phản ánh</span>
+
+                <div class="margin-row-title pull-right">
+                    <i data-toggle="collapse" data-target="#LSXLPA"
+                       class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div id="LSXLPA" class="padding-width18 clearfix collapse in from-search">
+                    <div class="border-gray" style="margin-bottom: 30px;">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="">
+                                        <div ng-repeat="his in caller.issueHistoryList">
+                                            <ul class="chat">
+                                                <li class="left clearfix" style="border: none">
+                                                    <div class=" clearfix">
+                                                        <div class="header cus-history">
+                                                            <strong class="primary-font">{{his.createdUserName}}</strong>
+                                                            <small class=" text-muted" style="font-size: 100% !important; margin-left: 55px">
+                                                                <span class="glyphicon glyphicon-time"></span>{{his.createdDateStr}}
+                                                            </small>
+                                                        </div>
+                                                        <div ng-repeat="item in his.detailList">
+                                                        <div class="clearfix"ng-show="item.type=='1'">
+                                                            <label class="col-md-2 control-label" translate> Trạng thái</label>
+                                                            <div class="col-md-10">
+                                                                <label class="control-label"
+                                                                       ng-bind="item.oldValue "></label>
+                                                                ->
+                                                                <label class="control-label"
+                                                                       ng-bind="item.newValue "></label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="clearfix" ng-show="item.type=='3'">
+                                                            <label class="col-md-2 control-label" translate> Nội dung xử lý</label>
+                                                            <div class="col-md-10 content">
+                                                                <label class="control-label"
+                                                                       ng-bind="item.newValue "></label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="clearfix" ng-show="item.type=='2'">
+                                                            <label class="col-md-2 control-label" translate> Nguời xử lý </label>
+                                                            <div class="col-md-10">
+                                                                <label class="control-label"
+                                                                       ng-bind="userInfo.fullName"></label> --> <label class="control-label"
+                                                                       ng-bind="item.newValue "></label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="clearfix" ng-show="item.type=='4'">
+                                                            <label class="col-md-2 control-label" translate> Thảo luận</label>
+                                                            <div class="col-md-10 discuss">
+                                                                <label class="control-label"
+                                                                       ng-bind="item.newValue "></label>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <a  ng-show="caller.issueHistoryList.length!=0" class=" text-muted" ng-click="caller.loadMoreIssueHistory()"> Xem thêm...
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer" style="z-index: 1" align="right">
+	<button type="button"
+		class="btn btn-qlk padding-search-right margin_right10 closeQLK btn"
+		ng-click="caller.cancelPopupIssue()" translate>Đóng</button>
+	<button type="button" id="savePopupApp"
+		class="btn btn-qlk padding-search-right saveQLK pull-right"
+		ng-click="caller.savePopupIssue()" translate>Ghi lại</button>
+</div>

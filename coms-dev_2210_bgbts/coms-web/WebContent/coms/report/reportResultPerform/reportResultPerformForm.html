@@ -1,0 +1,121 @@
+<div data-ng-controller="reportResultPerformController as vm"
+     id="stock_transId">
+    <div>
+        <p class="text-brecum">{{vm.String}}</p>
+        <form class="form-horizontal row" role="form" id="rpMonthOSSearchId"
+              kendo-validator="vm.validator" k-options="vm.validatorOptions">
+            <div class="form-body">
+                <div class="portlet light bordered">
+                    <div class="portlet-title background-title">
+                        <div class="caption">
+							<span class="caption-subject bold lowercase " translate>Thông tin tìm kiếm</span>
+                        </div>
+                        <div class="text-right margin-row-title">
+
+                            <i data-toggle="collapse" data-target="#demo11"
+                               class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div id="demo11" class="collapse in from-search">
+                    	<div class="clearfix" ng-enter="vm.doSearch()">
+                    		<div class="form-group col-md-6">
+								<label class="col-md-4 control-label margin_top" translate>Loại
+									báo cáo</label>
+								<div class="col-md-8 margin_top">
+									<input style="float: left;" type="radio" id="typeBcth"
+										name="typeBcth" ng-model="vm.searchForm.typeBc" ng-change="vm.changeTypeBc()"
+										ng-checked="vm.searchForm.typeBc == 1" value="1"> <label
+										style="font-weight: 400" for="typeBcth" class="padding_radio">Tổng hợp</label>
+									<input style="float: left;" type="radio" id="typeBcct"
+										name="typeBcct" ng-model="vm.searchForm.typeBc" ng-change="vm.changeTypeBc()"
+										ng-checked="vm.searchForm.typeBc == 2" value="2"> <label
+										style="font-weight: 400" for="typeBcct" class="padding_radio">Chi tiết</label>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+                                <label class="col-md-4 control-label" translate>Tỉnh</label>
+							<div class="col-md-8" ng-enter="vm.doSearchContruction()">
+								<div class="input-icon right ">
+									<i class="fa fa-search directive"
+										ng-click="vm.openCatProvincePopup()"></i>
+								</div>
+								<input kendo-auto-complete k-options="vm.provinceOptions"
+									class=" form-control width100" type="text"
+									ng-model="vm.searchForm.catProvince" id="province"
+									name="province" />
+								<div class="One_icon">
+									<i class="fa fa-times"
+										ng-click="vm.cancelInputProvince()"></i>
+								</div>
+							</div>
+                            </div>
+                    	</div>
+                        <div class="clearfix" ng-enter="vm.doSearch()">
+                            <div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Năm</label>
+
+								<div class="col-md-8">
+									<input id="dateGeneral" class=" form-control width100"
+										type="text" ng-model="vm.searchForm.monthYearD"
+										k-model="vm.searchForm.monthYearD"/>
+								</div>
+							</div>
+							<div class="form-group col-md-6" ng-show="vm.searchForm.typeBc == 2">
+								<label class="col-md-4 control-label" translate>Trạm</label>
+								<div class="col-md-8">
+									<input id="keySearchId" class=" form-control width100"
+										type="text" ng-model="vm.searchForm.keySearch" placeholder="Nhập mã trạm VCC/VTNET"/>
+								</div>
+							</div>
+                        </div>
+                        
+                        <script type="text/javascript">
+						$("#dateGeneral").kendoDatePicker({
+							start: "decade",                          
+		                    depth: "decade",                           
+		                    format: "yyyy"
+						});
+						var todayDate = kendo.toString(kendo.parseDate(new Date()), 'yyyy');
+						$("#dateGeneral").data("kendoDatePicker").value(todayDate);
+					</script>
+                        
+                        <div class="clearfix form-actions margin-top">
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <button type="button" id="doSearch"
+                                            class="btn btn-qlk padding-search-right  noteQLK"
+                                            ng-click="vm.doSearch()" translate>Tìm kiếm
+                                    </button>
+                                    <button type="button" id="excel"
+                                            class="btn btn-qlk padding-search-right  excelQLK"
+                                            ng-click="vm.exportexcel()" translate>Xuất excel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="portlet light bordered">
+        <div class="portlet-title background-title">
+            <div class="caption">
+				<span class="caption-subject bold lowercase" translate>Kết quả tìm kiếm: </span>&nbsp;<label class="control-label bold lowercase"
+					id="listdata">{{vm.countRecord}}</label><label
+					class="control-label bold lowercase">&nbsp;bản ghi</label>
+            </div>
+            <div class="btn-group pull-right margin-row-title">
+                <i data-toggle="collapse" data-target="#rpMonthPlanPro"
+                   class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+            </div>
+        </div>
+        <div id="rpMonthPlanPro" class="collapse in from-search">
+            <div class="clearfix position-relative">
+                <div id="gridKHBTSResultId" kendo-grid="vm.gridReportBTSByDA" k-editable="false"
+                     k-options="vm.gridReportBTSByDAOptions"></div>
+            </div>
+        </div>
+    </div>
+</div>
+

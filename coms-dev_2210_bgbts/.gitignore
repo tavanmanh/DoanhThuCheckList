@@ -1,0 +1,16 @@
+.idea/**
+
+*.iml
+
+*.xml
+
+target
+
+out/
+
+.idea
+
+.jazzignore
+.externalToolBuilders
+.settings
+coms-service/src/main/resources/cas_en.properties

@@ -1,0 +1,4 @@
+Hướng dẫn  import TR
+- Khi import giao TR, trong file excel biểu mẫu import, ô File đính kèm sẽ nhập tên các file file đính kèm của TR, tên các file cách nhau bởi dấu chấm phẩy(;)
+- Biểu mẫu file import TR và các biểu mẫu file đính kèm sẽ được nén chung vào 1 thư mục .zip
+- Điều kiện: Tên file đính kèm là bắt buộc nhập,khi nhập tên file đính kèm phải đúng tên với tên các file nằm trong thưc mục import TR lên. Nếu nhập sai tên file đính kèm thì hệ thống sẽ báo file không tồn tại và không cho import.

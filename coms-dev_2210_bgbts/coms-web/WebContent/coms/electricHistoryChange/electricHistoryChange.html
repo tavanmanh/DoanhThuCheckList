@@ -1,0 +1,203 @@
+<style>
+.mt-3 {
+	margin-top: 5px;
+}
+
+.mr-3 {
+	margin-right: 15px;
+}
+
+.display-flex {
+	display: flex;
+	justify-content: end;
+}
+
+.form-check-label {
+	font-size: 13px;
+}
+</style>
+
+<div data-ng-controller="manageMEController as vm"
+	id="manageMEController">
+	<div>
+		<p class="text-brecum">{{vm.String}}</p>
+
+		<form class="form-horizontal row" role="form">
+			<div class="form-body">
+				<div class="portlet light bordered">
+					<div class="portlet-title background-title">
+						<div class="caption">
+							<span class="caption-subject bold lowercase" translate>Thông
+								tin tìm kiếm </span>
+						</div>
+						<div class="text-right margin-row-title">
+							<i data-toggle="collapse" data-target="#demoapp"
+								class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+						</div>
+					</div>
+
+					<div id="demoapp" class="collapse in from-search"
+						style="position: relative">
+
+						<i data-toggle="dropdown"
+							class="tooltip1  tooltipshow_search_advance"
+							aria-expanded="false">
+							<button style="overflow: hidden;" class="search_advance"
+								ng-show="vm.iconDiss" ng-click="vm.iconDiss=!vm.iconDiss">
+								<span class="tooltiptext">Mở rộng</span>
+							</button>
+
+						</i> <i data-toggle="dropdown"
+							class="tooltip1 tooltiphide_search_advance" aria-expanded="false">
+							<button style="overflow: hidden;" class="search_advance"
+								ng-show="!vm.iconDiss" ng-click="vm.iconDiss=!vm.iconDiss">
+								<span class="tooltiptext">Rút gọn</span>
+							</button>
+						</i>
+
+						<div class="clearfix position-relative">
+							<div class="clearfix">
+								<div class="form-group col-md-6">
+									<div ng-show="vm.radio===2">
+										<!-- thay đổi nội dung ở đây -->
+										<div class="row">
+											<div class="col-md-6">
+												<label class="col-md-4 control-label" translate>Mã
+													trạm</label>
+												<div class="col-md-8">
+													<input id="keySearch" ng-enter="vm.doSearch()"
+														class=" form-control width100" type="text"
+														autofocus="true" ng-model="vm.MESearch.stationCode"
+														placeholder="Mã trạm" />
+												</div>
+											</div>
+											<div class="col-md-6">
+												<label class="col-md-4 control-label" translate>Người
+													tác động</label>
+												<div class="col-md-8">
+													<input id="keySearch" ng-enter="vm.doSearch()"
+														class=" form-control width100" type="text"
+														autofocus="true" ng-model="vm.MESearch.user"
+														placeholder="Người tác động" />
+												</div>
+											</div>
+										</div>
+										<div class="row mt-3">
+											<div class="col-md-6">
+												<label class="col-md-4 control-label" translate>Từ
+													ngày</label>
+												<div class="col-md-8" ng-enter="vm.doSearch()">
+													<input id="keySearch" ng-enter="vm.doSearch()"
+														class=" form-control width100" type="date"
+														autofocus="true" ng-model="vm.MESearch.startTime" />
+												</div>
+											</div>
+											<div class="col-md-6">
+												<label class="col-md-4 control-label" translate>Đến
+													ngày</label>
+												<div class="col-md-8" ng-enter="vm.doSearch()">
+													<input id="keySearch" ng-enter="vm.doSearch()"
+														class=" form-control width100" type="date"
+														autofocus="true" ng-model="vm.MESearch.endTime" />
+												</div>
+											</div>
+										</div>
+										<div class="row mt-3">
+											<div class="col-md-12 display-flex">
+												<button type="button" id="findParam"
+													ng-click="vm.doSearch()"
+													class="mr-3 btn btn-qlk padding-search-right searchQLK"
+													translate>Tìm kiếm</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group col-md-6">
+									<div class="col-md-4" ng-repeat="option in vm.optionList">
+										<label class="form-check-label"> <input type="radio"
+											class="form-check-input" name="typeOfElectricChange"
+											ng-model="vm.radio" ng-value="option.id"> {{
+											option.name }}
+										</label>
+									</div>
+								</div>
+							</div>
+
+							<div class="clearfix form-actions margin-top">
+								<div class="row">
+									<div class="col-md-12 text-center">
+										<!-- <button type="button" id="find"
+											class="btn green btn-outline padding-search-right"
+											ng-click="vm.doSearch()" translate>Tìm kiếm</button> -->
+										<button type="button" id="findParam" ng-click=""
+											class="btn btn-qlk padding-search-right fa fa-download" translate>Tải
+											về</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+
+		<div class="portlet light bordered">
+			<div class="portlet-title background-title">
+				<div class="caption">
+					<span class="caption-subject bold lowercase" translate>Kết
+						quả tìm kiếm: </span>&nbsp; <label class="control-label bold lowercase">{{vm.countCons}}</label>
+					<label class="control-label bold lowercase">&nbsp;bản ghi</label>
+				</div>
+				<div class="text-right margin-row-title">
+					<i data-toggle="collapse" data-target="#demoapp2"
+						class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+				</div>
+			</div>
+			
+			<div id="demoapp2" class="collapse in from-search">
+			
+				<!-- Hiển thị data cho mục lịch sử máy phát điện -->
+				<div class="clearfix position-relative"
+					ng-show="vm.radio===0">
+					<div id="historyGenerator" kendo-grid="vm.manageMEGrid"
+						k-editable="false" k-options="vm.historyGeneratorOptions"></div>
+				</div>
+				
+				<!-- Hiển thị data cho mục lịch sử thay đổi ắc quy -->
+				<div class="clearfix position-relative"
+					ng-show="vm.radio===1">
+					<div id="historyBattery" kendo-grid="vm.manageMEGrid"
+						k-editable="false" k-options="vm.historyChangeBatteryOptions"></div>
+				</div>
+				
+				<!-- Hiển thị data cho mục lịch sử thay đổi thông tin -->
+				<div class="clearfix position-relative"
+					ng-show="vm.radio===2">
+					<div id="historyInformation" kendo-grid="vm.manageMEGrid"
+						k-editable="false" k-options="vm.historyInformationOptions"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$('#appIdSearch').keypress(
+				function(event) {
+					$("input").change(function() {
+						$(this).val($.trim($(this).val()));
+					});
+					document.onkeydown = keyDown;
+					function keyDown(e) {
+						switch (e.keyCode) {
+						case 27:
+							$("#cancel").click();
+							break;
+						case 13:
+							if ($('.k-widget.k-window.fix-footer').css(
+									'display') !== 'block') {
+								$("#findParam").click();
+							}
+							break;
+						}
+					}
+				});
+	</script>

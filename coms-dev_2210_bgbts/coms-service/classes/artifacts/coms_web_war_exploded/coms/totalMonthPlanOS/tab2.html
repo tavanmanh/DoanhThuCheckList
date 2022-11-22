@@ -1,0 +1,452 @@
+<<style>
+	html {
+		overflow-y: scroll;
+	}
+</style>
+<div id="creExtReMa1" class="collapse in from-search row">
+<div class="row border-popup-management" style="display: flex">
+<div class="col-md-12 col-lg-2 border-right ">
+    <form class="padding-height-20 form-horizontal row" role="form" id="form">
+        <div class="form-body">
+            <div class="row button-header">
+                <a class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 cusTabLeft" tabindex="1"
+                     ng-class="{'active':vm.value==1}"
+                     ng-click="vm.chooseTab(1)">
+                    <label class="stt_radio1">1. Chỉ tiêu</label>
+                </a>
+                <!-- 
+                <a class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 cusTabLeft" tabindex="2"
+                     ng-class="{'active':vm.value==2}"
+                     ng-click="vm.chooseTab(2)">
+                    <label class="stt_radio1">2. Đảm bảo nguồn việc</label>
+                </a>
+                <a class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 cusTabLeft" tabindex="3"
+                     ng-class="{'active':vm.value==3}"
+                     ng-click="vm.chooseTab(3)">
+                    <label class="stt_radio1">3. Đảm bảo lực lượng</label>
+                </a>
+                <a class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 childTabCus"
+                     ng-class="{'active':vm.value==31}"
+                     ng-show="vm.value==3||vm.isForce" tabindex="4" ng-click="vm.chooseTab(31)">
+                    <label class="stt_radio1">3.1.Dự án gia cố</label>
+                </a>
+                <a class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 childTabCus"
+                     ng-class="{'active':vm.value==32}"
+                     ng-show="vm.value==3||vm.isForce" tabindex="5" ng-click="vm.chooseTab(32)">
+                    <label class="stt_radio1">3.2.BTS</label>
+                </a>
+                <a class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 childTabCus"
+                     ng-class="{'active':vm.value==33}"
+                     ng-show="vm.value==3||vm.isForce" tabindex="6" ng-click="vm.chooseTab(33)">
+                    <label class="stt_radio1">3.3.Ngầm hóa</label>
+                </a>
+                <a class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 cusTabLeft" tabindex="7"
+                     ng-class="{'active':vm.value==4}"
+                     ng-click="vm.chooseTab(4)">
+                    <label class="stt_radio1">4. Đảm bảo vật tư, thiết bị</label>
+                </a>
+                <a class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 cusTabLeft" tabindex="8"
+                     ng-class="{'active':vm.value==5}"
+                     ng-click="vm.chooseTab(5)">
+                    <label class="stt_radio1">5. Đảm bảo tài chính</label>
+                </a>
+                <a class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 cusTabLeft" tabindex="9"
+                     ng-class="{'active':vm.value==6}"
+                     ng-click="vm.chooseTab(6)">
+                    <label class="stt_radio1">6. Đảm bảo HĐ, biểu mẫu, tiên lượng HSHC</label>
+                </a> -->
+                <a class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 cusTabLeft" tabindex="10"
+                     ng-class="{'active':vm.value==7}"
+                     ng-click="vm.chooseTab(7)">
+                    <label class="stt_radio1">2. Phụ lục</label>
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="form-horizontal  padding-height-20  col-md-12 col-lg-10"
+     role="form">
+<div class="form-body" ng-show="vm.value==1">
+    <div class="padding-width18">
+        <div class="border-gray" style="padding-right: 15px">
+            <div class="clearfix position-relative">
+                <div class="clearfix form-group">
+                    <label class="col-md-2 form-horizontal control-label req" translate>Đơn vị</label>
+
+								<div class="col-md-10">
+									<div class="input-icon right ">
+										<i class="fa fa-search directive"
+											ng-click="vm.openDepartmentChoose('deptTarget')"></i>
+									</div>
+									<input kendo-auto-complete k-options="vm.deptOptionsTarget"
+										ng-blur="vm.changeDataDept('dept')" id="sysGroupName"
+										class=" form-control width100" type="text"
+										ng-model="vm.totalMonthPlanTemp.sysGroupName" name="dept"
+										onclick="reset_msg();" required
+										data-required-msg="Đơn vị không để trống" /> <span id="msg"
+										data-for='dvn1' class='k-invalid-msg'></span>
+
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="vm.cancelInputDept('dept')"></i>
+									</div>
+									<script>
+										function reset_msg() {
+											document.getElementById('msg').innerHTML = '';
+										}
+									</script>
+								</div>
+							</div>
+            </div>
+            
+            <div class="clearfix position-relative">
+                <div class="clearfix form-group">
+                    <label class="col-md-2 control-label req" translate>1. SL xây lắp(triệu)</label>
+                    <div class="col-md-2">
+                        <input  class="text-right form-control width100" type="number"
+                                maxlength="14" vt-currency fraction-size="3" id="quantityXlTarget"
+                               ng-model="vm.totalMonthPlanTemp.quantityXlTarget" min="0"
+                               required data-required-msg="SL xây lắp không được để trống" parsecurrency3/>
+                    </div>
+                    
+                    <label class="col-md-2 control-label req" translate>2. SL nguồn chi phí(ngoài OS)(triệu)</label>
+                    <div class="col-md-2">
+                        <input class="text-right form-control width100" type="number"
+                               maxlength="14"  vt-currency fraction-size="3" id="quantityCpTarget"
+                               ng-model="vm.totalMonthPlanTemp.quantityCpTarget" min="0"
+                               required data-required-msg="SL nguồn chi phí không được để trống" parsecurrency3/>
+                    </div>
+                    
+                    <label class="col-md-2 control-label req" translate>3. SL Ngoài TĐ(GPDN)(triệu)</label>
+                    <div class="col-md-2">
+                        <input class="text-right form-control width100" type="number"
+                               maxlength="14"  vt-currency fraction-size="3" id="quantityNtdGpdnTarget"
+                               ng-model="vm.totalMonthPlanTemp.quantityNtdGpdnTarget" min="0"
+                               required data-required-msg="SL Ngoài TĐ(GPDN) không được để trống" parsecurrency3/>
+                    </div>
+
+                </div>
+            </div>   
+            
+            <div class="clearfix position-relative">
+                <div class="clearfix form-group">
+                	<label class="col-md-2 control-label req" translate>4. SL Ngoài TĐ(XDDD)(triệu)</label>
+                    <div class="col-md-2">
+                        <input  class="text-right form-control width100" type="number"
+                                maxlength="14" vt-currency fraction-size="3" id="quantityNtdXdddTarget"
+                               ng-model="vm.totalMonthPlanTemp.quantityNtdXdddTarget"  min="0"
+                               required data-required-msg="SL Ngoài TĐ không được để trống" parsecurrency3/>
+                    </div>
+                
+                    <label class="col-md-2 control-label req" translate>5. Quỹ lương(triệu)</label>
+                    <div class="col-md-2">
+                        <input  class="text-right form-control width100" type="number"
+                                maxlength="14" vt-currency fraction-size="3" min="0"
+                               ng-model="vm.totalMonthPlanTemp.completeTarget" id="completeTarget"
+                               required data-required-msg="Quỹ lương không được để trống" parsecurrency3/>
+                    </div>
+                    
+                    <label class="col-md-2 control-label req" translate>6. HSHC xây lắp(triệu)</label>
+                    <div class="col-md-2">
+                        <input class="text-right form-control width100" type="number"
+                               maxlength="14"  vt-currency fraction-size="3" id="hshcXlTarget"
+                               ng-model="vm.totalMonthPlanTemp.hshcXlTarget" min="0"
+                               required data-required-msg="HSHC xây lắp không được để trống" parsecurrency3/>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="clearfix position-relative">
+                <div class="clearfix form-group">
+                	<label class="col-md-2 control-label req" translate>7. QT lên doanh thu Chi phí(ngoài OS)(triệu)</label>
+                    <div class="col-md-2">
+                        <input class="text-right form-control width100" type="number"
+                               maxlength="14"  vt-currency fraction-size="3" id="revenueCpTarget"
+                               ng-model="vm.totalMonthPlanTemp.revenueCpTarget" min="0"
+                               required data-required-msg="QT lên doanh thu nguồn CP không được để trống" parsecurrency3/>
+                    </div>
+                
+                    <label class="col-md-2 control-label req" translate>8. QT lên doanh thu ngoài TĐ(GPDN)(triệu)</label>
+                    <div class="col-md-2">
+                        <input  class="text-right form-control width100" type="number"
+                                maxlength="14" vt-currency fraction-size="3" id="revenueNtdGpdnTarget"
+                               ng-model="vm.totalMonthPlanTemp.revenueNtdGpdnTarget" min="0"
+                               required data-required-msg="QT lên doanh thu ngoài TĐ(GPDN) không được để trống" parsecurrency3/>
+                    </div>
+                    
+                    <label class="col-md-2 control-label req" translate>9. QT lên doanh thu ngoài TĐ(XDDD)(triệu)</label>
+                    <div class="col-md-2">
+                        <input class="text-right form-control width100" type="number"
+                               maxlength="14"  vt-currency fraction-size="3" id="revenueNtdXdddTarget"
+                               ng-model="vm.totalMonthPlanTemp.revenueNtdXdddTarget" min="0"
+                               required data-required-msg="QT lên doanh thu ngoài TĐ(XDDD) không được để trống" parsecurrency3/>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="clearfix position-relative">
+                <div class="clearfix form-group">
+                    <label class="col-md-2 control-label req" translate>10. HSHC Hạ tầng cho thuê(triệu)</label>
+                    <div class="col-md-2">
+                        <input class="text-right form-control width100" type="number"
+                               maxlength="14"  vt-currency fraction-size="3" min="0"
+                               ng-model="vm.totalMonthPlanTemp.hshcHtctTarget" id="hshcHtctTarget"
+                               required data-required-msg="HSHC Hạ tầng cho thuê không được để trống" parsecurrency3/>
+                    </div>
+                    
+                    <label class="col-md-2 control-label req" translate>11. Tìm kiếm việc XDDD(triệu)</label>
+                    <div class="col-md-2">
+                        <input class="text-right form-control width100" type="number"
+                               maxlength="14"  vt-currency fraction-size="3" id="taskXdddTarget"
+                               ng-model="vm.totalMonthPlanTemp.taskXdddTarget" 
+                               required data-required-msg="Tìm kiếm việc XDDD không được để trống" parsecurrency3/>
+                    </div>
+                    
+                    <label class="col-md-2 control-label req" translate>12. Thu hồi dòng tiền(triệu)</label>
+                    <div class="col-md-2">
+                        <input class="text-right form-control width100" type="number"
+                               maxlength="14"  vt-currency fraction-size="3" id="revokeCashTarget"
+                               ng-model="vm.totalMonthPlanTemp.revokeCashTarget" min="0"
+                               required data-required-msg="Thu hồi dòng tiền không được để trống" parsecurrency3/>
+                    </div>
+
+                </div>
+            </div>     
+            
+            <div class="clearfix position-relative">
+                <div class="clearfix form-group">
+                    <!-- <label class="col-md-2 control-label req" translate>13. Tổng triển khai HTCT(trạm)</label>
+                    <div class="col-md-2">
+                        <input  class="text-right form-control width100" type="number"
+                                maxlength="14"
+                               ng-model="vm.totalMonthPlanTemp.tongTrienKhaiHtctTarget" ng-change="vm.calculateYearPlanDifferent('tongTrienKhaiHtctTarget')"
+                               required data-required-msg="Tổng triển khai HTCT không được để trống" />
+                    </div> -->
+                    
+                    <label class="col-md-2 control-label req" translate>13. XD xong móng HTCT(trạm)</label>
+                    <div class="col-md-2">
+                        <input class="text-right form-control width100" type="number"
+                               maxlength="14" id="buildCompleteHtct"
+                               ng-model="vm.totalMonthPlanTemp.buildCompleteHtct" min="0"
+                               required data-required-msg="XD xong móng HTCT không được để trống"  />
+                    </div>
+                    
+                    <label class="col-md-2 control-label req" translate>14. Xong ĐB trạm HTCT(trạm)</label>
+                    <div class="col-md-2">
+                        <input class="text-right form-control width100" type="number"
+                               maxlength="14" id="completeDbHtct"
+                               ng-model="vm.totalMonthPlanTemp.completeDbHtct" min="0"
+                               required data-required-msg="Xong ĐB trạm HTCT không được để trống" />
+                    </div>
+
+					<label class="col-md-2 control-label req" translate>15. Thuê mặt bằng HTCT(trạm)</label>
+                    <div class="col-md-2">
+                        <input class="text-right form-control width100" type="number"
+                               maxlength="14" id="rentHtct"
+                               ng-model="vm.totalMonthPlanTemp.rentHtct" min="0"
+                               required data-required-msg="Thuê mặt bằng HTCT không được để trống" />
+                    </div>
+                </div>
+            </div>             
+            
+            <!-- <div class="clearfix position-relative">
+                <div class="clearfix form-group">
+
+                    <label class="col-md-2 control-label " translate>Sản lượng theo KHN</label>
+
+                    <div class="col-md-2">
+                        <input  class=" text-right form-control width100" type="text"
+                               maxlength="14"vt-currency fraction-size="3"
+                               ng-model="vm.yearPlan.quantity" disabled
+                               />
+                    </div>
+                    <label class="col-md-2 control-label " translate>Quỹ lương theo KHN</label>
+
+                    <div class="col-md-2">
+                        <input class="text-right form-control width100" type="text"
+                               maxlength="14"vt-currency fraction-size="3"
+                               ng-model="vm.yearPlan.complete"
+                               disabled/>
+                    </div>
+                    <label class="col-md-2 control-label " translate>Doanh thu theo KHN</label>
+
+                    <div class="col-md-2">
+                        <input  class="text-right form-control width100" type="text"
+                               maxlength="14"vt-currency fraction-size="3"
+                               ng-model="vm.yearPlan.revenue"
+                               disabled/>
+
+                    </div>
+
+                </div>
+            </div> -->
+
+            <!--<div class="clearfix position-relative">-->
+                <!--<div class="clearfix form-group">-->
+                    <!--<div class="col-md-2  " ></div>-->
+                    <!--<div class="col-md-10  " style="border-bottom: 1px solid;"></div>-->
+                <!--</div>-->
+                <!---->
+            <!--</div>-->
+
+           
+
+            <!-- <div class="clearfix position-relative">
+                <div class="clearfix form-group">
+
+
+                    <label class="col-md-2 control-label " translate>Chênh lệch sản lượng</label>
+
+                    <div class="col-md-2">
+                        <div class="line-col2"></div>
+                        <input  class="text-right form-control width100" type="text" 
+                               maxlength="14" vt-currency fraction-size="3"
+                               ng-model="vm.different.quantity" 
+                               disabled/>
+                    </div>
+                    <label class="col-md-2 control-label " translate>Chênh lệch quỹ lương</label>
+
+                    <div class="col-md-2">
+                        <div class="line-col2"></div>
+                        <input  class="text-right form-control width100" type="text"
+                               maxlength="14" vt-currency fraction-size="3"
+                               ng-model="vm.different.complete"
+                               disabled/>
+                    </div>
+                    <label class="col-md-2 control-label " translate>Chênh lệch doanh thu</label>
+
+                    <div class="col-md-2">
+                        <div class="line-col2"></div>
+                        <input class="text-right form-control width100" type="text"
+                               maxlength="14" vt-currency fraction-size="3"
+                               ng-model="vm.different.revenue"
+                               disabled/>
+                    </div>
+
+                </div>
+            </div> -->
+            <!--<div class="row">-->
+                <!--<a href="" ng-click="vm.getYearPlanDetail()">Thông tin kế hoạch năm</a>-->
+            <!--</div>-->
+        </div>
+    </div>
+
+    <div class="clearfix form-actions margin-top">
+        <div class="row" style="margin-bottom: 5px">
+            <div class="col-md-12 text-center">
+                <button type="button" ng-click="vm.importExcelTab2()"
+                        class="btn btn-qlk padding-search-right excelQLK" translate ng-disabled="vm.diss">Import
+                </button>
+                <button type="button"
+                        ng-click="vm.addTargetTemp()"
+                        class="btn btn-qlk padding-search-right bosung" translate ng-disabled="vm.diss">Bổ
+                    sung
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix form-actions margin-top">
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <span>Đơn vị tính: Triệu (VNĐ)</span>
+                <i id="xuatExcel" class="tooltip1 action-button excelQLK" ng-click="vm.exportFileChiTieu()"  aria-expanded="false">
+                    <span class="tooltipArrow"></span>
+                    <span class="tooltiptext">Xuất Excel</span>
+                </i>
+            </div>
+
+
+        </div>
+
+    </div>
+    <div class="clearfix position-relative">
+        <div id="targetGrid" kendo-grid="vm.targetGrid"
+                k-options="vm.targetGridOptions"
+                k-on-change="vm.onGridChange(kendoEvent, { selected: selected }, data)"></div>
+</div>
+    <div class="clearfix form-actions margin-top">
+        <div class="row">
+            <label style="padding: inherit;" class="col-md-1 control-label text-right " translate>Ghi chú</label>
+
+            <div class="col-md-11">
+                <textarea class="form-control" name="content" maxlength="2000" ng-model="vm.totalMonthPlan.targetNote"
+                          rows="3">
+                </textarea>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix form-actions margin-top"
+         ng-show="vm.totalMonthPlan.totalMonthPlanId!=null&&vm.totalMonthPlan.totalMonthPlanId!=''">
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <button type="button" id="savepopupApp" class="btn btn-qlk padding-search-right saveQLK"
+                        ng-click="vm.saveTarget()" translate ng-disabled="vm.diss || vm.disableUpdate || vm.loadingUpdate">Ghi lại
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-body" ng-show="vm.value==7">
+    <div class=" bold" style="margin-top: -30px;margin-left: 12px;"><p class="">Danh sách phụ lục</p></div>
+    <div class="padding-width18 ">
+        <div class="file-border">
+            <div class="row file-inport">
+                <div class="wrapper-input">
+                    <div class="k-button k-upload-button">
+                        <input class="file-input k-valid" name="files" type="file"
+                               kendo-upload="" id="appendixFile" tabindex="10" onchange="angular.element(this).scope().onSelectAppendixFile()"
+                               data-role="upload" multiple="multiple" autocomplete="off">
+                        <span id="appendixFileName">Kéo thả các file vào đây hoặc click để chọn file</span>
+                    </div>
+                    <center><span style="color:gray; margin: auto;">Dung lượng &#60;&#61; 100MB, định dạng pdf</span></center>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix position-relative form-actions margin-top">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="appendix" kendo-grid="vm.appendixGrid"
+                         k-options="vm.appendixGridOptions"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="clearfix form-actions margin-top"
+         ng-show="vm.totalMonthPlan.totalMonthPlanId!=null&&vm.totalMonthPlan.totalMonthPlanId!=''">
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <button type="button" class="btn btn-qlk padding-search-right saveQLK" ng-click="vm.saveAppendixFile()"
+                        translate ng-disabled="vm.diss || vm.disableUpdate || vm.loadingUpdate">Ghi lại
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+
+$(document).ready(function(){
+    $("input#percent").change(function(){
+        var a=parseInt($("input#percent").val());
+        if( a>100){
+            $(this).val(100);
+
+        }else
+        if( a<0){
+            $(this).val(0);
+        }else if(a<=100 && a>=0) {
+            $(this).val();
+
+        }else{
+            $(this).val(0);
+
+        }
+    });
+
+});
+</script>

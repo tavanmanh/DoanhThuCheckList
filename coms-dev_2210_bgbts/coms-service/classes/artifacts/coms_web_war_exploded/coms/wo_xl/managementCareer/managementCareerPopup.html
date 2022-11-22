@@ -1,0 +1,93 @@
+<div id="managementCareerPopup">
+	<form class="form-horizontal row" role="form" name="managementCareer"
+		id="managementCareer" kendo-validator="validator"
+		k-options="validatorOptions">
+		<div class="form-body padding10" data-ng-controller="managementCareerController as vm">
+			<div class="portlet light bordered">
+				<div class="form-body padding10">
+					<div class="row caption" id="thongTinChungSpan">
+							<span class="caption-subject bold lowercase"
+								style="margin-left: 1px !important;" translate>Thông tin chung</span>
+					</div>
+					<div class="clearfix position-relative">
+	                        <div class="clearfix">
+	                            <div class="row">
+	                                <div class="col-md-6">
+	                                    <div>
+	                                        <label class="form-horizontal control-label req" translate>Mã ngành nghề </label><span style="color:red !important;">*</span>
+	                                    
+	                                    </div>
+										<input class="form-control" type="text" 
+												ng-blur="focusOut()" maxlength="1000" name="code"
+												id="code"
+												ng-model="caller.managementCareer.code" />
+	                                </div>
+	                                <div class="col-md-6">
+	                                    <div>
+	                                        <label class="form-horizontal control-label req" translate>Tên ngành nghề</label><span style="color:red !important;">*</span>
+	                                 </div>
+										<input class="form-control" type="text" 
+											ng-blur="focusOut()" maxlength="1000" name="name"
+											id="name" ng-model="caller.managementCareer.name"	/>
+	                                </div>
+	                            </div>
+	                            <div class="row">
+	                                <div class="col-md-6">
+	                                    <div>
+	                                        <label class="form-horizontal control-label req" translate>Danh sách WO áp dụng</label><span style="color:red !important;">*</span>
+	                                    </div>
+	                                    
+	                                    <select kendo-multi-select style="width: 100%" ng-model="caller.managementCareer.woIdList"
+                                            k-data-text-field="'woTypeName'" k-data-value-field="'woTypeId'"
+                                            k-data-source="caller.woTypes">
+                                    	</select>
+                                    
+	                                    <div class="One_icon">
+												<i class="fa fa-times" aria-hidden="true"
+											   ng-click="caller.cancelInput('woTypeName')"></i>
+										</div>
+	                                </div>
+	                                
+	                            </div>
+	                        </div>
+                    </div>
+				</div>
+			</div>
+			
+			<div class="clearfix form-actions margin-top" style="margin-top: 20px;" ng-show ="!caller.viewDetail">
+					<div class="row">
+						<div class="col-md-12 text-right">
+							<button type="button"
+								class="btn btn-qlk padding-search-right closeQLK" id="cancel"
+								ng-click="caller.cancel()" translate>Hủy bỏ</button>
+							<button type="button" id="savepopupCareer"
+								class="btn btn-qlk padding-search-right saveQLK"
+								ng-click="caller.save()" translate>Ghi lại</button>
+						</div>
+					</div>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			$("input").change(function() {
+				$(this).val($.trim($(this).val()));
+			});
+			document.onkeydown = keyDown;
+			function keyDown(e) {
+				switch (e.keyCode) {
+				case 27:
+					$("#cancel").click();
+					break;
+				case 13:
+					if (e.keyCode == 13 && !$('#cancel:focus').length
+							&& !$('#savepopupCareer').length) {
+
+						$("#savepopupCareer").click();
+
+						break;
+					}
+				}
+			}
+		</script>
+	</form>
+</div>

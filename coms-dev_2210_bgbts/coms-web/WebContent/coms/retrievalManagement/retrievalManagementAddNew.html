@@ -1,0 +1,468 @@
+<div xmlns="http://www.w3.org/1999/html">
+
+
+
+	<form class="form-horizontal row" role="form">
+
+		<div class="form-body">
+
+			<div class="portlet light bordered">
+
+				<div class="portlet-title background-title">
+
+					<div class="caption">
+
+						<span class="caption-subject bold lowercase" translate>Tạo mới kế hoạch chi tiết </span>
+
+					</div>
+
+					<div class="text-right margin-row-title">
+
+						<i ng-click="vm.cancelAdd()" class="fa fa-times" aria-hidden="true"></i>
+
+					</div>
+
+				</div>
+
+				<div id="flowBoxes" class="padding20">
+
+					<div class="Left right active" id="creImpReqBCone" ng-click="vm.prevStep()">
+
+						<p class="acceptQLK postion-icon" id="creImpReqBCIconOne"></p>
+
+						<p class="width-80 ">1. Thông tin chung</p>
+
+					</div>
+
+					<div class="Left right " id="creImpReqBCtwo" ng-click="vm.nextStep2()">
+
+						<p class="declineQLK postion-icon" id="creImpReqBCIconTwo"></p>
+
+						<p class="width-80">2. Hàng hóa thu hồi</p>
+
+					</div>
+
+				</div>
+
+				<hr>
+
+				<div class="form-horizontal  padding-height-20  row" role="form">
+
+					<div ng-show="vm.tab1">
+
+						<div class="form-body ">
+
+							<div class="portlet-title">
+
+								<div class="caption">
+
+									<span class="caption-subject bold lowercase" translate>Thông tin chung</span>
+
+								</div>
+
+							</div>
+
+
+
+							<div class="padding-width18">
+
+								<div class="border-gray">
+
+									<div>
+
+										<div class="clearfix margin10">
+
+											<div class="form-group col-md-6">
+
+												<label class="col-md-4 control-label req" translate>Mã thu hồi</label>
+
+												<div class="col-md-8">
+
+													<input class=" form-control width100" type="text" ng-model="vm.obj.code" data-required-msg="Tên công trình không được để trống"
+
+													/>
+
+												</div>
+
+											</div>
+
+											<div class="form-group col-md-6">
+
+												<div class=" " ng-show="vm.mycnk">
+
+													<label class="col-md-4 control-label " translate>Mã yêu cầu nhập kho</label>
+
+													<div class="col-md-8">
+
+														<label class="control-data">{{vm.obj.codeOrders}}</label>
+
+
+
+													</div>
+
+												</div>
+
+											</div>
+
+
+
+										</div>
+
+										<div class="clearfix margin10">
+
+											<div class="form-group col-md-12">
+
+												<div class="form-group col-md-12">
+
+													<label class="col-md-2 control-label req" translate>Nội dung thu hồi</label>
+
+
+
+													<div class="col-md-10">
+
+														<textarea class=" form-control width100" ng-model="vm.obj.content" placeholder="Căn cứ vào TT/CT/CV/QĐ số "></textarea>
+
+													</div>
+
+												</div>
+
+											</div>
+
+										</div>
+
+										<div class="clearfix margin10">
+
+											<div class="form-group col-md-6">
+
+												<label class="col-md-4 control-label req" translate>Công trình thu hồi</label>
+
+												<div class="col-md-8">
+
+													<div class="input-icon right ">
+
+														<i class="fa fa-search directive" ng-click="vm.openTaskPopup('search')"></i>
+
+													</div>
+
+<!--													<input class=" form-control width100" type="text" ng-model="vm.obj.constructionCode" ng-change="vm.changeConstruction()" kendo-auto-complete ng-blur="vm.changeDataDept('dept')"-->
+
+<!--													k-options="vm.constructionOptions" />-->
+													<input class=" form-control width100" type="text" ng-model="vm.obj.constructionCode" kendo-auto-complete ng-blur="vm.changeDataDept('dept')"
+
+														   k-options="vm.constructionOptions" />
+
+													<div class="One_icon">
+
+														<i class="fa fa-times" aria-hidden="true" ng-click="vm.clearInput('0')"></i>
+
+													</div>
+
+												</div>
+
+											</div>
+
+											<div class="form-group col-md-6">
+
+												<label class="col-md-4 control-label req" translate>Lý do thu hồi</label>
+
+
+
+												<div class="col-md-8">
+
+													<select kendo-drop-down-list style="width: 100%" ng-model="vm.obj.catReasonId" k-data-text-field="'name'" k-data-value-field="'id'"
+
+													k-option-label="'---Chọn---'" k-data-source="vm.catReason">
+
+													</select>
+
+												</div>
+
+											</div>
+
+										</div>
+
+
+
+
+
+										<div class="clearfix margin10">
+
+											<div class="form-group col-md-6">
+
+												<label class="col-md-4 control-label req" translate>Đơn vị yêu cầu</label>
+
+												<div class="col-md-8">
+
+													<div class="input-icon right ">
+
+														<i class="fa fa-search directive" ng-click="vm.openDepartmentTo1('reqAdd')"></i>
+
+													</div>
+
+													<input kendo-auto-complete k-options="vm.deprtOptions4" ng-blur="vm.changeDataDept('dept4')" class=" form-control width100"
+
+													type="text" name="dept4" ng-model="vm.obj.requestGroupName" data-required-msg="Đơn vị không để trống"
+
+													/>
+
+													<span id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+
+													<div class="One_icon">
+
+														<i class="fa fa-times" aria-hidden="true" ng-click="vm.clearInput('1')"></i>
+
+													</div>
+
+												</div>
+
+											</div>
+
+<!--											<div class="form-group col-md-6">-->
+
+<!--												<label class="col-md-4 control-label req" translate>Đơn vị nhận yêu cầu</label>-->
+
+<!--												<div class="col-md-8">-->
+
+<!--													<div class="  width100 control-label" type="text" ng-model="vm.obj.receiveGroupName">{{vm.obj.receiveGroupName}}-->
+
+<!--													</div>-->
+
+<!--												</div>-->
+
+<!--											</div>-->
+
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label req" translate>Chọn kho</label>
+												<div class="col-md-8">
+													<select kendo-drop-down-list style="width: 100%" ng-model="vm.obj.stockId" k-data-text-field="'stockName'" k-data-value-field="'stockId'"
+															k-option-label="'---Chọn---'" k-data-source="vm.listStock">
+
+													</select>
+												</div>
+											</div>
+
+										</div>
+
+										<div class="clearfix margin10">
+
+											<div class="form-group col-md-12">
+
+												<div class="form-group col-md-12">
+
+													<label class="col-md-2 control-label" translate>Ghi chú
+
+													</label>
+
+
+
+													<div class="col-md-10">
+
+														<textarea class=" form-control width100" ng-model="vm.obj.description"></textarea>
+
+													</div>
+
+												</div>
+
+											</div>
+
+										</div>
+
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+
+						</br>
+
+						<div class="portlet-title">
+
+							<div class="caption">
+
+								<span class="caption-subject bold lowercase" translate>Danh sách file đính kèm</span>
+
+							</div>
+
+						</div>
+
+						<div class="padding-width18">
+
+							<div class="border-gray">
+
+								<div class="row file-inport">
+
+									<div class="wrapper-input">
+
+										<center>
+
+											<span style="color: gray; margin: auto;">Dung lượng &#60;&#61; 100MB, định dạng xls, xlsx, docx, doc, pdf</span>
+
+										</center>
+
+										<div class="k-button k-upload-button">
+
+											<input class="file-input k-valid" name="fileDSF" type="file" kendo-upload="" id="fileDSF" tabindex="10" onchange="angular.element(this).scope().onSelectDSFFile()"
+
+											data-role="upload" multiple="multiple" autocomplete="off">
+
+
+
+											<span id="fileNameDSF">Kéo thả các file vào đây hoặc click để chọn file</span>
+
+										</div>
+
+									</div>
+
+									<div class="clearfix position-relative">
+
+										<div id="DSFgrid" kendo-grid="vm.DSFgrid" k-editable="false" k-options="vm.DSFgridOptions">
+
+										</div>
+
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+
+						<script type="text/javascript">
+
+							$("input").change(function () {
+
+								$(this).val($.trim($(this).val()));
+
+							});
+
+							document.onkeydown = keyDown;
+
+							function keyDown(e) {
+
+								switch (e.keyCode) {
+
+									case 27:
+
+										$("#cancel").click();
+
+										break;
+
+									case 13:
+
+										if (e.keyCode === 13 && !$('#cancel:focus').length
+
+											&& !$('#savepopupApp:focus').length) {
+
+											$("#savepopupApp").click();
+
+											break;
+
+										}
+
+								}
+
+							}
+
+						</script>
+
+
+
+					</div>
+
+
+
+
+
+					<div ng-show="vm.tab2">
+
+						<form class="padding-height-20 form-horizontal row" role="form">
+
+							<div class="form-body">
+
+								<div class="portlet-title">
+
+									<div class="caption">
+
+										<span class="caption-subject bold lowercase" translate>Danh sách vật tư</span>
+
+									</div>
+
+								</div>
+
+								<div class="padding-width18" ng-show="vm.showDSVTGrid">
+
+									<div id="DSVT" kendo-grid="vm.DSVTGrid" k-options="vm.DSVTGridOptions"></div>
+
+								</div>
+
+								<div class="padding-width18" ng-show="vm.showDetailDSVTTGrid">
+
+									<div id="DSVT" kendo-grid="vm.detailDSVTGrid" k-options="vm.detailDSVTTGridOptions"></div>
+
+								</div>
+
+								<div class="portlet-title">
+
+									<div class="caption">
+
+										<span class="caption-subject bold lowercase" translate>Danh sách thiết bị</span>
+
+									</div>
+
+								</div>
+
+								<div class="padding-width18">
+
+									<div id="DSTB" kendo-grid="vm.DSTBGrid" k-options="vm.DSTBGridOptions"></div>
+
+								</div>
+
+							</div>
+
+						</form>
+
+					</div>
+
+
+
+					<div class="bottonAdd">
+
+						<div class="clearfix">
+
+							<button ng-show="vm.tab2" type="button" class="btn btn-qlk padding-search-right backQLK btn pull-righ" ng-click="vm.prevStep()"
+
+							translate>Trước</button>
+
+							<button ng-show="vm.tab1" type="button" id="nextStep" class="btn btn-qlk   padding-search-right btn pull-right  nextQLK"
+
+							ng-click="vm.nextStep2()" translate>Tiếp</button>
+
+							<div ng-show="vm.edit1">
+
+								<button ng-show="vm.tab2" type="button" class="btn btn-qlk padding-search-right btn pull-right nextQLK" ng-disabled="vm.disabled"
+
+								ng-click="vm.updateDSFItem()" translate>Ghi lại
+
+								</button>
+
+							</div>
+
+							<button ng-show="vm.tab2" type="button" class="btn btn-qlk padding-search-right smargin_right10 closeQLK btn pull-right"
+
+							ng-click="vm.cancelAdd()" translate>Hủy bỏ</button>
+
+
+
+
+
+						</div>
+
+					</div>
+
+				</div>
+
+	</form>
+
+	</div>

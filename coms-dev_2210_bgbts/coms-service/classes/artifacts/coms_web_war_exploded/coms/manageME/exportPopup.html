@@ -1,0 +1,29 @@
+<div id="addNewDevicePopup">
+	<form name="form" class="form-horizontal row " role="form" style="">
+
+		<div class="row">
+			<span ng-repeat="device in caller.exportDeviceList">
+				<div class="col-md-4">
+					<span>
+						<div class="row button-header">
+							<div class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10">
+								 <input type="checkbox" id="device.value" value="device.value" 
+								 tabindex="1" 
+								 ng-click="caller.selectRadio(device.value)">
+								<label for="html">{{device.name}}</label><br>
+							</div>
+						</div>
+					</span>
+				</div>
+			</span>
+		</div>
+		<div class="modal-footer" align="right">
+			<button type="button" id="excel"
+				class="btn btn-qlk padding-search-right"
+				ng-click="caller.exportExcel()" translate>Xuất excel</button>
+			<button type="button" id="cancel"
+				class="btn btn-qlk padding-search-right margin_right10 closeQLK btn pull-right"
+				ng-click="caller.cancelExport()" translate>Thoát</button>
+		</div>
+	</form>
+</div>

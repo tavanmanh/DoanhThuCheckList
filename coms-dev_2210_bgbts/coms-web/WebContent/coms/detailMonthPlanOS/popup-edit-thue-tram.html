@@ -1,0 +1,145 @@
+
+<form class="form-horizontal row" role="form">
+	<div class="form-body" style="padding-bottom: 100px;">
+		<div class="portlet light">
+			<div class="portlet-title background-title">
+				<div class="caption">
+					<span class="caption-subject bold lowercase" translate>Thông
+						tin chung</span>
+				</div>
+				<div class="text-right margin-row-title">
+					<i data-toggle="collapse" data-target="#part1"
+						class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+				</div>
+			</div>
+			<div id="part1" class="collapse in from-search">
+				<div class="padding-width18">
+					<div class="border-gray">
+						<div class="clearfix position-relative">
+							<div class="clearfix">
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label" translate>Mã tỉnh</label>
+									<div class="col-md-8">
+										<input id="catProvinceCode" class=" form-control width100"
+											type="text" ng-model="caller.thueTramItem.catProvinceCode"
+											disabled name="catProvinceCode" />
+									</div>
+								</div>
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label req" translate>Mã trạm</label>
+									<div class="col-md-8">
+										<input id="stationCode" class=" form-control width100"
+											type="text" ng-model="caller.thueTramItem.stationCode"
+											name="stationCode" disabled />
+									</div>
+								</div>
+							</div>
+
+							<!-- <div class="clearfix">
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label" translate>Thời gian hoàn thành</label>
+									<div class="col-md-8">
+										<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+											class=" form-control width100" min-year="1000"
+											id="completeDate" name="completeDate"
+											ng-model="caller.thueTramItem.completeDate" />
+									</div>
+								</div>
+								
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label req" translate>Người thực hiện</label>
+									<div class="col-md-8 margin_top">
+                                        <auto-search model-label="" caller="caller" req="req"
+                                                     template-url="views/popup/gridViewCreateUser.html"
+                                                     header-template="caller.userHeaderTemplate"
+                                                     template-auto="caller.userTemplate"
+                                                     page="1" page-size="10" popup-id="ar_deposit_browser_adOrgId"
+                                                     popup-type="gridplusUser"
+                                                     combo-id="performerId"
+                                                     combo-source-link="sysUserCOMSRsService/getForAutoComplete"
+                                                     combo-name="fullName" combo-value="sysUserId"
+                                                     combo-code="employeeCode"
+                                                     combo-search="caller.commonSearch" combo-grid="caller.gridCreator"
+                                                     model-id="caller.thueTramItem.performerId"
+                                                     model-name="caller.thueTramItem.performerName"
+                                                     ng-model="caller.thueTramItem.performerName"></auto-search>
+                                        <span style=" color: red;"
+                                              ng-if="form.performerId.$invalid && !form.performerId.$pristine">Người thi công không được để trống</span>
+                                    </div>
+								</div>
+								
+							</div>
+							 -->
+							<div class="clearfix">
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label req" translate>Thời gian bắt đầu</label>
+									<div class="col-md-8">
+										<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+											class=" form-control width100" min-year="1000"
+											id="startDate" name="startDate"
+											ng-model="caller.thueTramItem.startDate" />
+									</div>
+								</div>
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label req" translate>Thời gian kết thúc</label>
+									<div class="col-md-8">
+										<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+											class=" form-control width100" min-year="1000"
+											id="endDate" name="endDate"
+											ng-model="caller.thueTramItem.endDate" />
+									</div>
+								</div>
+							</div>
+
+							<div class="clearfix">
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label req" translate>Người
+										thực hiện</label>
+									<div class="col-md-8 margin_top">
+										<auto-search model-label="" caller="caller" req="req"
+											template-url="views/popup/gridViewCreateUser.html"
+											header-template="caller.userHeaderTemplate"
+											template-auto="caller.userTemplate" page="1" page-size="10"
+											popup-id="ar_deposit_browser_adOrgId"
+											popup-type="gridplusUser" combo-id="performerId"
+											combo-source-link="sysUserCOMSRsService/getForAutoComplete"
+											combo-name="fullName" combo-value="sysUserId"
+											combo-code="employeeCode" combo-search="caller.commonSearch"
+											combo-grid="caller.gridCreator"
+											model-id="caller.thueTramItem.performerId"
+											model-name="caller.thueTramItem.performerName"
+											ng-model="caller.thueTramItem.performerName"></auto-search>
+										<span style="color: red;"
+											ng-if="form.performerId.$invalid && !form.performerId.$pristine">Người
+											thi công không được để trống</span>
+									</div>
+								</div>
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label" translate>Ghi chú</label>
+									<div class="col-md-8">
+										<textarea id="description" class=" form-control width100"
+											type="text" ng-model="caller.thueTramItem.description"
+											rows="3" name="description" />
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row modal-footer">
+		<div class="col-md-12 text-right">
+			<button type="button"
+				class="btn btn-qlk padding-search-right closeQLK" id="cancel"
+				ng-click="caller.cancel()" translate>Hủy bỏ</button>
+			<button type="button" id="savepopupApp"
+				class="btn btn-qlk padding-search-right saveQLK"
+				ng-disabled="caller.disabled||caller.invalidDate"
+				ng-click="caller.saveThueTramPopup()" translate>Ghi lại</button>
+		</div>
+
+	</div>
+</form>

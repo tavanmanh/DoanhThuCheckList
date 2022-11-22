@@ -1,0 +1,9 @@
+<div data-ng-controller="yearPlanOSController as vm">
+    <div ng-show="!vm.showDetail" style="clear: both;">
+        <div data-ng-include="'coms/yearPlanOS/yearPlanOSList.html'"></div>
+    </div>
+    <div ng-show="vm.showDetail" style="clear: both;">
+        <div data-ng-include="'coms/yearPlanOS/yearPlanOSForm.html'"></div>
+    </div>
+    
+</div>

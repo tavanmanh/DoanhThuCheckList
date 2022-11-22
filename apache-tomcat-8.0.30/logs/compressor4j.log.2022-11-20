@@ -1,0 +1,5 @@
+2022-11-20 10:08:19,103 INFO -com.viettel.erp.utils.ObjectMapperProvider.<init>(ObjectMapperProvider.java:14):Creating object mapper class
+2022-11-20 10:16:46,624 INFO -com.viettel.erp.utils.ObjectMapperProvider.<init>(ObjectMapperProvider.java:14):Creating object mapper class
+2022-11-20 10:19:27,997 INFO -com.viettel.erp.utils.ObjectMapperProvider.<init>(ObjectMapperProvider.java:14):Creating object mapper class
+2022-11-20 15:22:00,683 INFO -com.viettel.erp.utils.ObjectMapperProvider.<init>(ObjectMapperProvider.java:14):Creating object mapper class
+2022-11-20 21:23:49,368 INFO -com.viettel.erp.utils.ObjectMapperProvider.<init>(ObjectMapperProvider.java:14):Creating object mapper class

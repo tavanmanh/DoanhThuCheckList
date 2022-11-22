@@ -1,0 +1,594 @@
+<style>
+html {
+	overflow-y: scroll;
+}
+</style>
+<form class="form-horizontal row" role="form" id="formConfirm">
+	<div class="form-body" style="margin-bottom: 10px;">
+		<div class="form-body">
+			<div class="portlet light">
+				<div class="form-group">
+					<div class="border-gray">
+						<div class="clearfix position-relative">
+							<div class="col-md-12 clearfix">
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label req" translate>Họ
+										và tên</label>
+									<div class="col-md-8">
+										<input type="text" ng-model="caller.addForm.fullName"
+											id="fullName" class=" form-control width100"
+											ng-disabled="!caller.isCreateNew && caller.status!=2" />
+									</div>
+								</div>
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label req" translate>Tỉnh/thành
+										phố</label>
+									<div class="col-md-8">
+										<input kendo-auto-complete
+											k-options="caller.provinceCodeOptions"
+											ng-disabled="!caller.isCreateNew && caller.status!=2"
+											class=" form-control width100" type="text" id="provinceName"
+											ng-model="caller.addForm.provinceNameCtvXddd" name="provinceName" />
+									</div>
+								</div>
+							</div>
+							<div class="col-md-12 clearfix">
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label req" translate>Quận/huyện</label>
+									<div class="col-md-8">
+										<input kendo-auto-complete
+											k-options="caller.districtNameOptions"
+											ng-disabled="(!caller.isCreateNew && caller.status!=2) || !caller.addForm.provinceId"
+											class=" form-control width100" type="text" id="districtName"
+											ng-disabled="!caller.isCreateNew"
+											ng-model="caller.addForm.districtName" name="districtName" />
+									</div>
+								</div>
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label req" translate>Phường/xã</label>
+									<div class="col-md-8">
+										<input kendo-auto-complete
+											k-options="caller.communeNameOptions"
+											ng-disabled="(!caller.isCreateNew && caller.status!=2) || !caller.addForm.districtId"
+											class=" form-control width100" type="text" id="communeName"
+											ng-disabled="!caller.isCreateNew"
+											ng-model="caller.addForm.communeName" name="communeName" />
+									</div>
+								</div>
+							</div>
+							<div class="col-md-12 clearfix">
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label req" translate>Địa
+										chỉ</label>
+									<div class="col-md-8">
+										<input type="text" ng-model="caller.addForm.address"
+											id="address" class=" form-control width100"
+											ng-disabled="!caller.isCreateNew && caller.status!=2" />
+									</div>
+								</div>
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label" translate>Email</label>
+									<div class="col-md-8">
+										<input type="text" ng-model="caller.addForm.email" id="email"
+											class=" form-control width100"
+											ng-disabled="!caller.isCreateNew && caller.status!=2" />
+									</div>
+								</div>
+
+							</div>
+
+							<div class="col-md-12 clearfix">
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label req" translate>Mật
+										khẩu tài khoản</label>
+									<div class="col-md-8">
+										<input type="password" ng-model="caller.addForm.password"
+											id="password" class=" form-control width100"
+											ng-disabled="!caller.isCreateNew && caller.status!=2" />
+									</div>
+								</div>
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label req" translate>Số
+										điện thoại</label>
+									<div class="col-md-8">
+										<input type="text" ng-model="caller.addForm.phoneNumber"
+											id="phoneNumber" class=" form-control width100"
+											ng-disabled="!caller.isCreateNew && caller.status!=2" />
+									</div>
+								</div>
+
+							</div>
+
+							<div class="col-md-12 clearfix">
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label req" translate>Ngày
+										sinh</label>
+									<div class="col-md-8">
+										<input kendo-date-picker k-format="'dd/MM/yyyy'"
+											ng-model="caller.addForm.userBirthday" style="width: 100%;"
+											id="userBirthday" class=" form-control width100"
+											min-year="1000" date-time
+											ng-disabled="!caller.isCreateNew && caller.status!=2" />
+									</div>
+								</div>
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label req" translate>Số
+										CMT/ĐKKD</label>
+									<div class="col-md-8">
+										<input rows="4" class=" form-control width100" type="text"
+											id="taxCode" ng-model="caller.addForm.taxCode"
+											ng-disabled="!caller.isCreateNew"
+											class=" form-control width100" />
+									</div>
+								</div>
+
+							</div>
+
+							<div class="col-md-12 clearfix">
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label req" translate>Số
+										điện thoại TK ViettelPay</label>
+									<div class="col-md-8">
+										<input rows="4" class=" form-control width100" type="text"
+											ng-model="caller.addForm.accountNumber" id="accountNumber"
+											class=" form-control width100"
+											ng-disabled="!caller.isCreateNew && caller.status!=2" />
+									</div>
+								</div>
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label" translate>Mã số
+										thuế</label>
+									<div class="col-md-8">
+										<input type="text" ng-model="caller.addForm.taxCodeUser"
+											id="taxCodeUser" class=" form-control width100"
+											ng-disabled="!caller.isCreateNew && caller.status!=2" />
+									</div>
+								</div>
+
+							</div>
+
+							<div class="col-md-12 clearfix">
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label req" translate>Số
+										hợp đồng</label>
+									<div class="col-md-8">
+										<input type="text" ng-model="caller.addForm.contractCode"
+											id="contractCode" class=" form-control width100"
+											ng-disabled="!caller.isCreateNew && caller.status!=2" />
+									</div>
+								</div>
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label req" translate>Tên
+										người giới thiệu</label>
+									<div class="col-md-8">
+										<input rows="4" class=" form-control width100" type="text"
+											ng-model="caller.addForm.parentName" id="parentName"
+											class=" form-control width100"
+											ng-disabled="!caller.isCreateNew && caller.status!=2" />
+									</div>
+								</div>
+
+							</div>
+
+							<div class="col-md-12 clearfix">
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label req" translate>Số
+										điện thoại người giới thiệu</label>
+									<div class="col-md-8">
+										<input type="text" ng-model="caller.addForm.parentPhone"
+											id="parentPhone" class=" form-control width100"
+											ng-disabled="!caller.isCreateNew && caller.status!=2" />
+									</div>
+								</div>
+								<div class="form-group col-md-6" ng-show="!caller.isCreateNew">
+									<label class="col-md-4 control-label" translate>Mã đơn
+										vị</label>
+									<div class="col-md-8">
+										<input type="text" ng-model="caller.addForm.sysGroupLv2Code"
+											class=" form-control width100" readonly />
+									</div>
+								</div>
+
+							</div>
+							<div class="col-md-12 clearfix">
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label req" translate>Đơn
+										vị tỉnh quản lý</label>
+									<div class="col-md-8">
+										<div class="input-icon right ">
+											<i class="fa fa-search directive"
+												ng-hide="!caller.isCreateNew && caller.status!=2"
+												ng-click="caller.openPopupSysGroup('province')"></i>
+										</div>
+										<input kendo-auto-complete
+											k-options="caller.provinceXdddOptions" id="provinceNameXddd"
+											name="provinceNameXddd" class="form-control width100"
+											ng-disabled="!caller.isCreateNew && caller.status!=2"
+											data-ng-model="caller.addForm.provinceNameXddd" />
+									</div>
+								</div>
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label req" translate>Cụm
+										đội huyện quản lý</label>
+									<div class="col-md-8">
+										<div class="input-icon right ">
+											<i class="fa fa-search directive"
+												ng-hide="!caller.isCreateNew && caller.status!=2"
+												ng-click="caller.openPopupSysGroup('sysGroup')"></i>
+										</div>
+										<input kendo-auto-complete k-options="caller.sysGroupOptions"
+											id="sysGroupName" name="sysGroupName"
+											class="form-control width100"
+											ng-disabled="!caller.isCreateNew && caller.status!=2"
+											data-ng-model="caller.addForm.sysGroupName" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Ảnh CMT -->
+				<div class="portlet light">
+					<div class="portlet-title background-title" style="">
+						<div class="caption">
+							<span class="caption-subject bold lowercase" translate>Ảnh
+								CMT</span>
+						</div>
+						<div class="text-right margin-row-title">
+							<i data-toggle="collapse" data-target="#partCmt"
+								class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+						</div>
+					</div>
+
+					<div id="uploadCmt"
+						class="portlet light bordered collapse in from-search">
+						<div>
+							<div id="uploadCmt" class="portlet light collapse in from-search">
+								<div>
+									<div>
+										<center>Kéo thả các ảnh vào đây hoặc click để chọn
+											ảnh</center>
+									</div>
+									<div class="clearfix">
+										<div class="form-group col-md-12">
+											<div class="col-md-12 k-content">
+												<input name="fileCmt" id="fileCmt"
+													k-select="caller.submitAttachFileCmt" type="file"
+													list-file-type="jpg,png,jpeg" />
+
+											</div>
+										</div>
+										<div class="clearfix"></div>
+										<center>
+											<span style="color: gray">Dung lượng &#60;&#61; 100MB,
+												định dạng jpg,png,jpeg</span>
+										</center>
+										<script>
+											$(document)
+													.ready(
+															function() {
+																var caller = angular
+																		.element(
+																				document
+																						.getElementById('formConfirm'))
+																		.scope().caller;
+																var urlUpload = window.location.protocol
+																		+ '//'
+																		+ window.location.hostname
+																		+ ':'
+																		+ window.location.port;
+
+																function onSuccess(
+																		data) {
+																	caller
+																			.callback(data);
+																}
+																$("#fileCmt")
+																		.kendoUpload(
+																				{
+																					async : {
+																						removeUrl : urlUpload
+																								+ API_URL
+																								+ "fileservice/removeFileUpload",
+																					},
+																					select : caller.submitAttachFileCmt,
+																					validation : {
+																						allowedExtensions : [
+																								".jpg",
+																								".png",
+																								".jpeg" ]
+																					},
+																					success : onSuccess,
+																					localization : {
+																						uploadSelectedFiles : "Chọn tệp"
+																					}
+
+																				});
+																;
+															});
+										</script>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="partCmt" class="collapse in from-search"
+						ng-if="caller.addForm.listImageCmt.length > 0">
+						<!-- <div class="padding-width18">
+						<div class="border-gray">
+							<div class="clearfix position-relative">
+								<div>
+									<div style="width: 500px; height: 500px; margin: auto;">
+										<img class="image-cus"
+											ng-src="data:image/jpg;base64,{{caller.imageSelected.base64String}}">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div> -->
+						<div class="padding-width18">
+							<div class="border-gray">
+								<div class="clearfix position-relative">
+									<div ng-repeat="image in caller.addForm.listImageCmt">
+										<div class="wrap-image">
+											<img class="image-cus"
+												ng-src="data:image/jpg;base64,{{image.base64String}}">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Ảnh hộ khẩu -->
+				<div class="portlet light">
+					<div class="portlet-title background-title" style="">
+						<div class="caption">
+							<span class="caption-subject bold lowercase" translate>Ảnh
+								hộ khẩu</span>
+						</div>
+						<div class="text-right margin-row-title">
+							<i data-toggle="collapse" data-target="#partHk"
+								class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+						</div>
+					</div>
+					<div id="uploadHk"
+						class="portlet light bordered collapse in from-search">
+						<div>
+							<div id="uploadHk" class="portlet light collapse in from-search">
+								<div>
+									<div>
+										<center>Kéo thả các ảnh vào đây hoặc click để chọn
+											ảnh</center>
+									</div>
+									<div class="clearfix">
+										<div class="form-group col-md-12">
+											<div class="col-md-12 k-content">
+												<input name="fileHk" id="fileHk"
+													k-select="caller.submitAttachFileHk" type="file"
+													list-file-type="jpg,png,jpeg" />
+
+											</div>
+										</div>
+										<div class="clearfix"></div>
+										<center>
+											<span style="color: gray">Dung lượng &#60;&#61; 100MB,
+												định dạng jpg,png,jpeg</span>
+										</center>
+										<script>
+											$(document)
+													.ready(
+															function() {
+																var caller = angular
+																		.element(
+																				document
+																						.getElementById('formConfirm'))
+																		.scope().caller;
+																var urlUpload = window.location.protocol
+																		+ '//'
+																		+ window.location.hostname
+																		+ ':'
+																		+ window.location.port;
+
+																function onSuccess(
+																		data) {
+																	caller
+																			.callback(data);
+																}
+																//	setTimeout(function(){ 
+																$("#fileHk")
+																		.kendoUpload(
+																				{
+																					async : {
+																						/* saveUrl : urlUpload
+																								+ API_URL
+																								+ "fileservice/uploadATTT", */
+																						removeUrl : urlUpload
+																								+ API_URL
+																								+ "fileservice/removeFileUpload",
+																					/* autoUpload : true */
+
+																					},
+																					select : caller.submitAttachFileHk,
+																					validation : {
+																						allowedExtensions : [
+																								".jpg",
+																								".png",
+																								".jpeg" ]
+																					},
+																					success : onSuccess,
+																					localization : {
+																						uploadSelectedFiles : "Chọn tệp"
+																					}
+
+																				});
+																;
+																//}, 1000);
+															});
+										</script>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="partHk" class="collapse in from-search"
+						ng-if="caller.addForm.listImageHk.length > 0">
+						<!-- <div class="padding-width18">
+						<div class="border-gray">
+							<div class="clearfix position-relative">
+								<div>
+									<div style="width: 500px; height: 500px; margin: auto;">
+										<img class="image-cus"
+											ng-src="data:image/jpg;base64,{{caller.imageSelected.base64String}}">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div> -->
+						<div class="padding-width18">
+							<div class="border-gray">
+								<div class="clearfix position-relative">
+									<div ng-repeat="image in caller.addForm.listImageHk">
+										<div class="wrap-image">
+											<img class="image-cus"
+												ng-src="data:image/jpg;base64,{{image.base64String}}">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<!-- Ảnh hợp đồng -->
+				<div class="portlet light">
+					<div class="portlet-title background-title" style="">
+						<div class="caption">
+							<span class="caption-subject bold lowercase" translate>Ảnh
+								hợp đồng</span>
+						</div>
+						<div class="text-right margin-row-title">
+							<i data-toggle="collapse" data-target="#partHd"
+								class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+						</div>
+					</div>
+					<div id="uploadHd"
+						class="portlet light bordered collapse in from-search">
+						<div>
+							<div id="uploadHd" class="portlet light collapse in from-search">
+								<div>
+									<div>
+										<center>Kéo thả các ảnh vào đây hoặc click để chọn
+											ảnh</center>
+									</div>
+									<div class="clearfix">
+										<div class="form-group col-md-12">
+											<div class="col-md-12 k-content">
+												<input name="fileHd" id="fileHd"
+													k-select="caller.submitAttachFileDh" type="file"
+													list-file-type="jpg,png,jpeg" />
+
+											</div>
+										</div>
+										<div class="clearfix"></div>
+										<center>
+											<span style="color: gray">Dung lượng &#60;&#61; 100MB,
+												định dạng jpg,png,jpeg</span>
+										</center>
+										<script>
+											$(document)
+													.ready(
+															function() {
+																var caller = angular
+																		.element(
+																				document
+																						.getElementById('formConfirm'))
+																		.scope().caller;
+																var urlUpload = window.location.protocol
+																		+ '//'
+																		+ window.location.hostname
+																		+ ':'
+																		+ window.location.port;
+
+																function onSuccess(
+																		data) {
+																	caller
+																			.callback(data);
+																}
+																$("#fileHd")
+																		.kendoUpload(
+																				{
+																					async : {
+																						removeUrl : urlUpload
+																								+ API_URL
+																								+ "fileservice/removeFileUpload",
+																					},
+																					select : caller.submitAttachFileHd,
+																					validation : {
+																						allowedExtensions : [
+																								".jpg",
+																								".png",
+																								".jpeg" ]
+																					},
+																					success : onSuccess,
+																					localization : {
+																						uploadSelectedFiles : "Chọn tệp"
+																					}
+
+																				});
+																;
+																//}, 1000);
+															});
+										</script>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div id="partHd" class="collapse in from-search"
+						ng-if="caller.addForm.listImageHd.length > 0">
+						<!-- <div class="padding-width18">
+						<div class="border-gray">
+							<div class="clearfix position-relative">
+								<div>
+									<div style="width: 500px; height: 500px; margin: auto;">
+										<img class="image-cus"
+											ng-src="data:image/jpg;base64,{{caller.imageSelected.base64String}}">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div> -->
+						<div class="padding-width18">
+							<div class="border-gray">
+								<div class="clearfix position-relative">
+									<div ng-repeat="image in caller.addForm.listImageHd">
+										<div class="wrap-image">
+											<img class="image-cus"
+												ng-src="data:image/jpg;base64,{{image.base64String}}">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- ------- -->
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer" align="right">
+		<button type="button" id="saveData"
+			ng-hide="!caller.isCreateNew && caller.status!=2"
+			class="btn btn-qlk padding-search-right btn pull-right saveQLK"
+			ng-click="caller.save()" translate>Ghi lại</button>
+		<button type="button" id="cancel"
+			class="btn btn-qlk padding-search-right margin_right10 closeQLK btn pull-right"
+			ng-click="caller.cancel()" translate>Hủy bỏ</button>
+	</div>
+	</div>
+</form>

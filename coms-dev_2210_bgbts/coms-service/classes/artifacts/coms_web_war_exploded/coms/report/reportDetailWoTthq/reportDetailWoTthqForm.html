@@ -1,0 +1,193 @@
+<style>
+.amcharts-chart-div a {
+	display: none !important;
+}
+
+.form-group {
+	margin-top: 1em;
+	border-radius: 5px;
+}
+
+.display-block {
+	display: block;
+	width: 100%;
+}
+
+.from-search {
+	margin-top: 0px !important;
+}
+
+.k-pager-wrap .k-link {
+	margin-top: 4px;
+}
+
+.icon-table {
+	font-size: 20px;
+	padding: 5px;
+	color: #E0D014;
+	text-align: center;
+}
+
+i:hover {
+	color: #011995;
+}
+
+.no-padding {
+	padding: 0;
+}
+
+.position-relative {
+	position: relative;
+}
+</style>
+<div data-ng-controller="reportDetailWoTthqController as vm">
+	<p class="text-brecum">{{vm.String}}</p>
+	<form class="form-horizontal row" role="form">
+
+		<div class="form-body">
+			<div class="portlet light bordered">
+				<div class="portlet-title background-title">
+					<div class="caption">
+						<span class="caption-subject bold lowercase" translate>Thông
+							tin tìm kiếm </span>
+
+					</div>
+					<div class="text-right margin-row-title">
+						<i data-toggle="collapse" data-target="#workItem1"
+							class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+					</div>
+				</div>
+				<div id="workItem1" class="collapse in from-search">
+					<div class="clearfix position-relative">
+
+						<div class="collapse in from-search">
+							<div class="clearfix position-relative">
+								<div class="clearfix">
+									<div class="row">
+										<div class="col-md-6">
+											<label class="display-block control-label"
+												style="text-align: left !important;" translate>Nội
+												dung tìm kiếm</label> <input id="keySearch"
+												class="form-control display-block" type="text"
+												ng-model="vm.searchForm.keySearch"
+												placeholder="Mã trạm/mã WO/địa chỉ" />
+										</div>
+
+										<div class="col-md-6">
+											<label class="display-block form-horizontal control-label"
+												style="text-align: left !important;" translate>Tỉnh</label>
+											<div class="row position-relative">
+												<div class="col-md-12 no-padding">
+													<div class="input-icon right ">
+														<i class="fa fa-search directive"
+															ng-click="vm.openCatProvincePopup()"></i>
+													</div>
+													<input kendo-auto-complete k-options="vm.provinceOptions"
+														class="form-control display-block" type="text"
+														id="provincename" ng-model="vm.searchForm.provinceName"
+														name="provincename" />
+												</div>
+											</div>
+										</div>
+
+									</div>
+
+									<div class="row">
+										<div class="col-md-6">
+											<div class="row">
+												<div class="col-md-12 no-padding">
+													<label class="display-block control-label"
+														style="text-align: left !important;" translate>Ngày
+														hoàn thành</label>
+												</div>
+											</div>
+											<div class="row position-relative">
+												<div class="col-md-11 no-padding">
+													<div class="row">
+														<div class="col-md-1 no-padding">
+															<label class="control-label" translate>Từ</label>
+														</div>
+														<div class="col-md-5 no-padding position-relative">
+															<input kendo-date-picker k-format="'dd/MM/yyyy'"
+																ng-model="vm.searchForm.fromDate" style="width: 100%;"
+																min-year="1000" date-time />
+														</div>
+														<div class="col-md-1 no-padding"
+															style="text-align: center;">
+															<label class="control-label" translate>đến</label>
+														</div>
+														<div class="col-md-5 no-padding position-relative">
+															<input kendo-date-picker k-format="'dd/MM/yyyy'"
+																ng-model="vm.searchForm.toDate" style="width: 100%;"
+																min-year="1000" date-time />
+														</div>
+													</div>
+
+												</div>
+												<div class="One_icon col-md-1">
+													<i class="fa fa-times" aria-hidden="true"
+														ng-click="vm.cancelInput('date')"></i>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-md-6">
+											<label class="display-block form-horizontal control-label"
+												style="text-align: left !important;" translate>Kết
+												luận</label>
+											<div class="row position-relative">
+												<select class="form-control display-block"
+													ng-model="vm.searchForm.status" kendo-drop-down-list
+													k-data-text-field="'name'" k-data-value-field="'code'"
+													k-data-source="vm.lstStatus">
+													<option></option>
+												</select>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- <div id="borderCount"></div> -->
+						<div class="clearfix form-actions margin-top">
+							<div class="row">
+								<div class="col-md-12 text-center">
+									<button type="button" ng-click="vm.doSearch()"
+										class="btn btn-qlk padding-search-right searchQLK" translate>
+										Báo cáo</button>
+									<button type="button" ng-click="vm.excelReport()"
+										style="width: 120px;"
+										class="btn btn-qlk padding-search-right excelQLK" translate>
+										Xuất excel</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<div class="portlet light bordered">
+		<div class="portlet-title background-title">
+			<div class="caption">
+				<span class="caption-subject bold lowercase" translate>Kết
+					quả tìm kiếm: </span>&nbsp;<label class="control-label bold lowercase"
+					id="appCountTthq">{{vm.countTthq}}</label><label
+					class="control-label bold lowercase">&nbsp;bản ghi</label>
+
+			</div>
+			<div class="text-right margin-row-title">
+				<i data-toggle="collapse" data-target="#workItem2"
+					class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+			</div>
+		</div>
+		<div id="workItem2" class="collapse in from-search">
+			<div class="clearfix position-relative">
+				<div id="detailsWoTthqGridId" kendo-grid="vm.detailsWoTthqGrid"
+					k-options="vm.detailsWoTthqGridOptions" k-editable="false"></div>
+			</div>
+		</div>
+	</div>
+</div>

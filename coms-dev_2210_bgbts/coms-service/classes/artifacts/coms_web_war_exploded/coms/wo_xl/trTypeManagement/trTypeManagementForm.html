@@ -1,0 +1,114 @@
+<style>
+
+.amcharts-chart-div a {
+	display: none !important;
+}
+.form-group{
+	margin-top: 1em;
+	border-radius: 5px;
+}
+
+.from-search{
+	margin-top: 0px !important;
+}
+.k-pager-wrap .k-link{
+	margin-top: 4px;
+}
+
+.icon-table{
+	font-size: 20px;
+	padding: 5px;
+	color: #E0D014;
+	text-align:center;
+}
+
+i:hover{
+	color: #011995;
+}
+</style>
+<div data-ng-controller="trTypeManagementController as vm">
+	<p class="text-brecum">{{vm.String}}</p>
+	<form class="form-horizontal row" role="form">
+
+		<div class="form-body">
+			<div class="portlet light bordered">
+				<div class="portlet-title background-title">
+					<div class="caption">
+						<span class="caption-subject bold lowercase" translate>Thông
+							tin tìm kiếm </span>
+
+					</div>
+				</div>
+				<div id="workItem1" class="collapse in from-search">
+					<div class="clearfix position-relative">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 form-horizontal control-label " translate>Thông tin TR</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										ng-model="vm.searchForm.trTypeName" required />
+									<script>
+								</script>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 form-horizontal control-label " translate>Mã loại TR</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										ng-model="vm.searchForm.trTypeCode"  required />
+									<script>
+								</script>
+								</div>
+							</div>
+						</div>
+						<div id="borderCount"></div>
+						<div class="clearfix form-actions margin-top">
+							<div class="row">
+								<div class="col-md-12 text-center">
+									<button type="button" id="doSearchQuantity"
+										ng-click="vm.searchTrType()"
+										class="btn btn-qlk padding-search-right searchQLK" translate>Tìm kiếm</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<div class="portlet light bordered">
+		<div class="portlet-title background-title">
+			<div class="caption">
+				<span class="caption-subject bold lowercase" translate>Kết quả tìm kiếm</span>
+			</div>
+		</div>
+		<div class="row mt5">
+			<div class="col-md-12">
+				<div class="portlet-body pull-left" >
+					<button type="button" title="Thêm mới"  style="margin-left:0.6em;" ng-click="vm.createTrType()"
+							class="btn btn-default padding-button padding-search-right box-shadow">
+						<i class="icon-plus"></i>Thêm loại TR
+					</button>
+					<input class="file-input" #file name="files" type="file" id="files" tabindex="10" style="display: none"  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"/>
+					<button type="button" id="importExcel" class="btn btn-qlk padding-search-right excelQLK"
+							ng-click="vm.importExcelFile()" translate>Import</button>
+					<button type="button" id="getTemplate" class="btn btn-qlk padding-search-right excelQLK"
+							ng-click="vm.getTemplateFile()" translate>Tải file mẫu</button>
+
+				</div>
+				<div class="btn-group pull-right margin_top_button ">
+					<i id="xuatExcel" class="tooltip1 action-button excelQLK" ng-disabled="vm.disableExportExcel" ng-click="vm.exportTrTypeList()" aria-expanded="false">
+						<span class="tooltipArrow"></span><span class="tooltiptext">Xuất Excel</span></i>
+				</div>
+			</div>
+		</div>
+
+
+		<div id="grid" class="collapse in from-search" >
+			<div class="clearfix position-relative">
+				<div kendo-grid="vm.trTypeListTable" k-options="vm.trTypeListTableOptions"></div>
+			</div>
+		</div>
+	</div>
+</div>

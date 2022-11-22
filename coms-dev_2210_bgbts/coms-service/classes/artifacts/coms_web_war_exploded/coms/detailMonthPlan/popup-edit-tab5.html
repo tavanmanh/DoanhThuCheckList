@@ -1,0 +1,91 @@
+
+<form class="form-horizontal row" role="form">
+	<div class="form-body" style="padding-bottom: 100px;">
+		<div class="portlet light">
+			<div class="portlet-title background-title">
+				<div class="caption">
+					<span class="caption-subject bold lowercase" translate>Thông
+						tin chung</span>
+				</div>
+				<div class="text-right margin-row-title">
+					<i data-toggle="collapse" data-target="#part1"
+						class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+				</div>
+			</div>
+			<div id="part1" class="collapse in from-search">
+				<div class="padding-width18">
+					<div class="border-gray" style="padding: 18px;">
+						<div class="clearfix position-relative">
+							<div class="clearfix form-group">
+								<div class="clearfix position-relative">
+									<label class="col-md-2 control-label" translate>Mã tỉnh</label>
+									<label class="col-md-4 control-label"
+										ng-bind="caller.dongTienItem.catProvinceCode"></label> <label
+										class="col-md-2 control-label" translate>Mã trạm</label> <label
+										class=" col-md-4 control-label"
+										ng-bind="caller.dongTienItem.catStationCode"></label>
+								</div>
+								<div class="clearfix">
+									<label class="col-md-2 control-label" translate>Mã công
+										trình</label>
+										<label class="col-md-4 control-label"
+											ng-bind="caller.dongTienItem.constructionCode"></label>
+									<label class="col-md-2 control-label" translate>Hợp
+										đồng đầu ra</label>
+										<label class="col-md-4 control-label"
+											ng-bind="caller.dongTienItem.cntContract"></label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="portlet light">
+			<div class="portlet-title background-title" style="">
+				<div class="caption">
+					<span class="caption-subject bold lowercase" translate>Thông
+						tin thực hiện hạng mục</span>
+				</div>
+				<div class="text-right margin-row-title">
+					<i data-toggle="collapse" data-target="#part2"
+						class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+				</div>
+			</div>
+			<div id="part2" class="collapse in from-search">
+				<div class="padding-width18">
+					<div class="">
+						<div class="clearfix position-relative">
+							<div class="clearfix form-group">
+								<div class="clearfix row margin-top">
+								   <div class="clearfix position-relative">
+								        <div id="planDetailTab5Grid" kendo-grid="caller.CashFlowDetailGrid"
+								             k-options="caller.CashFlowDetailGridOptions">
+								        </div>
+								    </div>
+								</div>					
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		
+		
+	</div>
+	<div class="row modal-footer">
+        <div class="col-md-12 text-right">
+            <button type="button"
+                    class="btn btn-qlk padding-search-right closeQLK" id="cancel"
+                    ng-click="caller.cancelEditPopup()" translate>Đóng
+            </button>
+            <!--<button type="button" id="savepopupApp"-->
+                    <!--class="btn btn-qlk padding-search-right saveQLK"-->
+                    <!--ng-click="caller.saveDongTienPopup()" translate>Ghi lại-->
+            <!--</button>-->
+        </div>
+
+	</div>
+</form>

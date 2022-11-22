@@ -1,0 +1,70 @@
+<style>
+html {
+	overflow-y: scroll;
+}
+</style>
+<div id="creExtDetailQuantityId" class="collapse in from-search row">
+	<div class="row border-popup-management" style="display: flex">
+		<div class="col-md-12 col-lg-2 border-right ">
+			<form class="padding-height-20 form-horizontal row" role="form"
+				id="form">
+				<div class="form-body">
+					<div class="row button-header">
+						<a
+							class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 cusTabLeft"
+							tabindex="1" ng-click="vm.chooseTab(1)"
+							ng-class="{'active':vm.value==1}"> <label class="stt_radio1">1.
+								Giao chỉ tiêu</label>
+						</a>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="form-horizontal  padding-height-20  col-md-12 col-lg-10"
+			role="form">
+			<!--tab1-->
+			<div class="form-body" ng-show="vm.value==1">
+				<div class="clearfix form-actions margin-top">
+					<div class="row" style="margin-bottom: 5px">
+						<div class="col-md-3">
+							<input class=" form-control width100" type="text"
+								ng-model="vm.searchForm.keySearch"
+								ng-enter="vm.doSearchDetail('targetGrid')"
+								placeholder="Nhập nội dung tìm kiếm" />
+						</div>
+						<div class="col-md-7 text-center">
+							<button type="button" id="findParam"
+								ng-click="vm.doSearchDetail('targetGrid')"
+								class="btn btn-qlk padding-search-right searchQLK" translate>Tìm
+								kiếm</button>
+							<button type="button"
+								class=" btn btn-qlk padding-search-right excelQLK"
+								ng-disabled="vm.disabled" ng-click="vm.importExcelTab2()"
+								translate>Import</button>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix form-actions margin-top">
+					<div class="row">
+						<div class="col-md-6">
+							<!-- <a href="" ng-click="vm.getTotalMonthPlanDetail()">Thông tin
+								kế hoạch tháng tổng thể</a> -->
+						</div>
+						<div class="col-md-6 text-right">
+							<span>Đơn vị tính: Triệu (VNĐ)</span> <i id="xuatExcel1"
+								class="tooltip1 action-button excelQLK"
+								ng-click="vm.exportExcelTab1()" aria-expanded="false"> <span
+								class="tooltiptext">Xuất Excel</span></i>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix position-relative">
+					<div id="targetGrid" kendo-grid="vm.targetGrid"
+						k-options="vm.targetGridOptions"
+						k-on-change="vm.onGridChange(kendoEvent, { selected: selected }, data)"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

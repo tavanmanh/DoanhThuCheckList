@@ -1,0 +1,422 @@
+<style>
+.form-control[]: {
+	background-color: #e5e5e5 !important;
+}
+
+
+</style>
+
+<div id="assignHandoverPopup">
+	<form class="form-horizontal row" role="form" name="addForm"
+		id="addForm" k-options="validatorOptions">
+		<div class="form-body padding10">
+			<div class="portlet light bordered">
+				<div class="form-body padding10">
+					<div class="row caption" id="thongTinChungSpan" ng-hide="caller.isCreate == true">
+						<span class="caption-subject bold lowercase"
+							style="margin-left: 1px !important;" translate>Thông tin
+							chung</span>
+					</div>
+					<div class="portlet light bordered collapse in from-search"
+						id="thongTinChung" ng-hide="caller.isCreate == true">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label " translate>Ký hiệu lĩnh vực của đơn vị đến tiếp xúc</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										ng-disabled="!caller.isCreate" id="unitCode"
+										ng-model="caller.addForm.unitCode" name="unitCode" />
+
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label " translate>Khu vực</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										ng-disabled="!caller.isCreate" id="areaCode"
+										ng-model="caller.addForm.areaCode" name="areaCode" />
+								</div>
+							</div>
+						</div>
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label " translate>Mã
+									tỉnh</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										ng-disabled="!caller.isCreate" id="provinceCode"
+										ng-model="caller.addForm.provinceCode" name="provinceCode" />
+
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label " translate>Tên
+									đơn vị hoặc chủ đầu tư đến tiếp xúc</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										ng-disabled="!caller.isCreate" id="unitName"
+										ng-model="caller.addForm.unitName" name="unitName" />
+								</div>
+							</div>
+						</div>
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label " translate>Địa
+									chỉ của đơn vị hoặc chủ đầu tư đến tiếp xúc</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										id="unitAddress" ng-disabled="!caller.isCreate"
+										ng-model="caller.addForm.unitAddress" name="unitAddress" />
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label " translate>Lĩnh
+									vực hoạt động của đơn vị hoặc chủ đầu tư đến tiếp xúc</label>
+								<div class="col-md-8 margin_top">
+									<input class=" form-control width100" type="text"
+										id="unitField" ng-disabled="!caller.isCreate"
+										ng-model="caller.addForm.unitField" name="unitField" />
+								</div>
+
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label " translate>Chủ
+									đầu tư nhận được Công văn</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										ng-disabled="!caller.isCreate" id="unitBoss"
+										ng-model="caller.addForm.unitBoss" name="unitBoss" />
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label " translate>Hạn
+									hoàn thành tiếp xúc</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="deadlineDateComplete" 
+										name="deadlineDateComplete"  style="width: 100%;"
+										ng-disabled="!caller.isCreate"
+										ng-model="caller.addForm.deadlineDateComplete" />
+								</div>
+							</div>
+
+
+						</div>
+						
+							<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label " translate>Thuộc loại</label>
+								<div class="col-md-8">
+									<select kendo-drop-down-list style="width: 100%"
+								name="type" id="type"
+								ng-model="caller.addForm.type"
+								k-data-text-field="'name'" k-data-value-field="'code'"
+								k-data-source="caller.typeList">
+							</select>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+
+
+					<!-- ---------------- -->
+					
+					<div class="row caption" id="thongTinChungSpan6" >
+						<span class="caption-subject bold lowercase"
+							style="margin-left: 1px !important;" translate>Thông tin
+							chung</span>
+					</div>
+					<div class="portlet light bordered collapse in from-search"
+						id="thongTinChung6" >
+						
+							<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Thuộc loại</label>
+								<div class="col-md-8">
+									<select kendo-drop-down-list style="width: 100%" required data-required-msg="Loại  không được bỏ trống"
+								name="type" id="type"
+								ng-model="caller.addForm.type"
+								k-data-text-field="'name'" k-data-value-field="'code'"
+								k-data-source="caller.typeList">
+							</select>
+							<span data-for='type' class='k-invalid-msg'></span>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+
+
+					<!-- ---------------- -->
+
+
+					<div class="row caption" id="thongTinChungSpan2">
+						<span class="caption-subject bold lowercase"
+							style="margin-left: 1px !important;" translate>Đơn vị hoặc chủ đầu tư đến tiếp xúc </span>
+					</div>
+					<!-- HienLT56 start 15072020 - fix-->
+					<div class="portlet light bordered collapse in from-search"
+						id="thongTinChungSpan2">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Ngày
+									đến tiếp xúc</label>
+								<div class="col-md-8">
+									<input class="form-control" name="contactDate" id="contactDate"  ng-blur="focusOut()"  ng-model="caller.addForm.contactDate" 
+									kendo-date-picker date-time k-format="'dd/MM/yyyy'" required data-required-msg="Ngày đến tiếp xúc không được bỏ trống"
+									ng-change="caller.validateContactDate()" type="text" min-year="1000" 
+										style="width: 100%;" />
+								<span data-for='contactDate' class='k-invalid-msg'></span> 
+								<span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg" style="color:red">{{caller.validateContactDateErr}}</span>
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label " translate>Họ
+									và tên</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										id="fullNameCus" ng-model="caller.addForm.fullNameCus"
+										name="fullNameCus" />
+								</div>
+							</div>
+						</div>
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label " translate>Chức
+									vụ</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										id="positionCus" ng-model="caller.addForm.positionCus"
+										name="positionCus" />
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label " translate>Số
+									điện thoại </label>
+								<div class="col-md-8 margin_top">
+									<input class=" form-control width100" type="text"
+										id="phoneNumberCus" ng-model="caller.addForm.phoneNumberCus"
+										name="phoneNumberCus" />
+									<span data-for='"phoneNumberCus"' class='k-invalid-msg'></span> 
+									<span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg" style="color:red">{{caller.validatePhoneErr}}</span>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label " translate>Mail</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										id="mailCus" ng-model="caller.addForm.mailCus"
+										name="mailCus" />
+									<!-- <span data-for='"mailCus"' class='k-invalid-msg'></span> 
+									<span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg" style="color:red">{{caller.validateEmailErr}}</span> -->
+								</div>
+							</div>
+
+
+
+						</div>
+					</div>
+					<!-- HienLT56 end 15072020 - fix-->
+
+					<!-- ---------------- -->
+
+					<div class="row caption" id="thongTinChungSpan3">
+						<span class="caption-subject bold lowercase"
+							style="margin-left: 1px !important;" translate>Nhân sự của
+							CNKT đến tiếp xúc</span>
+					</div>
+					<div class="portlet light bordered collapse in from-search"
+						id="thongTinChungSpan3">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label " translate>Họ
+									và Tên</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										id="fullNameEmploy" ng-model="caller.addForm.fullNameEmploy"
+										name="fullNameEmploy" />
+
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label " translate>Số
+									điện thoại</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										id="phoneNumberEmploy" ng-model="caller.addForm.phoneNumberEmploy"
+										name="phoneNumberEmploy"/>
+									<span data-for='"phoneNumberEmploy"' class='k-invalid-msg'></span> 
+									<span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg" style="color:red">{{caller.validatePhoneErr1}}</span>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label " translate>Mail</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										id="mailEmploy" ng-model="caller.addForm.mailEmploy"
+										name="mailEmploy" />
+									<!-- <span data-for='"mailEmploy"' class='k-invalid-msg'></span> 
+									<span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg" style="color:red">{{caller.validateEmailErr1}}</span> -->
+								</div>
+							</div>
+
+						</div>
+
+
+					</div>
+
+
+					<!-- ---------------- -->
+
+					<div class="row caption" id="thongTinChungSpan4">
+						<span class="caption-subject bold lowercase"
+							style="margin-left: 1px !important;" translate>Kết quả đến
+							tiếp xúc và tiếp nhận nhu cầu từ chủ đầu tư </span>
+					</div>
+					<div class="portlet light bordered collapse in from-search"
+						id="thongTinChungSpan4">
+
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label " translate>Kết quả tiếp xúc</label>
+								<div class="col-md-8">
+									<select kendo-drop-down-list style="width: 100%"
+								name="resultList" id="resultList"
+								ng-model="caller.addForm.result"
+								k-data-text-field="'name'" k-data-value-field="'code'"
+								k-data-source="caller.resultList">
+							</select>
+								</div>
+							</div>
+							</div>
+
+						
+						
+						<div class="clearfix">
+							<div class="form-group col-md-12">
+								<label class="col-md-2 control-label " translate>Diễn
+									giải tóm tắt nội dung đến tiếp xúc</label>
+								<div class="col-md-10">
+								<textarea class=" form-control width100" type="text"
+										id="shortContent" ng-model="caller.addForm.shortContent"
+										rows="3" name="shortContent" />
+								</div>
+							</div>
+
+
+						</div>
+
+
+					</div>
+					<!----------------------------------------------------------------------------->
+
+
+					<!-- ---------------- -->
+					<div class="row caption" id="thongTinChungSpan5">
+						<span class="caption-subject bold lowercase"
+							style="margin-left: 1px !important;" translate>Trao đổi thực hiện nhiệm vụ</span>
+					</div>
+					<div class="portlet light bordered collapse in from-search"
+						id="thongTinChungSpan5">
+						<div class="clearfix">
+							<div class="form-group col-md-12">
+								<label class="col-md-2 control-label " translate>Nhập nội dung trao đổi giữa CNKT và B.ĐTHT</label>
+								<div class="col-md-10">
+									<textarea class=" form-control width100" type="text"
+										id="description" ng-model="caller.addForm.description"
+										rows="3" name="description" />
+										
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix">
+							<div class="form-group col-md-12">
+								<label class="col-md-2 control-label " translate>Lịch sử trao đổi giữa CNKT với B.ĐTHT</label>
+								<div class="col-md-10" style="overflow: auto; height: 100px;">
+										<div  ng-repeat="dto in caller.listDescription" style="padding-top: 10px;">
+										<span  ng-if="$first"  style="color: red;">{{dto.data}}</span>
+										<span ng-if="!$first" >{{dto.data}}</span>
+										</div>
+										
+										
+										
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+					<!-- ---------------- -->
+
+					<div class="portlet-title margin-top15">
+						<div class="caption">
+							<span class="caption-subject bold lowercase" translate>Danh
+								sách file đính kèm</span>
+						</div>
+					</div>
+
+					<div class="padding-width18">
+						<div class="border-gray">
+							<div>
+								<center>Kéo thả các file vào đây hoặc click để chọn
+									file</center>
+							</div>
+							<div class="clearfix">
+								<div class="col-md-12">
+									<input class="file-input" name="files" type="file" kendo-upload
+										id="files" tabindex="10" k-select="caller.onSelect" />
+								</div>
+							</div>
+							<center>
+								<span style="color: gray">Dung lượng &#60;&#61; 100MB,
+									định dạng xls,xlsx,doc,docx,pdf</span>
+							</center>
+							<div id="shipmentFileGrid" kendo-grid="caller.shipmentFileGrid"
+								k-options="caller.gridFileOptions"
+								k-on-change="onGridChange(kendoEvent, { selected: selected }, data)"></div>
+						</div>
+					</div>
+					<!-- --------------------------------------------------------------------- -->
+
+					<div class="clearfix form-actions" align="right">
+						<button type="button" id="saveData"
+							ng-hide="caller.isReject"
+							class="btn btn-qlk   padding-search-right btn pull-right  saveQLK"
+							ng-click="caller.save()" translate>Ghi lại</button>
+						<button type="button" id="cancel"
+							class="btn btn-qlk padding-search-right margin_right10 closeQLK btn pull-right"
+							ng-click="caller.cancel()" translate>Hủy bỏ</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<!-- <script>
+	$(document)
+			.ready(
+					function() {
+						var caller = angular.element(
+								document.getElementById('addForm')).scope().caller;
+						//Disabled form
+
+					});
+</script> -->

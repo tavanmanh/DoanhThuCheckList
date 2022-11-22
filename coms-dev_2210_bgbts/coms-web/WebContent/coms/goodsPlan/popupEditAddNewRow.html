@@ -1,0 +1,160 @@
+
+<form class="form-horizontal row" role="form">
+
+	<div class="form-body">
+		<!-- <div id="goodsPlanPopupAdd" class="collapse in from-search"> -->
+
+		<div class="clearfix position-relative">
+			<div class="clearfix">
+				<div class="form-group col-md-6">
+					<label class="col-md-4 control-label req" translate>Mã công
+						trình</label>
+					<div class="col-md-8">
+						<div class="input-icon right ">
+                                    <i class="fa fa-search directive"></i>
+                                </div>
+						<input id="consPlan" class=" form-control width100" type="text"
+							kendo-auto-complete k-options="caller.constructionRowOptions"
+							ng-model="caller.rowData.constructionCode" required
+							data-required-msg="Mã công trình không được để trống" />
+						<div class="One_icon">
+                                <i class="fa fa-times" aria-hidden="true"
+                                   ng-click="caller.resetFormAdd('constructionCode')"></i>
+                            </div>
+					</div>
+				</div>
+				<div class="form-group col-md-6">
+					<label class="col-md-4 control-label req" translate>CV/HD</label>
+					<div class="col-md-8">
+						<input id="contractPlan" class=" form-control width100"
+							type="text" ng-model="caller.rowData.cntContractCode"
+							placeholder="CV/HD" required
+							data-required-msg="Mã CV/HD không được để trống" />
+							<div class="One_icon">
+                                <i class="fa fa-times" aria-hidden="true"
+                                   ng-click="caller.resetFormAdd('cntContractCode')"></i>
+                            </div>
+					</div>
+				</div>
+
+			</div>
+			<div class="clearfix">
+				<div class="form-group col-md-6">
+					<label class="col-md-4 control-label req" translate>Tên vật
+						tư thiết bị</label>
+					<div class="col-md-8">
+						<input id="namePlan" class=" form-control width100" type="text"
+							ng-model="caller.rowData.goodsName"
+							placeholder="Tên vật tư thiết bị" required
+							data-required-msg="Tên vật tư thiết bị không được để trống" />
+							<div class="One_icon">
+                                <i class="fa fa-times" aria-hidden="true"
+                                   ng-click="caller.resetFormAdd('goodsName')"></i>
+                            </div>
+					</div>
+				</div>
+				<div class="form-group col-md-6">
+					<label class="col-md-4 control-label req" translate>ĐVT</label>
+					<div class="col-md-8">
+						<div class="input-icon right ">
+                                    <i class="fa fa-search directive"></i>
+                                </div>
+						<input id="unitPlan" class=" form-control width100" type="text"
+							kendo-auto-complete k-options="caller.catUnitOptions"
+							ng-model="caller.rowData.catUnitName" required
+							data-required-msg="Đơn vị tính không được để trống" />
+							<div class="One_icon">
+                                <i class="fa fa-times" aria-hidden="true"
+                                   ng-click="caller.resetFormAdd('catUnitName')"></i>
+                            </div>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="clearfix">
+				<div class="form-group col-md-6">
+					<label class="col-md-4 control-label req" translate>Số
+						lượng</label>
+					<div class="col-md-8">
+						<input id="quantityPlan" class=" form-control width100"
+							type="number" ng-model="caller.rowData.quantity"
+							placeholder="Số lượng" required
+							data-required-msg="Số lượng không được để trống" />
+							<div class="One_icon">
+                                <i class="fa fa-times" aria-hidden="true"
+                                   ng-click="caller.resetFormAdd('quantity')"></i>
+                            </div>
+					</div>
+				</div>
+				<div class="form-group col-md-6">
+					<label class="col-md-4 control-label req" translate>Ngày
+						đảm bảo theo KPI</label>
+					<div class="col-md-8">
+						<input id="datePlan" class=" form-control width100"
+							kendo-date-picker k-format="'dd/MM/yyyy'"
+							ng-model="caller.rowData.expectedDate" min-year="1000" date-time />
+							<div class="One_icon">
+                                <i class="fa fa-times" aria-hidden="true"
+                                   ng-click="caller.resetFormAdd('expectedDate')"></i>
+                            </div>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="clearfix">
+				<div class="form-group col-md-6">
+					<label class="col-md-4 control-label" translate>Ghi chú</label>
+					<div class="col-md-8">
+						<input id="descriptionPlan" class=" form-control width100"
+							type="text" ng-model="caller.rowData.description"
+							placeholder="Ghi chú" />
+							<div class="One_icon">
+                                <i class="fa fa-times" aria-hidden="true"
+                                   ng-click="caller.resetFormAdd('description')"></i>
+                            </div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- </div> -->
+	</div>
+
+</form>
+<div class="clearfix form-actions margin-top">
+	<div class="row">
+		<div class="col-md-12 text-right">
+			<button type="button"
+				class="btn btn-qlk padding-search-right closeQLK" id="cancel"
+				ng-click="caller.cancelPopup()" translate>Hủy bỏ</button>
+			<button type="button" id="save" ng-disabled="vm.isDisabled"
+				class="btn btn-qlk padding-search-right saveQLK"
+				ng-click="caller.saveRow()" translate>Ghi lại</button>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$('#retrievalGridOp')
+			.keypress(
+					function(event) {
+						$("input").change(function() {
+							$(this).val($.trim($(this).val()));
+						});
+						document.onkeydown = keyDown;
+						function keyDown(e) {
+							switch (e.keyCode) {
+							case 27:
+								$("#cancel").click();
+								break;
+							case 13:
+								if ($('.k-widget.k-window.fix-footer').css(
+										'display') !== 'block') {
+									$("#goodsPlanPopupAdd").click();
+								}
+								break;
+
+							}
+						}
+					});
+</script>

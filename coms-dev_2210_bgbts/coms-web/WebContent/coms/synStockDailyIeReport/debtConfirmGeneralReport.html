@@ -1,0 +1,213 @@
+<!--VietNT_20190116_start-->
+<style>
+html {
+	overflow-y: scroll;
+}
+
+.no-padding {
+	padding: 0;
+}
+</style>
+<div data-ng-controller="synStockDailyIeReportController as vm">
+	<p class="text-brecum">{{vm.StringGeneral}}</p>
+	<form class="form-horizontal row" role="form" id="sstg_searchForm"
+		name="form">
+		<div class="form-body">
+			<div class="portlet light bordered">
+				<div class="portlet-title background-title">
+					<div class="caption">
+						<span class="caption-subject bold lowercase" translate>Thông
+							tin tìm kiếm </span>
+					</div>
+					<div class="text-right margin-row-title">
+						<i data-toggle="collapse" data-target="#dataSearch"
+							class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+					</div>
+				</div>
+				<div id="dataSearch" class="collapse in from-search">
+					<div class="clearfix position-relative">
+
+						<!--row 1-->
+						<div class="clearfix">
+
+							<!--sysGroupName-->
+							<div class="form-group col-md-6">
+								<label class="col-md-3 control-label" translate>{{vm.htmlLabel.sysGroup}}</label>
+								<div class="col-md-8" ng-enter="vm.doSearch()">
+									<div class="input-icon right ">
+										<i class="fa fa-search directive"
+										   ng-click="vm.openDepartmentPopup()"></i>
+									</div>
+									<input kendo-auto-complete k-options="vm.deptOptions"
+										   class=" form-control width100" type="text"
+										   ng-model="vm.searchForm.sysGroupText" name="sysGroupName" />
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+										   ng-click="vm.resetFormField('group')"></i>
+									</div>
+								</div>
+							</div>
+
+							<!--synStockTransCode-->
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>{{vm.htmlLabel.keySearch}}</label>
+								<div class="col-md-8" ng-enter="vm.doSearch()">
+									<input id="keySearch" class=" form-control width100"
+										   type="text" ng-model="vm.searchForm.keySearch"
+										   name="keySearch"
+										   placeholder="Mã trạm/Mã công trình" />
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+										   ng-click="vm.resetFormField('keySearch')"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!--row 2-->
+						<div class="clearfix">
+							<!--province-->
+							<div class="form-group col-md-6">
+								<label class="col-md-3 control-label" translate>{{vm.htmlLabel.province}}</label>
+								<div class="col-md-8" ng-enter="vm.doSearch()">
+									<div class="input-icon right ">
+										<i class="fa fa-search directive"
+										   ng-click="vm.openCatProvincePopup()"></i>
+									</div>
+									<input kendo-auto-complete k-options="vm.provinceOptions"
+										   class=" form-control width100" type="text"
+										   ng-model="vm.searchForm.provinceCode" name="provinceCode" />
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+										   ng-click="vm.resetFormField('province')"></i>
+									</div>
+								</div>
+							</div>
+
+							<!--REAL_IE_TRANS_DATE-->
+							<!--<div class="form-group col-md-6">-->
+								<!--<label class="col-md-4 control-label" translate>{{vm.htmlLabel.dateFrom}}</label>-->
+								<!--<div class="col-md-8" ng-enter="vm.doSearchGoodsDebtConfirmGeneral()">-->
+									<!--<div class="col-md-5 no-padding position-relative">-->
+										<!--<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"-->
+											<!--min-year="1000" id="dateFromGeneral" name="dateFromGeneral"-->
+											<!--style="width: 100%;" ng-model="vm.searchForm.dateFrom"-->
+											<!--ng-blur="vm.validateDateField('dateFromGeneral')"-->
+											<!--ng-change="vm.validateDateField('dateFromGeneral')" /> <span-->
+											<!--style="color: red" id="errImpReqMess1">{{vm.dateFromGeneralErr}}</span>-->
+									<!--</div>-->
+									<!--<div class="col-md-2" style="text-align: center;">-->
+										<!--<label class="control-label" translate>{{vm.htmlLabel.dateTo}}</label>-->
+									<!--</div>-->
+									<!--<div class="col-md-5 no-padding position-relative">-->
+										<!--<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"-->
+											<!--min-year="1000" name="dateToGeneral" id="dateToGeneral"-->
+											<!--style="width: 100%;" ng-model="vm.searchForm.dateTo"-->
+											<!--ng-blur="vm.validateDateField('dateToGeneral')"-->
+											<!--ng-change="vm.validateDateField('dateToGeneral')" /> <span-->
+											<!--style="color: red" id="errImpReqMess2">{{vm.dateToGeneralErr}}</span>-->
+									<!--</div>-->
+									<!--<div class="One_icon">-->
+										<!--<i class="fa fa-times" aria-hidden="true"-->
+											<!--ng-click="vm.resetFormField('date')"></i>-->
+									<!--</div>-->
+								<!--</div>-->
+							<!--</div>-->
+							<!--REAL_IE_TRANS_DATE-->
+							<div class="form-group col-md-6" ng-enter="vm.doSearch()">
+								<label class="col-md-4 control-label req" translate>{{vm.htmlLabel.dateFrom}}</label>
+								<div class="clearfix position-relative col-md-8"
+									 id="realIeDateGeneral">
+									<div class="col-md-5 no-padding position-relative">
+										<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+											   min-year="1000"
+											   id="debtGeneral_dateFrom" name="debtGeneral_dateFrom"
+											   style="width: 100%;" ng-model="vm.searchForm.dateFrom"/>
+										<span class="k-invalid-msg" data-for="debtGeneral_dateFrom"></span>
+									</div>
+									<div class="col-md-2" style="text-align: center;">
+										<label class="control-label" translate>{{vm.htmlLabel.dateTo}}</label>
+									</div>
+									<div class="col-md-5 no-padding position-relative">
+										<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+											   min-year="1000"
+											   id="debtGeneral_dateTo" name="debtGeneral_dateTo"
+											   style="width: 100%;" ng-model="vm.searchForm.dateTo"/>
+										<span class="k-invalid-msg" data-for="debtGeneral_dateTo"></span>
+									</div>
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+										   ng-click="vm.resetFormField('date')"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="clearfix form-actions margin-top">
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<!-- <button type="button" id="find"
+                                    class="btn green btn-outline padding-search-right"
+                                    ng-click="vm.doSearchGoodsDebtConfirmGeneral()" translate>Tìm kiếm</button> -->
+								<!-- <button type="button" id="sst_doSearch" ng-click="vm.doSearchGoodsDebtConfirmGeneral()" -->
+								<button type="button" id="sst_doSearch" ng-click="vm.doSearch()"
+									class="btn btn-qlk padding-search-right searchQLK" translate>Tìm
+									kiếm</button>
+								<button type="button" id="excel" ng-disabled="vm.disableBtnExcel"
+										class="btn btn-qlk padding-search-right padding-lable excelQLK"
+										ng-click="vm.exportExcelGeneral()" translate>Xuất excel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</form>
+
+	<div class="portlet light bordered">
+		<div class="portlet-title background-title">
+			<div class="caption">
+				<span class="caption-subject bold lowercase" translate>Kết
+					quả tìm kiếm: </span>&nbsp;<label class="control-label bold lowercase"
+					id="appCount">{{vm.count}}</label><label
+					class="control-label bold lowercase">&nbsp;bản ghi</label>
+
+			</div>
+		</div>
+		<div id="grid" class="collapse in from-search">
+			<div class="clearfix position-relative">
+				<div id="goodsDebtConfirmGeneralGrid" kendo-grid="vm.goodsDebtConfirmGeneralGrid"
+					k-options="vm.goodsDebtConfirmGeneralGridOptions"></div>
+			</div>
+		</div>
+	</div>
+	<div ng-init="vm.rpType = 0"></div>
+</div>
+<script type="text/javascript">
+	$('#sstg_searchForm')
+			.keypress(
+					function(event) {
+						$("input").change(function() {
+							$(this).val($.trim($(this).val()));
+						});
+						document.onkeydown = keyDown;
+
+						function keyDown(e) {
+							switch (e.keyCode) {
+							case 27:
+								$("#cancel").click();
+								break;
+							case 13:
+								if ($('.k-widget.k-window.fix-footer').css(
+										'display') !== 'block') {
+									$("#doSearchAssign").click();
+								}
+								break;
+
+							}
+						}
+					});
+</script>
+<!--VietNT_end-->

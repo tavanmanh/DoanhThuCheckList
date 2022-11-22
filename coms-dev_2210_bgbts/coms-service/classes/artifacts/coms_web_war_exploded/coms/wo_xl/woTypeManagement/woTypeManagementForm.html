@@ -1,0 +1,124 @@
+<style>
+.amcharts-chart-div a {
+	display: none !important;
+}
+.form-group{
+	margin-top: 1em;
+	border-radius: 5px;
+}
+.fa .fa-search{
+	color:#0eaf0e;
+}
+.portlet.light {
+    padding-bottom: 0px !important;
+}
+.yellow{
+	color :#E0D014;
+}
+.azure{
+	color: #011995;
+}
+.display-block{
+	font-size: 1.5em;
+}
+.display-block i{
+	margin-right: 10%;
+}
+.k-pager-wrap .k-link{
+	margin-top: 4px;
+}
+</style>
+<div data-ng-controller="woTypeManagementController as vm">
+	<p class="text-brecum">{{vm.String}}</p>
+	<form class="form-horizontal row" role="form">
+	
+		<div class="form-body">
+			<div class="portlet light bordered">
+				<div class="portlet-title background-title">
+					<div class="caption">
+						<span class="caption-subject bold lowercase" translate>Thông
+							tin tìm kiếm </span>
+
+					</div>
+				</div>
+				<div id="workItem1" class="collapse in from-search">
+					<div class="clearfix position-relative">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 form-horizontal control-label " translate>Tên loại WO</label>
+								<div class="col-md-8">
+									<input kendo-auto-complete k-options="vm.dataListWOTable"
+										ng-blur="vm.changeDataAuto('dept')"
+										class=" form-control width100" type="text"
+										ng-model="vm.searchForm.woTypeName" required />
+									<script>
+								</script>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 form-horizontal control-label " translate>Mã loại WO</label>
+								<div class="col-md-8">
+									<input kendo-auto-complete k-options="vm.dataListWOTable"
+										ng-blur="vm.changeDataAuto('dept')"
+										class=" form-control width100" type="text"
+										ng-model="vm.searchForm.woTypeCode" required />
+	
+								</div>
+							</div>
+						</div>
+						<div id="borderCount"></div>
+						<div class="clearfix form-actions margin-top" style="margin-top: 1em;">
+							<div class="row">
+								<div class="col-md-12 text-center">
+									<button type="button" id="doSearchQuantity"
+										ng-click="vm.doSearch()"
+										class="btn btn-default padding-button padding-search-right box-shadow" >
+										<i class="fa fa-search" aria-hidden="true" ></i>
+										<span class="btn-default" >Tìm kiếm</span>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<div class="portlet light bordered">
+		<div class="portlet-title background-title">
+			<div class="caption">
+				<span class="caption-subject bold lowercase" translate>Kết
+					quả tìm kiếm</span>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="portlet-body pull-left" >
+					<button  title="Thêm mới"  style="margin-left:0.6em;"
+							 class="btn btn-default padding-button padding-search-right box-shadow" ng-click="vm.openCreateWoModal()">
+						<i class="icon-plus"></i>
+						Thêm loại WO
+					</button>
+					<input class="file-input" #file name="files" type="file" id="files" tabindex="10" style="display: none"  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"/>
+					<button type="button" id="importExcel" class="btn btn-qlk padding-search-right padding-lable excelQLK"
+							ng-click="vm.importExcelFile()" translate>Import</button>
+					<button type="button" id="getTemplate" class="btn btn-qlk padding-search-right padding-lable excelQLK"
+							ng-click="vm.getTemplateFile()" translate>Tải file mẫu</button>
+				</div>
+
+				<div class="btn-group pull-right margin_top_button ">
+					<i id="xuatExcel" class="tooltip1 action-button excelQLK" ng-disabled="vm.disableExportExcel" ng-click="vm.exportWoTypeList()" aria-expanded="false">
+						<span class="tooltipArrow"></span><span class="tooltiptext">Xuất Excel</span></i>
+				</div>
+			</div>
+		</div>
+
+		<div id="grid" class="collapse in from-search" >
+			<div class="clearfix position-relative">
+				<div kendo-grid="vm.dataListWOTable"
+					k-options="vm.dataListWOTableOptions"></div>
+			</div>
+		</div>
+	</div>
+</div>

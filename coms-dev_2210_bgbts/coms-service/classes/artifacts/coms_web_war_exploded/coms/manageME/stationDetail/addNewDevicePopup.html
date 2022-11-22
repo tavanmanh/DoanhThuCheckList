@@ -1,0 +1,94 @@
+<div id="addNewDevicePopup">
+<form name="form" class="form-horizontal row " role="form"
+      style="">
+		<div class="form-body">
+                    <div id="goodsPlanPopupAdd" class="collapse in from-search">
+                        <div class="clearfix position-relative">
+                            <div class="clearfix">
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-4 control-label req" translate>Loại thiết bị</label>
+                                    <div class="col-md-8">
+                                    	<input readonly="true" id="type" class=" form-control width100" type="text"
+                                            ng-model="caller.addForm.type"/>
+								</select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-4 control-label req" translate>Tên thiết bị</label>
+                                    <div class="col-md-8">
+                                        <input id="deviceName" class=" form-control width100" type="text" 
+                                            ng-model="caller.addForm.deviceName" required data-required-msg="Tên thiết bị không được để trống" />
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="clearfix">
+                            	<div class="form-group col-md-6">
+                                    <label class="col-md-4 control-label req" translate>Mã thiết bị</label>
+                                    <div class="col-md-8">
+                                        <input id="deviceCode" class=" form-control width100" type="text" 
+                                            ng-model="caller.addForm.deviceCode" required data-required-msg="Mã thiết bị không được để trống" />
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-4 control-label req" translate>Serial</label>
+                                    <div class="col-md-8">
+                                        <input id="serial" class=" form-control width100" type="text"
+                                            ng-model="caller.addForm.serial" required data-required-msg="Serial không được để trống" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix position-relative">
+                        	<div class="clearfix">
+	                            <div class="form-group col-md-12">
+	                                <div id="upload"
+			class="portlet light bordered collapse in from-search">
+			<div>
+				<div id="upload2" class="portlet light  collapse in from-search">
+					<div>
+						<div>	
+							<center>
+							Kéo thả các file vào đây hoặc click để chọn file
+							</center>
+							
+						</div>
+						<div class="clearfix">
+							<div class="form-group col-md-12">
+								<div class="col-md-12 k-content" style="text-align:center; border-width: 1px;">
+									<input class="col-md-12" name="attachfiles" id="attachfiles"
+										type="file" 
+										list-file-type="xls,xlsx,doc,docx,pdf" />
+									<button ng-click="caller.submitAttachFile()" style="border-width: 1px;">Tải lên</button>
+									<div>
+										<span style="font-weight: bolder; margin-left: 10px">{{caller.fileLst[0].name}}</span>
+									</div>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							<center>
+								<span style="color: gray">Dung lượng &#60;&#61; 100MB,
+									định dạng xls,xlsx,doc,docx,pdf</span>
+							</center>
+							
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	                            </div>
+                        	</div>
+                        </div>
+                    </div> 
+            </div>
+		<div class="modal-footer" align="right">
+			<button type="button" id="saveData"
+				class="btn btn-qlk   padding-search-right btn pull-right  saveQLK"
+				ng-click="caller.saveDevice()" translate>Ghi lại</button>
+			<button type="button" id="cancel"
+				class="btn btn-qlk padding-search-right margin_right10 closeQLK btn pull-right"
+				ng-click="caller.cancelImport()" translate>Hủy bỏ</button>
+		</div>
+	</form>
+	</div>

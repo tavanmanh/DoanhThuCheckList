@@ -1,0 +1,62 @@
+<style>
+    .modal-content {
+        width: 1000px;
+        padding: 0;
+    }
+
+    .close-modal-x {
+        position: absolute;
+        top: 10px;
+        right: auto;
+    }
+
+    .light-border {
+        border: 1px solid #333;
+    }
+</style>
+<div class="modal-header" style="background-color: #33CCCC;">
+    <h5 class="modal-title" style="color: whitesmoke" ng-bind-html="modalTitle">Danh sách trạm chưa thuê</h5>
+    <button type="button" class="close close-modal-x" data-dismiss="modal" aria-label="Close" ng-click="$dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+	<div class="collapse in from-search">
+		<div class="clearfix">
+			<div class="form-group col-md-6">
+				<label class="col-md-4 control-label" translate>Tìm kiếm</label>
+				<div class="col-md-8">
+					<input id="keySearch" class=" form-control width100" type="text"
+						ng-model="vm.keySearchStation"
+						placeholder="Mã trạm" />
+				</div>
+			</div>
+			<div class="form-group col-md-6">
+				<div class="row">
+					<div class="col-md-12">
+						<button type="button" id="doSearchStation"
+							ng-click="vm.doSearchStation()"
+							class="btn btn-qlk padding-search-right searchQLK" translate>Tìm
+							kiếm</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix">
+			<div class="form-group row">
+				<div class="collapse in from-search">
+					<div class="clearfix position-relative mheight-400">
+						<div kendo-grid="vm.stationListTbl" id="stationListTblId"
+							k-options="vm.stationListOptions"
+							style="width: 100% !important; margin: 0;"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="$dismiss()">
+        <i class="fa fa-ban"></i> Đóng
+    </button>
+</div>

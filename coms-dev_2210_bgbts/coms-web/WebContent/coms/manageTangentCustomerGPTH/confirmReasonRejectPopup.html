@@ -1,0 +1,71 @@
+<style>
+.form-control[readonly]: {
+	background-color: #e5e5e5 !important;
+}
+</style>
+
+<div id="assignHandoverPopupId">
+	<form class="form-horizontal row" role="form" name="viewForm"
+		id="viewFormId" k-options="validatorOptions">
+		<div class="form-body padding10">
+			<div class="portlet light bordered">
+				<div class="form-body padding10">
+					<!-- <div class="row caption" id="thongTinChungSpan">
+						<span class="caption-subject bold lowercase"
+							style="margin-left: 1px !important;" translate>Thông tin
+							chung</span>
+					</div> -->
+					<div class="portlet light collapse in from-search"
+						id="thongTinChung">
+						<div class="clearfix">
+							<div class="form-group col-md-12">
+								<label class="col-md-4 control-label" translate>Lý do khách hàng từ chối</label>
+								<div class="col-md-8">
+									<textarea class=" form-control width100" type="text" rows="4" disabled
+										id="reasonRejection" ng-model="caller.resultForm.reasonRejection"
+										name="reasonRejection"></textarea>
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix">
+							<div class="form-group col-md-12">
+								<label class="col-md-4 control-label" translate>Giao lại người tiếp xúc</label>
+								<div class="col-md-8">
+									<div class="input-icon right ">
+										<i class="fa fa-search directive"
+											ng-click="caller.openStaffConfirmPopup('tiepXucNext')"></i>
+									</div>
+									<input kendo-auto-complete k-options="caller.performerTiepXucNextOptions"
+										class=" form-control width100" type="text" id="approvedPerformerName"
+										ng-model="caller.resultForm.approvedPerformerName" name="approvedPerformerName" />
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix">
+							<div class="form-group col-md-12">
+								<label class="col-md-4 control-label" translate>Ghi chú phê duyệt</label>
+								<div class="col-md-8">
+									<textarea class=" form-control width100" type="text" rows="4"
+										id="approvedDescription" ng-model="caller.resultForm.approvedDescription"
+										name="approvedDescription"></textarea>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+
+					<div class="clearfix form-actions modal-footer" align="right">
+						<button type="button" id="saveData"
+							class="btn btn-qlk   padding-search-right btn pull-right  saveQLK"
+							ng-click="caller.saveConfirmApprove()" translate>Phê duyệt</button>
+						<button type="button" id="cancel"
+							class="btn btn-qlk padding-search-right margin_right10 closeQLK btn pull-right"
+							ng-click="caller.saveConfirmReject()" translate>Từ chối</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

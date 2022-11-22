@@ -1,0 +1,129 @@
+<form class="form-horizontal" style="padding-top: 20px" role="form">
+	<div class="form-body">
+		<!-- row 1-->
+		<div class="clearfix" id="aio_gp_add_body">
+			<div class="panel panel-group " style="height: 230px">
+				<div class="panel-heading"
+					style="background: #26c2bf; font-weight: bold">Thông tin
+					ticket</div>
+				<div class="panel-body">
+					<div class="clearfix">
+						<div class="form-group col-md-6">
+							<label class="col-md-4 form-horizontal control-label " translate>
+								Tên Khách hàng</label>
+							<div class="col-md-8">
+
+								<input class=" form-control width100" type="text"
+									
+									ng-model="caller.ticketDetail.complainOrderRequestDTO.customerName"
+									placeholder="Nhập tên khách hàng" />
+							</div>
+						</div>
+
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label req" translate>Số
+								điện thoại khách hàng</label>
+							<div class="clearfix position-relative col-md-8">
+								<div class="col-md-5 no-padding position-relative">
+									<input class=" form-control width100" type="text" style="text-align: right;"
+										
+										ng-model="caller.ticketDetail.complainOrderRequestDTO.customerPhone" />
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+
+					<div class="clearfix">
+
+						<div class="form-group col-md-6">
+							<label class="col-md-4 form-horizontal control-label req"
+								translate>Địa chỉ</label>
+							<div class="col-md-8">
+								<!--ng-disabled="caller.editMode === 1 || caller.editMode === 0"-->
+								<input class=" form-control width100" type="text"
+									placeholder="Nhập địa chỉ khách hàng"
+									
+									ng-model="caller.ticketDetail.complainOrderRequestDTO.customerAddress" />
+							</div>
+						</div>
+
+					</div>
+					<div class="clearfix">
+						<div class="form-group col-md-6">
+							<label class="col-md-4 form-horizontal control-label req"
+								translate>Người tạo yêu cầu</label>
+							<div class="col-md-8">
+								
+								<input class=" form-control width100" type="text"
+									
+									
+									ng-model="caller.ticketDetail.complainOrderRequestDTO.createUser" />
+							</div>
+						</div>
+
+					</div>
+
+					<div class="clearfix">
+						<div class="form-group col-md-6">
+							<label class="col-md-4 form-horizontal control-label req"
+								translate>Người thực hiện</label>
+							<div class="col-md-8">
+								<!--ng-disabled="caller.editMode === 1 || caller.editMode === 0"-->
+								<input class=" form-control width100" type="text"
+									
+									
+									ng-model="caller.ticketDetail.complainOrderRequestDTO.performName" />
+							</div>
+						</div>
+
+					</div>
+
+					<div class="clearfix">
+						<div class="form-group col-md-6">
+							<label class="col-md-4 form-horizontal control-label req"
+								translate>Thông tin dịch vụ</label>
+							<div class="col-md-8">
+								<!--ng-disabled="caller.editMode === 1 || caller.editMode === 0"-->
+								<input class=" form-control width100" type="text"
+									
+									
+									ng-model="caller.ticketDetail.complainOrderRequestDTO.service" />
+							</div>
+						</div>
+					</div>
+					<div class="clearfix">
+						<div class="form-group col-md-12">
+							<label class="col-md-2 form-horizontal control-label" translate>
+								Nội dung yêu cầu của khách hàng </label>
+							<div class="col-md-8">
+								
+								<textarea class=" form-control width100" 
+									type="text" 
+									ng-model="caller.ticketDetail.complainOrderRequestDTO.title"
+									placeholder="Nhập nội dung"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-group " style="height: 65px">
+				<div class="panel-heading "
+					style="background: #26c2bf; font-weight: bold"></div>
+			</div>
+			
+		</div>
+	</div>
+</form>
+<div class="modal-footer" style="z-index: 1" align="right">
+	<button type="button"
+		class="btn btn-qlk padding-search-right margin_right10 closeQLK"
+		ng-click="caller.closeAll()" translate>Đóng</button>
+	<button type="button" style="width: 160px;"
+		class="btn btn-qlk padding-search-right margin_right10 saveQLK"
+		ng-click="caller.saveComplainOrder()" translate>{{caller.buttonSaveLabel}}
+	</button>
+
+	<!--ng-hide="caller.editMode"-->
+</div>

@@ -1,0 +1,8 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Fri Nov 18 09:30:48 ICT 2022
+http\://repo.unicodee.com/repository/maven-snapshots/.error=Could not transfer artifact com.mchange\:c3p0\:pom\:0.9.5.2 from/to maven-snapshots (http\://repo.unicodee.com/repository/maven-snapshots/)\: Transfer failed for http\://repo.unicodee.com/repository/maven-snapshots/com/mchange/c3p0/0.9.5.2/c3p0-0.9.5.2.pom ProxyInfo{host\='10.61.11.39', userName\='null', port\=3128, type\='http', nonProxyHosts\='null'}
+https\://repo.maven.apache.org/maven2/.error=Could not transfer artifact com.mchange\:c3p0\:pom\:0.9.5.2 from/to central (https\://repo.maven.apache.org/maven2)\: Transfer failed for https\://repo.maven.apache.org/maven2/com/mchange/c3p0/0.9.5.2/c3p0-0.9.5.2.pom ProxyInfo{host\='10.61.11.39', userName\='null', port\=3128, type\='http', nonProxyHosts\='null'}
+@10.61.11.39\:3128>@default-maven-snapshots-http\://repo.unicodee.com/repository/maven-snapshots/.lastUpdated=1668738606247
+http\://repo.unicodee.com/repository/maven-releases/.error=Could not transfer artifact com.mchange\:c3p0\:pom\:0.9.5.2 from/to maven-releases (http\://repo.unicodee.com/repository/maven-releases/)\: Transfer failed for http\://repo.unicodee.com/repository/maven-releases/com/mchange/c3p0/0.9.5.2/c3p0-0.9.5.2.pom ProxyInfo{host\='10.61.11.39', userName\='null', port\=3128, type\='http', nonProxyHosts\='null'}
+@10.61.11.39\:3128>@default-central-https\://repo.maven.apache.org/maven2/.lastUpdated=1668738648344
+@10.61.11.39\:3128>@default-maven-releases-http\://repo.unicodee.com/repository/maven-releases/.lastUpdated=1668738627289

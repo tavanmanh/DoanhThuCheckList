@@ -1,0 +1,259 @@
+<style>
+    .app-modal-window .modal-dialog {
+        min-width: 1000px;
+    }
+
+    .modal-content{
+        width: 100%;
+        padding: 0;
+    }
+
+    .close-modal-x{
+        position: absolute;
+        top: 6px;
+        right: 6px;
+    }
+
+    .input-half{
+        width: 40%;
+        display: inline;
+    }
+
+    .display-block{
+        display: block;
+        width: 100%;
+    }
+    .animate-show-hide.ng-hide {
+        opacity: 0;
+    }
+
+    .animate-show-hide.ng-hide-add,
+    .animate-show-hide.ng-hide-remove {
+        transition: all linear 0.5s;
+    }
+
+    .check-element {
+        border: 1px solid black;
+        opacity: 1;
+        padding: 10px;
+    }
+
+    .mheight-400{
+        max-height: 350px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+</style>
+
+<!-- Edit TR Modal -->
+
+<div class="modal-header" style="background-color: #33CCCC;">
+    <h5 class="modal-title">Tạo mới/Sửa TR</h5>
+    <button type="button" class="close close-modal-x" data-dismiss="modal" aria-label="Close" ng-click="$dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal row" role="form">
+        <div class="form-body">
+            <div class="portlet light bordered">
+                <div class="portlet-title background-title">
+                    <div class="caption">
+                        <span class="caption-subject bold lowercase" ng-bind-html="vm.sectionHeader" translate></span>
+                    </div>
+                </div>
+                <div id="tr_details_container" class="collapse in from-search">
+                    <div class="clearfix position-relative">
+                        <div class="clearfix">
+
+                            <div class="form-group row">
+                                <div class="col-md-4">
+                                    <div>
+                                        <label class="form-horizontal control-label" translate>Tên TR</label><span style="color:red !important;">*</span>
+                                    </div>
+                                    <input class="form-control display-block" ng-model="workingTR.trName" placeholder="Tên TR" ng-disabled="isEditingAIOTR" id="trNameInput"/>
+                                    <span style="color:red;">{{vm.validateTrName}}</span>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div>
+                                        <label class="form-horizontal control-label" translate>Loại TR</label><span style="color:red !important;">*</span>
+                                    </div>
+                                    <select ng-model="workingTR.trTypeId" class="form-control display-block" ng-disabled="!isCreateNew"
+                                            ng-options="trType.woTrTypeId as trType.trTypeName for trType in trTypes"
+                                            ng-change="selectTrType()">
+                                        <option></option>
+                                    </select>
+                                    <span style="color: red">{{vm.validateTrCode}}</span>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="display-block control-label" style="text-align: left !important;" translate>Định mức thời gian (số giờ)</label>
+                                    <input type="text" ng-model="workingTR.qoutaTime" class="form-control display-block" placeholder="1" only-numbers />
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <div>
+                                        <label class="form-horizontal control-label" translate>Hạn hoàn thành</label><span style="color:red !important;">*</span>
+                                    </div>
+                                    <input class="form-control display-block" kendo-date-picker k-format="'dd/MM/yyyy'" ng-model="workingTR.finishDate" min-year="1000" date-time />
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div>
+                                        <label class="form-horizontal control-label" translate>Đơn vị điều phối cấp 1</label><span style="color:red !important;">*</span>
+                                    </div>
+                                    <select ng-model="workingTR.cdLevel1" class="form-control display-block"
+                                            ng-options="cd1.code as cd1.name for cd1 in cdLv1List" ng-disabled="!isCreateNew || permissions.crudTRCnkt"
+                                            ng-selected="workingTR.cdLevel1 == cd1.code">
+                                        <option></option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4" ng-if="!workingTR.isDbht">
+                                    <div>
+                                        <label class="form-horizontal control-label" translate>Đơn vị điều phối cấp 2</label><span style="color:red !important;">*</span>
+                                    </div>
+                                    <input class="form-control display-block" disabled ng-model="workingTR.cdLevel2Name">
+                                </div>
+
+                                <div class="col-md-4" ng-if="workingTR.isDbht">
+                                    <div>
+                                        <label class="form-horizontal control-label" translate>Đơn vị điều phối cấp 2</label><span style="color:red !important;">*</span>
+                                    </div>
+                                    <input class="form-control display-block" type="text" kendo-auto-complete k-options="autoCompleteCdLevel2Options"
+                                           ng-model="workingTR.cdLevel2Name" maxlength="200" />
+                                </div>
+
+                                <div class="col-md-4" ng-if="workingTR.isDbht">
+                                    <div>
+                                        <label class="form-horizontal control-label" translate>Đảo bảo thiết kế dự án</label><span style="color:red !important;">*</span>
+                                    </div>
+                                    <input class="form-control display-block" kendo-date-picker k-format="'dd/MM/yyyy'" ng-model="workingTR.dbTkdaDate" min-year="1000" date-time />
+                                </div>
+
+                                <div class="col-md-4" ng-if="workingTR.isDbht">
+                                    <div>
+                                        <label class="form-horizontal control-label" translate>Đảo bảo thẩm thiết kế dự toán</label><span style="color:red !important;">*</span>
+                                    </div>
+                                    <input class="form-control display-block" kendo-date-picker k-format="'dd/MM/yyyy'" ng-model="workingTR.dbTtkdtDate" min-year="1000" date-time />
+                                </div>
+
+                                <div class="col-md-4" ng-if="workingTR.isDbht">
+                                    <div>
+                                        <label class="form-horizontal control-label" translate>Đảo bảo vật tư</label><span style="color:red !important;">*</span>
+                                    </div>
+                                    <input class="form-control display-block" kendo-date-picker k-format="'dd/MM/yyyy'" ng-model="workingTR.dbVtDate" min-year="1000" date-time />
+                                </div>
+
+                                <div class="col-md-4" ng-show="workingTR.trTypeCode!='TR_THUE_MAT_BANG_TRAM'">
+                                    <div style="width: 49%; display: inline-block; padding-top: 6px;">
+                                        <input type="radio" name="ctOrPj" ng-model="ctOrPj.isContract" ng-value="true" ng-click="selectContract()" ng-disabled="!isCreateNew" ><span> Hợp đồng </span>
+                                    </div>
+                                    <div style="width: 49%; display: inline-block; padding-top: 6px;">
+                                        <input type="radio" name="ctOrPj" ng-model="ctOrPj.isContract" ng-value="false" ng-click="selectProject()" ng-disabled="!isCreateNew"> <span> Dự án </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4" ng-show="workingTR.trTypeCode!='TR_THUE_MAT_BANG_TRAM'">
+                                    <div ng-if="!ctOrPj.isContract">
+                                        <div>
+                                            <label class="form-horizontal control-label" translate>Mã dự án</label><span style="color:red !important;">*</span>
+                                        </div>
+                                        <input class="form-control display-block" type="text"
+                                               k-options="autoCompleteProjectOptions" kendo-auto-complete
+                                               ng-model="label.projectInfo" ng-disabled="!isCreateNew"
+                                               maxlength="200" id="autoCompleteProjectId" />
+                                        <span style="color: red">{{vm.validateTrProjectCode}}</span>
+                                    </div>
+                                    <div ng-if="ctOrPj.isContract">
+                                        <div>
+                                            <label class="form-horizontal control-label" translate>Mã hợp đồng</label><span style="color:red !important;">*</span>
+                                        </div>
+                                        <input class="form-control display-block" type="text"
+                                               k-options="autoCompleteContractOptions" kendo-auto-complete
+                                               ng-model="workingTR.contractCode" ng-disabled="!isCreateNew"
+                                               maxlength="200" id="autoCompleteContractId" />
+                                        <span style="color: red">{{vm.validateContractCode}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" ng-show="workingTR.trTypeCode!='TR_THUE_MAT_BANG_TRAM'">
+                                    <div>
+                                        <label class="form-horizontal control-label" translate>Mã công trình</label><span style="color:red !important;">*</span>
+                                    </div>
+                                    <select ng-model="workingTR.construction" class="form-control display-block" ng-change="getRelatedInfo()"
+                                            ng-options="cons as cons.constructionCode for cons in constructions" ng-if="isCreateNew"
+                                            ng-selected="workingTR.constructionCode == cons.constructionCode">
+                                        <option></option>
+                                    </select>
+                                    <input ng-model="workingTR.constructionCode" class="form-control display-block" ng-if="!isCreateNew" disabled />
+                                </div>
+
+                                <div class="col-md-4" ng-if="workingTR.trTypeCode!='TR_THUE_MAT_BANG_TRAM'">
+                                    <label class="display-block control-label" style="text-align: left !important;" translate>Mã trạm</label>
+                                    <input ng-model="label.stationCodeAndAddress" class="form-control display-block" disabled />
+                                </div>
+
+                                <div class="col-md-4" ng-show="workingTR.trTypeCode!='TR_THUE_MAT_BANG_TRAM'">
+                                    <label class="display-block control-label" style="text-align: left !important;" translate>Vị trí thực hiện yêu cầu (Long - Lat)</label>
+                                    <input class="form-control input-half" ng-model="workingTR.executeLong" placeholder="Longtitude" disabled/>
+                                    <input class="form-control input-half" ng-model="workingTR.executeLat" placeholder="Latitude" disabled/>
+                                </div>
+
+                                <div class="col-md-12" ng-if="workingTR.trTypeCode=='TR_THUE_MAT_BANG_TRAM'">
+                                    <label class="display-block control-label" style="text-align: left !important;" translate>Giao chỉ tiêu</label>
+                                    <div class="clearfix position-relative mheight-400">
+                                        <div id="rentStationList" kendo-grid="vm.rentStationListTbl" k-options="vm.rentStationListOptions" style="width: 100% !important; margin:0;"></div>
+                                    </div>
+                                </div>
+
+                                <!--<div class="col-md-12" ng-if="vm.isAutoCreateWo">-->
+                                    <!--<label class="display-block control-label" style="text-align: left !important;" translate>Hạng mục tự tạo WO cho loại công trình (*) <span ng-bind-html="vm.catConstructionTypeName"></span></label>-->
+
+                                    <!--<div class="clearfix position-relative mheight-400">-->
+                                        <!--<div id="workItemList" kendo-grid="vm.workItemListTbl" k-options="vm.workItemListOptions" style="width: 100% !important; margin:0;"></div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+
+                                <div class="col-md-12">
+                                    <label class="display-block control-label" style="text-align: left !important;" translate>Các trạm đã chọn</label>
+                                    <div class="caption">
+                                        <span class="caption-subject bold lowercase" ng-bind-html="vm.lstStationCodes" translate></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div id="addFileWhenCreated" class="row" ng-if="isCreateNew" style="margin-top: 1em">
+                                        <button type="button" class="btn btn-qlk padding-search-right ng-scope" ng-click="addAttachment()">
+                                            <icon class="icon-plus"></icon> Thêm File đính kèm
+                                        </button>
+                                        <input id="trAttachmentFileId" type="file" style="display: none">
+                                        <ul>
+                                            <li ng-repeat="file in fileList" ng-bind-html="file.file.name"></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        <div id="borderCount"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="$dismiss()">
+        <i class="fa fa-ban"></i> Hủy bỏ
+    </button>
+    <button type="button" class="btn btn-secondary" ng-click="validateCreateNew()&&validateWorkItemList()?$close():return;">
+        <i class="fa fa-floppy-o azure"></i> Ghi lại
+    </button>
+</div>
+
+<!-- End edit tr Modal -->

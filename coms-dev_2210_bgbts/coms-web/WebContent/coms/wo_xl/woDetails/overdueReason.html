@@ -1,0 +1,31 @@
+<style>
+    .modal-content{
+        padding: 0px!important;
+    }
+</style>
+
+<div class="modal-header" style="background-color: #33CCCC;">
+    <h5 class="modal-title">Giải trình lý do tiếp nhận quá hạn</h5>
+    <button type="button" class="close close-modal-x" data-dismiss="modal" aria-label="Close" ng-click="$dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal row" role="form">
+        <div class="form-body" >
+            <div class="col-md-12">
+                <label class="display-block control-label req" style="text-align: left !important;" translate>Lý do:</label>
+                <textarea ng-model="vm.overdueReasonInput" style="width: 100%; height: 120px;"> </textarea>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="$dismiss()">
+        <i class="fa fa-ban"></i> Hủy bỏ
+    </button>
+    <button type="button" class="btn btn-secondary" ng-click="vm.validateOverdueReason()?$close():return;">
+        <i class="fa fa-floppy-o azure"></i> Lưu
+    </button>
+</div>

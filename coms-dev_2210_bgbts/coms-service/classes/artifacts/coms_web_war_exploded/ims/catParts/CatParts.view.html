@@ -1,0 +1,20 @@
+<!-- @author hailh10 -->
+<div ng-controller="CatPartsController as vm">
+     <div class="btn-toolbar margin-bottom-10 margin-top" ng-show="!vm.showSum">
+			<div data-ng-include="'erp/apcommon/category_header.html'" kendo-validator="vm.validator" k-options="vm.validatorOptions"></div>	
+	</div>
+	<hr class="line-Hr">
+    <div ng-show="!vm.showDetail" id="catParts">
+	    <div ng-show="vm.showSearch">
+	    	<div data-ng-include="'erp/catParts/searchForm.html'" kendo-validator="vm.validator" k-options="vm.validatorOptions"></div>
+	    </div>
+        <div id="catPartsGridId" kendo-grid="vm.catPartsGrid" k-options="vm.gridOptions" k-on-change="vm.onGridChange(kendoEvent, { selected: selected }, data)">
+            <!-- <div k-detail-template grid-detail>
+                <div data-ng-include="'erp/gl/catParts/CatPartsForm.html'" kendo-validator="vm.validator" k-options="vm.validatorOptions"></div>
+            </div> -->
+        </div>
+    </div>
+    <div ng-show="vm.showDetail">
+        <div data-ng-include="'erp/catParts/CatPartsForm.html'" kendo-validator="vm.validator" k-options="vm.validatorOptions"></div>
+    </div>
+</div>

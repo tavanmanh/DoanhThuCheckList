@@ -1,0 +1,430 @@
+<!-- @author hailh10 -->
+<h3 class="page-title" translate>
+	<i class="fa fa-line-chart" aria-hidden="true"></i> {{'Chi tiết' | translate}} CatParts
+</h3>
+<div ng-controller="CatPartsFormController as vm">
+    
+	<hr class="line-Hr">
+    <div  id="catParts">
+		<form class="form-horizontal row" role="form" name ="catParts" >
+			<div class="form-body">
+				<div class="clearfix">
+					
+				</div>
+				
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">PARTNER_NAME</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_partnerName" name="catParts_partnerName" ng-readonly="vm.readonly" ng-model="vm.data.partnerName" maxlength = "500">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">ADDRESS</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_address" name="catParts_address" ng-readonly="vm.readonly" ng-model="vm.data.address" maxlength = "300">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">PHONE</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_phone" name="catParts_phone" ng-readonly="vm.readonly" ng-model="vm.data.phone" maxlength = "30">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">DESCRIPTION</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_description" name="catParts_description" ng-readonly="vm.readonly" ng-model="vm.data.description" maxlength = "300">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">FAX</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_fax" name="catParts_fax" ng-readonly="vm.readonly" ng-model="vm.data.fax" maxlength = "30">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">TAX_CODE</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_taxCode" name="catParts_taxCode" ng-readonly="vm.readonly" ng-model="vm.data.taxCode" maxlength = "50">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">CODE</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_code" name="catParts_code" ng-readonly="vm.readonly" ng-model="vm.data.code" maxlength = "100">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">REF_ID</label>
+						<div class="col-md-8">							
+							<select   kendo-drop-down-list="vm.refId.dropDownList" class="form-control width100"
+											id="catParts_refId" 
+											style="width: 100%" name="catParts_refId"
+											k-data-text-field="'name'" k-data-value-field="'id'"
+											k-data-source="vm.refId.dlDataSource" ng-readonly="vm.readonly"
+											ng-model="vm.data.refId">
+									</select> 
+						</div>
+					</div>
+				</div>	
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">TYPE</label>
+						<div class="col-md-8">							
+							<select   kendo-drop-down-list="vm.type.dropDownList" class="form-control width100"
+											id="catParts_type" 
+											style="width: 100%" name="catParts_type"
+											k-data-text-field="'name'" k-data-value-field="'id'"
+											k-data-source="vm.type.dlDataSource" ng-readonly="vm.readonly"
+											ng-model="vm.data.type">
+									</select> 
+						</div>
+					</div>
+				</div>	
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">ABB_NAME</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_abbName" name="catParts_abbName" ng-readonly="vm.readonly" ng-model="vm.data.abbName" maxlength = "100">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">GROUP_ID</label>
+						<div class="col-md-8">							
+							<input class="form-control width100"  id="catParts_groupId" name="catParts_groupId" ng-readonly="vm.readonly" ng-model="vm.data.groupId" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength = "22">
+						</div>
+					</div>
+				</div>			
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">DELEGATE_PERSON</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_delegatePerson" name="catParts_delegatePerson" ng-readonly="vm.readonly" ng-model="vm.data.delegatePerson" maxlength = "60">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">TITLE</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_title" name="catParts_title" ng-readonly="vm.readonly" ng-model="vm.data.title" maxlength = "100">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">ACCOUNT_NUMBER</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_accountNumber" name="catParts_accountNumber" ng-readonly="vm.readonly" ng-model="vm.data.accountNumber" maxlength = "100">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">BUSSINESS_NUMBER</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_bussinessNumber" name="catParts_bussinessNumber" ng-readonly="vm.readonly" ng-model="vm.data.bussinessNumber" maxlength = "50">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">STATUS</label>
+						<div class="col-md-8">							
+							<select   kendo-drop-down-list="vm.status.dropDownList" class="form-control width100"
+											id="catParts_status" 
+											style="width: 100%" name="catParts_status"
+											k-data-text-field="'name'" k-data-value-field="'id'"
+											k-data-source="vm.status.dlDataSource" ng-readonly="vm.readonly"
+											ng-model="vm.data.status">
+									</select> 
+						</div>
+					</div>
+				</div>	
+					<div class="clearfix">
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label " translate>CREATED_DATE</label>
+							<div class="col-md-8">
+								<input  kendo-date-picker k-format="'dd/MM/yyyy'" ng-readonly="vm.readonly" class="form-control width100" name="catParts_createdDate" id="catParts_createdDate" ng-model="vm.data.createdDate" />
+							</div>						
+						</div>
+					</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">PROPOSAL_NOTE</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_proposalNote" name="catParts_proposalNote" ng-readonly="vm.readonly" ng-model="vm.data.proposalNote" maxlength = "500">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">ACCEPTOR_ID</label>
+						<div class="col-md-8">							
+							<select   kendo-drop-down-list="vm.acceptorId.dropDownList" class="form-control width100"
+											id="catParts_acceptorId" 
+											style="width: 100%" name="catParts_acceptorId"
+											k-data-text-field="'name'" k-data-value-field="'id'"
+											k-data-source="vm.acceptorId.dlDataSource" ng-readonly="vm.readonly"
+											ng-model="vm.data.acceptorId">
+									</select> 
+						</div>
+					</div>
+				</div>	
+					<div class="clearfix">
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label " translate>ACCEPT_DATE</label>
+							<div class="col-md-8">
+								<input  kendo-date-picker k-format="'dd/MM/yyyy'" ng-readonly="vm.readonly" class="form-control width100" name="catParts_acceptDate" id="catParts_acceptDate" ng-model="vm.data.acceptDate" />
+							</div>						
+						</div>
+					</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">ACCEPT_NOTE</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_acceptNote" name="catParts_acceptNote" ng-readonly="vm.readonly" ng-model="vm.data.acceptNote" maxlength = "500">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">REJECT_NOTE</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_rejectNote" name="catParts_rejectNote" ng-readonly="vm.readonly" ng-model="vm.data.rejectNote" maxlength = "500">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">NUM_DISPATH</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_numDispath" name="catParts_numDispath" ng-readonly="vm.readonly" ng-model="vm.data.numDispath" maxlength = "50">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">NUM_SUBMITSION</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_numSubmitsion" name="catParts_numSubmitsion" ng-readonly="vm.readonly" ng-model="vm.data.numSubmitsion" maxlength = "50">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">CAT_PARTNER_TYPE_ID</label>
+						<div class="col-md-8">							
+							<input class="form-control width100"  id="catParts_catPartnerTypeId" name="catParts_catPartnerTypeId" ng-readonly="vm.readonly" ng-model="vm.data.catPartnerTypeId" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength = "10">
+						</div>
+					</div>
+				</div>			
+					<div class="clearfix">
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label " translate>CREAT_PARTNER_DATE</label>
+							<div class="col-md-8">
+								<input  kendo-date-picker k-format="'dd/MM/yyyy'" ng-readonly="vm.readonly" class="form-control width100" name="catParts_creatPartnerDate" id="catParts_creatPartnerDate" ng-model="vm.data.creatPartnerDate" />
+							</div>						
+						</div>
+					</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">REASON_CHANGE_PARTNER</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_reasonChangePartner" name="catParts_reasonChangePartner" ng-readonly="vm.readonly" ng-model="vm.data.reasonChangePartner" maxlength = "500">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">DELEGATE_POSITION</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_delegatePosition" name="catParts_delegatePosition" ng-readonly="vm.readonly" ng-model="vm.data.delegatePosition" maxlength = "100">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">ACCOUNT_HOLDER</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_accountHolder" name="catParts_accountHolder" ng-readonly="vm.readonly" ng-model="vm.data.accountHolder" maxlength = "100">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">IDENTITY_CARD</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_identityCard" name="catParts_identityCard" ng-readonly="vm.readonly" ng-model="vm.data.identityCard" maxlength = "100">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">BANK_NAME</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_bankName" name="catParts_bankName" ng-readonly="vm.readonly" ng-model="vm.data.bankName" maxlength = "100">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">STATION_CODE_EXPECTED</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_stationCodeExpected" name="catParts_stationCodeExpected" ng-readonly="vm.readonly" ng-model="vm.data.stationCodeExpected" maxlength = "100">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">STATION_ID_EXPECTED</label>
+						<div class="col-md-8">							
+							<input class="form-control width100"  id="catParts_stationIdExpected" name="catParts_stationIdExpected" ng-readonly="vm.readonly" ng-model="vm.data.stationIdExpected" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength = "20">
+						</div>
+					</div>
+				</div>			
+					<div class="clearfix">
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label " translate>MODIFIELD_DATE</label>
+							<div class="col-md-8">
+								<input  kendo-date-picker k-format="'dd/MM/yyyy'" ng-readonly="vm.readonly" class="form-control width100" name="catParts_modifieldDate" id="catParts_modifieldDate" ng-model="vm.data.modifieldDate" />
+							</div>						
+						</div>
+					</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">CAT_BANK_BRANCH_ID</label>
+						<div class="col-md-8">							
+							<input class="form-control width100"  id="catParts_catBankBranchId" name="catParts_catBankBranchId" ng-readonly="vm.readonly" ng-model="vm.data.catBankBranchId" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength = "38">
+						</div>
+					</div>
+				</div>			
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">IS_LOCK</label>
+						<div class="col-md-8">							
+							<select   kendo-drop-down-list="vm.isLock.dropDownList" class="form-control width100"
+											id="catParts_isLock" 
+											style="width: 100%" name="catParts_isLock"
+											k-data-text-field="'name'" k-data-value-field="'id'"
+											k-data-source="vm.isLockDlDataSource"  ng-readonly="vm.readonly"
+											ng-model="vm.data.isLock">
+									</select> 
+						</div>
+					</div>
+				</div>	
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">ISSUE_BY</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_issueBy" name="catParts_issueBy" ng-readonly="vm.readonly" ng-model="vm.data.issueBy" maxlength = "300">
+						</div>
+					</div>
+				</div>
+					<div class="clearfix">
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label " translate>DATE_RANGE</label>
+							<div class="col-md-8">
+								<input  kendo-date-picker k-format="'dd/MM/yyyy'" ng-readonly="vm.readonly" class="form-control width100" name="catParts_dateRange" id="catParts_dateRange" ng-model="vm.data.dateRange" />
+							</div>						
+						</div>
+					</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">CHECK_PARTNER</label>
+						<div class="col-md-8">							
+							<input class="form-control width100"  id="catParts_checkPartner" name="catParts_checkPartner" ng-readonly="vm.readonly" ng-model="vm.data.checkPartner" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength = "10">
+						</div>
+					</div>
+				</div>			
+					<div class="clearfix">
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label " translate>DATE_UPDATE_PARTNERS_CONTRACT</label>
+							<div class="col-md-8">
+								<input  kendo-date-picker k-format="'dd/MM/yyyy'" ng-readonly="vm.readonly" class="form-control width100" name="catParts_dateUpdatePartnersContract" id="catParts_dateUpdatePartnersContract" ng-model="vm.data.dateUpdatePartnersContract" />
+							</div>						
+						</div>
+					</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">REPRESENTATION_NAME</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_representationName" name="catParts_representationName" ng-readonly="vm.readonly" ng-model="vm.data.representationName" maxlength = "500">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">REPRESENTATION_POSITION</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_representationPosition" name="catParts_representationPosition" ng-readonly="vm.readonly" ng-model="vm.data.representationPosition" maxlength = "500">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">NOTE</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_note" name="catParts_note" ng-readonly="vm.readonly" ng-model="vm.data.note" maxlength = "2,000">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">ACCOUNT</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_account" name="catParts_account" ng-readonly="vm.readonly" ng-model="vm.data.account" maxlength = "2,000">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">TRANSACTION_NAME</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_transactionName" name="catParts_transactionName" ng-readonly="vm.readonly" ng-model="vm.data.transactionName" maxlength = "750">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">REPRESENTATIVE_NAME</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_representativeName" name="catParts_representativeName" ng-readonly="vm.readonly" ng-model="vm.data.representativeName" maxlength = "750">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label ">REPRESENTATIVE_POSITION</label>
+						<div class="col-md-8">
+							<input class="form-control width100"  id="catParts_representativePosition" name="catParts_representativePosition" ng-readonly="vm.readonly" ng-model="vm.data.representativePosition" maxlength = "750">
+						</div>
+					</div>
+				</div>
+					<div class="clearfix">
+						<div class="form-group col-md-12 text-right">
+									<button type="button" class="btn green" ng-disabled="vm.isdisable" ng-click = "vm.save()">Lưu lại</button>
+						</div>
+					</div>				
+			</div>
+		</form>
+	</div>
+</div>
+

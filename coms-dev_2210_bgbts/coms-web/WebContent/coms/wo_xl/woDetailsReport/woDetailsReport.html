@@ -1,0 +1,307 @@
+<style>
+
+    .amcharts-chart-div a {
+        display: none !important;
+    }
+
+    .form-group {
+        margin-top: 1em;
+        border-radius: 5px;
+    }
+
+    .display-block {
+        display: block;
+        width: 100%;
+    }
+
+    .from-search {
+        margin-top: 0px !important;
+    }
+
+    .k-pager-wrap .k-link {
+        margin-top: 4px;
+    }
+
+    .icon-table {
+        font-size: 20px;
+        padding: 5px;
+        color: #E0D014;
+        text-align: center;
+    }
+
+    i:hover {
+        color: #011995;
+    }
+
+    .no-padding {
+        padding: 0;
+    }
+
+    .position-relative {
+        position: relative;
+    }
+</style>
+<div data-ng-controller="woDetailsReportController as vm">
+    <p class="text-brecum">{{vm.String}}</p>
+    <form class="form-horizontal row" role="form">
+
+        <div class="form-body">
+            <div class="portlet light bordered">
+                <div class="portlet-title background-title">
+                    <div class="caption" style="width: 100%">
+                        <span class="caption-subject bold lowercase" translate>Thông tin tìm kiếm </span>
+                        <div class="pull-right">
+                            <input type="checkbox" ng-model="advanceSearch">
+                            <span class="caption-subject bold lowercase"
+                                  style="font-size: 14px; margin-left: 5px; margin-right: 10px;"
+                                  translate>Nâng cao</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="workItem1" class="collapse in from-search">
+                    <div class="clearfix position-relative">
+
+                        <div class="collapse in from-search">
+                            <div class="clearfix position-relative">
+                                <div class="clearfix">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="display-block control-label"
+                                                   style="text-align: left !important;" translate>Nguồn việc<span
+                                                    style="color: red">*</span></label>
+                                            <select ng-if="!isAIO" class="form-control display-block"
+                                                    ng-model="vm.searchForm.apWorkSrc"
+                                                    ng-selected="workingWO.apWorkSrc == apWorkSrc.code"
+                                                    ng-options="apWorkSrc.code as apWorkSrc.name for apWorkSrc in apWorkSrcs">
+                                                <option></option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="display-block control-label"
+                                                   style="text-align: left !important;" translate>Loại WO<span
+                                                    style="color: red">*</span></label>
+                                            <select kendo-multi-select style="width: 100%"
+                                                    ng-model="vm.searchForm.listWoTypeId"
+                                                    k-data-text-field="'woTypeName'" k-data-value-field="'woTypeId'"
+                                                    k-data-source="woTypes">
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="display-block control-label"
+                                                   style="text-align: left !important;" translate>Loại Công trình<span
+                                                    style="color: red">*</span> </label>
+                                            <select class="form-control display-block"
+                                                    ng-model="vm.searchForm.apConstructionType"
+                                                    ng-options="consType.code as consType.name for consType in apConstructionTypes"
+                                                    ng-selected="workingWO.apConstructionType == consType.code">
+                                                <option></option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="display-block control-label"
+                                                   style="text-align: left !important;" translate>Nội dung tìm
+                                                kiếm</label>
+                                            <input id="keySearch" class="form-control display-block" type="text"
+                                                   ng-enter="vm.genReport()"
+                                                   ng-model="vm.searchForm.keySearch"
+                                                   placeholder="Mã trạm/Công trình/Hợp đồng"/>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="display-block form-horizontal control-label"
+                                                   style="text-align: left !important;" translate>Tìm WO</label>
+                                            <div class="col-md-12 no-padding">
+                                                <input placeholder="Nhập tên/Mã WO" ng-enter="vm.genReport()"
+                                                       class=" form-control width100" type="text"
+                                                       ng-model="vm.searchForm.woCode"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-12 no-padding">
+                                                    <label class="display-block control-label"
+                                                           style="text-align: left !important;" translate>Ghi
+                                                        nhận</label>
+                                                </div>
+                                            </div>
+                                            <div class="row position-relative">
+                                                <div class="col-md-11 no-padding">
+                                                    <div class="row">
+                                                        <div class="col-md-1 no-padding"><label class="control-label"
+                                                                                                translate>Từ</label>
+                                                        </div>
+                                                        <div class="col-md-5 no-padding position-relative">
+                                                            <input kendo-date-picker k-format="'dd/MM/yyyy'"
+                                                                   ng-model="vm.searchForm.fromDate"
+                                                                   style="width: 100%;"
+                                                                   min-year="1000" date-time/>
+                                                        </div>
+                                                        <div class="col-md-1 no-padding" style="text-align: center;">
+                                                            <label class="control-label" translate>đến</label></div>
+                                                        <div class="col-md-5 no-padding position-relative">
+                                                            <input kendo-date-picker k-format="'dd/MM/yyyy'"
+                                                                   ng-change="vm.setToDate()"
+                                                                   ng-model="vm.searchForm.toDateRaw"
+                                                                   style="width: 100%;"
+                                                                   min-year="1000" date-time/>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="One_icon col-md-1">
+                                                    <i class="fa fa-times" aria-hidden="true"
+                                                       ng-click="vm.cancelListYear()"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row no-padding" >
+										<div class="col-md-6">
+											<label class="display-block form-horizontal control-label"
+												style="text-align: left !important;" translate>Trụ</label>
+											<div class="col-md-12 no-padding">
+												<select class="form-control display-block"
+													ng-model="vm.searchForm.type"
+													ng-options="originType.code as originType.name for originType in originTypes">
+													<option></option>
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6" ng-if="advanceSearch">
+                                            <label class="display-block form-horizontal control-label"
+                                                   style="text-align: left !important;" translate>Tỉnh</label>
+                                            <div class="row position-relative">
+                                                <div class="col-md-11 no-padding">
+                                                    <div class="input-icon right ">
+                                                        <i class="fa fa-search directive"
+                                                           ng-click="vm.openCatProvincePopup()"></i>
+                                                    </div>
+                                                    <input kendo-auto-complete k-options="vm.provinceOptions"
+                                                           class="form-control width100" type="text" id="provincename"
+                                                           ng-model="vm.searchForm.provinceName" name="provincename"/>
+                                                </div>
+                                                <div class="col-md-1 One_icon">
+                                                    <i class="fa fa-times" aria-hidden="true"
+                                                       ng-click="vm.clearProvince()"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" ng-if="advanceSearch">
+                                    	<div class="col-md-6">
+                                            <div class="row">
+                                                <label class="display-block form-horizontal control-label"
+                                                       style="text-align: left !important;" translate>Đơn vị thực hiện
+                                                    (CD level 4)</label>
+                                            </div>
+                                            <div class="row position-relative">
+                                                <div class="col-md-11 no-padding">
+                                                    <div class="input-icon right ">
+                                                        <i class="fa fa-search directive"
+                                                           ng-click="vm.openDepartmentTo('dept')"></i>
+                                                    </div>
+                                                    <input kendo-auto-complete k-options="vm.deprtOptions1"
+                                                           ng-blur="vm.changeDataAuto('dept')"
+                                                           class=" form-control width100" type="text"
+                                                           ng-model="vm.label.depName" name="dept"
+                                                           onclick="reset_msg();" required
+                                                           data-required-msg="Đơn vị không để trống"/>
+                                                    <span id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+                                                    <script>
+                                                        function reset_msg() {
+                                                            document.getElementById('msg').innerHTML = '';
+                                                        }
+                                                    </script>
+                                                </div>
+                                                <div class="One_icon col-md-1">
+                                                    <i class="fa fa-times" aria-hidden="true"
+                                                       ng-click="vm.cancelInput('dept')"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="display-block form-horizontal control-label"
+                                                   style="text-align: left !important;" translate>Nhân viên</label>
+                                            <div class="col-md-12 no-padding">
+                                                <input placeholder="Nhập tên/email" ng-enter="vm.genReport()"
+                                                       class=" form-control width100" type="text"
+                                                       ng-model="vm.searchForm.ftName"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" ng-if="advanceSearch">
+                                    	<div class="col-md-6">
+                                            <label class="display-block form-horizontal control-label"
+                                                   style="text-align: left !important;" translate>Trạng thái</label>
+                                            <div class="col-md-12 no-padding">
+                                                <select class="form-control display_block"
+                                                        ng-model="vm.searchForm.state">
+                                                    <option>&nbsp;</option>
+                                                    <option ng-repeat="state in states" value="{{state.code}}">
+                                                        {{state.name}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="display-block form-horizontal control-label"
+                                                   style="text-align: left !important;" translate>Người ghi nhận P.QT-TTHT</label>
+                                            <div class="col-md-12 no-padding">
+                                                <input placeholder="Nhập tên/email" ng-enter="vm.genReport()"
+                                                       class=" form-control width100" type="text"
+                                                       ng-model="vm.searchForm.userTthtApproveWo"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div id="borderCount"></div> -->
+                        <div class="clearfix form-actions margin-top">
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <button type="button" ng-click="vm.genReport()"
+                                            class="btn btn-qlk padding-search-right searchQLK" translate> Báo cáo
+                                    </button>
+                                    <button type="button" ng-click="vm.toExcelReport()" style="width: 120px;"
+                                            ng-disabled="vm.disableBtnExcel"
+                                            class="btn btn-qlk padding-search-right excelQLK" translate> Xuất excel
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div align="center">
+                                    <div id="loadingReportConstr" style="height: 30px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="portlet light bordered">
+        <div class="portlet-title background-title">
+            <div class="caption">
+                <span class="caption-subject bold lowercase" translate>Kết quả báo cáo</span>
+            </div>
+        </div>
+
+        <div id="grid" class="collapse in from-search">
+            <div class="clearfix position-relative">
+                <div id="detailsReportTable" kendo-grid="vm.detailsReportTable" k-options="vm.detailsReportTableOptions"></div>
+            </div>
+        </div>
+    </div>
+</div>

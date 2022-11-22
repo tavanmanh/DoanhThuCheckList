@@ -1,0 +1,389 @@
+<style>
+.form-control[readonly]: {
+	background-color: #e5e5e5 !important;
+}
+</style>
+
+<div id="assignHandoverPopupId">
+	<form class="form-horizontal row" role="form" name="addForm"
+		id="addFormId" k-options="validatorOptions">
+		<div class="form-body padding10">
+			<div class="portlet light bordered">
+				<div class="form-body padding10">
+					<div class="row caption" id="thongTinChungSpan">
+						<span class="caption-subject bold lowercase"
+							style="margin-left: 1px !important;" translate>Thông tin
+							chung</span>
+					</div>
+					<div class="portlet light bordered collapse in from-search"
+						id="thongTinChung">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Mã công
+									trình/tuyến/trạm</label>
+								<div class="col-md-8">
+									<div class="input-icon right ">
+										<i class="fa fa-search directive"
+											ng-click="caller.openConstruction('add')"></i>
+									</div>
+									<input kendo-auto-complete
+										k-options="caller.constructionOptions" readonly="readonly"
+										class=" form-control width100" type="text"
+										ng-model="caller.addFormCons.constructionCode"
+										name="constructionCode" id="constructionCode" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-hide="caller.checkStatus"
+											ng-click="caller.resetFormAdd('constructionCode')"></i>
+									</div> -->
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Hợp đồng</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text" readonly
+										ng-model="caller.addFormCons.cntContractCode"
+										name="cntContractCode" id="cntContractCode" />
+								</div>
+							</div>
+						</div>
+						<!-- <div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>TTKV</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										ng-model="caller.addFormCons.ttkv" readonly name="ttkv" id="ttkv" />
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>TTKT</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text" readonly
+										ng-model="caller.addFormCons.ttkt" name="ttkt" id="ttkt" />
+								</div>
+							</div>
+						</div> -->
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Nội dung</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										id="description" ng-model="caller.addFormCons.description"
+										name="description" readonly />
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Nguồn
+									việc</label>
+								<div class="col-md-8">
+									<select kendo-drop-down-list style="width: 100%"
+										ng-model="caller.addFormCons.sourceTask" disabled
+										k-data-text-field="'name'" k-data-value-field="'code'"
+										id="sourceTask" k-data-source="caller.sourceTaskList">
+									</select>
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-hide="caller.checkStatus"
+											ng-click="caller.resetFormAdd('sourceTask')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Loại
+									công trình</label>
+								<div class="col-md-8">
+									<select kendo-drop-down-list style="width: 100%"
+										ng-model="caller.addFormCons.constructionType"
+										k-data-text-field="'name'" k-data-value-field="'code'"
+										id="constructionType" disabled
+										k-data-source="caller.constructionTypeList">
+									</select>
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-hide="caller.checkStatus"
+											ng-click="caller.resetFormAdd('constructionType')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Giá trị
+									sản lượng (VNĐ)</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										id="quantityValue" ng-model="caller.addFormCons.quantityValue"
+										name="quantityValue" readonly />
+								</div>
+							</div>
+						</div>
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Giá trị
+									HSHC (VNĐ)</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										id="hshcValue" ng-model="caller.addFormCons.hshcValue"
+										name="hshcValue" readonly />
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Giá trị
+									quỹ lương (VNĐ)</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										id="salaryValue" ng-model="caller.addFormCons.salaryValue"
+										name="salaryValue" readonly />
+								</div>
+							</div>
+						</div>
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Giá trị
+									hoá đơn (VNĐ)</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										id="billValue" ng-model="caller.addFormCons.billValue"
+										name="billValue" readonly />
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Tiến độ sản lượng -->
+
+					<div class="row caption" id="keHoachThiCongChiTietSpan" ng-hide="caller.addFormCons.quantityValue==0">
+						<span class="caption-subject bold lowercase"
+							style="margin-left: 1px !important;" translate>Tiến độ sản
+							lượng</span>
+					</div>
+					<div class="portlet light bordered collapse in from-search"
+						id="keHoachThiCongChiTiet" ng-hide="caller.addFormCons.quantityValue==0">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Đã hoàn
+									thành</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="tdslAccomplishedDate"
+										name="tdslAccomplishedDate" readonly style="width: 100%;color: gray;"
+										ng-model="caller.addFormCons.tdslAccomplishedDate" />
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Đang thi
+									công</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="tdslConstructing" name="tdslConstructing"
+										style="width: 100%;"
+										ng-model="caller.addFormCons.tdslConstructing" />
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Dự kiến
+									hoàn thành</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="tdslExpectedCompleteDate"
+										name="tdslExpectedCompleteDate" style="width: 100%;"
+										ng-model="caller.addFormCons.tdslExpectedCompleteDate" />
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Tiến độ hồ sơ -->
+					<div class="row caption" id="tamUngSpan" ng-hide="caller.addFormCons.hshcValue==0">
+						<span class="caption-subject bold lowercase"
+							style="margin-left: 1px !important;" translate>Tiến độ hồ
+							sơ</span>
+					</div>
+					<div class="portlet light bordered collapse in from-search"
+						id="tamUng" ng-hide="caller.addFormCons.hshcValue==0">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>HSHC
+									đang trên đường + TCTy chưa thẩm duyệt</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="tdhsTctNotApproval"
+										name="tdhsTctNotApproval" style="width: 100%;"
+										ng-model="caller.addFormCons.tdhsTctNotApproval" />
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Đang
+									trình GĐ CN ký</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="tdhsSigningGdcn" name="tdhsSigningGdcn"
+										style="width: 100%;"
+										ng-model="caller.addFormCons.tdhsSigningGdcn" />
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Đối soát
+									4A</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="tdhsControl4a" name="tdhsControl4a"
+										style="width: 100%;"
+										ng-model="caller.addFormCons.tdhsControl4a" />
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>PHT chi
+									nhánh đang thẩm duyệt</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="tdhsPhtApprovaling"
+										name="tdhsPhtApprovaling" style="width: 100%;"
+										ng-model="caller.addFormCons.tdhsPhtApprovaling" />
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>PHT chi
+									nhánh đang nghiệm thu</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="tdhsPhtAcceptancing"
+										name="tdhsPhtAcceptancing" style="width: 100%;"
+										ng-model="caller.addFormCons.tdhsPhtAcceptancing" />
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>TTKT
+									đang làm hồ sơ</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="tdhsTtktProfile" name="tdhsTtktProfile"
+										style="width: 100%;"
+										ng-model="caller.addFormCons.tdhsTtktProfile" />
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Dự kiến
+									hoàn thành</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="tdhsExpectedCompleteDate"
+										name="tdhsExpectedCompleteDate" style="width: 100%;"
+										ng-model="caller.addFormCons.tdhsExpectedCompleteDate" />
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Tiến độ thu tiền -->
+					<div class="row caption" id="vatTuACapSpan" ng-hide="caller.addFormCons.billValue==0">
+						<span class="caption-subject bold lowercase"
+							style="margin-left: 1px !important;" translate>Tiến độ thu
+							tiền</span>
+					</div>
+					<div class="portlet light bordered collapse in from-search"
+						id="vatTuACap" ng-hide="caller.addFormCons.billValue==0">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Đã hoàn
+									thành thu tiền</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="tdttCollectMoneyDate" readonly
+										name="tdttCollectMoneyDate" style="width: 100%;color: gray;"
+										ng-model="caller.addFormCons.tdttCollectMoneyDate" />
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Hồ sơ
+									đang ở P.HT</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="tdttProfilePht" name="tdttProfilePht"
+										style="width: 100%;"
+										ng-model="caller.addFormCons.tdttProfilePht" />
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>HS đang
+									ở P.TC Viettel tỉnh/TP</label>
+								
+									<div class="col-md-8">
+										<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+											min-year="1000" id="tdttProfilePtc" name="tdttProfilePtc"
+											style="width: 100%;"
+											ng-model="caller.addFormCons.tdttProfilePtc" />
+									</div>
+								</div>
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label" translate>Dự kiến
+										hoàn thành</label>
+									<div class="col-md-8">
+										<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+											min-year="1000" id="tdttExpectedCompleteDate"
+											name="tdttExpectedCompleteDate" style="width: 100%;"
+											ng-model="caller.addFormCons.tdttExpectedCompleteDate" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix form-actions" align="right">
+							<button type="button" id="saveData"
+								class="btn btn-qlk   padding-search-right btn pull-right  saveQLK"
+								ng-click="caller.saveEditCons()" translate>Ghi lại</button>
+							<button type="button" id="cancel"
+								class="btn btn-qlk padding-search-right margin_right10 closeQLK btn pull-right"
+								ng-click="caller.cancelEditCons()" translate>Hủy bỏ</button>
+						</div>
+					</div>
+				</div>
+			</div>
+	</form>
+</div>
+<!-- <script>
+	$(document)
+	.ready(
+			function() {
+				var caller = angular.element(document.getElementById('addForm')).scope().caller;
+				//Disabled form
+				$("#thongTinChung :input").prop('disabled', caller.thongTinChung);
+				$("#keHoachThiCongChiTiet :input").prop('disabled', caller.keHoachThiCongChiTiet);
+				$("#tamUng :input").prop('disabled', caller.tamUng);
+				$("#vatTuACap :input").prop('disabled', caller.vatTuACap);
+				$("#keHoachThiCongSanLuong :input").prop('disabled', caller.keHoachThiCongSanLuong);
+				$("#tienDoNghiemThu :input").prop('disabled', caller.tienDoNghiemThu);
+				$("#deNghiQuyetToan :input").prop('disabled', caller.deNghiQuyetToan);
+				$("#thamDinhQuyetToan :input").prop('disabled', caller.thamDinhQuyetToan);
+				$("#quyetToan :input").prop('disabled', caller.quyetToan);
+				$("#xuatHoaDon :input").prop('disabled', caller.xuatHoaDon);
+				$("#thanhLy :input").prop('disabled', caller.thanhLy);
+				$("#quyetToanNhanCong :input").prop('disabled', caller.quyetToanNhanCong);
+				
+				$("#khtcDeploymentMonth").val(caller.addFormCons.khtcDeploymentMonth);
+				$("#gttdHshcMonth").val(caller.addFormCons.gttdHshcMonth);
+        		$("#gttdSalaryMonth").val(caller.addFormCons.gttdSalaryMonth);
+        		$("#xhdRevenueMonth").val(caller.addFormCons.xhdRevenueMonth);
+        		
+        		$("#khtcDeploymentMonth").data("kendoDatePicker").enable(!caller.thongTinChung);
+			});
+</script> -->

@@ -1,0 +1,313 @@
+<div id="creExtReMa1" class="collapse in from-search row">
+<div class="row border-popup-management" style="display: flex">
+<div class="col-md-12 col-lg-2 border-right ">
+    <form class="padding-height-20 form-horizontal row" role="form" id="form">
+        <div class="form-body">
+            <div class="row button-header">
+                <a class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 cusTabLeft" tabindex="1"
+                     ng-click="vm.chooseTab(1)" ng-class="{'active':vm.value==1}">
+                    <label class="stt_radio1">1. Thi công</label>
+                </a>
+                <a class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 cusTabLeft" tabindex="2"
+                     ng-click="vm.chooseTab(2)" ng-class="{'active':vm.value==2}">
+                    <label class="stt_radio1">2. Hồ sơ hoàn công</label>
+                </a>
+                <a class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 cusTabLeft" tabindex="3"
+                     ng-click="vm.chooseTab(3)" ng-class="{'active':vm.value==3}">
+                    <label class="stt_radio1">3. Lên doanh thu</label>
+                </a>
+                <a class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 cusTabLeft" tabindex="4"
+                     ng-click="vm.chooseTab(4)" ng-class="{'active':vm.value==4}">
+                    <label class="stt_radio1">4. Yêu cầu vật tư</label>
+                </a>
+                <a class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 cusTabLeft" tabindex="5"
+                     ng-click="vm.chooseTab(5)" ng-class="{'active':vm.value==5}">
+                    <label class="stt_radio1">5. Dòng tiền</label>
+                </a>
+                <a class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10 cusTabLeft" tabindex="6"
+                     ng-click="vm.chooseTab(6)" ng-class="{'active':vm.value==6}">
+                    <label class="stt_radio1">6. Công việc khác</label>
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="form-horizontal  padding-height-20  col-md-12 col-lg-10"
+     role="form">
+<!--tab1-->
+<div class="form-body" ng-show="vm.value==1">
+    <div class="clearfix form-actions margin-top">
+        <div class="row" style="margin-bottom: 5px">
+            <div class="col-md-3">
+                <input class=" form-control width100" type="text"
+                       ng-model="vm.searchForm.keySearch"
+                       ng-enter="vm.doSearchDetail('targetGrid')"
+                       placeholder="Nhập nội dung tìm kiếm"/>
+            </div>
+            <div class="col-md-7 text-center">
+                <button type="button" id="findParam" ng-click="vm.doSearchDetail('targetGrid')"
+                        class="btn btn-qlk padding-search-right searchQLK" translate>Tìm
+                    kiếm
+                </button>
+                <button type="button"
+                        class=" btn btn-qlk padding-search-right excelQLK"ng-disabled="vm.disabled"
+                        ng-click="vm.importExcelTab2()" translate>Import
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix form-actions margin-top">
+        <div class="row">
+            <div class="col-md-6">
+                <a href="" ng-click="vm.getTotalMonthPlanDetail()">Thông tin kế hoạch tháng tổng thể</a>
+            </div>
+            <div class="col-md-6 text-right">
+                <span>Đơn vị tính: triệu (VNĐ)</span>
+                <i id="xuatExcel1" class="tooltip1 action-button excelQLK" ng-click="vm.exportExcelTab1()"
+                   aria-expanded="false"> <span class="tooltiptext">Xuất Excel</span></i>
+            </div>
+
+        </div>
+    </div>
+    <div class="clearfix position-relative">
+        <div id="targetGrid" kendo-grid="vm.targetGrid"
+             k-options="vm.targetGridOptions"
+             k-on-change="vm.onGridChange(kendoEvent, { selected: selected }, data)"></div>
+    </div>
+
+    <div class="bottonAdd" ng-show="vm.detailMonthPlan.detailMonthPlanId!=undefined">
+        <div class="clearfix">
+            <button type="button"
+                    class="btn btn-qlk padding-search-right btn pull-right nextQLK"ng-disabled="vm.disabled || vm.disableUpdateDetail || vm.loadingUpdate"
+                    ng-click="vm.updateListTC()" translate style="width: 150px;">Ghi lại thi công
+            </button>
+        </div>
+    </div>
+</div>
+<!--tab2-->
+<div class="form-body" ng-show="vm.value==2">
+    <div class="clearfix form-actions margin-top">
+        <div class="row" style="margin-bottom: 5px">
+            <div class="col-md-3">
+                <input class=" form-control width100" type="text"
+                       ng-model="vm.searchFormHSHC.keySearch"
+                       ng-enter="vm.doSearchDetail('sourceGrid')"
+                       placeholder="Nhập nội dung tìm kiếm"/>
+            </div>
+            <div class="col-md-7 text-center">
+                <button type="button" id="findParam2" ng-click="vm.doSearchDetail('sourceGrid')"
+                        class="btn btn-qlk padding-search-right searchQLK" translate>Tìm
+                    kiếm
+                </button>
+                <button type="button"
+                        class=" btn btn-qlk padding-search-right excelQLK"ng-disabled="vm.disabled"
+                        ng-click="vm.importExcelTab2()" translate>Import
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix form-actions margin-top">
+        <div class="row">
+            <div class="col-md-6">
+                <a  href="" ng-click="vm.getTotalMonthPlanDetail()">Thông tin kế hoạch tháng tổng thể</a>
+            </div>
+            <div class="col-md-6 text-right">
+                <span>Đơn vị tính: Triệu (VNĐ)</span>
+                <i id="xuatExcel2" class="tooltip1 action-button excelQLK" ng-click="vm.exportExcelTab2()"
+                   aria-expanded="false"> <span class="tooltiptext">Xuất Excel</span></i>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="clearfix position-relative">
+        <div id="sourceGrid" kendo-grid="vm.sourceGrid"
+             k-options="vm.sourceGridOptions"
+             k-on-change="vm.onGridChange(kendoEvent, { selected: selected }, data)"></div>
+    </div>
+    <div class="bottonAdd" ng-show="vm.detailMonthPlan.detailMonthPlanId!=undefined">
+        <div class="clearfix">
+            <button type="button"
+                    class="btn btn-qlk padding-search-right btn pull-right nextQLK"ng-disabled="vm.disabled || vm.disableUpdateDetail || vm.loadingUpdate"
+                    ng-click="vm.updateListHSHC()" translate style="width: 140px;">Ghi lại HSHC
+            </button>
+        </div>
+    </div>
+</div>
+<!--tab3-->
+<div class="form-body" ng-show="vm.value==3">
+    <div class="clearfix form-actions margin-top">
+        <div class="row" style="margin-bottom: 5px">
+            <div class="col-md-3">
+                <input class=" form-control width100" type="text"
+                       ng-model="vm.searchFormForceMainTain.keySearch"
+                       ng-enter="vm.doSearchDetail('forceMaintainGrid')"
+                       placeholder="Nhập nội dung tìm kiếm"/>
+            </div>
+            <div class="col-md-7 text-center">
+                <button type="button"  ng-click="vm.doSearchDetail('forceMaintainGrid')"
+                        class="btn btn-qlk padding-search-right searchQLK" translate>Tìm
+                    kiếm
+                </button>
+                <button type="button"
+                        class=" btn btn-qlk padding-search-right excelQLK"ng-disabled="vm.disabled"
+                        ng-click="vm.importExcelTab2()" translate>Import
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix form-actions margin-top">
+        <div class="col-md-6 text-right"></div>
+        <div class="col-md-6 text-right">
+            <span>Đơn vị tính: Triệu (VNĐ)</span>
+            <i id="xuatExcel3" class="tooltip1 action-button excelQLK" ng-click="vm.exportExcelTab3()"
+               aria-expanded="false"> <span class="tooltiptext">Xuất Excel</span></i>
+        </div>
+    </div>
+    <div class="clearfix position-relative">
+        <div id="forceMaintainGrid" kendo-grid="vm.forceMaintainGrid"
+             k-options="vm.forceMaintainGridOptions"></div>
+    </div>
+    <div class="bottonAdd" ng-show="vm.detailMonthPlan.detailMonthPlanId!=undefined">
+        <div class="clearfix">
+            <button type="button"
+                    class="btn btn-qlk padding-search-right btn pull-right nextQLK"ng-disabled="vm.disabled || vm.disableUpdateDetail || vm.loadingUpdate"
+                    ng-click="vm.updateListLDT()" translate style="width: 150px;">Ghi lại doanh thu
+            </button>
+        </div>
+    </div>
+</div>
+<!--tab4-->
+<div class="form-body" ng-show="vm.value==4">
+    <div class="clearfix form-actions margin-top">
+        <div class="row" style="margin-bottom: 5px">
+            <div class="col-md-3">
+                <input class=" form-control width100" type="text"
+                       ng-model="vm.searchFormBTS.keySearch"
+                       ng-enter="vm.doSearchDetail('BTSGrid')"
+                       placeholder="Nhập nội dung tìm kiếm"/>
+            </div>
+            <div class="col-md-7 text-center">
+                <button type="button"  ng-click="vm.doSearchDetail('BTSGrid')"
+                        class="btn btn-qlk padding-search-right searchQLK" translate>Tìm
+                    kiếm
+                </button>
+                <button type="button"
+                        class=" btn btn-qlk padding-search-right excelQLK"ng-disabled="vm.disabled"
+                        ng-click="vm.importExcelTab2()" translate>Import
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix form-actions margin-top">
+        <div class="col-md-6 text-right"></div>
+        <div class="col-md-6 text-right">
+            <i id="xuatExcel4" class="tooltip1 action-button excelQLK" ng-click="vm.exportExcelTab4()"
+               aria-expanded="false"> <span class="tooltiptext">Xuất Excel</span></i>
+        </div>
+    </div>
+    <div class="clearfix position-relative">
+        <div id="BTSGrid" kendo-grid="vm.BTSGrid"
+             k-options="vm.BTSGridOptions"></div>
+    </div>
+    <div class="bottonAdd" ng-show="vm.detailMonthPlan.detailMonthPlanId!=undefined">
+        <div class="clearfix">
+            <button type="button"
+                    class="btn btn-qlk padding-search-right btn pull-right nextQLK"ng-disabled="vm.disabled || vm.disableUpdateDetail || vm.loadingUpdate"
+                    ng-click="vm.updateListDmpnOrder()" translate style="width: 140px;">Ghi lại YCVT
+            </button>
+        </div>
+    </div>
+</div>
+<!--tab5-->
+<div class="form-body" ng-show="vm.value==5">
+    <div class="clearfix form-actions margin-top">
+        <div class="row" style="margin-bottom: 5px">
+            <div class="col-md-3">
+                <input class=" form-control width100" type="text"
+                       ng-model="vm.searchFormCashFlow.keySearch"
+                       ng-enter="vm.doSearchDetail('CashFlow')"
+                       placeholder="Nhập nội dung tìm kiếm"/>
+            </div>
+            <div class="col-md-7 text-center">
+                <button type="button"  ng-click="vm.doSearchDetail('CashFlow')"
+                        class="btn btn-qlk padding-search-right searchQLK" translate>Tìm
+                    kiếm
+                </button>
+                <button type="button"
+                        class=" btn btn-qlk padding-search-right excelQLK" ng-disabled="vm.disabled"
+                        ng-click="vm.importExcelTab2()" translate>Import
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix form-actions margin-top">
+        <div class="col-md-6 text-right"></div>
+        <div class="col-md-6 text-right">
+            <span>Đơn vị tính: VNĐ</span>
+            <i id="xuatExcel5" class="tooltip1 action-button excelQLK" ng-click="vm.exportExcelTab5()"
+               aria-expanded="false"> <span class="tooltiptext">Xuất Excel</span></i>
+            </div>
+    </div>
+    <div class="clearfix position-relative">
+        <div id="CashFlow" kendo-grid="vm.CashFlow"
+             k-options="vm.CashFlowGridOptions"></div>
+    </div>
+    <div class="bottonAdd" ng-show="vm.detailMonthPlan.detailMonthPlanId!=undefined"
+            >
+        <div class="clearfix">
+            <button type="button"
+                    class="btn btn-qlk padding-search-right btn pull-right nextQLK"ng-disabled="vm.disabled || vm.disableUpdateDetail || vm.loadingUpdate"
+                    ng-click="vm.updateListDT()" translate style="width: 150px;">Ghi lại dòng tiền
+            </button>
+        </div>
+    </div>
+</div>
+<!--tab6-->
+<div class="form-body" ng-show="vm.value==6">
+    <div class="clearfix form-actions margin-top">
+        <div class="row" style="margin-bottom: 5px">
+            <div class="col-md-3">
+                <input class=" form-control width100" type="text"
+                       ng-model="vm.searchFormOtherJobs.keySearch"
+                       ng-enter="vm.doSearchDetail('OtherJobs')"
+                       placeholder="Nhập nội dung tìm kiếm"/>
+            </div>
+            <div class="col-md-7 text-center">
+                <button type="button"  ng-click="vm.doSearchDetail('OtherJobs')"
+                        class="btn btn-qlk padding-search-right searchQLK" translate>Tìm
+                    kiếm
+                </button>
+                <button type="button"
+                        class=" btn btn-qlk padding-search-right excelQLK"ng-disabled="vm.disabled"
+                        ng-click="vm.importExcelTab2()" translate>Import
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix form-actions margin-top">
+        <div class="col-md-6 text-right"></div>
+        <div class="col-md-6 text-right">
+            <i id="xuatExcel6" class="tooltip1 action-button excelQLK" ng-click="vm.exportExcelTab6()"
+               aria-expanded="false"> <span class="tooltiptext">Xuất Excel</span></i>
+        </div>
+    </div>
+    <div class="clearfix position-relative">
+        <div id="OtherJobs" kendo-grid="vm.OtherJobs"
+             k-options="vm.OtherJobsGridOptions">
+        </div>
+        <div class="bottonAdd" ng-show="vm.detailMonthPlan.detailMonthPlanId!=undefined">
+            <div class="clearfix">
+                <button type="button"
+                        class="btn btn-qlk padding-search-right btn pull-right nextQLK"ng-disabled="vm.disabled || vm.disableUpdateDetail || vm.loadingUpdate"
+                        ng-click="vm.updateListCVK()" translate style="width: 150px;">Ghi lại CV khác
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+</div>
+</div>
+

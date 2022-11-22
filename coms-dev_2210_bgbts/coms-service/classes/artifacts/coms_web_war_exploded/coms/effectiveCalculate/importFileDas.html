@@ -1,0 +1,99 @@
+                                                                                             <hr>
+<form class="form-horizontal row" role="form" name="shipment"
+	id="shipment" kendo-validator="validator" k-options="validatorOptions">
+	<div class="">
+		<div class="portlet light bordered">
+		   <div class="portlet-title background-title">
+		      
+		     <div class="clear-fix">
+				<div class="col-md-5 margin_top" ng-init = "vm.option1Show = 1">
+					<input style="float: left;" type="radio" id="giaDinh"
+						name="giaDinh" ng-model="vm.option1Show" ng-value="1"> <label
+						style="font-weight: lighter; font-size: small;" for="state"
+						class="padding_radio">Gia Dinh</label> 
+						
+						<input style="float: left;"type="radio" id="capex"
+						 name="capex" ng-model="vm.option1Show" ng-value="2"> <label		
+						style="font-weight: lighter; font-size: small;" for="state1"
+						class="padding_radio">Gia Dinh capex</label>					
+				</div>				
+			</div>
+		   </div>		
+		</div>
+		<div ng-show="vm.option1Show == 1" class="padding-width18">
+			<div class="border-gray ">
+				<div class="border-gray">
+						<div class="clearfix">
+							<div class="form-group col-md-12">
+								<div>
+									<file-input list-file-type="xls,xlsx" model="caller.dataList"
+										size="110000000" caller="caller" input-id="filePackage"
+										model-label="File import" 
+										msg="Không được bỏ trống file file"></file-input>
+										
+										
+								</div>
+								<input class="col-md-2" ng-click="caller.submitDas()" type="submit"
+									value="Tải lên">
+								<div class="form-group col-md-4" align="right">
+									<a href="" ng-click="caller.getExcelTemplateDas()"><u>Tải biểu mẫu</u></a>
+								</div>
+							</div>
+							<div class="form-group col-md-7" align="right">
+								<i style="color: gray;margin-right: 50px;">Dung lượng <= 100MB, Định dạng
+									xls,xlsx</i>
+							</div>
+						</div>
+					</div>
+			</div>
+		</div>
+		
+		<div ng-show="vm.option1Show == 2" class="padding-width18">
+			<div class="border-gray ">
+				<div class="border-gray">
+						<div class="clearfix">
+							<div class="form-group col-md-12">
+								<div>
+									<file-input list-file-type="xls,xlsx" model="caller.dataList"
+										size="110000000" caller="caller" input-id="filePackageCapex"
+										model-label="File import" 
+										msg="Không được bỏ trống file file"></file-input>
+								</div>
+								<input class="col-md-2" ng-click="caller.submitCapex()" type="submit"
+									value="Tải lên">
+								<div class="form-group col-md-4" align="right">
+									<a href="" ng-click="caller.getExcelTemplateCapex()"><u>Tải biểu mẫu</u></a>
+								</div>
+							</div>
+							<div class="form-group col-md-7" align="right">
+								<i style="color: gray;margin-right: 50px;">Dung lượng <= 100MB, Định dạng
+									xls,xlsx</i>
+							</div>
+						</div>
+					</div>
+			</div>
+		</div>
+	</div>
+
+	
+	<hr>
+	<script type="text/javascript">
+		      $("input").change(function(){
+		       $(this).val($.trim($(this).val()));
+		      });
+		      document.onkeydown= keyDown;
+              function keyDown(e){
+         		switch(e.keyCode) {
+         			case 27:
+         				$("#cancel").click();
+         				break;
+         			case 13:
+					if (e.keyCode == 13&& !$('#cancel:focus').length&& !$('#saveStockCell:focus').length) {
+         				$("#saveStockCell").click();
+         				break;
+						}
+         		}
+         	} 
+       
+	</script>  
+</form>

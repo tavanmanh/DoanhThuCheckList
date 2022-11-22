@@ -1,0 +1,13 @@
+<style>
+html {
+  overflow-y: scroll;
+}
+</style>
+<div data-ng-controller="resultMonthPlanTTXDController  as vm">
+    <div ng-show="!vm.showDetail" style="clear: both;">
+        <div data-ng-include="'coms/resultMonthPlanTTXD/resultMonthPlanTTXDForm.html'"></div>
+    </div>
+    <div ng-show="vm.showDetail" style="clear: both;">
+        <div data-ng-include="'coms/resultMonthPlanTTXD/popup-detail-cancel-confirm-os.html'"></div>
+    </div>
+</div>

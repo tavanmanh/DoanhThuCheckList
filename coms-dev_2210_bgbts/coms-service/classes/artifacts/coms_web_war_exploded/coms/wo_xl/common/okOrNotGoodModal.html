@@ -1,0 +1,200 @@
+<style>
+    .modal-content{
+        width: 100%;
+        padding: 0;
+    }
+
+    .close-modal-x{
+        position: absolute;
+        top: 6px;
+        right: 6px;
+    }
+    .gpxd{
+    	display: block;
+    	width: 100%;
+    	padding: 0;
+    }
+    .gpxd-row{
+    	margin-top: 10px;
+    }
+</style>
+
+<!-- Check OK NG Modal -->
+
+<div class="modal-header" style="background-color: #33CCCC;">
+<!--    Ngày khởi công thực tế-->
+    <h5 class="modal-title" ng-if="!isAcceptRejectQuantity">Đánh giá kết quả công việc</h5>
+    <h5 class="modal-title" ng-if="isAcceptRejectQuantity">Ghi nhận sản lượng</h5>
+    <button type="button" class="close close-modal-x" data-dismiss="modal" aria-label="Close" ng-click="$dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="collapse in from-search">
+        <div class="clearfix position-relative">
+            <div class="clearfix">
+                <div class="form-group row">
+	                <div>
+	                	<div class="col-md-6">
+                        	<input type="radio" name="okOrNotGood" ng-value="true" value="true" ng-model="confirmWO.isWoDoneOk"> Hoàn thành
+	                    </div>
+	                    <div class="col-md-6">
+	                        <input type="radio" name="okOrNotGood" ng-value="false" value="false" ng-model="confirmWO.isWoDoneOk"> Chưa hoàn thành
+	                    </div>
+                        <div ng-if="confirmWO.isWoDoneOk == true">
+                            <div class="col-md-6" ng-if="confirmWO.woTypeCode == 'HSHC' && confirmWO.isAcceptRejectQuantity == true">
+                                <input type="radio" ng-value="1" value="1" ng-model="confirmWO.pmtStatus"> Thanh toán
+                            </div>
+                            <div class="col-md-6" ng-if="confirmWO.woTypeCode =='HSHC' && confirmWO.isAcceptRejectQuantity == true">
+                                <input type="radio" ng-value="2" value="2" ng-model="confirmWO.pmtStatus"> Quyết toán
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wo doanh thu DTHT-->
+                    <div style="margin-top: 40px" ng-show="confirmWO.woTypeCode=='DOANHTHU_DTHT'">
+                        <div class="col-md-6" ng-show="confirmWO.isWoDoneOk == true">
+                            <label class="display-block control-label">Kỳ XDH lần 1</label>
+                            <input class=" form-control display-block" name="periodXHD" ng-model="confirmWO.invoicePeriod"/>
+                        </div>
+                        <div class="col-md-6" ng-show="confirmWO.isWoDoneOk == true">
+                            <label class="display-block control-label">Ngày DT trạm</label>
+                            <input class=" form-control display-block" kendo-date-picker
+                                   k-format="'dd/MM/yyyy'"
+                                   ng-model="confirmWO.stationRevenueDate" min-year="1000" date-time/>
+                        </div>
+                    </div>
+
+                    <!-- Duyệt hoaàn thành wo thi công -->
+                    <div class="col-md-6" ng-if="confirmWO.isWoDoneOk == true && vm.workingWO.woTypeId == 1">
+                        <label class="display-block control-label">
+                            Ngày khởi công thực tế<label class="required">*</label>
+                        </label>
+                        <input class="form-control display-block" kendo-date-picker k-format="'dd/MM/yyyy'" id="start"
+                               ng-model="confirmWO.deploymentDateReality" min-year="1000" date-time/>
+                    </div>
+
+                    <!-- Ghi nhận sản lượng HSHC -->
+                    <div class="col-md-12" ng-if="confirmWO.isWoDoneOk == true && confirmWO.woTypeCode=='HSHC' && confirmWO.isAcceptRejectQuantity">
+                        Xác nhận giá trị sản lượng (triệu VND):
+                        <input class="form-control" ng-model="confirmWO.moneyValueMil" only-numbers/>
+                    </div>
+                    <div class="col-md-12" ng-if="!isAcceptRejectQuantity && confirmWO.woTypeCode != 'BGBTS_DTHT'">
+                        Ghi chú: Sản lượng theo ngày hoặc tháng chưa được ghi nhận sẽ tự động được ghi nhận nếu duyệt hoàn thành WO này.
+                    </div>
+
+                    <!-- Gia hạn wo đồng bộ hạ tầng trạm -->
+                    <div class="col-md-12" ng-if="confirmWO.woTypeCode=='THICONG' && confirmWO.trTypeCode=='TR_DONG_BO_HA_TANG'">
+                        Gia hạn hoàn thành
+                        <input class="form-control display-block" kendo-date-picker k-format="'dd/MM/yyyy'" id="extendFinishDate"
+                               ng-model="confirmWO.finishDate" min-year="1000" date-time/>
+                    </div>
+
+                    <!-- Nội dung duyệt -->
+                    <div class="col-md-12">
+                        <label class="display-block control-label" style="text-align: left !important;" translate>
+                            Nội dung
+                        </label>
+                        <!-- WO Bàn giao BTS cho DTHT -->
+                        <div class="form-group row"
+                             ng-if="confirmWO.woTypeCode == 'BGBTS_DTHT' && confirmWO.isWoDoneOk == false">
+                            <div class="col-md-12">
+                                <div class="col-md-6">
+                                    <input type="radio" name="ngMissingImage" ng-value="1" value="1" ng-model="confirmWO.bgbtsResult"> Thiếu ảnh
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="radio" name="ngThicong" ng-value="2" value="2" ng-model="confirmWO.bgbtsResult"> Thi công chưa đạt
+                                </div>
+                                <div style="margin-left: 30px; margin-top: 30px" ng-if="confirmWO.bgbtsResult == '1'">
+                                    <div ng-repeat="item in ngMissingImageItems" class="standard" flex="50">
+                                        <label>
+                                            <input type="checkbox" ng-checked="ngMissingImageExists(item, ngMissingImageSelected)"
+                                                   ng-click="ngMissingImageToggle(item, ngMissingImageSelected)"/>
+                                            {{ item.name }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <textarea style="max-width: 100%; width: 100%; height: 120px;margin-left: 30px; margin-right: 10px" ng-model="rejectComment.text"
+                                  ng-if="confirmWO.woTypeCode != 'BGBTS_DTHT' || confirmWO.bgbtsResult == '2'"></textarea>
+                    </div>
+
+                    <!-- Cập nhật ngày bàn giao đưa vào sd thực tế -->
+                    <div class="col-md-6" ng-if="confirmWO.pmtStatus == 2 && confirmWO.isWoDoneOk == true">
+                        <label class="display-block control-label">Ngày bàn giao đưa vào sử dụng thực tế
+                            <label class="required">*</label>
+                        </label>
+                        <input id="handoverUseDateReality" class="form-control display-block" kendo-date-picker k-format="'dd/MM/yyyy'"
+                               ng-model="confirmWO.handoverUseDateReality" min-year="1000" date-time/>
+                    </div>
+
+                    <!-- Luồng tài chính -->
+					<div class="col-md-12"
+						ng-if="confirmWO.isWoDoneOk && confirmWO.woTypeCode=='HSHC' && confirmWO.state=='RECEIVED_TTDTHT'">
+						Nhân viên tài chính duyệt: <select
+							class="form-control display-block"
+							ng-model="confirmWO.emailTcTct"
+							ng-options="item.code as (item.name + ' - ' + item.code) for item in tcTctEmails">
+							<option></option>
+						</select>
+					</div>
+					<br>
+
+					<!-- Huypq-11112021-start -->
+					<div class="col-md-12" ng-if="confirmWO.isWoDoneOk && (confirmWO.state=='CD_PAUSE' || confirmWO.state=='TTHT_PAUSE') && confirmWO.opinionType=='Đề xuất gia hạn'">
+                        Gia hạn hoàn thành
+                        <input class="form-control display-block" kendo-date-picker k-format="'dd/MM/yyyy'" id="pauseFinishDate"
+                               ng-model="confirmWO.finishDate" min-year="1000" date-time/>
+                    </div>
+                    <div class="col-md-12"
+                         ng-if="confirmWO.isWoDoneOk && (confirmWO.state=='CD_PAUSE' || confirmWO.state=='TTHT_PAUSE') && confirmWO.opinionType=='Đề xuất hủy'">
+                        Xác nhận giá trị sản lượng (triệu VND): <input class="form-control" ng-model="confirmWO.moneyValueMil"/>
+                    </div>
+                    <!-- Huy-end -->
+                    <!-- ducpm23 start -->
+					<div class="form-group row" ng-if="!isAcceptRejectQuantity && confirmWO.catWorkItemTypeId==2083 && confirmWO.isWoDoneOk">
+						<div class="col-md-12 gpxd-row">
+							<div class="col-md-4" style="padding:0">
+								<label class="control-label col-md-4 gpxd"
+									style="text-align: left !important;" translate>Tên
+									GPXD/Giấy chấp nhận</label>
+							</div>
+							<div class="col-md-8">
+								<input  class="form-control col-md-8" ng-model="confirmWO.licenceName"/>
+							</div>
+						</div>
+					</div>
+					<div class="form-group row" ng-if="!isAcceptRejectQuantity && confirmWO.catWorkItemTypeId==2083 && confirmWO.isWoDoneOk">
+						<div class="col-md-12">
+								<div class="col-md-4" style="padding: 0">
+									<label class="control-label col-md-4 gpxd" translate>Chọn
+										file</label>
+								</div>
+								<div class="col-md-8">
+									<input type="file" list-file-type="xls,xlsx,doc,docx,pdf"
+										id="attachFile" name="attachFile"
+										ng-model="confirmWO.attachFileName"
+										onchange="angular.element(this).scope().fileNameChanged()"
+									/>
+								</div>
+							</div>
+					</div>
+					<!-- ducpm23 end -->
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="$dismiss()">
+        <i class="fa fa-ban"></i> Hủy bỏ
+    </button>
+    <button type="button" class="btn btn-secondary"
+            ng-disabled="confirmWO.isWoDoneOk == undefined"
+            ng-click="vm.validateRejectComment()?$close():return;">
+        <i class="fa fa-floppy-o azure"></i> Ghi lại
+    </button>
+</div>
+
+<!-- End Quick create WO Modal -->

@@ -1,0 +1,250 @@
+<style>
+    .control-label-custom{
+        text-align: left;
+    }
+    .text-breadcrumb  {
+        padding-left: 10px;
+        font-size: 12px;
+    }
+    .caption-body {
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .caption-title {
+        font-size: 16px;
+        color: #000000;
+        font-style: normal;
+    }
+    .amcharts-chart-div a {
+        display: none !important;
+    }
+
+    .icon-table{
+        font-size: 20px;
+        padding: 5px;
+        color: #E0D014;
+        text-align:center;
+    }
+    i:hover{
+        color: #011995;
+    }
+
+    .mt5{
+        margin-top: 5px;
+    }
+    .k-pager-numbers .k-state-selected {
+        margin-top: 0px !important;
+    }
+
+    .k-widget.k-autocomplete {
+        width: 100%;
+    }
+    html {
+  		overflow-y: scroll; /Fix rung màn hình/
+	}
+
+</style>
+<div data-ng-controller="trManagementController as vm">
+    <p class="text-breadcrumb" ng-bind-html="vm.breadcrumb"></p>
+    <form class="form-horizontal row" role="form">
+
+        <div class="form-body">
+            <div class="portlet light bordered">
+                <div class="portlet-title background-title">
+                    <div class="caption-body">
+						<span class="caption-subject bold lowercase" style="font-size: 14px; color: #666;" translate>
+                            Thông tin tìm kiếm </span>
+                        <i data-toggle="collapse" data-target="#searchTrForm"
+                           class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div id="searchTrForm" class="collapse in from-search">
+                    <div class="clearfix position-relative">
+                        <div class="clearfix">
+                            <div class="form-group col-md-4">
+                                <label class="col-md-4 control-label-custom" translate>Thông tin TR</label>
+                                <div class="col-md-8">
+                                    <input placeholder="Nhập tên/Mã TR" class=" form-control width100" type="text"
+                                           ng-model="vm.searchForm.keySearch"  />
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="col-md-4 control-label-custom" translate>Loại TR</label>
+                                <div class="col-md-8">
+                                    <!-- <select ng-model="vm.searchForm.trTypeId" ng-options="trType.woTrTypeId as trType.trTypeName for trType in trTypes"
+                                            class="form-control display-block">
+                                        <option></option>
+                                    </select> -->
+                                    <!-- HienLT56 start 01122020 -->
+                                    <select kendo-multi-select style="width: 100%" ng-model="vm.searchForm.listTrTypeCode"
+													k-data-text-field="'trTypeName'" k-data-value-field="'trTypeCode'"
+													k-data-source="trTypes">
+									</select>
+									<!-- HienLT56 end 01122020 -->
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label class="col-md-4 control-label-custom" translate>Trạng thái</label>
+                                <div class="col-md-8">
+                                    <select class="form-control display-block" ng-model="vm.searchForm.state"
+                                            ng-options="state.stateCode as state.stateText for state in trStates">
+                                        <option></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+
+                            <div class="form-group col-md-4">
+                                <label class="col-md-4 control-label-custom" translate>Ngày tạo từ</label>
+                                <div class="col-md-8">
+                                    <input kendo-date-picker k-format="'dd/MM/yyyy'"
+                                           name="finishDate" ng-model="vm.searchForm.createdDateFrom" style="width: 100%;"
+                                           min-year="1000" date-time/>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label class="col-md-4 control-label-custom" translate>Ngày tạo đến</label>
+                                <div class="col-md-8">
+                                    <input kendo-date-picker k-format="'dd/MM/yyyy'"
+                                           name="finishDate" ng-model="vm.searchForm.createdDateTo" style="width: 100%;"
+                                           min-year="1000" date-time/>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label class="col-md-4 control-label-custom" translate>Hạn hoàn thành từ</label>
+                                <div class="col-md-8">
+                                    <input kendo-date-picker k-format="'dd/MM/yyyy'"
+                                           name="finishDate" id="finishDateFrom" ng-model="vm.searchForm.finishDateFrom" style="width: 100%;"
+                                           min-year="1000" date-time/>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="clearfix" style="margin-bottom: 5px">
+                            <div class="form-group col-md-4">
+                                <label class="col-md-4 control-label-custom" translate>Hạn hoàn thành đến</label>
+                                <div class="col-md-8">
+                                    <input kendo-date-picker k-format="'dd/MM/yyyy'"
+                                           name="finishDate" id="finishDateTo" ng-model="vm.searchForm.finishDateTo" style="width: 100%;"
+                                           min-year="1000" date-time/>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label class="col-md-4 control-label-custom" translate>Dự án</label>
+                                <div class="col-md-8">
+                                    <input class="form-control display-block" type="text"
+                                           k-options="autoCompleteFilterProjectOptions" kendo-auto-complete
+                                           ng-model="vm.searchForm.projectCode" id="autoCompleteProject" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label class="col-md-4 form-horizontal control-label-custom " translate>Hợp đồng XL</label>
+                                <div class="col-md-8">
+                                    <input class="form-control display-block" type="text"
+                                           k-options="autoCompleteFilterContractOptions" kendo-auto-complete
+                                           ng-model="vm.searchForm.contractCode"  />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="clearfix" style="margin-bottom: 5px">
+                            <div class="form-group col-md-4">
+                                <label class="col-md-4 form-horizontal control-label-custom " translate>Hợp đồng AIO</label>
+                                <div class="col-md-8">
+                                    <input class="form-control display-block" type="text"
+                                           k-options="autoCompleteFilterAIOContractOptions" kendo-auto-complete
+                                           ng-model="vm.searchForm.aioContractCode" id="autoCompleteAIOContract" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label class="col-md-4 control-label-custom" translate>Trạm</label>
+                                <div class="col-md-8">
+                                    <input class="form-control display-block" type="text"
+                                           k-options="autoCompleteStationOptions" kendo-auto-complete
+                                           ng-model="label.stationName" id="autoCompleteStationId" />
+                                </div>
+                            </div>
+                            <!-- taotq start 05052021 -->
+                            <div class="form-group col-md-4">
+                                <label class="col-md-4 control-label-custom" translate>Mã công trình</label>
+                                <div class="col-md-8">
+                                     <input class="form-control display-block" type="text"
+                                        k-options="autoCompleteConstructionCode" kendo-auto-complete
+                                        ng-model="vm.searchForm.constructionCode" id="autoCompleteConstructionId" />
+                                </div>
+                            </div>
+                            <!-- taotq end 05052021 -->
+                        </div>
+                        <div class="clearfix" style="margin-bottom: 5px">
+                            <div class="form-group col-md-4" style="min-height: 20px;">
+                                <label class="col-md-4 form-horizontal control-label-custom " translate>Gia hạn thuê MB</label>
+                                <div class="col-md-8">
+                                    <input type="checkbox" value="1" ng-model="vm.searchForm.filterAutoExpire"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix form-actions margin-top">
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <button type="button" ng-click="vm.doSearch()" class="btn btn-qlk padding-search-right searchQLK" translate>
+                                        Tìm kiếm
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="portlet light bordered">
+        <div class="portlet-title background-title">
+            <div class="caption">
+				<span class="caption-subject bold lowercase" translate>Kết quả tìm kiếm
+						<!--<label class="control-label bold lowercase" id="appCount">2</label>-->
+						<!--<label class="control-label bold lowercase">&nbsp;bản ghi</label>-->
+					</span>
+                <!--<i class="fa fa-chevron-down"></i>-->
+            </div>
+        </div>
+        <div class="row mt5">
+            <div class="col-md-12">
+                <div class=" pull-left" ng-if="permissions.createTR || permissions.crudTRCnkt">
+                    <button type="button" ng-click="vm.prepareCreateNew()" class="btn btn-qlk fa fa-plus-circle padding-search-right" translate> Thêm TR</button>
+                    <input class="file-input" #file name="files" type="file" id="files" tabindex="10" style="display: none" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"/>
+<!--                    <button type="button" ng-click="vm.importExcelFile()" class="btn btn-qlk excelQLK padding-search-right" translate> Import</button>-->
+<!--                    <button type="button" ng-click="vm.downloadTemplate()" class="btn btn-qlk excelQLK padding-search-right" translate> Template</button>-->
+					<button type="button" ng-click="vm.importTrTMBT()" class="btn btn-qlk excelQLK padding-search-right" style="width: 150px;" translate>Import thuê MB</button>
+                    <button type="button" ng-click="vm.importZip()" class="btn btn-qlk excelQLK padding-search-right" style="width: 120px;" translate> Import TR</button>
+                </div>
+                <div class="btn-group pull-right margin_top_button ">
+                    <i data-toggle="dropdown" class="tooltip1" aria-expanded="false"><span class="tooltipArrow"></span><span class="tooltiptext">Cài đặt</span><i class="fa fa-cog" aria-hidden="true"></i></i>
+                    <i id="xuatExcel" class="tooltip1 action-button excelQLK" ng-disabled="vm.disableExportExcel" ng-click="vm.exportTrList()" aria-expanded="false">
+                        <span class="tooltipArrow"></span><span class="tooltiptext">Xuất Excel</span></i>
+                    <div uib-tooltip="Ẩn/hiện cột" class="dropdown-menu hold-on-click dropdown-checkboxes workItemHide" role="menu">
+                        <label ng-repeat="column in vm.dataTRListTable.columns.slice(1,vm.dataTRListTable.columns.length)| filter: vm.gridColumnShowHideFilter">
+                            <input type="checkbox" checked="column.hidden" ng-click="vm.showHideColumn(column)"> {{column.title}}</label></div></div>
+            </div>
+        </div>
+
+        <div class="collapse in from-search">
+            <div class="clearfix position-relative">
+                <div id="dataTRListTable" kendo-grid="vm.dataTRListTable"
+                     k-options="vm.dataTRListTableOptions"></div>
+            </div>
+        </div>
+    </div>
+</div>

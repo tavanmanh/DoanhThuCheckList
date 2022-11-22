@@ -1,0 +1,223 @@
+<div data-ng-controller="totalMonthPlanHTCTController as vm" id="appIdSearch">
+	<form class="form-horizontal row" role="form" name="reason" id="reason"
+		kendo-validator="validator" k-options="validatorOptions">
+		<div class="form-body padding10">
+			<div class="clearfix">
+				<div class="form-group col-md-6">
+					<label class="col-md-4 control-label req" translate>Tỉnh</label>
+					<div class="col-md-8 position-relative">
+						<input class="form-control" 
+							name="provinceCode" id="provinceCode" maxlength="20" readonly
+							ng-model="caller.totalMonthPlanHTCT.provinceCode" ng-show="caller.isCreateNew==false"
+							/>
+							
+						
+						 <input kendo-auto-complete
+							k-options="caller.provinceValueOptions2"
+							ng-blur="caller.changeDataAuto('province2')"
+							class=" form-control width100" type="text"
+							ng-model="caller.totalMonthPlanHTCT.provinceCode" name="province" id="provinceCode"
+							ng-show="caller.isCreateNew==true" 
+							required data-required-msg="Mã tỉnh không để trống" />
+						
+						<div class="One_icon">
+							<i class="fa fa-times" aria-hidden="true" ng-show="caller.isCreateNew==true" 
+								ng-click="caller.cancelInput('province2')"></i>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="form-group col-md-6">
+					<label class="col-md-4 control-label req" translate>Tháng</label>
+					<div class="col-md-8 position-relative">
+									<input class="form-control" name="monthYear"
+							id="monthYear" readonly  kendo-date-picker k-format="'MM/yyyy'"
+                                                   data-k-ng-model="caller.totalMonthPlanHTCT.monthYear"
+                                                   style="width: 100%;"                           
+							ng-show="caller.isCreateNew==false"  />
+						
+							<input kendo-date-picker
+                   k-options="monthSelectorOptions"
+                   k-format="'MM/yyyy'" data-k-ng-model="caller.totalMonthPlanHTCT.monthYear" id="monthYear1"
+                   style="width: 100%;" ng-show="caller.isCreateNew==true" />
+					</div>
+					
+					<div class="One_icon">
+						<i class="fa fa-times" aria-hidden="true"  ng-show="caller.isCreateNew==true"
+							ng-click="caller.cancelInput('monthYear')"></i>
+					</div>
+					
+				</div>
+				
+				
+			</div>
+			
+			
+			
+			<div class="clearfix">
+				<div class="form-group col-md-6">
+					<label class="col-md-4 control-label req" translate>Mã trạm VCC</label>
+					<div class="col-md-8 position-relative">
+						<input class="form-control" 
+							name="stationCodeVCC" id="stationCodeVCC" maxlength="50" readonly
+							ng-model="caller.totalMonthPlanHTCT.stationCodeVCC" ng-show="caller.isCreateNew==false"
+							/>
+							
+						
+						 <input kendo-auto-complete
+							k-options="caller.stationValueOptions2"
+							ng-blur="caller.changeDataAuto('station2')"
+							class=" form-control width100" type="text"
+							ng-model="caller.totalMonthPlanHTCT.stationCodeVCC" name="stationCodeVCC" id="stationCodeVCC"
+							ng-show="caller.isCreateNew==true" 
+							required data-required-msg="Mã trạm VCC không để trống" />
+						
+						<div class="One_icon">
+							<i class="fa fa-times" aria-hidden="true" ng-show="caller.isCreateNew==true" 
+								ng-click="caller.cancelInput('station2')"></i>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="form-group col-md-6">
+					<label class="col-md-4 control-label req" translate>Mã trạm VTNET</label>
+					<div class="col-md-8 position-relative">
+						<input class="form-control" 
+							name="stationCodeVTNET" id="stationCodeVTNET" maxlength="50" readonly
+							ng-model="caller.totalMonthPlanHTCT.stationCodeVTNET" ng-show="caller.isCreateNew==false"
+							/>
+							
+						
+						 <input class=" form-control width100" type="text"
+							ng-model="caller.totalMonthPlanHTCT.stationCodeVTNET" name="stationCodeVTNET" id="stationCodeVTNET"
+							ng-show="caller.isCreateNew==true" 
+							required data-required-msg="Mã trạm VTNET không để trống" />
+						
+					</div>
+					
+				</div>
+			</div>
+
+			<div class="clearfix" style="margin-top:18px;">
+				<div class="form-group col-md-6">
+					<label class="col-md-4 control-label " translate>Chỉ tiêu
+						thuê mặt bằng(trạm)</label>
+					<div class="col-md-8 ">
+						<input class="text-right form-control" type="text" only-numbers ng-blur="focusOut()" 
+							maxlength="25" name="soluong_TMB" id="soluong_TMB" ng-model="caller.totalMonthPlanHTCT.soluong_TMB " />
+					</div>
+				</div>
+				
+				<div class="form-group col-md-6">
+					<label class="col-md-4 control-label " translate>Chỉ tiêu thiết kế dự toán(trạm)</label>
+					<div class="col-md-8 text-right">
+						<input class="text-right form-control" type="text" only-numbers ng-blur="focusOut()"
+							maxlength="25" name="soluong_TKDT" id="soluong_TKDT" ng-model="caller.totalMonthPlanHTCT.soluong_TKDT"  />
+					</div>
+				</div>
+				
+				
+			</div>
+
+			
+			<div class="clearfix">
+				<div class="form-group col-md-6 ">
+					<label class="col-md-4 control-label " translate>Chỉ tiêu
+						khởi công(trạm)</label>
+					<div class="col-md-8 text-right">
+						<input class="text-right form-control" type="text" only-numbers ng-blur="focusOut()"
+							maxlength="25" name="soluong_KC" id="soluong_KC" ng-model="caller.totalMonthPlanHTCT.soluong_KC" />
+					</div>
+				</div>
+				
+				<div class="form-group col-md-6">
+					<label class="col-md-4 control-label " translate>Chỉ tiêu
+						đồng bộ hạ tầng(trạm)</label>
+					<div class="col-md-8 ">
+						<input class="text-right form-control" type="text" only-numbers ng-blur="focusOut()"
+							maxlength="25" name="soluong_DB" id="soluong_DB" ng-model="caller.totalMonthPlanHTCT.soluong_DB" />
+					</div>
+				</div>
+				
+			</div>
+			
+			<div class="clearfix">
+				<div class="form-group col-md-6">
+					<label class="col-md-4 control-label " translate>Chỉ tiêu
+						phát sóng(trạm)</label>
+					<div class="col-md-8 text-right">
+						<input class="text-right form-control" type="text" only-numbers ng-blur="focusOut()"
+							" maxlength="25" name="soluong_PS" id="soluong_PS" ng-model="caller.totalMonthPlanHTCT.soluong_PS" />
+					</div>
+				</div>
+				
+				<div class="form-group col-md-6">
+					<label class="col-md-4 control-label " translate>Chỉ tiêu 
+					hồ sơ hoàn công về TTHT(trạm)</label>
+					<div class="col-md-8 text-right">
+						<input class="text-right form-control" type="text" only-numbers ng-blur="focusOut()"
+							maxlength="25" name="soluong_HSHC" id="soluong_HSHC" ng-model="caller.totalMonthPlanHTCT.soluong_HSHC"/>
+					</div>
+				</div>
+			</div>
+			
+			
+			<div class="clearfix">
+				<div class="form-group col-md-6">
+					<label class="col-md-4 control-label " translate>Chỉ tiêu
+					hồ sơ hoàn công về DTHT(trạm)</label>
+					<div class="col-md-8 text-right">
+						<input class="text-right form-control" type="text" only-numbers ng-blur="focusOut()"
+							maxlength="25" name="soluong_HSHC_DTHT" id="soluong_HSHC_DTHT" ng-model="caller.totalMonthPlanHTCT.soluong_HSHC_DTHT" />
+					</div>
+				</div>
+				
+				<div class="form-group col-md-6">
+					<label class="col-md-4 control-label " translate>Chỉ tiêu
+						lên Doanh thu(trạm)</label>
+					<div class="col-md-8 text-right">
+						<input class="text-right form-control" type="text" only-numbers ng-blur="focusOut()"
+							maxlength="25" name="tram_toDoanhThu" id="tram_toDoanhThu" ng-model="caller.totalMonthPlanHTCT.tram_toDoanhThu" />
+					</div>
+				</div>
+			</div>
+			
+			<div class="clearfix form-actions margin-top">
+				<div class="row">
+					<div class="col-md-12 text-right" ng-hide="caller.viewDetail ==true">
+						<button type="button"
+							class="btn btn-qlk padding-search-right closeQLK" id="cancel"
+							ng-click="caller.cancel()"  translate>Hủy bỏ</button>
+						<button type="button" id="savepopupReport"
+							class="btn btn-qlk padding-search-right saveQLK"
+							ng-click="caller.save()" translate>Ghi lại</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+<script type="text/javascript">
+	$("input").change(function() {
+		$(this).val($.trim($(this).val()));
+	});
+	document.onkeydown = keyDown;
+	function keyDown(e) {
+		switch (e.keyCode) {
+		case 27:
+			$("#cancel").click();
+			break;
+		case 13:
+			if (e.keyCode == 13 && !$('#cancel:focus').length
+					&& !$('#savepopupReport').length) {
+
+				$("#savepopupReport").click();
+
+				break;
+			}
+		}
+	}
+</script>
+</form>
+</div>

@@ -1,0 +1,142 @@
+<div data-ng-controller="manageAnnualTargetPlanController as vm"
+	id="manageDataOSSearch">
+	<div>
+		<p class="text-brecum">{{vm.String}}</p>
+		<form class="form-horizontal row" role="form">
+			<div class="form-body">
+				<div class="portlet light bordered">
+					<div class="portlet-title background-title">
+						<div class="caption">
+							<span class="caption-subject bold lowercase" translate>Thông
+								tin tìm kiếm </span>
+
+						</div>
+						<div class="text-right margin-row-title">
+							<i data-toggle="collapse" data-target="#structureQuantity"
+								class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+						</div>
+					</div>
+					<div id="structureQuantity" class="collapse in from-search">
+						<div class="clearfix position-relative">
+							<div class="clearfix">
+								<div class="col-md-6">
+									<label class="col-md-4 control-label" translate>Thông
+										tin tìm kiếm</label>
+									<div class="col-md-8">
+										<input class=" form-control width100" type="text"
+											ng-model="vm.searchForm.keySearch" name="keySearch"
+											id="keySearch" placeholder="Nhập năm/tháng" />
+										<div class="One_icon">
+											<i class="fa fa-times" aria-hidden="true"
+												ng-click="vm.cancelInput('keySearch')"></i>
+										</div>
+									</div>
+								</div>
+
+							<!-- 	<div class="col-md-6">
+									<label class="col-md-3 control-label " translate>Ngày
+										hoàn thành từ ngày</label>
+									<div class="col-md-4 margin_top">
+
+										<input kendo-date-picker k-format="'dd/MM/yyyy'"
+											min-year="1000" id="startDate" name="startDate"
+											style="width: 100%;" ng-model="vm.searchForm.startDate" />
+
+									</div>
+									<label class="col-md-1 control-label " translate>đến
+										ngày</label>
+									<div class="col-md-4 margin_top">
+
+										<input kendo-date-picker k-format="'dd/MM/yyyy'"
+											min-year="1000" id="endDate" name="endDate"
+											style="width: 100%;" ng-model="vm.searchForm.endDate" />
+
+									</div>
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="vm.cancelInput('date')"></i>
+									</div>
+								</div> -->
+							</div>
+					<!-- 		<div class="clearfix">
+								<div class="col-md-6">
+									<label class="col-md-4 control-label " translate>Thuộc
+										loại</label>
+									<div class="col-md-8">
+										<select kendo-drop-down-list style="width: 100%" name="type"
+											id="type" ng-model="vm.searchForm.type"
+											k-data-text-field="'name'" k-data-value-field="'code'"
+											k-data-source="vm.typeList">
+										</select>
+											<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="vm.cancelInput('type')"></i>
+									</div>
+									</div>
+								</div>
+
+
+							</div> -->
+							<div class="clearfix form-actions margin-top">
+								<div class="row">
+									<div class="col-md-12 text-center">
+										<button type="button" id="findManageDataOS"
+											ng-click="vm.doSearch()"
+											class="btn btn-qlk padding-search-right searchQLK" translate>Tìm
+											kiếm</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+		</form>
+	</div>
+	<div class="portlet light bordered">
+		<div class="portlet-title background-title">
+			<div class="caption">
+				<span class="caption-subject bold lowercase" translate> Kết
+					quả tìm kiếm: </span>&nbsp;<label class="control-label bold lowercase"
+					id="manageAnnualTargetPlanCount">{{vm.count}}</label> <label
+					class="control-label bold lowercase">&nbsp;bản ghi</label>
+
+			</div>
+			<div class="text-right margin-row-title">
+				<i data-toggle="collapse" data-target="#rpQuantity"
+					class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+			</div>
+		</div>
+		<div id="rpQuantity" class="collapse in from-search">
+			<div class="clearfix position-relative">
+				<div id="manageAnnualTargetPlanGridId"
+					kendo-grid="vm.manageAnnualTargetPlanGrid" k-editable="false"
+					k-options="vm.manageAnnualTargetPlanGridOptions"
+					k-on-change="vm.onGridChange(kendoEvent, { selected: selected }, data)"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$('#manageDataOSSearch')
+			.keypress(
+					function(event) {
+						$("input").change(function() {
+							$(this).val($.trim($(this).val()));
+						});
+						document.onkeydown = keyDown;
+						function keyDown(e) {
+							switch (e.keyCode) {
+							case 27:
+								$("#cancel").click();
+								break;
+							case 13:
+								if ($('.k-widget.k-window.fix-footer').css(
+										'display') !== 'block') {
+									$("#findManageDataOS").click();
+								}
+								break;
+
+							}
+						}
+					});
+</script>

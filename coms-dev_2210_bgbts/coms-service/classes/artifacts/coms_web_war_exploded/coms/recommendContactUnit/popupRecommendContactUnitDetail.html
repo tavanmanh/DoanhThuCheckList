@@ -1,0 +1,51 @@
+	<div >
+		<form class="form-horizontal row" role="form">
+			<div class="form-body">
+		</form>
+	</div>
+	<div class="portlet light bordered">
+		<div class="portlet-title background-title">
+			<div class="caption">
+				<span class="caption-subject bold lowercase" translate> Kết
+					quả tìm kiếm: </span>&nbsp;<label class="control-label bold lowercase"
+					id="counContactUnitDetailId">{{caller.count}}</label> <label
+					class="control-label bold lowercase">&nbsp;bản ghi</label>
+
+			</div>
+			<div class="text-right margin-row-title">
+				<i data-toggle="collapse" data-target="#rpQuantityy"
+					class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+			</div>
+		</div>
+		<div id="rpQuantityy" class="collapse in from-search">
+			<div class="clearfix position-relative">
+				<div id="recommendContactUnitDetailId" kendo-grid="caller.recommendContactUnitDetailGrid"
+					k-editable="false" k-options="caller.recommendContactUnitDetailGridOptions"
+					k-on-change="caller.onGridChange(kendoEvent, { selected: selected }, data)"></div>
+			</div>
+		</div>
+	</div>
+<script type="text/javascript">
+	$('#manageDataOSSearch')
+			.keypress(
+					function(event) {
+						$("input").change(function() {
+							$(this).val($.trim($(this).val()));
+						});
+						document.onkeydown = keyDown;
+						function keyDown(e) {
+							switch (e.keyCode) {
+							case 27:
+								$("#cancel").click();
+								break;
+							case 13:
+								if ($('.k-widget.k-window.fix-footer').css(
+										'display') !== 'block') {
+									$("#findManageDataOS").click();
+								}
+								break;
+
+							}
+						}
+					});
+</script>

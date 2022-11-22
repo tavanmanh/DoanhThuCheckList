@@ -1,0 +1,50 @@
+<!-- @author hailh10 -->
+ <h3 class="page-title" translate>
+	<i class="fa fa-line-chart" aria-hidden="true"></i>
+	Danh sách CatParts
+</h3> 
+<div ng-controller="CatPartsListController as vm">
+    
+	<hr class="line-Hr">
+    <div  id="catParts">
+	    
+	    <div data-ng-include="'ims/catParts/CatPartsSearchForm.html'" kendo-validator="vm.validator" k-options="vm.validatorOptions"></div>
+	    <div class="porlet-title">
+	    	<div class="caption">
+	    		<span class="caption-subject bold uppercase ng-scope">{{'Kết quả tìm kiếm'|translate}} ({{vm.catPartsGrid.dataSource.total()}})</span>
+	    	</div>
+	    </div>
+        <div id="catPartsGridId" kendo-grid="vm.catPartsGrid" k-options="vm.gridOptions" k-on-change="vm.onGridChange(kendoEvent, { selected: selected }, data)">            
+        </div>
+    </div>
+    
+</div>
+
+<script type="x/kendo-template" id="CatPartsListAction">
+		
+            <div class="btn-group" style="float:left">
+            <button  type="button" class="btn default" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-columns"></i></button>
+            <div class="dropdown-menu hold-on-click dropdown-checkboxes" role="menu">
+            <label ng-repeat="column in vm.catPartsGrid.columns | filter:vm.gridColumnFilter" >
+            <input type="checkbox" checked="column.hidden" ng-click="vm.showHideColumn(column)"> {{column.title}}
+            </label>
+            </div>
+            </div>
+            <div class="btn-group btn-group-solid" style="float:right">
+            <button type="button" title="Thêm mới"  
+            ng-click="vm.add()" 
+            class="btn default">
+            <i class="fa fa-plus"></i>
+            </button>
+           
+    		<button type="button" title="{{ 'common.title.detail' | translate }}" 
+            ng-click="vm.remove" 
+            class="btn default" >
+            <i class="fa fa-trash"></i>
+            </button>
+
+            </div>
+ 			
+            
+            
+        </script>

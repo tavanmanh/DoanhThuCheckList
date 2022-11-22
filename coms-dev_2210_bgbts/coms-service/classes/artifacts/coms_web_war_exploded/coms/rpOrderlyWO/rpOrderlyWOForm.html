@@ -1,0 +1,258 @@
+<style>
+html {
+	overflow-y: scroll;
+}
+</style>
+<div data-ng-controller="rpOrderlyWOController as vm">
+	<p class="text-brecum">{{vm.String}}</p>
+	<form class="form-horizontal row" role="form" id="searchForm"
+		name="searchForm">
+		<div class="form-body">
+			<div class="portlet light bordered">
+				<div class="portlet-title background-title">
+					<div class="caption">
+						<span class="caption-subject bold lowercase" translate>Thông
+							tin tìm kiếm </span>
+					</div>
+					<div class="text-right margin-row-title">
+						<i data-toggle="collapse" data-target="#dataSearch"
+							class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+					</div>
+				</div>
+				<div id="dataSearch" class="collapse in from-search">
+					<div class="clearfix position-relative" ng-enter="vm.doSearch()">
+
+						<!--row 1-->
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Đơn vị</label>
+								<div class="col-md-8">
+									<div class="input-icon right ">
+										<i class="fa fa-search directive"
+											ng-click="vm.openPopupGroup()"></i>
+									</div>
+									<input kendo-auto-complete k-options="vm.sysGroupACOptions"
+										id="aio_rpgt_sysGroup" name="aio_rpgt_sysGroup"
+										class="form-control width100"
+										data-ng-model="vm.searchForm.cdLevel1Name" />
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="vm.resetFormField('group')"></i>
+									</div>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Ngày
+									tạo từ ngày</label>
+								<div class="clearfix position-relative col-md-8 "
+									style="padding: 0px" id="aio_cm_date">
+									<div class="col-md-5 position-relative">
+										<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+											min-year="1000" ng-model="vm.searchForm.startDate"
+											id="aio_cm_dateFrom" name="aio_cm_dateFrom"
+											style="width: 100%;" /> <span class="k-invalid-msg"
+											data-for="aio_cm_dateFrom"></span>
+									</div>
+									<div class="col-md-2" style="text-align: center;">
+										<label class="control-label" translate>đến ngày</label>
+									</div>
+									<div class="col-md-5 position-relative">
+										<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+											min-year="1000" ng-model="vm.searchForm.endDate"
+											id="aio_cm_dateTo" name="aio_cm_dateTo" style="width: 100%;" />
+										<span class="k-invalid-msg" data-for="aio_cm_dateTo"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label " translate>Chỉ tiêu</label>
+								<div class="col-md-8">
+									<select kendo-drop-down-list style="width: 100%"
+										ng-model="vm.searchForm.status" k-data-text-field="'text'"
+										k-data-value-field="'value'" k-data-source="vm.listStatus">
+									</select>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label margin_top" translate>Loại báo cáo</label>
+								<div class="col-md-8 margin_top">
+									<input style="float: left;" type="radio" id="typeBcth"
+										name="typeBcth" ng-model="vm.searchForm.typeBc"
+										ng-checked="vm.searchForm.typeBc == 1" value="1">
+									<label style="font-weight: 400" for="typeBcth"
+										class="padding_radio">Tổng hợp</label> <input
+										style="float: left;" type="radio" id="typeBcct" name="typeBcct"
+										ng-model="vm.searchForm.typeBc"
+										ng-checked="vm.searchForm.typeBc == 2" value="2">
+									<label style="font-weight: 400" for="typeBcct"
+										class="padding_radio">Chi tiết</label>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="clearfix form-actions margin-top">
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<button type="button" ng-click="vm.doSearch()"
+									class="btn btn-qlk padding-search-right searchQLK" translate>Tìm
+									kiếm</button>
+								<button type="button" id="excel"
+										class="btn btn-qlk padding-search-right  excelQLK"
+										ng-click="vm.exportFile()" translate>Xuất excel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<!-- Tiếp nhận WO quá hạn - Tổng hợp -->
+	<div class="portlet light bordered" ng-show="vm.showTableReceiveTH">
+		<div class="portlet-title background-title">
+			<div class="caption">
+				<span class="caption-subject bold lowercase" translate>Kết
+					quả tìm kiếm: </span>&nbsp;<label class="control-label bold lowercase"
+					id="appCountRecieveWoAll">{{vm.recieveWoAll}}</label><label
+					class="control-label bold lowercase">&nbsp;bản ghi</label>
+
+			</div>
+			<div class="text-right margin-row-title">
+				<i data-toggle="collapse" data-target="#grid"
+					class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+			</div>
+		</div>
+		<div id="grid" class="collapse in from-search">
+			<div class="clearfix position-relative">
+				<div id="recieveWoAllGrid"
+					kendo-grid="vm.recieveWoAllGrid"
+					k-options="vm.recieveWoAllGridOptions"></div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Giao WO quá hạn - Tổng hợp -->
+	<div class="portlet light bordered" ng-show="vm.showTableAssignTH">
+		<div class="portlet-title background-title">
+			<div class="caption">
+				<span class="caption-subject bold lowercase" translate>Kết
+					quả tìm kiếm: </span>&nbsp;<label class="control-label bold lowercase"
+					id="appCountAssignWoAll">{{vm.assignWoAll}}</label><label
+					class="control-label bold lowercase">&nbsp;bản ghi</label>
+
+			</div>
+			<div class="text-right margin-row-title">
+				<i data-toggle="collapse" data-target="#grid"
+					class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+			</div>
+		</div>
+		<div id="grid" class="collapse in from-search">
+			<div class="clearfix position-relative">
+				<div id="assignWoAllGrid"
+					kendo-grid="vm.assignWoAllGrid"
+					k-options="vm.assignWoAllGridOptions"></div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Xác nhận kết quả hoàn thành quá hạn - Tổng hợp -->
+	<div class="portlet light bordered" ng-show="vm.showTableAcceptTH">
+		<div class="portlet-title background-title">
+			<div class="caption">
+				<span class="caption-subject bold lowercase" translate>Kết
+					quả tìm kiếm: </span>&nbsp;<label class="control-label bold lowercase"
+					id="appCountAcceptWoAll">{{vm.acceptWoAll}}</label><label
+					class="control-label bold lowercase">&nbsp;bản ghi</label>
+
+			</div>
+			<div class="text-right margin-row-title">
+				<i data-toggle="collapse" data-target="#grid"
+					class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+			</div>
+		</div>
+		<div id="grid" class="collapse in from-search">
+			<div class="clearfix position-relative">
+				<div id="acceptWoAllGrid"
+					kendo-grid="vm.acceptWoAllGrid"
+					k-options="vm.acceptWoAllGridOptions"></div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Tiếp nhận WO quá hạn - Chi tiết -->
+	<div class="portlet light bordered" ng-show="vm.showTableReceiveCT">
+		<div class="portlet-title background-title">
+			<div class="caption">
+				<span class="caption-subject bold lowercase" translate>Kết
+					quả tìm kiếm: </span>&nbsp;<label class="control-label bold lowercase"
+					id="appCountRecieveWoDetail">{{vm.recieveWoDetail}}</label><label
+					class="control-label bold lowercase">&nbsp;bản ghi</label>
+
+			</div>
+			<div class="text-right margin-row-title">
+				<i data-toggle="collapse" data-target="#grid"
+					class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+			</div>
+		</div>
+		<div id="grid" class="collapse in from-search">
+			<div class="clearfix position-relative">
+				<div id="recieveWoDetailGrid"
+					kendo-grid="vm.recieveWoDetailGrid"
+					k-options="vm.recieveWoDetailGridOptions"></div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Giao WO quá hạn - Chi tiết -->
+	<div class="portlet light bordered" ng-show="vm.showTableAssignCT">
+		<div class="portlet-title background-title">
+			<div class="caption">
+				<span class="caption-subject bold lowercase" translate>Kết
+					quả tìm kiếm: </span>&nbsp;<label class="control-label bold lowercase"
+					id="appCountAssingWoDetail">{{vm.assignWoDetail}}</label><label
+					class="control-label bold lowercase">&nbsp;bản ghi</label>
+
+			</div>
+			<div class="text-right margin-row-title">
+				<i data-toggle="collapse" data-target="#grid"
+					class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+			</div>
+		</div>
+		<div id="grid" class="collapse in from-search">
+			<div class="clearfix position-relative">
+				<div id="assignWoDetailGrid"
+					kendo-grid="vm.assignWoDetailGrid"
+					k-options="vm.assignWoDetailGridOptions"></div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Xác nhận kết quả hoàn thành quá hạn - Chi tiết -->
+	<div class="portlet light bordered" ng-show="vm.showTableAcceptCT">
+		<div class="portlet-title background-title">
+			<div class="caption">
+				<span class="caption-subject bold lowercase" translate>Kết
+					quả tìm kiếm: </span>&nbsp;<label class="control-label bold lowercase"
+					id="appCountAcceptWoDetail">{{vm.acceptWoDetail}}</label><label
+					class="control-label bold lowercase">&nbsp;bản ghi</label>
+
+			</div>
+			<div class="text-right margin-row-title">
+				<i data-toggle="collapse" data-target="#grid"
+					class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+			</div>
+		</div>
+		<div id="grid" class="collapse in from-search">
+			<div class="clearfix position-relative">
+				<div id="acceptWoDetailGrid"
+					kendo-grid="vm.acceptWoDetailGrid"
+					k-options="vm.acceptWoDetailGridOptions"></div>
+			</div>
+		</div>
+	</div>
+	
+	
+</div>

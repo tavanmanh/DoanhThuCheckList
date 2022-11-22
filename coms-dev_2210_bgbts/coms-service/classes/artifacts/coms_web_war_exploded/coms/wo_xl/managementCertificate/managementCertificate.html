@@ -1,0 +1,197 @@
+<style>
+    .control-label-custom {
+        text-align: left;
+    }
+
+    .text-breadcrumb {
+        padding-left: 10px;
+        font-size: 12px;
+    }
+
+    .caption-body {
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .caption-title {
+        font-size: 16px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .amcharts-chart-div a {
+        display: none !important;
+    }
+
+    .icon-table {
+        font-size: 20px;
+        padding: 5px;
+        color: #E0D014;
+        text-align: center;
+    }
+
+    i:hover {
+        color: #011995;
+    }
+
+    .mt5 {
+        margin-top: 5px;
+    }
+
+    .display-block {
+        width: 100%;
+    }
+
+    .caption-tit {
+        color: #666;
+        font-size: 14px;
+    }
+
+    #managementCertificateContainer .form-group {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    #managementCertificateContainer .control-label-custom {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    html {
+  		overflow-y: scroll; /* /Fix rung màn hình/ */
+	}
+</style>
+<div id="managementCertificateContainer" data-ng-controller="managementCertificateController as vm">
+    <p class="text-breadcrumb" ng-bind-html="vm.breadcrumb"></p>
+    <form class="form-horizontal row" role="form" id="managementCertificateSearch">
+
+        <div class="form-body">
+            <div class="portlet light bordered">
+                <div class="portlet-title background-title">
+                    <div class="caption-body">
+                        <span class="caption bold lowercase caption-tit" translate>Thông tin tìm kiếm </span>
+                        <i data-toggle="collapse" data-target="#searchCertificateForm"
+                           class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div id="searchCertificateForm" class="collapse in from-search">
+                    <div class="clearfix position-relative">
+
+                        
+                        <div class="clearfix">
+							
+							<div class="form-group col-md-6">
+								<label class="col-md-4 form-horizontal control-label " translate>Mã/Tên chứng chỉ</label>
+								<div class="col-md-8">
+                                    <input class="form-control display-block" type="text" ng-enter="vm.doSearch()"
+                                           k-options="vm.autoCompleteCertificateOptions" kendo-auto-complete
+                                           ng-model="vm.managementCertificateSearch.certificateCode" id="certificateCode" name="certificateCode"
+					                              ng-blur="vm.changeDataAuto('certificate')"/>
+					                              
+					                 <div class="One_icon">
+												<i class="fa fa-times" aria-hidden="true"
+											   ng-click="vm.cancelInput('certificateCode')"></i>
+											</div>
+                                </div>
+                            </div>
+                            
+							<div class="form-group col-md-6">
+								<label class="col-md-4 form-horizontal control-label " translate>Nhân viên</label>
+								<div class="col-md-8">
+					                   <input kendo-auto-complete k-options="vm.patternSignerOptions" class=" form-control width100" type="text"  id="loginName" 
+					                              ng-model="vm.managementCertificateSearch.loginName" name="loginName"
+					                              ng-blur="vm.changeDataAuto('user')"
+					                              />
+					                   <div class="One_icon">
+												<i class="fa fa-times" aria-hidden="true"
+											   ng-click="vm.cancelInput('loginName')"></i>
+										</div>			                      
+					             </div>
+					                   	
+				            </div>
+                        </div>
+                        
+                        <div class="clearfix">
+                        	<div class="form-group col-md-6">
+								<label class="col-md-4 form-horizontal control-label " translate>Trạng thái chứng chỉ</label>
+								<div class="col-md-8" ng-enter="vm.doSearch()">
+                                        <select kendo-multi-select style="width: 100%" ng-model="vm.managementCertificateSearch.statusList" id ="statusList"
+                                                k-data-text-field="'name'" k-data-value-field="'id'"
+                                                k-data-source="vm.statusDataList" >
+                                        </select>
+                                        <div class="One_icon">
+                                            <i class="fa fa-times" aria-hidden="true"
+                                               ng-click="vm.cancelInput('name')"></i>
+                                        </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group col-md-6">
+								<label class="col-md-4 form-horizontal control-label " translate>Trạng thái phê duyệt</label>
+								<div class="col-md-8" ng-enter="vm.doSearch()">
+                                        <select kendo-multi-select style="width: 100%" ng-model="vm.managementCertificateSearch.approveList" id ="approveList"
+                                                k-data-text-field="'name'" k-data-value-field="'id'"
+                                                k-data-source="vm.statusDataList1" >
+                                        </select>
+                                        <div class="One_icon">
+                                            <i class="fa fa-times" aria-hidden="true"
+                                               ng-click="vm.cancelInput('name1')"></i>
+                                        </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                        <div class="clearfix form-actions margin-top">
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <button type="button" id="doSearchCertificate"
+                                            ng-click="vm.doSearch()"
+                                            class="btn btn-qlk padding-search-right searchQLK" translate>Tìm kiếm
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="portlet light bordered">
+        <div class="portlet-title background-title">
+            <div class="caption">
+                <div class="caption">
+                    <span class="caption bold lowercase caption-tit" style="padding-left: 10px;" translate>Kết quả tìm kiếm</span>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="row mt5">
+            <div class="col-md-12">
+            	<div ng-if="permissions.createWO == true && permissions.createdWoUctt == false"
+            	class="pull-left" class="pull-left" style="margin-left: 5px;">
+                    <button type="button" ng-click="vm.openTabCreateNewCertificate()" class="btn btn-qlk padding-search-right addQLK" uib-tooltip="Tạo mới" translate> Tạo mới </button>
+                </div>
+
+                <div class="btn-group pull-right margin_top_button ">
+                    <i data-toggle="dropdown" class="tooltip1" aria-expanded="false"><span class="tooltipArrow"></span><span class="tooltiptext">Cài đặt</span><i class="fa fa-cog" aria-hidden="true"></i></i>
+                    <i id="xuatExcel" class="tooltip1 action-button excelQLK" ng-disabled="vm.disableExportExcel" ng-click="vm.exportCertificateExcel()"  aria-expanded="false"><span class="tooltipArrow"></span><span class="tooltiptext">Xuất Excel</span></i>
+                    <div uib-tooltip="Ẩn/hiện cột" class="dropdown-menu hold-on-click dropdown-checkboxes workItemHide" role="menu">
+                        <label ng-repeat="column in vm.dataCertificateListTable.columns.slice(1,vm.dataCertificateListTable.columns.length)| filter: vm.gridColumnShowHideFilter">
+                            <input type="checkbox" checked="column.hidden" ng-click="vm.showHideColumn(column)"> {{column.title}}</label></div></div>
+                
+            </div>
+        </div>
+
+        <div id="grid" class="collapse in from-search">
+            <div class="clearfix position-relative">
+                <div id="dataCertificateListTable" kendo-grid="vm.dataCertificateListTable" k-options="vm.dataCertificateListTableOptions"></div>
+            </div>
+        </div>
+    </div>
+</div>

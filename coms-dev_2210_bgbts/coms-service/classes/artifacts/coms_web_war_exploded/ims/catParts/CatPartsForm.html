@@ -1,0 +1,442 @@
+<!-- @author hailh10 -->
+<div ng-controller="CatPartsFormController as vm">
+    
+	<hr class="line-Hr">
+    <div  id="catParts">
+		<form class="form-horizontal row" role="form" name ="catParts" >
+			<div class="form-body">
+				<div class="clearfix">
+					
+				</div>
+				
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">PARTNER_NAME</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_partnerName" name="catParts_partnerName" ng-model="vm.data.partnerName" maxlength = "1000">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">ADDRESS</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_address" name="catParts_address" ng-model="vm.data.address" maxlength = "600">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">PHONE</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_phone" name="catParts_phone" ng-model="vm.data.phone" maxlength = "60">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">DESCRIPTION</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_description" name="catParts_description" ng-model="vm.data.description" maxlength = "600">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">FAX</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_fax" name="catParts_fax" ng-model="vm.data.fax" maxlength = "60">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">TAX_CODE</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_taxCode" name="catParts_taxCode" ng-model="vm.data.taxCode" maxlength = "100">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">CODE</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_code" name="catParts_code" ng-model="vm.data.code" maxlength = "200">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">REF_ID</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_refId" name="catParts_refId" ng-model="vm.data.refId" maxlength = "22">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">TYPE</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_type" name="catParts_type" ng-model="vm.data.type" maxlength = "22">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">ABB_NAME</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_abbName" name="catParts_abbName" ng-model="vm.data.abbName" maxlength = "100">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">GROUP_ID</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_groupId" name="catParts_groupId" ng-model="vm.data.groupId" maxlength = "22">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">DELEGATE_PERSON</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_delegatePerson" name="catParts_delegatePerson" ng-model="vm.data.delegatePerson" maxlength = "120">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">TITLE</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_title" name="catParts_title" ng-model="vm.data.title" maxlength = "200">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">ACCOUNT_NUMBER</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_accountNumber" name="catParts_accountNumber" ng-model="vm.data.accountNumber" maxlength = "200">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">BUSSINESS_NUMBER</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_bussinessNumber" name="catParts_bussinessNumber" ng-model="vm.data.bussinessNumber" maxlength = "100">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">STATUS</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_status" name="catParts_status" ng-model="vm.data.status" maxlength = "22">
+						</div>
+					</div>
+				</div>
+										
+					<div class="clearfix">
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label req" translate>CREATED_DATE</label>
+							<div class="col-md-8">
+								<input kendo-date-picker k-format="'dd/MM/yyyy'" class="width100" name="catParts_createdDate" id="catParts_createdDate" ng-model="vm.data.createdDate" />
+							</div>						
+						</div>
+					</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">PROPOSAL_NOTE</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_proposalNote" name="catParts_proposalNote" ng-model="vm.data.proposalNote" maxlength = "1000">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">ACCEPTOR_ID</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_acceptorId" name="catParts_acceptorId" ng-model="vm.data.acceptorId" maxlength = "22">
+						</div>
+					</div>
+				</div>
+										
+					<div class="clearfix">
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label req" translate>ACCEPT_DATE</label>
+							<div class="col-md-8">
+								<input kendo-date-picker k-format="'dd/MM/yyyy'" class="width100" name="catParts_acceptDate" id="catParts_acceptDate" ng-model="vm.data.acceptDate" />
+							</div>						
+						</div>
+					</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">ACCEPT_NOTE</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_acceptNote" name="catParts_acceptNote" ng-model="vm.data.acceptNote" maxlength = "1000">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">REJECT_NOTE</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_rejectNote" name="catParts_rejectNote" ng-model="vm.data.rejectNote" maxlength = "1000">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">NUM_DISPATH</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_numDispath" name="catParts_numDispath" ng-model="vm.data.numDispath" maxlength = "100">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">NUM_SUBMITSION</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_numSubmitsion" name="catParts_numSubmitsion" ng-model="vm.data.numSubmitsion" maxlength = "100">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">CAT_PARTNER_TYPE_ID</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_catPartnerTypeId" name="catParts_catPartnerTypeId" ng-model="vm.data.catPartnerTypeId" maxlength = "22">
+						</div>
+					</div>
+				</div>
+										
+					<div class="clearfix">
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label req" translate>CREAT_PARTNER_DATE</label>
+							<div class="col-md-8">
+								<input kendo-date-picker k-format="'dd/MM/yyyy'" class="width100" name="catParts_creatPartnerDate" id="catParts_creatPartnerDate" ng-model="vm.data.creatPartnerDate" />
+							</div>						
+						</div>
+					</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">REASON_CHANGE_PARTNER</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_reasonChangePartner" name="catParts_reasonChangePartner" ng-model="vm.data.reasonChangePartner" maxlength = "1000">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">DELEGATE_POSITION</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_delegatePosition" name="catParts_delegatePosition" ng-model="vm.data.delegatePosition" maxlength = "100">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">ACCOUNT_HOLDER</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_accountHolder" name="catParts_accountHolder" ng-model="vm.data.accountHolder" maxlength = "200">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">IDENTITY_CARD</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_identityCard" name="catParts_identityCard" ng-model="vm.data.identityCard" maxlength = "100">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">BANK_NAME</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_bankName" name="catParts_bankName" ng-model="vm.data.bankName" maxlength = "200">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">STATION_CODE_EXPECTED</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_stationCodeExpected" name="catParts_stationCodeExpected" ng-model="vm.data.stationCodeExpected" maxlength = "200">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">STATION_ID_EXPECTED</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_stationIdExpected" name="catParts_stationIdExpected" ng-model="vm.data.stationIdExpected" maxlength = "22">
+						</div>
+					</div>
+				</div>
+										
+					<div class="clearfix">
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label req" translate>MODIFIELD_DATE</label>
+							<div class="col-md-8">
+								<input kendo-date-picker k-format="'dd/MM/yyyy'" class="width100" name="catParts_modifieldDate" id="catParts_modifieldDate" ng-model="vm.data.modifieldDate" />
+							</div>						
+						</div>
+					</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">CAT_BANK_BRANCH_ID</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_catBankBranchId" name="catParts_catBankBranchId" ng-model="vm.data.catBankBranchId" maxlength = "22">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">IS_LOCK</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_isLock" name="catParts_isLock" ng-model="vm.data.isLock" maxlength = "22">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">ISSUE_BY</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_issueBy" name="catParts_issueBy" ng-model="vm.data.issueBy" maxlength = "600">
+						</div>
+					</div>
+				</div>
+										
+					<div class="clearfix">
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label req" translate>DATE_RANGE</label>
+							<div class="col-md-8">
+								<input kendo-date-picker k-format="'dd/MM/yyyy'" class="width100" name="catParts_dateRange" id="catParts_dateRange" ng-model="vm.data.dateRange" />
+							</div>						
+						</div>
+					</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">CHECK_PARTNER</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_checkPartner" name="catParts_checkPartner" ng-model="vm.data.checkPartner" maxlength = "22">
+						</div>
+					</div>
+				</div>
+										
+					<div class="clearfix">
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label req" translate>DATE_UPDATE_PARTNERS_CONTRACT</label>
+							<div class="col-md-8">
+								<input kendo-date-picker k-format="'dd/MM/yyyy'" class="width100" name="catParts_dateUpdatePartnersContract" id="catParts_dateUpdatePartnersContract" ng-model="vm.data.dateUpdatePartnersContract" />
+							</div>						
+						</div>
+					</div>
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">REPRESENTATION_NAME</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_representationName" name="catParts_representationName" ng-model="vm.data.representationName" maxlength = "1000">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">REPRESENTATION_POSITION</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_representationPosition" name="catParts_representationPosition" ng-model="vm.data.representationPosition" maxlength = "1000">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">NOTE</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_note" name="catParts_note" ng-model="vm.data.note" maxlength = "4000">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">ACCOUNT</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_account" name="catParts_account" ng-model="vm.data.account" maxlength = "4000">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">TRANSACTION_NAME</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_transactionName" name="catParts_transactionName" ng-model="vm.data.transactionName" maxlength = "1500">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">REPRESENTATIVE_NAME</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_representativeName" name="catParts_representativeName" ng-model="vm.data.representativeName" maxlength = "1500">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">REPRESENTATIVE_POSITION</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_representativePosition" name="catParts_representativePosition" ng-model="vm.data.representativePosition" maxlength = "1500">
+						</div>
+					</div>
+				</div>
+										
+				<div class="clearfix">
+					<div class="form-group col-md-6">
+						<label class="col-md-4 control-label req">UPDATOR_GROUP_ID</label>
+						<div class="col-md-8">
+							<input class="form-control" id="catParts_updatorGroupId" name="catParts_updatorGroupId" ng-model="vm.data.updatorGroupId" maxlength = "22">
+						</div>
+					</div>
+				</div>
+										
+			</div>
+		</form>
+	</div>
+</div>
+

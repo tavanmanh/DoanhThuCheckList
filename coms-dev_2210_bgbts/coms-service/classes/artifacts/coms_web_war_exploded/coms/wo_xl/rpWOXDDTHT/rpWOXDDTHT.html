@@ -1,0 +1,115 @@
+<div data-ng-controller="rpWOXDDTHTController as vm"
+     id="stock_transId">
+    <div>
+        <p class="text-brecum">{{vm.String}}</p>
+        <form class="form-horizontal row" role="form" id="rpMonthOSSearchId"
+              kendo-validator="vm.validator" k-options="vm.validatorOptions">
+            <div class="form-body">
+                <div class="portlet light bordered">
+                    <div class="portlet-title background-title">
+                        <div class="caption">
+							<span class="caption-subject bold lowercase " translate>Thông
+								tin tìm kiếm</span>
+                        </div>
+                        <div class="text-right margin-row-title">
+
+                            <i data-toggle="collapse" data-target="#demo11"
+                               class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div id="demo11" class="collapse in from-search">
+                        <div class="clearfix">
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label" translate>Loại báo
+                                    cáo</label>
+
+                                <div class="col-md-8 margin_top">
+                                    <input style=" float: left;" type="radio" id="status1"
+                                           name="status" ng-model="vm.searchForm.type"
+                                           ng-checked="vm.searchForm.type==1" value="1">
+                                    <span class="padding_radio">Báo tổng thể</span>
+                                    <input style=" float: left;" type="radio" id="status2"
+                                           name="status" ng-model="vm.searchForm.type"
+                                           ng-checked="vm.searchForm.type == 2" value="2">
+                                    <span class="padding_radio">Báo cáo chi tiết</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 form-horizontal control-label" translate>Nhân viên</label>
+                                <div class="col-md-8">
+                                    <input placeholder="Nhập mã nhân viên/email"
+                                           class=" form-control width100" type="text"
+                                           ng-model="vm.searchForm.ftName"/>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label" translate>Từ ngày</label>
+                                <div class="col-md-8">
+                                    <div class="col-md-5 no-padding position-relative" style="padding-left: 0px;">
+                                        <input kendo-date-picker k-format="'dd/MM/yyyy'"
+                                               ng-model="vm.searchForm.fromDate"
+                                               style="width: 100%;"
+                                               min-year="1000" date-time/>
+                                    </div>
+                                    <div class="col-md-2" style="text-align: center;"><label class="control-label"
+                                               translate>đến</label>
+                                    </div>
+                                    <div class="col-md-5 no-padding position-relative" style="padding-right: 0px;">
+                                        <input kendo-date-picker k-format="'dd/MM/yyyy'"
+                                               ng-model="vm.searchForm.toDate"
+                                               style="width: 100%;"
+                                               min-year="1000" date-time/>
+                                    </div>
+                                </div>
+                                <div class="One_icon">
+                                    <i class="fa fa-times" aria-hidden="true" ng-click="vm.cancelListYear()"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix form-actions margin-top">
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <button type="button" id="doSearch"
+                                            class="btn btn-qlk padding-search-right  noteQLK"
+                                            ng-click="vm.doSearch()" translate>Xem trước
+                                    </button>
+                                    <button type="button" id="excel"
+                                            class="btn btn-qlk padding-search-right  excelQLK"
+                                            ng-click="vm.exportexcel()" translate>Xuất excel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="portlet light bordered">
+        <div class="portlet-title background-title">
+            <div class="caption">
+				<span class="caption-subject bold lowercase" translate>Kết
+					quả tìm kiếm </span>&nbsp;
+            </div>
+            <div class="btn-group pull-right margin-row-title">
+                <i data-toggle="collapse" data-target="#countRPMonthProgressOS"
+                   class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+            </div>
+        </div>
+
+        <div id="rpMonthPlanPro" class="collapse in from-search">
+            <div class="clearfix position-relative" ng-if="vm.searchForm.type == 1">
+                <div kendo-grid="vm.gridGeneralReport" k-editable="false"
+                     k-options="vm.gridByGeneralReport"></div>
+            </div>
+
+            <div class="clearfix position-relative" ng-if="vm.searchForm.type == 2">
+                <div kendo-grid="vm.gridWoDetail" k-editable="false"
+                     k-options="vm.gridByWoDetailOptions"></div>
+            </div>
+        </div>
+    </div>
+</div>
+

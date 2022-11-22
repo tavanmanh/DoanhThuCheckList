@@ -1,0 +1,82 @@
+<form name="formWork" novalidate="">
+	<div>
+		<label style="margin: 8px;  font-size: 13px;">Thông tin chung</label>
+	<div>
+	<div class="clearfix border-gray" style="margin: 3px;">
+		<div class="row form-group " >
+			<div class="col-md-12">
+				<label class="col-md-2 control-label text-right req" translate>Đơn
+					vị thực hiện</label>
+
+				<div class="col-md-4">
+					<div class="input-icon right ">
+						<i class="fa fa-search directive"
+							ng-click="caller.openDepartmentTo1('dept1')"></i>
+					</div>
+					<input kendo-auto-complete k-options="caller.deprtOptions2"
+						ng-blur="caller.changeDV('dept1')"
+						class=" form-control width100" type="text"
+						ng-model="caller.catProvinForm.sysGroupName" name="dept1"
+						onclick="reset_msg();" required
+						data-required-msg="Đơn vị không để trống" /> <span id="msg"
+						data-for='dvn1' class='k-invalid-msg'></span>
+
+					<div class="One_icon">
+						<i class="fa fa-times" aria-hidden="true"
+							ng-click="caller.clearDV()"></i>
+					</div>
+					<script>
+						function reset_msg() {
+							document.getElementById('msg').innerHTML = '';
+						}
+					</script>
+				</div>
+				
+			</div>
+
+		</div>
+		<div class="row form-group">
+			<div class="col-md-12">
+				<div style="padding-bottom: inherit; height: 1rem;"
+					class="form-group">
+					<div style="padding-bottom: 0;" class="col-md-2 text-right">
+						<label ng-show="caller.showHm"
+							class="control-label text-right req">Tên Tỉnh</label> <label
+							ng-show="caller.showHm1" class="control-label text-right">Tên
+							hạng mục</label>
+					</div>
+					<div style="padding-bottom: 50px;" class="col-md-10 "
+						ng-show="caller.showHm">
+						<div class="row">
+							<div ng-repeat="catPro in caller.listCatProvince" class="col-md-3">
+								<label 
+									style="width: 100%"> <input type="checkbox"
+									data-checklist-model="caller.catProvinForm.workItemTypeList"
+									ng-checked="catPro.check"
+									data-checklist-value="catPro"> {{catPro.catProvinceName}}
+								</label>
+							</div>
+						</div>
+					
+					</div>
+					<div class="col-md-8" ng-show="caller.showHm1">
+						<label class="control-data" style="width: 100%">
+							{{caller.catProvinForm.catWorkItemType}} </label>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<div class="row modal-footer">
+			<div class="col-md-12 ">
+				<button type="button"
+					class="btn btn-qlk padding-search-right closeQLK" id="cancel"
+					ng-click="caller.cancel()" translate>Hủy bỏ</button>
+				<button type="button" id="savepopupApp"
+					class="btn btn-qlk padding-search-right saveQLK"
+					ng-click="caller.saveCatProvinceCon(caller.catProvinForm)" translate>Ghi
+					lại</button>
+			</div>
+		</div>
+	</div>
+</form>

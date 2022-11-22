@@ -1,0 +1,17 @@
+<div data-ng-controller="retrievalManagementController as vm">
+
+    <p class="text-brecum">{{vm.String}}</p>
+
+    <div ng-show="!vm.showDetail" style="clear: both;">
+
+        <div data-ng-include="'coms/retrievalManagement/retrievalManagementList.html'"></div>
+
+    </div>
+
+    <div ng-show="vm.showDetail" style="clear: both;">
+
+        <div data-ng-include="'coms/retrievalManagement/retrievalManagementAddNew.html'"></div>
+
+    </div>
+
+</div>

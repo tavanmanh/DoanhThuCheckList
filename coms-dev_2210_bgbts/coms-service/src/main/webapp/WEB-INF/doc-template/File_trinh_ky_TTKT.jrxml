@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="File_trinh_ky_CN" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b7641789-7c4e-456d-a195-cc213a9e697a">
+	<property name="ireport.callouts" value="##Wed Mar 27 18:51:06 ICT 2019"/>
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="requestGoodsId" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+					sg.name sysGroupName,
+					(SELECT '- '|| sg.name ||' kính đề nghị TT Hạ Tầng, Phòng Đầu tư đặt hàng sản xuất vật tư và cấp lên
+					 tuyến để đảm bảo vật tư theo đúng thiết kế của công trình'||'.' from CTCT_CAT_OWNER.SYS_GROUP sg
+					 inner JOIN REQUEST_GOODS rg on sg.sys_group_id = rg.sys_group_id where rg.REQUEST_GOODS_ID=$P{requestGoodsId}) content,
+					cp.CODE catProvinceCode,
+					rg.CONSTRUCTION_CODE constructionCode,
+					rgd.GOODS_NAME goodsName,
+					to_char(rgd.SUGGEST_DATE, 'DD/MM/YYYY') suggestDate,
+					rgd.CAT_UNIT_NAME catUnitName,
+					rgd.QUANTITY quantity,
+					rgd.DESCRIPTION description,
+                    rg.CNT_CONTRACT_CODE cntContractCode
+					FROM REQUEST_GOODS rg
+					left join REQUEST_GOODS_DETAIL rgd
+					on rgd.REQUEST_GOODS_ID = rg.REQUEST_GOODS_ID
+					left JOIN CTCT_CAT_OWNER.CAT_PROVINCE cp
+					ON cp.CAT_PROVINCE_ID = rg.CAT_PROVINCE_ID
+					left JOIN CTCT_CAT_OWNER.SYS_GROUP sg
+					ON sg.SYS_GROUP_ID = rg.SYS_GROUP_ID
+					where rg.REQUEST_GOODS_ID=$P{requestGoodsId}]]>
+	</queryString>
+	<field name="sysGroupName" class="java.lang.String"/>
+	<field name="content" class="java.lang.String"/>
+	<field name="catProvinceCode" class="java.lang.String"/>
+	<field name="constructionCode" class="java.lang.String"/>
+	<field name="goodsName" class="java.lang.String"/>
+	<field name="suggestDate" class="java.lang.String"/>
+	<field name="catUnitName" class="java.lang.String"/>
+	<field name="quantity" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="cntContractCode" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="123" splitType="Stretch">
+			<staticText>
+				<reportElement x="21" y="15" width="263" height="20" uuid="e107f578-ea6f-4a98-a9f3-82d65760385e"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[TỔNG CÔNG TY CỔ PHẦN CÔNG TRÌNH VIETTEL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="305" y="15" width="234" height="20" uuid="45b26c7e-5d6d-492c-91c0-0b4cc161211c"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Times New Roman" size="11" isBold="true" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[CỘNG HOÀ XÃ HỘI CHỦ NGHĨA VIỆT NAM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="341" y="37" width="156" height="16" uuid="0c9ef952-06ac-4a9e-8562-4e16987e1412"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="11" isUnderline="false" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[Độc lập - Tự do - Hạnh phúc]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="21" y="35" width="263" height="16" uuid="94e226c2-7c2a-43ce-a370-9d8194e9c228"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Times New Roman" size="11" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sysGroupName}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="373" y="53" width="100" height="1" uuid="517e3cd3-aa7b-45ed-98d0-805959c25496"/>
+			</line>
+			<line>
+				<reportElement x="93" y="51" width="100" height="1" uuid="9ab5e46a-e1a3-4dec-91ff-0ac4981607e8"/>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="72" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="132" y="0" width="301" height="23" uuid="5bccec28-8b01-41f2-94cb-ca36fc52ad08"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="11" isBold="true" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[PHIẾU YÊU CẦU SẢN XUẤT VẬT TƯ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="93" y="23" width="383" height="20" uuid="e13cd56d-997c-44c2-8c0d-bdf528077960"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="11" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[Kính gửi: TT Hạ Tầng - Tổng Công Ty CP Công trình Viettel]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="99" splitType="Stretch">
+			<staticText>
+				<reportElement x="21" y="0" width="111" height="20" uuid="c47b62cc-79a7-4abf-bc38-8ffe07053781"/>
+				<textElement>
+					<font fontName="Times New Roman" size="11" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[- Căn cứ vào hợp đồng:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TH" x="21" y="69" width="33" height="30" uuid="521c5529-2cff-46aa-bbbe-77add7faed3b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[STT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TH" x="54" y="69" width="58" height="30" uuid="2b015a62-bf58-4ab0-be1f-ad4513834cc6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[Mã tỉnh]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TH" x="112" y="69" width="86" height="30" uuid="b3a2c37d-0130-4eca-9e4e-a610e0bf5594"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[Mã công trình]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TH" x="198" y="69" width="115" height="30" uuid="27b7fc77-5b57-47f0-8d67-40cb859afabf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[Tên mặt hàng]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TH" x="313" y="69" width="71" height="30" uuid="2297d19c-de65-4e9d-8981-7d3c665150e3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[Ngày đề
+nghị cấp]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TH" x="384" y="69" width="46" height="30" uuid="04e407ea-6a89-4db6-af7e-e3f69a899b23"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[ĐVT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TH" x="430" y="69" width="43" height="30" uuid="a99c1e00-e7fa-4ccc-8234-2cbd0d9d4081"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[Số lượng]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TH" x="473" y="69" width="66" height="30" uuid="8fb81b24-b8d1-482c-a653-c880b746ce32"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[Ghi chú]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="21" y="20" width="518" height="37" uuid="5933451d-7588-43d8-ac4e-81570044d06c"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Times New Roman" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{content}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="132" y="0" width="407" height="20" uuid="20f8f0dd-9e5f-45e3-8f2f-372f8ce1bce2"/>
+				<textElement>
+					<font fontName="Times New Roman" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cntContractCode}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="table_TH" x="21" y="0" width="33" height="20" uuid="29a5911c-0e54-4040-897e-1fa26d04a1dd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TH" x="54" y="0" width="58" height="20" uuid="d4cb8407-4331-4dd1-9ae6-52be7c874084"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{catProvinceCode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TH" x="112" y="0" width="86" height="20" uuid="3b1d0780-04f3-4d2f-950d-4b314c1f6d98"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{constructionCode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TH" x="198" y="0" width="115" height="20" uuid="d6c618b2-d62f-486e-9e0c-9ec3008fa37e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{goodsName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TH" x="313" y="0" width="71" height="20" uuid="a518718a-24b8-4df5-9238-3e07b1788668"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{suggestDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TH" x="384" y="0" width="46" height="20" uuid="5cc072db-9c4b-4cf6-a8fb-804102788ac6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{catUnitName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TH" x="430" y="0" width="43" height="20" uuid="5c938a2d-e561-4d81-bb72-8ddf158bfff1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="table_TH" x="473" y="0" width="66" height="20" uuid="05fb0cff-1a15-44b3-8a34-5ea62a7dced8"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="126" splitType="Stretch">
+			<staticText>
+				<reportElement x="93" y="31" width="100" height="20" uuid="d656e796-9ab0-43c1-8d27-81e36160e7d2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[GIÁM ĐỐC TTKT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="358" y="31" width="100" height="20" uuid="99799fac-87a3-43f5-b08e-7483e8f48c1f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[TT HẠ TẦNG]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

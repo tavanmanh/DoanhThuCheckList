@@ -1,0 +1,26 @@
+<div class="form-body">
+	<div class="clearfix">
+		<div class="form-group col-md-12">
+			<label class="col-md-4 control-label req" translate>Lý do từ
+				chối</label>
+			<div class="col-md-8">
+				<select kendo-drop-down-list style="width: 100%"
+					ng-model="caller.dataConfirm.reason">
+					<option value="" ng-seleted>~~Chọn~~</option>
+					<option value="Sai số lượng, chủng loại vật tư">Sai
+						số lượng, chủng loại vật tư</option>
+					<option value="Sai đơn vị nhận">Sai đơn vị nhận</option>
+					<option value="Không thuộc mảng công việc xây lắp và ngoài OS">Không thuộc mảng công việc xây lắp và ngoài OS</option>
+				</select>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer" align="right">
+		<button type="button"
+			class="btn btn-qlk padding-search-right margin_right10 closeQLK btn pull-right"
+			ng-click="caller.cancelReason()" translate>Đóng</button>
+		<button type="button"
+			class="btn btn-qlk padding-search-right margin_right10 saveQLK pull-right"
+			ng-click="caller.saveReason()" translate>Ghi lại</button>
+	</div>
+</div>

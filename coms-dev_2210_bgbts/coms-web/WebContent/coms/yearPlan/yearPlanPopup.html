@@ -1,0 +1,68 @@
+
+<form name="form" class="form-horizontal row " role="form"
+	name="yearPlan" id="yearPlan" kendo-validator="validator"
+	k-options="validatorOptions" style="">
+	<div class="clearfix">
+		<!-- <div>
+			<div>
+				<a href="https://www.w3schools.com/html/">tải file mẫu</a>
+			</div>
+			<div>
+			
+			</div>
+		</div> -->
+		<div class="file-border">
+			<div class="row">
+                <a href="javascript:void(0);" id="linkFile" style="text-decoration:underline;float:right;" ng-click="caller.getExcelTemplate()">Tải
+                    file biểu mẫu</a>
+			</div>
+			<div class="row file-inport">
+				<div class="wrapper-input">
+					<div class="k-button k-upload-button">
+<!--					<input class="" id="Files" class="form-control"  type="file" ng-model="vm.reasonSearch.keySearch" />
+ 						<span for="file">Kéo thả các file vào đây hoặc click để chọn file</span>
+ -->						
+ 					<input class="file-input k-valid" name="fileImport" type="file"
+ 					kendo-upload="" id="fileImport" tabindex="10" onchange="angular.element(this).scope().onSelectFile()"
+ 					data-role="upload" autocomplete="off" multiple="multiple">
+ 					<span id="fileName" name="fileName">Kéo thả các file vào đây hoặc click để chọn file</span>
+					</div>
+					<center><span style="color:gray; margin: auto;">Dung lượng &#60;&#61; 100MB, định dạng xls, xlsx</span></center>
+				</div>
+			</div>
+			<!--         hungnx 20180618 start -->
+        <div class="row">
+				<div align="center"><div id="loadingIpYear" style="height:30px;"></div></div>
+		</div>
+<!--         hungnx 20180618 end -->
+		</div>
+		<div class="row">
+				<div class="col-md-12 text-right">
+					<button type="button"
+						class="btn btn-qlk padding-search-right closeQLK" id="cancel"
+						ng-click="caller.cancelImport()" translate>Hủy bỏ</button>
+					<button type="button" id="savepopupYear" 
+						class="btn btn-qlk padding-search-right saveQLK" ng-click="caller.saveImportFile()"
+						translate>Ghi lại</button>
+				</div>
+			</div>
+	<script type="text/javascript">
+		$("input").change(function() {
+			$(this).val($.trim($(this).val()));
+		});
+		document.onkeydown = keyDown;
+		function keyDown(e) {
+			switch (e.keyCode) {
+			case 27:
+				$("#cancel").click();
+				break;
+			case 13:
+				if (e.keyCode === 13 && !$('#cancel:focus').length
+						&& !$('#savepopupYear:focus').length) {
+					$("#savepopupYear").click();
+					break;
+				}
+			}
+		}
+	</script>
+</form>

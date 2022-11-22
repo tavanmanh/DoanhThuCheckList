@@ -1,0 +1,8 @@
+<div data-ng-controller="totalMonthPlanOSController as vm">
+    <div ng-show="!vm.showDetail" style="clear: both;">
+        <div data-ng-include="'coms/totalMonthPlanOS/totalMonthPlanOSList.html'"></div>
+    </div>
+    <div ng-show="vm.showDetail" style="clear: both;">
+        <div data-ng-include="'coms/totalMonthPlanOS/totalMonthPlanOSForm.html'"></div>
+    </div>
+</div>

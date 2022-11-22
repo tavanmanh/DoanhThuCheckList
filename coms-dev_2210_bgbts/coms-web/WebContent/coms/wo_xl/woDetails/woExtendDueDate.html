@@ -1,0 +1,34 @@
+<style>
+    .modal-content{
+        padding: 0px!important;
+    }
+</style>
+
+<div class="modal-header" style="background-color: #33CCCC;">
+    <h5 class="modal-title">Cập nhật hạn hoàn thành</h5>
+    <button type="button" class="close close-modal-x" data-dismiss="modal" aria-label="Close" ng-click="$dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal row" role="form">
+        <div class="form-body" >
+            <div class="col-md-12">
+                <label class="display-block control-label" style="text-align: left !important;" translate>Thời gian:</label>
+                <input class="form-control display-block" kendo-date-picker k-format="'dd/MM/yyyy'" id="inputFinishDate"
+                       ng-model="vm.workingWO.finishDate" min-year="1000" date-time/>
+                <label class="display-block control-label" style="text-align: left !important;" translate>Lý do:</label>
+                <textarea ng-model="vm.comment.text" style="width: 100%; height: 120px;"> </textarea>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="$dismiss()">
+        <i class="fa fa-ban"></i> Hủy bỏ
+    </button>
+    <button type="button" class="btn btn-secondary" ng-click="vm.validateExtendDueDate()?$close():return;">
+        <i class="fa fa-floppy-o azure"></i> Lưu
+    </button>
+</div>

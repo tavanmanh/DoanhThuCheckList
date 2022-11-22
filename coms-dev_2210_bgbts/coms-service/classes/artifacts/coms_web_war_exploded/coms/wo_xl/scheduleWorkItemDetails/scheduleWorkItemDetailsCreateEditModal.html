@@ -1,0 +1,102 @@
+<style>
+    .app-modal-window .modal-dialog {
+        min-width: 1000px;
+    }
+
+    .modal-content{
+        width: 100%;
+        padding: 0;
+    }
+
+    .close-modal-x{
+        position: absolute;
+        top: 6px;
+        right: 6px;
+    }
+
+    .input-half{
+        width: 40%;
+        display: inline;
+    }
+
+    .display-block{
+        display: block;
+        width: 100%;
+    }
+
+    .portlet-title{
+        display: none;
+    }
+
+</style>
+
+<div class="modal-header" style="background-color: #33CCCC;">
+    <h5 class="modal-title">Thêm mới/Sửa công việc </h5>
+    <button type="button" class="close close-modal-x" data-dismiss="modal" aria-label="Close" ng-click="$dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal row" role="form">
+
+        <div class="form-body">
+            <div class="portlet light bordered">
+                <div class="portlet-title background-title">
+                    <div class="caption" >
+                        <span class="caption-subject bold lowercase" translate>Thông tin</span>
+                    </div>
+                </div>
+                <div id="workItem1" class="collapse in from-search">
+                    <div class="clearfix position-relative">
+                        <div class="clearfix">
+                            <div class="form-group col-md-4">
+                                <div class="col-md-5">
+                                    <label class="form-horizontal control-label" translate>Mã công việc</label><span style="color:red !important;">*</span>
+                                </div>
+                                <div class="col-md-7">
+                                    <input class=" form-control width100" type="text"
+                                           ng-model="wiCheckListForm.scheduleCheckListCode" name="dept"
+                                           onclick="validateWorkItemCode = null"/>
+                                    <span style="color:red;">{{vm.validateWorkItemCode}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <div class="col-md-5">
+                                    <label class="form-horizontal control-label" translate>Tên công việc</label><span style="color:red !important;">*</span>
+                                </div>
+                                <div class="col-md-7">
+                                    <input class=" form-control width100" type="text"
+                                           ng-model="wiCheckListForm.scheduleCheckListName" name="dept"
+                                           onclick="validateWorkItemName = null"/>
+                                    <span style="color:red;">{{vm.validateWorkItemName}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <div class="col-md-6" style="padding-right: 0px">
+                                    <label class="form-horizontal control-label" translate>Mã công việc định kỳ</label>
+                                </div>
+                                <div class="col-md-6" style="padding-right: 0px;padding-left: 0px;">
+                                    <input class=" form-control width100" style="padding-right: 0px;padding-left: 2px;" type="text" disabled
+                                           ng-model="vm.workItemCode" name="dept"/>
+<!--                                    <input class="form-control display-block" disabled ng-model="vm.workingTR.trCode"/>-->
+                                    <span style="color:red;">{{vm.validateWorkItemCode}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--        </div>-->
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="$dismiss()">
+        <i class="fa fa-ban"></i> Hủy bỏ
+    </button>
+    <button type="button" class="btn btn-secondary" ng-click="validateCreateNew()?$close():return;">
+        <i class="fa fa-floppy-o azure"></i> Ghi lại
+    </button>
+</div>
+
+<!-- End edit tr Modal -->

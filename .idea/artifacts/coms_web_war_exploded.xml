@@ -1,0 +1,36 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="coms-web:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/coms_web_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="coms-web" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="module" name="erp-utils.jar" module-name="coms-web" />
+          <element id="library" level="module" name="gson-2.8.0.jar" module-name="coms-web" />
+          <element id="library" level="module" name="log4j-1.2.17.jar" module-name="coms-web" />
+          <element id="library" level="module" name="slf4j-api-1.7.21.jar" module-name="coms-web" />
+          <element id="library" level="module" name="slf4j-log4j12-1.7.21.jar" module-name="coms-web" />
+          <element id="library" level="module" name="vpclient-4.0.2.jar" module-name="coms-web" />
+          <element id="library" level="module" name="vpclient-ws-4.1.jar" module-name="coms-web" />
+          <element id="library" level="module" name="vptoken-4.0.jar" module-name="coms-web" />
+          <element id="library" level="module" name="vsa_service_client.jar" module-name="coms-web" />
+          <element id="library" level="module" name="vsa-service.jar" module-name="coms-web" />
+          <element id="library" level="module" name="commons-codec-1.3.jar" module-name="coms-web" />
+          <element id="library" level="module" name="commons-httpclient-3.1.jar" module-name="coms-web" />
+          <element id="library" level="module" name="commons-logging-1.1.jar" module-name="coms-web" />
+          <element id="library" level="module" name="httpclient-4.3.6.jar" module-name="coms-web" />
+          <element id="library" level="module" name="httpcore-4.3.3.jar" module-name="coms-web" />
+          <element id="library" level="module" name="jstl-1.2.jar" module-name="coms-web" />
+          <element id="library" level="module" name="standard-2.2.0.jar" module-name="coms-web" />
+          <element id="library" level="module" name="vpclient_SSO_Update_2017.jar" module-name="coms-web" />
+          <element id="library" level="module" name="vpclient-ws.jar" module-name="coms-web" />
+          <element id="library" level="module" name="vptoken.jar" module-name="coms-web" />
+        </element>
+      </element>
+      <element id="library" level="module" name="vps_lib-1.0-SNAPSHOT.jar" module-name="coms-web" />
+      <element id="javaee-facet-resources" facet="coms-web/web/Web" />
+    </root>
+  </artifact>
+</component>

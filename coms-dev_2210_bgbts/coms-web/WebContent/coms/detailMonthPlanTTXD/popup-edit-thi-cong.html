@@ -1,0 +1,139 @@
+<form class="form-horizontal row" novalidate="" name="form">
+	<div class="form-body">
+		<div class="portlet light">
+			<div class="portlet-title background-title" style="">
+				<div class="caption">
+					<span class="caption-subject bold lowercase" translate>Thông
+						tin thực hiện</span>
+				</div>
+				<div class="text-right margin-row-title">
+					<i data-toggle="collapse" data-target="#part2"
+						class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+				</div>
+			</div>
+			<div id="part2" class="collapse in from-search">
+				<div class="padding-width18">
+					<div class="border-gray" style="padding: 18px;">
+						<div class="clearfix position-relative">
+							<div class="clearfix form-group">
+								<div class="clearfix row margin-top">
+									<label class="col-md-2 control-label req" translate>Hợp
+										đồng</label>
+
+									<div class="col-md-4">
+										<label class="control-data">{{caller.thiCongItem.cntContractCode}}</label>
+									</div>
+									<label class="col-md-2 control-label req" translate>Giá
+										trị sản lượng (Tỷ VNĐ)</label>
+									<div class="col-md-4 text-right">
+										<input maxlength="25"
+											class=" form-control text-right width100" type="text"
+											id="quantityTarget" name="quantityTarget"
+											data-required-msg="Giá trị sản lượng không được để trống"
+											vt-currency parsecurrency3 fraction-size="3"
+											ng-value="caller.thiCongItem.quantityTarget"
+											ng-model="caller.thiCongItem.quantityTarget" />
+										<span style="color: red;"
+											ng-if="form.quantityTarget.$invalid && !form.quantityTarget.$pristine">Giá
+											trị sản lượng không được để trống</span>
+									</div>
+								</div>
+								<div class="clearfix row margin-top">
+									<label class="col-md-2 control-label req" translate>Giá
+										trị doanh thu (Tỷ VNĐ)</label>
+
+									<div class="col-md-4 margin_top">
+										<input maxlength="25"
+											class=" form-control text-right width100" type="text"
+											id="revenueTarget" name="revenueTarget"
+											data-required-msg="Giá trị doanh thu không được để trống"
+											vt-currency parsecurrency3 fraction-size="3"
+											ng-value="caller.thiCongItem.revenueTarget"
+											ng-model="caller.thiCongItem.revenueTarget" />
+										<span style="color: red;"
+											ng-if="form.revenueTarget.$invalid && !form.revenueTarget.$pristine">Giá
+											trị doanh thu không được để trống</span>
+									</div>
+									<label class="col-md-2 control-label req" translate>Yêu cầu khác</label>
+
+									<div class="col-md-4 margin_top">
+										<input maxlength="25"
+											class=" form-control text-right width100" type="text"
+											id="otherTarget" name="otherTarget"
+											data-required-msg="Giá trị yêu cầu khác không được để trống"
+											ng-value="caller.thiCongItem.otherTarget"
+											ng-model="caller.thiCongItem.otherTarget" />
+										<span style="color: red;"
+											ng-if="form.otherTarget.$invalid && !form.otherTarget.$pristine">Yêu cầu khác không được để trống</span>
+									</div>
+								</div>
+								<div class="clearfix row margin-top">
+									<label class="col-md-2 control-label req" translate>Người
+										thực hiện</label>
+
+									<div class="col-md-4">
+										<auto-search model-label="" caller="caller"
+											template-url="views/popup/gridViewCreateUser.html"
+											header-template="caller.suppervisorHeaderTemplate"
+											template-auto="caller.suppervisorTemplate" page="1"
+											page-size="10" popup-id="ar_deposit_browser_adOrgId"
+											popup-type="gridplusSuppervisor" combo-id="performerId"
+											combo-source-link="sysUserCOMSRsService/getSuppervisorAutoComplete"
+											combo-name="fullName" combo-value="sysUserId"
+											combo-code="employeeCode" combo-search="caller.commonSearch"
+											combo-grid="caller.gridCreator"
+											model-id="caller.thiCongItem.performerId"
+											model-name="caller.thiCongItem.performerName"
+											ng-model="caller.thiCongItem.performerName"></auto-search>
+									</div>
+									
+									<label class="col-md-2 control-label" translate>Người điều hành</label>
+
+									<div class="col-md-4">
+										<auto-search model-label="" caller="caller"
+											template-url="views/popup/gridViewCreateUser.html"
+											header-template="caller.suppervisorHeaderTemplate"
+											template-auto="caller.suppervisorTemplate" page="1"
+											page-size="10" popup-id="ar_deposit_browser_adOrgId"
+											popup-type="gridplusSuppervisor" combo-id="supervisorId"
+											combo-source-link="sysUserCOMSRsService/getSuppervisorAutoComplete"
+											combo-name="fullName" combo-value="sysUserId"
+											combo-code="employeeCode" combo-search="caller.commonSearch"
+											combo-grid="caller.gridCreator"
+											model-id="caller.thiCongItem.supervisorId"
+											model-name="caller.thiCongItem.supervisorName"
+											ng-model="caller.thiCongItem.supervisorName"></auto-search>
+									</div>
+								</div>
+								
+								<div class="clearfix row margin-top">
+									<label class="col-md-2 control-label req" translate>Ngày hoàn thành</label>
+
+									<div class="col-md-4">
+										<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+											class=" form-control width100" min-year="1000"
+											id="endDate" name="endDate"
+											ng-model="caller.thiCongItem.endDate" />
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row modal-footer">
+		<div class="col-md-12 text-right">
+			<button type="button"
+				class="btn btn-qlk padding-search-right closeQLK" id="cancel"
+				ng-click="caller.cancelEditPopup()" translate>Hủy bỏ</button>
+			<button type="button" id="savepopupApp"
+				class="btn btn-qlk padding-search-right saveQLK"
+				ng-disabled="caller.disabled||caller.invalidDate"
+				ng-click="caller.saveQuantityTTXDPopup()" translate>Ghi lại</button>
+		</div>
+
+	</div>
+</form>

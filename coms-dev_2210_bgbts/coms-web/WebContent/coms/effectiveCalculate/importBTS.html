@@ -1,0 +1,319 @@
+<style>
+.k-button.k-upload-button:hover {
+	background-color: silver !important;
+}
+
+.k-header {
+	border-color: #fff !important;
+}
+
+.k-button.k-upload-button {
+	width: 100%;
+	border: 1px solid;
+	margin-left: 0px;
+	text-weight: strong;
+}
+
+.guide {
+	text-align: center;
+}
+
+.col-md-10 {
+	padding-left: 16px;
+	padding-right: 8px;
+}
+
+.k-upload-files, .k-upload-status {
+	display: none;
+}
+</style>
+
+
+<form class="form-horizontal row" role="form" name="shipment"
+	id="shipment" kendo-validator="validator" k-options="validatorOptions">
+	<div class="portlet light" style="height: 255px;">
+		<div class="portlet-title background-title">
+			<div class="caption">
+				<span class="caption-subject bold lowercase ng-scope" translate="">Import
+					BTS từ file excel</span>
+			</div>
+		</div>
+
+
+
+		<div class="clearfix">
+			<div class="row">
+				<div id="upload"
+					class="portlet light bordered collapse in from-search">
+					<div class="border-gray" style="height: 222px;">
+						<div class="row">
+							<div class="form-group">
+								<label class="col-md-1 control-label" translate></label>
+
+								<div class="col-md-11 margin_top">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<div class="clearfix">
+										<div class="form-group col-md-3">
+											<label><input style="float: left;" type="radio"
+												id="actionType" name="actionType"
+												ng-model="caller.actionType"
+												ng-checked="caller.actionType == 1" value="1"> <span
+												class="padding_radio">Capex Nguồn</span></label>
+										</div>
+										<div class="form-group col-md-3">
+											<label><input style="float: left;" type="radio"
+												id="actionType" name="actionType"
+												ng-model="caller.actionType"
+												ng-checked="caller.actionType == 7" value="7"> <span
+												class="padding_radio">Capex</span></label>
+										</div>
+										<div class="form-group col-md-5">
+											<label> <input style="float: left;" type="radio"
+												id="actionType" name="actionType"
+												ng-model="caller.actionType"
+												ng-checked="caller.actionType == 8" value="8"> <span
+												class="padding_radio">Chào giá</span></label>
+										</div>
+
+									</div>
+									<div class="clearfix">
+										<div class="form-group col-md-3">
+											<label><input style="float: left;" type="radio"
+												id="actionType" name="actionType"
+												ng-model="caller.actionType"
+												ng-checked="caller.actionType == 2" value="2"> <span
+												class="padding_radio">WACC</span></label>
+										</div>
+										<div class="form-group col-md-3">
+											<label><input style="float: left;" type="radio"
+												id="actionType" name="actionType"
+												ng-model="caller.actionType"
+												ng-checked="caller.actionType == 3" value="3"> <span
+												class="padding_radio">Tỷ lệ giao khoán</span></label>
+										</div>
+										<div class="form-group col-md-5">
+											<label><input style="float: left;" type="radio"
+												id="actionType" name="actionType"
+												ng-model="caller.actionType"
+												ng-checked="caller.actionType == 6" value="6"> <span
+												class="padding_radio">Giá thuê TTr theo 1477</span></label>
+										</div>
+									</div>
+									<div class="clearfix">
+										<div class="form-group col-md-3">
+											<label><input style="float: left;" type="radio"
+												id="actionType" name="actionType"
+												ng-model="caller.actionType"
+												ng-checked="caller.actionType == 9" value="9"> <span
+												class="padding_radio">Tính toán hiệu quả</span></label>
+										</div>
+										<div class="form-group col-md-3">
+											<label><input style="float: left;" type="radio"
+												id="actionType" name="actionType"
+												ng-model="caller.actionType"
+												ng-checked="caller.actionType == 5" value="5"> <span
+												class="padding_radio">Dgia thuê VTNet</span></label>
+										</div>
+										<div class="form-group col-md-5">
+											<label><input style="float: left;" type="radio"
+												id="actionType" name="actionType"
+												ng-model="caller.actionType"
+												ng-checked="caller.actionType == 4" value="4"> <span
+												class="padding_radio">Chi phí xin đấu nối điện + GPMB</span></label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<hr>
+						<div class="guide">
+							Kéo thả các file vào đây hoặc click để chọn file [<span
+								style="color: blue"><u>{{caller.fileImportData.name}}</u></span>]
+						</div>
+
+						<div class="clearfix">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="col-md-12 k-content">
+										<input name="filePackage" id="filePackage"
+											ng-disabled="caller.disableSubmit" type="file"
+											list-file-type="xls,xlsx" />
+									</div>
+								</div>
+							</div>
+
+							<script>
+								$(document)
+										.ready(
+												function() {
+													var caller = angular
+															.element(
+																	document
+																			.getElementById('shipment'))
+															.scope().caller;
+													var scopeX = angular
+															.element(
+																	document
+																			.getElementById('shipment'))
+															.scope();
+													var urlUpload = window.location.protocol
+															+ '//'
+															+ window.location.hostname
+															+ ':'
+															+ window.location.port;
+
+													function onSuccess(data) {
+														console
+																.log($("#filePackage")[0].files[0]);
+														caller.fileImportData = $("#filePackage")[0].files[0];
+														console
+																.log(caller.fileImportData)
+														console
+																.log(caller.fileImportData.name)
+														console.log(scopeX)
+														scopeX.$apply();
+													}
+													$("#filePackage")
+															.kendoUpload(
+																	{
+																		async : {
+																			removeUrl : urlUpload
+																					+ API_URL
+																					+ "fileservice/removeFileUpload",
+																		},
+																		select : onSuccess,
+																		validation : {
+																			allowedExtensions : [
+																					".xls",
+																					".xlsx", ]
+																		},
+																		success : onSuccess,
+																		localization : {
+																			uploadSelectedFiles : "Chọn tệp"
+																		}
+
+																	});
+													;
+												});
+							</script>
+
+						</div>
+
+
+						<div class="clearfix">
+							<div class="form-group col-md-12 guide">
+
+								<span style="color: gray">Dung lượng &#60;&#61; 100MB,
+									định dạng xls,xlsx</span>
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<div class="row">
+								<div align="center">
+									<div id="testSubmit" style="height: 30px;"></div>
+								</div>
+								<br>
+								<div align="center">
+									<a href="" ng-click="caller.getBTSExcelTemplate()"><u>Tải
+											biểu mẫu</u></a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+				</div>
+
+			</div>
+		</div>
+
+		<div class="clearfix form-actions margin-top">
+			<div class="row">
+				<button ng-disabled="caller.disableSubmit" type="button"
+					id="savepopupApp"
+					class="btn btn-qlk padding-search-right saveQLK pull-right"
+					ng-click="caller.submitImportBTS()" translate>Ghi lại</button>
+				<button type="button"
+					class="btn btn-qlk padding-search-right closeQLK pull-right"
+					id="cancel" ng-click="caller.cancelImportBTS()" translate>Hủy
+					bỏ</button>
+			</div>
+		</div>
+
+	</div>
+	<script type="text/javascript">
+		$("input").change(function() {
+			$(this).val($.trim($(this).val()));
+		});
+		document.onkeydown = keyDown;
+		var scopeX = angular.element(document.getElementById('shipment'))
+				.scope();
+		$("div.k-window-actions > a.k-window-action > span.k-i-close").on(
+				"click", function() {
+					vm.disableSubmit = false;
+					scopeX.$apply();
+				});
+
+		function keyDown(e) {
+			switch (e.keyCode) {
+			case 27:
+				$("#cancel").click();
+				break;
+			case 13:
+				if (e.keyCode == 13 && !$('#cancel:focus').length
+						&& !$('#saveStockCell:focus').length) {
+					$("#savepopupApp").click();
+					break;
+				}
+			}
+		}
+	</script>
+</form>
+
+<style>
+.loadersmall {
+	border: 5px solid #f3f3f3 !important;
+	-webkit-animation: spin 0.4s linear infinite !important;
+	animation: spin 0.4s linear infinite !important;
+	border-top: 2px solid #555 !important;
+	border-radius: 50% !important;
+	width: 30px !important;
+	height: 30px !important;
+}
+
+@
+-webkit-keyframes spin { 0% {
+	-webkit-transform: rotate(0deg);
+}
+
+100%
+{
+-webkit-transform
+:
+ 
+rotate
+(360deg);
+ 
+}
+}
+@
+keyframes spin { 0% {
+	transform: rotate(0deg);
+}
+
+100%
+{
+transform
+:
+ 
+rotate
+(360deg);
+ 
+}
+}
+input {
+	
+}
+</style>

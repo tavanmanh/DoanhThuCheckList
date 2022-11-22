@@ -1,0 +1,8 @@
+<div data-ng-controller="quantityController  as vm">
+    <div ng-show="!vm.showDetail" style="clear: both;">
+        <div data-ng-include="'coms/quantityByDay/workItemList.html'"></div>
+    </div>
+    <div ng-show="vm.showDetail" style="clear: both;">
+        <div data-ng-include="'coms/quantityByDay/pupup-cancel-confirm.html'"></div>
+    </div>
+</div>

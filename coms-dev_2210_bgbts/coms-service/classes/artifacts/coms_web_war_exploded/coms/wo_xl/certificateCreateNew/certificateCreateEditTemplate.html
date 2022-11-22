@@ -1,0 +1,192 @@
+<form class="form-horizontal row" role="form">
+    <div class="form-body" data-ng-controller="certificateCreateEditTemplateController">
+        <div class="portlet light bordered">
+            <div class="portlet-title background-title">
+                <div class="caption">
+                    <span class="caption-subject bold lowercase" translate>Thông tin chứng chỉ</span>
+                </div>
+            </div>
+            <div class="collapse in from-search">
+                <div class="clearfix position-relative">
+                    <div class="clearfix">
+                        <div class="form-group row">
+                            <div class="col-md-4">
+                                    <label class="form-horizontal control-label" translate>Mã/Số chứng chỉ</label><span style="color:red !important;">*</span>
+                                	<input ng-model="workingCertificate.certificateCode" ng-if="!isEditting" class="form-control display-block" />
+	                                <div ng-if="isEditting">
+	                                    <input disabled class="form-control display-block" ng-model="workingCertificate.certificateCode"/>
+	                                </div>
+                            </div>
+                            
+                            
+
+                            <div class="col-md-4">
+                                    <label class="form-horizontal control-label" translate>Tên chứng chỉ </label><span style="color:red !important;">*</span>
+                                     <input ng-model="workingCertificate.certificateName" ng-if="!isEditting" class="form-control display-block" />
+                                     <div ng-if="isEditting">
+	                                    <input disabled class="form-control display-block" ng-model="workingCertificate.certificateName"/>
+	                                </div>
+                            	
+							</div>
+                            <div class="col-md-4">
+                                    <label class="form-horizontal control-label" translate>Lĩnh vực/Ngành nghề</label><span style="color:red !important;">*</span>
+                                	<input class="form-control display-block" type="text" 
+                                       k-options="autoCompleteCareerOptions" kendo-auto-complete 
+                                       ng-model="workingCertificate.careerName" id="careerName" ng-blur="changeDataAuto('career1')"/>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <div class="col-md-4">
+                                    <label class="form-horizontal control-label" translate>Điểm thực hành</label><span style="color:red !important;">*</span>
+                                	<input id="practicePoint" type="text" class="form-control display-block" only-numbers ng-blur="focusOut()" ng-model="workingCertificate.practicePoint" />
+                            </div>
+
+                            <div class="col-md-4">
+                                    <label class="form-horizontal control-label" translate>Điểm lí thuyết </label><span style="color:red !important;">*</span>
+                                	<input id="theoreticalPoint" type="text" class="form-control display-block" only-numbers ng-blur="focusOut()" ng-model="workingCertificate.theoreticalPoint" />
+                            </div>
+                            <div class="col-md-4">
+                                    <label class="form-horizontal control-label" translate>Đơn vị cấp </label><span style="color:red !important;">*</span>
+                                     <input ng-model="workingCertificate.unitCreated" class="form-control display-block" />
+                            	
+							</div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            
+                            <div class="col-md-4">
+                                <label class="form-horizontal control-label"  translate>Ngày cấp</label><span style="color:red !important;">*</span>
+                                <input class="form-control display-block" kendo-date-picker k-format="'dd/MM/yyyy'"
+                                       ng-model="workingCertificate.startDate" min-year="1000" date-time/> 
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-horizontal control-label" translate>Ngày hết hạn</label><span style="color:red !important;">*</span>
+                                <input type="text" ng-if="!disableEdit && workingCertificate.approveStatus == 2" class="form-control display-block" kendo-date-picker k-format="'dd/MM/yyyy'" 
+                                       ng-model="workingCertificate.finishDate" min-year="1000" k-min = "minDate" date-time/>
+                                 <input disabled ng-if="disableEdit" class="form-control display-block" 
+                                       ng-model="workingCertificate.finishDate" />
+                                 <input ng-if="!isEditting" class="form-control display-block"  kendo-date-picker k-format="'dd/MM/yyyy'" ng-model="workingCertificate.finishDate" 
+                                 min-year="1000" k-min = "minDate" date-time />
+                                       
+                            </div>
+                            
+                            <div class="col-md-4"> 
+                            
+                                <label class="display-block control-label" style="text-align: left !important;" translate>File đính kèm </label>
+								<a href='' ng-click='downloadFile1(workingCertificate)'>{{workingCertificate.utilAttachDocumentDTO.name}}</a>
+								<div class="col-md-12" ng-if="!disableEdit">
+									<div class="clearfix">
+										<div class="col-md-8">
+			                                <input type="file" file-model="customerFile" 
+			                                	ng-model="workingCertificate.attachNewFileName"
+													name="customerFile" id="customerFile"
+														list-file-type="jpeg,jpg,png,doc,docx,xls,xlsx,pdf,JPEG,JPG,PNG,DOC,DOCX,XLS,XLSX,PDF" />
+											
+										</div>
+										<div id="alert-container"></div>
+										 <div class="One_icon" >
+												<i class="fa fa-times" aria-hidden="true"
+													ng-click="resetFormFile()"></i>
+										</div>
+									</div>
+									
+								</div>
+								
+                            </div>
+                        </div>
+                	</div>
+            	</div>
+        	</div>
+        </div>
+        
+        <div class="portlet light bordered">
+            <div class="portlet-title background-title">
+                <div class="caption">
+                    <span class="caption-subject bold lowercase" translate>Thông tin nhân sự</span>
+                </div>
+            </div>
+            <div class="collapse in from-search">
+                <div class="clearfix position-relative">  
+                        <div class="form-group row">
+                            <div class="col-md-4">
+                                <label class="form-horizontal control-label " translate>Mã Nhân viên</label><span style="color:red !important;">*</span>
+                                <input class="form-control display-block" type="text"
+                                       k-options="autoCompleteEmployeeOptions" kendo-auto-complete 
+                                       ng-model="workingCertificate.loginName" id="loginName" ng-blur="changeDataAuto('userlogin')"/>
+                            </div>
+
+                            <div class="col-md-4" >
+                                <label class="form-horizontal control-label" translate>Họ tên nhân viên</label><span style="color:red !important;">*</span>
+                                <input class="form-control display-block" type="text" 
+                                       ng-model="workingCertificate.fullName" ng-disabled = "selectedDept2 || isEditting "
+                                       maxlength="200" id="fullName"/>
+                            </div>
+                            
+                            <div class="col-md-4" >
+                                <label class="form-horizontal control-label" translate>Chi nhánh kĩ thuật</label><span style="color:red !important;">*</span>
+                                <input class="form-control display-block" type="text"
+                                       ng-model="workingCertificate.sysGroupName" ng-disabled = "selectedDept2 || isEditting "
+                                       maxlength="200" id="sysGroupName"/>
+
+                            </div>
+                            
+                            <div class="col-md-4" >
+                                <label class="form-horizontal control-label" translate >Email</label><span style="color:red !important;">*</span>
+                                <div >
+                                    <input class="form-control display-block" type="text"
+                                           ng-model="workingCertificate.email" 
+                                           maxlength="200" id="email"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4" >
+                                <label class="form-horizontal control-label" translate>Số điện thoại</label><span style="color:red !important;">*</span>
+                                <div >
+                                    <input class="form-control display-block" type="text" only-numbers 
+                                           ng-model="workingCertificate.phoneNumber"  
+                                           maxlength="200" id="phoneNumber"/>
+                                </div>                   
+                            </div>
+                            <div class="col-md-4">
+                           		<label class="form-horizontal control-label" translate>Chức danh</label><span style="color:red !important;">*</span>
+                                <div >
+                                    <input class="form-control display-block" type="text" 
+                                           ng-model="workingCertificate.positionName" 
+                                           maxlength="200" id="positionName"/>
+                            	</div>
+                        	</div>
+
+                    	</div>
+
+                	</div>
+            	</div>
+        	</div>
+
+	        <div class="portlet bordered">
+	
+	            <div class="collapse in from-search">
+	                <div class="clearfix position-relative">
+	                    <div class="clearfix">
+	
+	                        <div class="form-group row" ng-if="!isEditting">
+	                            <div class="col-md-1" style="margin-left: 10px;">
+	                                <button type="button" ng-click="validateCreateNew()?doCreateNewCertificate():return;"
+	                                        class="btn btn-qlk   padding-search-right btn pull-right  saveQLK">
+	                                    Ghi lại
+	                                </button>
+	                            </div>
+	                            <div class="col-md-1" >
+	                                <button type="button" ng-click="resetNewCertificateForm()" class="btn btn-qlk padding-search-right margin_right10 closeQLK btn pull-right">
+	                                    Hủy
+	                                </button>
+	                            </div>
+	                        </div>
+	
+	                    </div>
+	                </div>
+	            </div>
+        	</div>
+
+    </div>
+</form>

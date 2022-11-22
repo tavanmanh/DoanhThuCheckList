@@ -1,0 +1,42 @@
+<style>
+    .modal-content{
+        width: 100%;
+        padding: 0;
+    }
+
+    .close-modal-x{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    .light-border{
+        border: 1px solid #333;
+    }
+</style>
+
+<div class="modal-header" style="background-color: #33CCCC;">
+    <h5 class="modal-title">Giao việc</h5>
+    <button type="button" class="close close-modal-x" data-dismiss="modal" aria-label="Close" ng-click="$dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-md-4"> Chọn CD: </div>
+        <div class="col-md-8">
+            <select class="form-control display-block" ng-model="selectedUnit.sysGroupId"
+                    ng-options="cdLv1.code as cdLv1.name for cdLv1 in cdLv1List">
+                <option></option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="$dismiss()">
+        <i class="fa fa-ban"></i> Hủy bỏ
+    </button>
+    <button type="button" class="btn btn-secondary" ng-click="$close()">
+        <i class="fa fa-floppy-o azure"></i> Ghi lại
+    </button>
+</div>

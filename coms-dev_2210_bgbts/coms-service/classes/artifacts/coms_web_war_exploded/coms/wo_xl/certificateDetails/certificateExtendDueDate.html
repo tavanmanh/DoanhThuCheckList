@@ -1,0 +1,116 @@
+
+<div id="certificateExtendDueDate">
+	<form class="form-horizontal row" role="form" name="workingCertificate"
+		id="workingCertificate" kendo-validator="validator"
+		k-options="validatorOptions">
+		<div class="form-body padding10"
+			data-ng-controller="certificateDetailsController as vm">
+				<div class="form-body padding10">
+					<div class="row caption" id="thongTinChungSpan">
+						<span class="caption-subject bold lowercase"
+							style="margin-left: 1px !important;" translate>Thông tin
+							gia hạn</span>
+					</div>
+					<div class="portlet light bordered collapse in from-search"
+						id="thongTinChung">
+						<div class="clearfix position-relative">
+							<div class="clearfix">
+								<div class="row">
+									<div class="col-md-12">
+										<input class="form-control display-block"  type="hidden" id="certificateId"
+											ng-model="caller.certificateExtend.certificateId" /> 
+										<label class="display-block control-label"
+											style="text-align: left !important;" translate>Thời
+											gian gia hạn:</label> 
+										<input class="form-control display-block"
+											kendo-date-picker k-format="'dd/MM/yyyy'" id="finishDate" ng-if="caller.isCreateNew || caller.showDetail"
+											ng-model="caller.certificateExtend.finishDate"
+											min-year="1000" date-time /> 
+										<input disabled class="form-control display-block" ng-if="caller.viewPopupDetail && !caller.isCreateNew && !caller.showDetail"
+										ng-model="caller.certificateExtend.finishDate" />
+										<label
+											class="display-block control-label"
+											style="text-align: left !important;" translate>Lý do
+											gia hạn: </label>
+										<textarea ng-model="caller.certificateExtend.description" ng-if="!caller.viewPopupDetail"
+											style="width: 100%; height: 120px;"> </textarea>
+										<textarea ng-model="caller.certificateExtend.description" ng-if="caller.viewPopupDetail"
+											style="width: 100%; height: 120px;"> </textarea>
+	
+
+									</div>
+
+									
+									<div class="col-md-12">
+										<label class="display-block control-label"
+											style="text-align: left !important;" translate>File
+											scan đính kèm</label>
+											
+											<div class="clearfix col-md-8 animate-repeat"
+													ng-repeat="file in caller.fileLst track by file.name"
+													ng-show="caller.fileLst">
+														<a href='' ng-click='caller.downloadFile2(file)'>{{file.name}}</u></a>
+														<div class="clearfix" ng-hide="true">
+															<button id="btnShowFile"></button>
+														</div>
+											</div>
+											<div class="col-md-8" ng-if="caller.isCreateNew || caller.showDetail">
+												<div class="clearfix">
+													<div class="col-md-8">
+														<input type="file" file-model="customerFile"
+															name="customerFile" id="customerFile" 
+															list-file-type="jpeg,jpg,png,doc,docx,xls,xlsx,pdf,JPEG,JPG,PNG,DOC,DOCX,XLS,XLSX,PDF" />
+														<div id="alert-container"></div>
+	
+													</div>
+													<div class="One_icon">
+														<i class="fa fa-times" aria-hidden="true"
+															ng-click="caller.resetFormFile()"></i>
+													</div>
+												</div>
+											</div>
+									   </div>
+								</div>
+							</div>
+						</div>	
+					</div>
+					
+				</div>
+				
+			<div class="clearfix form-actions margin-top " ng-if="caller.isCreateNew || caller.showDetail">
+							<div class="row">
+								<div class="col-md-12 text-right">
+									<button type="button"
+										class="btn btn-qlk padding-search-right closeQLK" id="cancel"
+										ng-click="caller.cancelImport()" translate>Hủy bỏ</button>
+									<button type="button" id="savepopupCareer"
+										class="btn btn-qlk padding-search-right saveQLK"
+										ng-click="caller.extendFinishDate()" translate>Ghi lại</button>
+								</div>
+							</div>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			$("input").change(function() {
+				$(this).val($.trim($(this).val()));
+			});
+			document.onkeydown = keyDown;
+			function keyDown(e) {
+				switch (e.keyCode) {
+				case 27:
+					$("#cancel").click();
+					break;
+				case 13:
+					if (e.keyCode == 13 && !$('#cancel:focus').length
+							&& !$('#savepopupCareer').length) {
+
+						$("#savepopupCareer").click();
+
+						break;
+					}
+				}
+			}
+		</script>
+	</form>
+</div>

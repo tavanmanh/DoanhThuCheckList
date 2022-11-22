@@ -1,0 +1,1065 @@
+<style>
+.form-control[readonly]: {
+	background-color: #e5e5e5 !important;
+}
+
+#information61, #information621Detail, #information631Detail,
+	#information641Detail, #information65, #information71, #information161,
+	#information162, #information41, #information51, #information52Detail,
+	#information81, #information82, #information511 {
+	width: 50px;
+	border-style: dotted;
+	border-width: 1px;
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
+	text-align: center;
+}
+
+#information622, #information632, #information642 {
+	width: 150px;
+	border-style: dotted;
+	border-width: 1px;
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
+}
+
+#information821, #information831, #information841, #information851 {
+	width: 300px;
+	border-style: dotted;
+	border-width: 1px;
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
+}
+</style>
+
+<div id="viewDetailTiepXucId">
+	<form class="form-horizontal row" role="form"
+		name="viewDetailTiepXucId" id="viewDetailTiepXucId"
+		k-options="validatorOptions">
+		<div class="form-body padding10">
+			<div class="portlet light bordered" disable-all="true">
+				<div class="form-body padding10">
+					<div class="portlet light bordered collapse in from-search"
+						id="thongTinChung">
+						<div class="tab-content">
+							<div id="tiepXuc" class="tab-pane active">
+								<div class="clearfix">
+									<div class="form-group col-md-4"
+										style="margin-top: 10px; margin-bottom: 9px; margin-left: 10px">
+										<button type="button"
+											class="btn button-header-popup padding-search-right"
+											ng-click="caller.customer()" ng-show="caller.btn1" translate>Khách
+											hàng</button>
+
+										<button type="button"
+											class="btn button-header-popup padding-search-right"
+											ng-click="caller.customer()" ng-show="caller.btn3"
+											style="background: #457fca; color: white" translate>Khách
+											hàng</button>
+
+										<button type="button"
+											class="btn button-header-popup padding-search-right"
+											ng-click="caller.design()"
+											ng-show="caller.btn2==true&&(caller.viewForm.status>1)==true"
+											translate>Thiết kế</button>
+
+
+										<button type="button"
+											class="btn button-header-popup padding-search-right"
+											ng-click="caller.design()"
+											ng-show="caller.btn4==true&&(caller.viewForm.status>1)==true"
+											style="background: #eacda3; color: black" translate>Thiết
+											kế</button>
+									</div>
+								</div>
+
+
+								<div class="portlet light bordered" ng-show="caller.showTabOne">
+									<!-- Thông tin tiếp xúc -->
+									<div class="row caption" id="thongTinChungSpan">
+										<span class="caption-subject bold lowercase"
+											style="margin-left: 1px !important;" translate>Thông
+											tin tiếp xúc</span>
+									</div>
+
+									<div class="portlet light collapse in from-search"
+										id="tiepXucForm">
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label req" translate>Ngày
+													hẹn tiếp xúc khách hàng</label>
+												<div class="col-md-8">
+													<input kendo-date-picker k-format="'dd/MM/yyyy'"
+														class=" form-control width100"
+														ng-disabled="!caller.checkPerform || caller.viewForm.status>3"
+														ng-model="caller.resultFormDetail.appointmentDate"
+														style="width: 100%;" id="appointmentDate" min-year="1000"
+														date-time />
+												</div>
+											</div>
+										</div>
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label" translate>Kết
+													quả tư vấn khách hàng</label>
+												<div class="col-md-8">
+													<div class="form-group col-md-6">
+														<label><input style="float: left;" type="radio"
+															id="resultTangentType" name="resultTangentType"
+															ng-model="caller.resultFormDetail.resultTangentType"
+															ng-disabled="!caller.checkPerform || caller.viewForm.status>3"
+															ng-checked="caller.resultFormDetail.resultTangentType == '1'"
+															value="1"> <span class="padding_radio">Có
+																nhu cầu</span></label>
+													</div>
+													<div class="form-group col-md-6">
+														<label> <input style="float: left;" type="radio"
+															id="resultTangentType" name="resultTangentType"
+															ng-model="caller.resultFormDetail.resultTangentType"
+															ng-disabled="!caller.checkPerform || caller.viewForm.status>3"
+															ng-checked="caller.resultFormDetail.resultTangentType == '0'"
+															value="0"> <span class="padding_radio">Không
+																có nhu cầu</span>
+														</label>
+													</div>
+												</div>
+
+											</div>
+										</div>
+
+										<div class="clearfix row"
+											ng-show="caller.resultFormDetail.resultTangentType == '1' && (caller.viewForm.status==2)">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label req" translate>Ngày
+													hẹn trình bày giải pháp</label>
+												<div class="col-md-8">
+													<input kendo-date-picker k-format="'dd/MM/yyyy'"
+														class=" form-control width100"
+														ng-model="caller.resultFormDetail.presentSolutionDate"
+														style="width: 100%;" id="presentSolutionDate"
+														min-year="1000" date-time />
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- end thông tin tiếp xúc -->
+									<!-- Thông tin nhu cầu khách hàng -->
+									<div class="row caption" id="thongTinChungNhuCauKhachHang"
+										ng-show="caller.resultFormDetail.resultTangentType == '1' && (caller.viewForm.status>=2)">
+										<span class="caption-subject bold lowercase"
+											style="margin-left: 1px !important;" translate>Thông
+											tin từ khách hàng</span>
+									</div>
+									<div class="portlet light collapse in from-search" id="nhuCau"
+										ng-show="caller.resultFormDetail.resultTangentType == '1' && (caller.viewForm.status>=2)">
+										<!--<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label req" translate>Nghề nghiệp của khách hàng:</label>
+												<div class="col-md-8">
+													<input class=" form-control width100" type="text"
+														id="jobCustomer"
+														ng-model="caller.resultYesFormDetail.jobCustomer"
+														name="jobCustomer" />
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label req" translate>Ngày sinh(dương lịch)</label>
+												<div class="col-md-8">
+													<div class="clearfix">
+														<div class="col-md-8">
+															<input kendo-date-picker k-format="'dd/MM/yyyy'" class=" form-control width100"
+																ng-model="caller.resultYesFormDetail.dateOfBirth" style="width: 100%;"
+																	id="dateOfBirth" min-year="1000" date-time />
+														</div>
+													</div>
+												</div>
+											</div>										
+										</div>-->
+
+										<div class="clearfix">
+											<div class="form-group col-md-6" ng-disabled="true">
+												<label class="col-md-4 control-label margin_top" translate>Loại
+													khách hàng</label>
+												<div class="col-md-8 margin_top">
+													<input style="float: left;" type="radio" id="b2cId"
+														name="b2cId" ng-model="caller.viewForm.partnerType"
+														ng-click="caller.changeInfor(caller.viewForm.partnerType)"
+														ng-disabled="caller.disabledPartnerType == true"
+														ng-checked="caller.viewForm.partnerType == '1'" value="1">
+													<label style="font-weight: 400" for="b2cId"
+														class="padding_radio">Cá nhân(B2C)</label> <input
+														style="float: left;" type="radio" id="b2bId" name="b2bId"
+														ng-click="caller.changeInfor(caller.viewForm.partnerType)"
+														ng-disabled="caller.disabledPartnerType == true"
+														ng-model="caller.viewForm.partnerType"
+														ng-checked="caller.viewForm.partnerType == '2'" value="2">
+													<label style="font-weight: 400" for="b2bId"
+														class="padding_radio">Doanh nghiệp(B2B)</label>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									
+									<div class="row caption" id="thongTinKhSpan"
+										ng-show="caller.resultFormDetail.resultTangentType == '1' && (caller.viewForm.status>=2)">
+										<span class="caption-subject bold lowercase"
+											style="margin-left: 1px !important;" translate>Thông
+											tin địa điểm thi công</span>
+									</div>
+
+									
+									<div class="portlet light collapse in from-search"
+										id="information"
+										ng-show="caller.resultFormDetail.resultTangentType == '1' && (caller.viewForm.status>=2)">
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label req" translate>Tỉnh/thành
+													phố thi công</label>
+												<div class="col-md-8">
+													<input 
+														class=" form-control width100" type="text" id="provinceConstruction" ng-disabled="true"
+														ng-model="caller.resultYesFormDetail.provinceConstruction" name="provinceConstruction" />
+												</div>
+											</div>
+											
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label req" translate>Quận/huyện thi công</label>
+												<div class="col-md-8">
+													<input 
+														class=" form-control width100" type="text" id="districtConstruction" ng-disabled="true"
+														ng-model="caller.resultYesFormDetail.districtConstruction" name="districtConstruction" />
+												</div>
+											</div>
+										</div>
+										
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label req" translate>Phường/xã thi công</label>
+												<div class="col-md-8">
+													<input 
+														class=" form-control width100" type="text" id="communeConstruction" ng-disabled="true"
+														ng-model="caller.resultYesFormDetail.communeConstruction" name="communeConstruction" />
+												</div>
+											</div>
+											
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label" translate>Địa chỉ xây dựng/thi công chi tiết</label>
+												<div class="col-md-8">
+													<input class=" form-control width100" type="text"
+														id="detailAddressConstruction"  ng-disabled="true"
+														ng-model="caller.resultYesFormDetail.detailAddressConstruction"
+														name="detailAddressConstruction" />
+												</div>
+											</div>
+										
+										</div>
+									</div>
+
+									<div class="row caption" id="thongTinKhSpan"
+										ng-show="!!caller.viewForm.partnerType">
+										<span class="caption-subject bold lowercase"
+											style="margin-left: 1px !important;" translate>Chi
+											tiết khách hàng </span>
+									</div>
+
+									<div class="portlet light bordered collapse in from-search"
+										ng-show="caller.viewForm.partnerType=='1'" id="thongTinKhB2c">
+										<div class="clearfix">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label req" translate>Giới
+													tính</label>
+												<div class="col-md-8">
+													<input style="float: left;" type="radio" id="maleId"
+														name="maleId"
+														ng-model="caller.resultYesFormDetail.detailCustomer.sexB2C"
+														ng-checked="caller.resultYesFormDetail.detailCustomer.sexB2C == '1'"
+														value="1"> <label style="font-weight: 400"
+														for="maleId" class="padding_radio">Nam</label> <input
+														style="float: left;" type="radio" id="femaleId"
+														name="femaleId"
+														ng-model="caller.resultYesFormDetail.detailCustomer.sexB2C"
+														ng-checked="caller.resultYesFormDetail.detailCustomer.sexB2C == '2'"
+														value="2"> <label style="font-weight: 400"
+														for="femaleId" class="padding_radio">Nữ</label>
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label req" translate>Ngày
+													sinh</label>
+												<div class="col-md-8">
+													<input kendo-date-picker k-format="'dd/MM/yyyy'"
+														class=" form-control width100"
+														ng-model="caller.resultYesFormDetail.detailCustomer.birthYearB2C"
+														style="width: 100%;" id="birthYearB2C" min-year="1000"
+														date-time />
+												</div>
+											</div>
+										</div>
+										<div class="clearfix">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label" translate>Email</label>
+												<div class="col-md-8">
+													<input class=" form-control width100" type="text"
+														ng-model="caller.resultYesFormDetail.detailCustomer.emailB2C"
+														name="customerEmail" id="customerEmail" />
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label req" translate>SDT(Zalo/Whatshap)</label>
+												<div class="col-md-8">
+													<input class=" form-control width100" type="text"
+														ng-model="caller.resultYesFormDetail.detailCustomer.phoneB2C"
+														name="phoneB2C" id="phoneB2C" />
+												</div>
+											</div>
+										</div>
+										<div class="clearfix">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label" translate>Khu
+													vực địa lý</label>
+												<div class="col-md-8">
+													<select kendo-drop-down-list id="geographicalArea"
+														ng-model="caller.resultYesFormDetail.detailCustomer.geographicalArea"
+														k-option-label="'~Chọn~'" k-data-text-field="'name'"
+														k-data-value-field="'name'"
+														k-data-source="caller.geographicalAreaList"
+														class="form-control width100">
+													</select>
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label req" translate>Lĩnh
+													vực làm việc</label>
+												<div class="col-md-8">
+													<select kendo-drop-down-list id="fieldWork"
+														ng-model="caller.resultYesFormDetail.detailCustomer.fieldWork"
+														k-option-label="'~Chọn~'" k-data-text-field="'name'"
+														k-data-value-field="'name'"
+														k-data-source="caller.fieldWorkList"
+														class="form-control width100">
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="clearfix">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label req" translate>Đối
+													tượng khách hàng</label>
+												<div class="col-md-8">
+													<select kendo-drop-down-list id="customersId"
+														ng-model="caller.resultYesFormDetail.detailCustomer.customers"
+														ng-change="caller.chooseCustomers(caller.resultYesFormDetail.detailCustomer.customers)"
+														k-data-text-field="'name'" k-data-value-field="'name'"
+														k-data-source="caller.customersList"
+														class="form-control width100">
+													</select>
+												</div>
+											</div>
+											<div class="form-group col-md-6"
+												ng-show="caller.isCustomers==true">
+												<label class="col-md-4 control-label" translate>Chức
+													vụ KH</label>
+												<div class="col-md-8">
+													<input class=" form-control width100" type="text"
+														ng-model="caller.resultYesFormDetail.detailCustomer.position"
+														name="position" id="position" />
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<!-- ---------Khách hàng B2B----------- -->
+									<div class="portlet light bordered collapse in from-search"
+										ng-show="caller.viewForm.partnerType=='2'" id="thongTinKhB2b">
+										<div class="clearfix">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label req" translate>Tên
+													đơn vị</label>
+												<div class="col-md-8">
+													<input class=" form-control width100" type="text"
+														ng-model="caller.resultYesFormDetail.detailCustomer.unitName"
+														name="unitName" id="unitName" />
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label req" translate>Mã
+													số thuế</label>
+												<div class="col-md-8">
+													<input class=" form-control width100" type="text"
+														only-numbers
+														ng-model="caller.resultYesFormDetail.detailCustomer.taxCode"
+														name="taxCode" id="taxCode" />
+												</div>
+											</div>
+										</div>
+										<div class="clearfix">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label req" translate>Ngành
+													nghề kinh doanh</label>
+												<div class="col-md-8">
+													<select kendo-drop-down-list id="business"
+														ng-model="caller.resultYesFormDetail.detailCustomer.business"
+														k-data-text-field="'name'" k-data-value-field="'name'"
+														k-data-source="caller.businessCareerList"
+														class="form-control width100">
+													</select>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix">
+											<div class="form-group col-md-6"
+												ng-show="caller.resultYesFormDetail.detailCustomer.business=='Khác'">
+												<label class="col-md-4 control-label req" translate>Cụ
+													thể ngành nghề</label>
+												<div class="col-md-8">
+													<input class="form-control width100" type="text"
+														ng-model="caller.resultYesFormDetail.detailCustomer.detailBusinessOther"
+														name="detailBusinessOther" id="detailBusinessOther" />
+												</div>
+											</div>
+
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label" translate>Số
+													lượng lao động</label>
+												<div class="col-md-8">
+													<select kendo-drop-down-list id="employee"
+														ng-model="caller.resultYesFormDetail.detailCustomer.employee"
+														k-data-text-field="'name'" k-data-value-field="'name'"
+														k-data-source="caller.employeesList"
+														class="form-control width100">
+													</select>
+												</div>
+											</div>
+										</div>
+
+
+										<div class="clearfix">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label" translate>Ngày
+													thành lập</label>
+												<div class="col-md-8">
+													<input kendo-date-picker k-format="'dd/MM/yyyy'"
+														class=" form-control width100"
+														ng-model="caller.resultYesFormDetail.detailCustomer.founding"
+														style="width: 100%;" id="founding" min-year="1000"
+														date-time />
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label" translate>Khu
+													vực địa lý</label>
+												<div class="col-md-8">
+													<select kendo-drop-down-list id="geographicalArea"
+														ng-model="caller.resultYesFormDetail.detailCustomer.geographicalArea"
+														k-data-text-field="'name'" k-data-value-field="'name'"
+														k-data-source="caller.geographicalAreaList"
+														class="form-control width100">
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="clearfix">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label req" translate>Đối
+													tượng khách hàng</label>
+												<div class="col-md-8">
+													<select kendo-drop-down-list id="customers"
+														ng-model="caller.resultYesFormDetail.detailCustomer.customers"
+														k-data-text-field="'name'" k-data-value-field="'code'"
+														k-data-source="caller.customersList"
+														class="form-control width100">
+													</select>
+												</div>
+											</div>
+
+											<div class="form-group col-md-6"
+												ng-show="caller.resultYesFormDetail.detailCustomer.customers==1">
+												<label class="col-md-4 control-label" translate>Chức
+													vụ KH</label>
+												<div class="col-md-8">
+													<input class=" form-control width100" type="text"
+														ng-model="caller.resultYesFormDetail.detailCustomer.position"
+														name="position" id="position" />
+												</div>
+											</div>
+										</div>
+
+									</div>
+									<!-- --------------Thông tin liên quan đến chủ doanh nghiệp-------------- -->
+									<div class="row caption" id="thongTinKhSpan"
+										ng-show="caller.viewForm.partnerType=='2'">
+										<span class="caption-subject bold lowercase"
+											style="margin-left: 1px !important;" translate>Thông
+											tin liên quan đến chủ doanh nghiệp</span>
+									</div>
+									<div class="portlet light bordered collapse in from-search"
+										ng-show="caller.viewForm.partnerType=='2'" id="thongTinKhB2b">
+										<div class="clearfix">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label req" translate>Người
+													đại diện</label>
+												<div class="col-md-8">
+													<input class=" form-control width100" type="text"
+														ng-model="caller.resultYesFormDetail.detailCustomer.representative"
+														name="representative" id="representative" />
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label" translate>Chức
+													vụ</label>
+												<div class="col-md-8">
+													<select kendo-drop-down-list id="positionRepresentative"
+														ng-model="caller.resultYesFormDetail.detailCustomer.positionRepresentative"
+														k-data-text-field="'name'" k-data-value-field="'name'"
+														k-data-source="caller.positionsRepresentativeList"
+														class="form-control width100">
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="clearfix">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label req" translate>Giới
+													tính</label>
+												<div class="col-md-8">
+													<input style="float: left;" type="radio" id="maleId"
+														name="maleId"
+														ng-model="caller.resultYesFormDetail.detailCustomer.sexRepresentative"
+														ng-checked="caller.resultYesFormDetail.detailCustomer.sexRepresentative == '1'"
+														value="1"> <label style="font-weight: 400"
+														for="maleId" class="padding_radio">Nam</label> <input
+														style="float: left;" type="radio" id="femaleId"
+														name="femaleId"
+														ng-model="caller.resultYesFormDetail.detailCustomer.sexRepresentative"
+														ng-checked="caller.resultYesFormDetail.detailCustomer.sexRepresentative == '2'"
+														value="2"> <label style="font-weight: 400"
+														for="femaleId" class="padding_radio">Nữ</label>
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label" translate>Ngày
+													sinh</label>
+												<div class="col-md-8">
+													<input kendo-date-picker k-format="'dd/MM/yyyy'"
+														class=" form-control width100"
+														ng-model="caller.resultYesFormDetail.detailCustomer.birthYearRepresentative"
+														style="width: 100%;" id="birthYearRepresentative"
+														min-year="1000" date-time />
+												</div>
+											</div>
+										</div>
+										<div class="clearfix">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label" translate>Email</label>
+												<div class="col-md-8">
+													<input class=" form-control width100" type="text"
+														ng-model="caller.resultYesFormDetail.detailCustomer.emailRepresentative"
+														name="emailRepresentative" id="emailRepresentative" />
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label" translate>SDT</label>
+												<div class="col-md-8">
+													<input class=" form-control width100" type="text"
+														ng-model="caller.resultYesFormDetail.detailCustomer.phoneRepresentative"
+														name="phoneRepresentative" id="phoneRepresentative" />
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label" translate>Địa
+													chỉ</label>
+												<div class="col-md-8">
+													<input class=" form-control width100" type="text"
+														ng-model="caller.resultYesFormDetail.detailCustomer.addressRepresentative"
+														name="addressRepresentative" id="addressRepresentative" />
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<!-- --------------Thông tin liên quan đến đầu mối phụ trách mua sắm của doanh nghiệp-------------- -->
+									<div class="row caption" id="thongTinKhSpan"
+										ng-show="caller.viewForm.partnerType=='2'">
+										<span class="caption-subject bold lowercase"
+											style="margin-left: 1px !important;" translate>Thông
+											tin liên quan đến đầu mối phụ trách mua sắm của doanh nghiệp</span>
+									</div>
+									<div class="portlet light bordered collapse in from-search"
+										ng-show="caller.viewForm.partnerType=='2'" id="thongTinKhB2b">
+										<div class="clearfix">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label req" translate>Người
+													liên hệ trực tiếp</label>
+												<div class="col-md-8">
+													<input class=" form-control width100" type="text"
+														ng-model="caller.resultYesFormDetail.detailCustomer.directContact"
+														name="directContact" id="directContact" />
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label req" translate>Chức
+													vụ</label>
+												<div class="col-md-8">
+													<select kendo-drop-down-list id="positionDirectContact"
+														ng-model="caller.resultYesFormDetail.detailCustomer.positionDirectContact"
+														k-data-text-field="'name'" k-data-value-field="'name'"
+														k-data-source="caller.positionsDirectContactList"
+														class="form-control width100">
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="clearfix">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label req" translate>Giới
+													tính</label>
+												<div class="col-md-8">
+													<input style="float: left;" type="radio" id="maleId"
+														name="maleId"
+														ng-model="caller.resultYesFormDetail.detailCustomer.sexDirectContact"
+														ng-checked="caller.resultYesFormDetail.detailCustomer.sexDirectContact == '1'"
+														value="1"> <label style="font-weight: 400"
+														for="maleId" class="padding_radio">Nam</label> <input
+														style="float: left;" type="radio" id="femaleId"
+														name="femaleId"
+														ng-model="caller.resultYesFormDetail.detailCustomer.sexDirectContact"
+														ng-checked="caller.resultYesFormDetail.detailCustomer.sexDirectContact == '2'"
+														value="2"> <label style="font-weight: 400"
+														for="femaleId" class="padding_radio">Nữ</label>
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label" translate>Ngày
+													sinh</label>
+												<div class="col-md-8">
+													<input kendo-date-picker k-format="'dd/MM/yyyy'"
+														class=" form-control width100"
+														ng-model="caller.resultYesFormDetail.detailCustomer.birthYearDirectContact"
+														style="width: 100%;" id="birthYearDirectContact"
+														min-year="1000" date-time />
+												</div>
+											</div>
+										</div>
+										<div class="clearfix">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label req" translate>Số
+													điện thoại</label>
+												<div class="col-md-8">
+													<input class=" form-control width100" type="text"
+														ng-model="caller.resultYesFormDetail.detailCustomer.phoneDirectContact"
+														name="phoneDirectContact" id="phoneDirectContact" />
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label" translate>Email</label>
+												<div class="col-md-8">
+													<input class=" form-control width100" type="text"
+														ng-model="caller.resultYesFormDetail.detailCustomer.emailDirectContact"
+														name="emailDirectContact" id="emailDirectContact" />
+												</div>
+											</div>
+										</div>
+										<div class="clearfix">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label req" translate>Địa
+													chỉ</label>
+												<div class="col-md-8">
+													<input class=" form-control width100" type="text"
+														ng-model="caller.resultYesFormDetail.detailCustomer.addressDirectContact"
+														name="addressDirectContact" id="addressDirectContact" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="portlet light bordered collapse in from-search"
+									id="thongTinChuaThietKe"
+									ng-show="caller.resultFormDetail.resultTangentType == 1 && (caller.viewForm.status>=2) && (caller.showTabTwo==true)">
+									<div class="clearfix row">
+										<div class="form-group col-md-6">
+
+											<div class="clearfix row">
+												<div class="form-group">
+													<label class="col-md-4" translate>1. Quy mô xây
+														dựng</label>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group" style="padding-left: 36px;">
+													<div class="custom-control custom-checkbox">
+														<label for="defaultUnchecked">- Số tầng: <input
+															type="number" id="information511" min="0"
+															ng-model="caller.resultYesFormDetail.information511"
+															name="information511">
+														</label>
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group" style="padding-left: 50px;">
+													<div class="custom-control custom-checkbox">
+														<label class="custom-" for="defaultUnchecked">-
+															Thông tin về khu đất:</label>
+													</div>
+												</div>
+
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group">
+													<label class="col-md-3 control-label" translate>Kích
+														thước: </label>
+													<div class="col-md-7">
+														<input class=" form-control width100" type="text"
+															id="information521" style="text-align: right;"
+															ng-model="caller.resultYesFormDetail.information521"
+															name="information521" />
+													</div>
+												</div>
+
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group">
+													<label class="col-md-3 control-label" translate>Hiện
+														trạng: </label>
+													<div class="col-md-7">
+														<input class=" form-control width100" type="text"
+															id="information522" style="text-align: right;"
+															ng-model="caller.resultYesFormDetail.information522"
+															name="information522" />
+													</div>
+												</div>
+
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group">
+													<label class="col-md-3 control-label" translate>Diện
+														tích thi công: </label>
+													<div class="col-md-7">
+														<input class=" form-control width100" type="text"
+															id="information523" style="text-align: right;"
+															ng-model="caller.resultYesFormDetail.information523"
+															name="information523" />
+													</div>
+												</div>
+
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group" style="padding-left: 50px;">
+													<div class="custom-control custom-checkbox">
+														<label class="custom-" for="information53"> Hướng
+															công trình:</label> <input type="text" id="information531"
+															style="text-align: right;"
+															ng-model="caller.resultYesFormDetail.information531"
+															name="information531">
+													</div>
+												</div>
+
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group">
+													<label class="col-md-12 " translate>2. Phong cách
+														kiến trúc theo nhu cầu của khách</label>
+												</div>
+
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group" style="padding-left: 50px;">
+													<label><input style="float: left;" type="radio"
+														id="information4" name="information4"
+														ng-model="caller.resultYesFormDetail.information4"
+														ng-checked="caller.resultYesFormDetail.information4 == 1"
+														value="1"> <span class="padding_radio">Cấp
+															4</span></label>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group" style="padding-left: 50px;">
+													<label><input style="float: left;" type="radio"
+														id="information4" name="information4"
+														ng-model="caller.resultYesFormDetail.information4"
+														ng-checked="caller.resultYesFormDetail.information4 == 2"
+														value="2"> <span class="padding_radio">Tân
+															cổ điển (Mái vát, ngói phẳng, phào chỉ không cầu kỳ, hình
+															khối phẳng,...)</span></label>
+												</div>
+
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group" style="padding-left: 50px;">
+													<label><input style="float: left;" type="radio"
+														id="information4" name="information4"
+														ng-model="caller.resultYesFormDetail.information4"
+														ng-checked="caller.resultYesFormDetail.information4 == 3"
+														value="3"> <span class="padding_radio">Hiện
+															đại (kiến trúc trẻ trung, không sử dụng các vật liệu xu
+															hướng cổ điển)</span></label>
+												</div>
+
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group" style="padding-left: 50px;">
+													<label><input style="float: left;" type="radio"
+														id="information4" name="information4"
+														ng-model="caller.resultYesFormDetail.information4"
+														ng-checked="caller.resultYesFormDetail.information4 == 4"
+														value="4"> <span class="padding_radio">Mái
+															Thái</span></label>
+												</div>
+
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group" style="padding-left: 50px;">
+													<label><input style="float: left;" type="radio"
+														id="information4" name="information5"
+														ng-model="caller.resultYesFormDetail.information5"
+														ng-checked="caller.resultYesFormDetail.information5 == 5"
+														value="5"> <span class="padding_radio">Mái
+															Nhật</span></label>
+												</div>
+
+											</div>
+
+											<div>
+												<div class="caption">
+													<span class="caption-subject bold lowercase" translate>Danh
+														sách ảnh tham khảo(nếu có)-Tối đa 3 file</span>
+												</div>
+											</div>
+
+											<div class="row mt5">
+												<div class="collapse in from-search">
+													<div class="clearfix position-relative">
+														<div kendo-grid="caller.attachmentFileTable"
+															id="attachmentFileTableGrid"
+															k-options="caller.fileAttachDataTblOptions"></div>
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group">
+													<label class="col-md-12 " translate>3. Công năng sử
+														dụng(cần có):</label>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group" style="padding-left: 50px;">
+													<div class="custom-control custom-checkbox">
+														<label class="custom-" for="information71">- Số
+															tầng hầm: <input type="number" id="information71" min="0"
+															ng-model="caller.resultYesFormDetail.information71">
+															tầng
+														</label>
+													</div>
+
+													<div class="custom-control custom-checkbox">
+														<label class="custom-" for="information72">- Gara:
+															<input type="number" id="information72" min="0"
+															ng-model="caller.resultYesFormDetail.information72">
+														</label>
+													</div>
+
+													<div class="custom-control custom-checkbox">
+														<label class="custom-" for="information73">- Số
+															phòng khách: <input type="number" id="information73"
+															min="0"
+															ng-model="caller.resultYesFormDetail.information73">
+															phòng
+														</label>
+													</div>
+
+
+													<div class="custom-control custom-checkbox">
+														<label class="custom-" for="information74">- Số
+															phòng bếp: <input type="number" id="information74"
+															min="0"
+															ng-model="caller.resultYesFormDetail.information74">
+															phòng
+														</label>
+													</div>
+
+													<div class="custom-control custom-checkbox">
+														<label class="custom-" for="information75">- Số
+															phòng ngủ: <input type="number" id="information75"
+															min="0"
+															ng-model="caller.resultYesFormDetail.information75">
+															phòng
+														</label>
+													</div>
+
+													<div class="custom-control custom-checkbox">
+														<label class="custom-" for="information76">- Số
+															phòng thờ: <input type="number" id="information76"
+															min="0"
+															ng-model="caller.resultYesFormDetail.information76">
+															phòng
+														</label>
+													</div>
+
+													<div class="custom-control custom-checkbox">
+														<label class="custom-" for="information77">- Số
+															phòng ăn: <input type="number" id="information77" min="0"
+															ng-model="caller.resultYesFormDetail.information77">
+															phòng
+														</label>
+													</div>
+
+													<div class="custom-control custom-checkbox">
+														<label class="custom-" for="information78">- Số
+															phòng vệ sinh(WC): <input type="number"
+															id="information78" min="0"
+															ng-model="caller.resultYesFormDetail.information78">
+															phòng
+														</label>
+													</div>
+
+													<div class="custom-control custom-checkbox">
+														<label class="custom-" for="information79">- Số
+															sân vườn: <input type="number" id="information79" min="0"
+															ng-model="caller.resultYesFormDetail.information79">
+														</label>
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group">
+													<label class="col-md-12 " translate>4. Mong muốn,
+														yêu cầu khác</label>
+												</div>
+
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group" style="padding-left: 50px;">
+
+													<label class="col-md-3 control-label">- Nội dung: </label>
+													<textarea class="form-control" type="text" rows="4"
+														id="contentBonus"
+														ng-model="caller.resultYesFormDetail.contentBonus"
+														name="contentBonus">
+															</textarea>
+
+
+												</div>
+											</div>
+
+
+											<div class="clearfix row">
+												<div class="form-group">
+													<label class="col-md-12 " translate>5. Thời gian dự
+														kiến khởi công</label>
+												</div>
+
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group" style="padding-left: 50px;">
+													<div class="form-group col-md-6">
+														<label class="col-md-6 control-label">- Thời gian
+															dự kiến: <input kendo-date-picker k-format="'dd/MM/yyyy'"
+															class=" form-control width100"
+															ng-model="caller.resultYesFormDetail.scheduleBuild"
+															style="width: 100%;" id="scheduleBuild" min-year="1000"
+															date-time />
+														</label>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- ----thẻ md6--- -->
+									</div>
+									<!-- ----thẻ clearfix--- -->
+								</div>
+								<!-- end chưa có thiết kế -->
+
+								<!-- end tiếp xúc -->
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<script>
+	$('#myTab a').click(function(e) {
+		e.preventDefault();
+		$(this).tab('show');
+	});
+
+	$(document)
+			.ready(
+					function() {
+						var caller = angular.element(
+								document.getElementById('viewDetailTiepXucId'))
+								.scope().caller;
+						if (caller.resultYesFormDetail != null) {
+							$("#information52Detail").val(
+									caller.resultYesFormDetail.information52);
+						}
+
+						if (caller.resultNoFormDetail != null) {
+							$("#information211Detail").val(
+									caller.resultNoFormDetail.information211);
+							$("#information212Detail").val(
+									caller.resultNoFormDetail.information212);
+							$("#information213Detail").val(
+									caller.resultNoFormDetail.information213);
+
+							$("#information221Detail").val(
+									caller.resultNoFormDetail.information221);
+							$("#information222Detail").val(
+									caller.resultNoFormDetail.information222);
+
+							$("#information231Detail").val(
+									caller.resultNoFormDetail.information231);
+							$("#information232Detail").val(
+									caller.resultNoFormDetail.information232);
+							$("#information233Detail").val(
+									caller.resultNoFormDetail.information233);
+							$("#information234Detail").val(
+									caller.resultNoFormDetail.information234);
+							$("#information235Detail").val(
+									caller.resultNoFormDetail.information235);
+
+							$("#information521Detail").val(
+									caller.resultNoFormDetail.information521);
+							$("#information522Detail").val(
+									caller.resultNoFormDetail.information522);
+							$("#information523Detail").val(
+									caller.resultNoFormDetail.information523);
+
+							$("#information621Detail").val(
+									caller.resultNoFormDetail.information621);
+							$("#information631Detail").val(
+									caller.resultNoFormDetail.information631);
+							$("#information641Detail").val(
+									caller.resultNoFormDetail.information641);
+						}
+
+					});
+</script>

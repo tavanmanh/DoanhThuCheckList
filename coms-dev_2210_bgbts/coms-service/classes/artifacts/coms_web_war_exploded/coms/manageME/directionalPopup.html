@@ -1,0 +1,67 @@
+<div id="addNewDevicePopup">
+<form name="form" class="form-horizontal row " role="form"
+      style="">
+		<div class="form-body">
+                    <div id="goodsPlanPopupAdd" class="collapse in from-search">
+                        <div class="clearfix position-relative">
+                            <div class="clearfix">
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-4 control-label" translate>Mã trạm VCC</label>
+                                    <div class="col-md-8">
+                                    	<input readonly="true" id="stationCode" class=" form-control width100" type="text"
+                                            ng-model="caller.addForm.stationCode"/>
+								</select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-4 control-label" translate>Mã trạm VTnet</label>
+                                    <div class="col-md-8">
+                                        <input readonly="true" id="stationCodeVtnet" class=" form-control width100" type="text" 
+                                            ng-model="caller.addForm.stationCodeVtnet"/>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="clearfix">
+                            	<div class="form-group col-md-6">
+                                    <label class="col-md-4 control-label req" translate>Mã nhân viên quản lý</label>
+                                    <div class="col-md-8">
+                                    <!-- <input class="form-control display-block" type="text" ng-enter="vm.doSearch()"
+                                           k-options="vm.autoCompleteEmployeeOptions" kendo-auto-complete
+                                           ng-model="caller.addForm.manageUserCode" id="manageUserCode"/> -->
+                                           <input kendo-auto-complete k-options="caller.userOptions"
+												class=" form-control width100" type="text"
+												ng-model="caller.addForm.manageUserCode" id="manageUserCode"
+												name="manageUserCode" />
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-4 control-label" translate>Tên nhân viên quản lý</label>
+                                    <div class="col-md-8">
+                                        <input readonly="true" id="manageUserName" class=" form-control width100" type="text"
+                                            ng-model="caller.addForm.manageUserName" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                            	<div class="form-group col-md-6">
+                                    <label class="col-md-4 control-label" translate>Email nhân viên quản lý</label>
+                                    <div class="col-md-8">
+                                        <input readonly="true" id="manageUserEmail" class=" form-control width100" type="text" 
+                                            ng-model="caller.addForm.manageUserEmail" required data-required-msg="Mã thiết bị không được để trống" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+            </div>
+		<div class="modal-footer" align="right">
+			<button type="button" id="saveData"
+				class="btn btn-qlk   padding-search-right btn pull-right  saveQLK"
+				ng-click="caller.saveManageStation()" translate>Ghi lại</button>
+			<button type="button" id="cancel"
+				class="btn btn-qlk padding-search-right margin_right10 closeQLK btn pull-right"
+				ng-click="caller.cancelImport()" translate>Hủy bỏ</button>
+		</div>
+	</form>
+	</div>

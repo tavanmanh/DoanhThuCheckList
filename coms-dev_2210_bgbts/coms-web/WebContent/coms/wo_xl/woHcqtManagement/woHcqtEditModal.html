@@ -1,0 +1,178 @@
+<style>
+    .app-modal-window .modal-dialog {
+        min-width: 1000px;
+    }
+
+    .modal-content{
+        width: 100%;
+        padding: 0;
+    }
+
+    .close-modal-x{
+        position: absolute;
+        top: 6px;
+        right: 6px;
+    }
+
+    .input-half{
+        width: 40%;
+        display: inline;
+    }
+
+    .display-block{
+        display: block;
+        width: 100%;
+    }
+
+    .k-widget.k-autocomplete {
+        width: 100%;
+    }
+
+</style>
+
+<!-- Edit WO Modal -->
+
+<div class="modal-header" style="background-color: #33CCCC;">
+    <h5 class="modal-title">Sửa WO</h5>
+    <button type="button" class="close close-modal-x" data-dismiss="modal" aria-label="Close" ng-click="$dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal row" role="form">
+        <div class="form-body" data-ng-controller="woCreateEditTemplateController">
+            <div class="portlet light bordered">
+                <div class="portlet-title background-title">
+                    <div class="caption">
+                        <span class="caption-subject bold lowercase" translate>Thông tin chung</span>
+                    </div>
+                </div>
+                <div class="collapse in from-search">
+                    <div class="clearfix position-relative">
+                        <div class="clearfix">
+                            <div class="form-group row">
+                                <div class="col-md-4">
+                                    <div>
+                                        <label class="form-horizontal control-label" translate>Loại WO</label><span style="color:red !important;">*</span>
+                                    </div>
+                                    <input ng-model="workingWO.woTypeName" class="form-control display-block" disabled/>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div>
+                                        <label class="form-horizontal control-label" translate>Tên WO</label><span style="color:red !important;">*</span>
+                                    </div>
+                                    <input ng-model="workingWO.woName" class="form-control display-block" disabled/>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="display-block control-label" style="text-align: left !important;" translate>Mã dự án HCQT</label>
+                                    <select class="form-control display-block" ng-model="workingWO.hcqtProjectId"
+                                            ng-options="project.hcqtProjectId as project.name for project in hcqtProjects"
+                                            ng-selected="workingWO.hcqtProjectId == project.hcqtProjectId">
+                                        <option></option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div>
+                                    <label class="form-horizontal control-label"
+                                           style="text-align: left !important;"
+                                           translate>Mã Hợp đồng HCQT</label><span style="color:red !important;">*</span>
+                                    </div>
+                                    <input class="form-control display-block" ng-model="workingWO.hcqtContractCode" disabled/>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div>
+                                        <label class="form-horizontal control-label" style="text-align: left !important;" translate>Mã Trạm</label><span style="color:red !important;">*</span>
+                                    </div>
+                                    <input ng-model="workingWO.stationCode" class="form-control display-block" disabled/>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div>
+                                        <label class="form-horizontal control-label" translate>Giá trị sản lượng (VND)</label><span style="color:red !important;">*</span>
+                                    </div>
+                                    <input class="form-control display-block" placeholder="Nhập giá trị sản lượng" only-numbers
+                                           ng-model="workingWO.moneyValue"/>
+                                </div>
+                                <div class="col-md-4">
+                                    <div>
+                                        <label class="form-horizontal control-label" translate>Ngày nhận HSHC</label>
+                                    </div>
+                                    <input class="form-control display-block" kendo-date-picker k-format="'dd/MM/yyyy'"
+                                           ng-model="workingWO.hshcReceiveDate" min-year="1000" date-time/>
+                                </div>
+                                <div class="col-md-4">
+                                    <div>
+                                        <label class="form-horizontal control-label" translate>Chi nhánh khu vực</label>
+                                    </div>
+                                    <input class="form-control display-block" ng-model="workingWO.cnkv"/>
+                                </div>
+                                <div class="col-md-4">
+                                    <div>
+                                        <label class="form-horizontal control-label" translate>Mã tỉnh</label>
+                                    </div>
+                                    <input class="form-control display-block" ng-model="workingWO.catProvinceCode"/>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="portlet light bordered">
+                <div class="portlet-title background-title">
+                    <div class="caption">
+                        <span class="caption-subject bold lowercase" translate>Thông tin thực hiện giám sát</span>
+                    </div>
+                </div>
+                <div id="tr_details_container" class="collapse in from-search">
+                    <div class="clearfix position-relative">
+                        <div class="clearfix">
+
+                            <div class="form-group row">
+                                <div class="col-md-4">
+                                    <label class="display-block control-label" style="text-align: left !important;"
+                                           translate>CD Level 1</label>
+                                    <input class="form-control display-block" disabled
+                                           ng-model="workingWO.cdLevel1Name"/>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div>
+                                        <label class="form-horizontal control-label" translate>Giao FT</label><span style="color:red !important;">*</span>
+                                    </div>
+                                    <input class="form-control display-block" type="text"
+                                           k-options="autoCompleteFTOptions" kendo-auto-complete
+                                           ng-model="workingWO.ftName" maxlength="200" disabled/>
+                                </div>
+                                <div class="col-md-4">
+                                    <div>
+                                        <label class="form-horizontal control-label" translate>Hạn hoàn thành</label><span style="color:red !important;">*</span>
+                                    </div>
+                                    <input class="form-control display-block" kendo-date-picker k-format="'dd/MM/yyyy'" id="inputFinishDate"
+                                           ng-model="workingWO.finishDate" min-year="1000" date-time/>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="$dismiss()">
+        <i class="fa fa-ban"></i> Hủy bỏ
+    </button>
+    <button type="button" class="btn btn-secondary" ng-click="validateEdit()?$close():return;">
+        <i class="fa fa-floppy-o azure"></i> Ghi lại
+    </button>
+</div>
+
+<!-- End edit WO Modal -->

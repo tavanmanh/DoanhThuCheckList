@@ -1,0 +1,230 @@
+
+<form class="form-horizontal row" role="form" name="form">
+	<div class="form-body" style="padding-bottom: 100px;">
+		<div class="portlet light">
+			<div class="portlet-title background-title">
+				<div class="caption">
+					<span class="caption-subject bold lowercase" translate>Thông
+						tin chung</span>
+				</div>
+				<div class="text-right margin-row-title">
+					<i data-toggle="collapse" data-target="#part1"
+						class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+				</div>
+			</div>
+			<div id="part1" class="collapse in from-search">
+				<div class="padding-width18">
+					<div class="border-gray">
+						<div class="clearfix position-relative">
+							<div class="clearfix form-group">
+								<div class="clearfix position-relative">
+									<label class="col-md-2 control-label" translate>Mã tỉnh</label>
+									<label class="col-md-4 control-label"
+										ng-bind="caller.hoanCongItem.catProvinceCode"></label> <label
+										class="col-md-2 control-label" translate>Mã trạm</label> <label
+										class=" col-md-4 control-label"
+										ng-bind="caller.hoanCongItem.catStationCode"></label>
+								</div>
+								<div class="clearfix">
+									<label class="col-md-2 control-label" translate>Mã công
+										trình</label>
+										<label class="col-md-4 control-label"
+											ng-bind="caller.hoanCongItem.constructionCode"></label>
+									<label class="col-md-2 control-label" translate>Hợp
+										đồng đầu ra</label>
+										<label class="col-md-4 control-label"
+											ng-bind="caller.hoanCongItem.cntContract"></label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="portlet light">
+			<div class="portlet-title background-title" style="">
+				<div class="caption">
+					<span class="caption-subject bold lowercase" translate>Thông
+						tin thực hiện, giám sát</span>
+				</div>
+				<div class="text-right margin-row-title">
+					<i data-toggle="collapse" data-target="#part2"
+						class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+				</div>
+			</div>
+			<div id="part2" class="collapse in from-search">
+				<div class="padding-width18">
+					<div class="border-gray" style="padding: 18px;">
+						<div class="clearfix position-relative">
+							<div class="clearfix form-group">
+
+								<div class="clearfix row margin-top">
+									<label class="col-md-2 control-label req" translate>Người
+										thực hiện</label>
+									<div class="col-md-4">
+										
+										 <auto-search model-label="" caller="caller" req="req"
+                                                    template-url="views/popup/gridViewCreateUser.html"
+                                                    header-template="caller.userHeaderTemplate"
+                                                    template-auto="caller.userTemplate"
+                                                    page="1" page-size="10" popup-id="ar_deposit_browser_adOrgId"
+                                                    popup-type="gridplusUser"
+                                                    combo-id="performerId"
+                                                    combo-source-link="sysUserCOMSRsService/getForAutoComplete"
+                                                    combo-name="fullName" combo-value="sysUserId"
+                                                    combo-code="employeeCode"
+                                                    combo-search="caller.commonSearch" combo-grid="caller.gridCreator"
+                                                    model-id="caller.hoanCongItem.performerId"
+                                                    model-name="caller.hoanCongItem.performerName"
+                                                    ng-model="caller.hoanCongItem.performerName"></auto-search>
+			
+									</div>
+                                    <label class="col-md-2 control-label " translate>Tỉnh trưởng phụ trách</label>
+                                    <div class="col-md-4">
+
+                                        <auto-search model-label="" caller="caller" req="req"
+                                                     template-url="views/popup/gridViewCreateUser.html"
+                                                     header-template="caller.suppervisorHeaderTemplate"
+                                                     template-auto="caller.suppervisorTemplate"
+                                                     page="1" page-size="10" popup-id="ar_deposit_browser_adOrgId"
+                                                     popup-type="gridplusSuppervisor"
+                                                     combo-id="supervisorId"
+                                                     combo-source-link="sysUserCOMSRsService/getSuppervisorAutoComplete"
+                                                     combo-name="fullName" combo-value="sysUserId"
+                                                     combo-code="employeeCode"
+                                                     combo-search="caller.commonSearch" combo-grid="caller.gridCreator"
+                                                     model-id="caller.hoanCongItem.supervisorId"
+                                                     model-name="caller.hoanCongItem.supervisorName"
+                                                     ng-model="caller.hoanCongItem.supervisorName"></auto-search>
+
+                                    </div>
+								</div>
+                                <div class="clearfix row margin-top">
+
+                                    <label class="col-md-2 control-label req" translate>Ngày
+                                        thực hiện</label>
+                                    <div class="col-md-2">
+                                        <input kendo-date-picker date-time k-format="'dd/MM/yyyy'" name="createFrom" id="createFrom"
+                                               ng-model="caller.hoanCongItem.startDate" style="width: 100%;"
+                                               data-required-msg="Ngày tạo từ không được để trống"
+                                               ng-blur="validateDate(caller.hoanCongItem.startDate,null,null,form.createFrom)"
+                                               min-year="1000" data-minyear-msg="Ngày tạo từ không hợp lệ"
+                                               data-date-msg="Ngày tạo từ không hợp lệ" ng-change="caller.checkDateFrom()" date-time/>
+                                        <span style=" color: red;"
+                                              ng-if="form.createFrom.$invalid && !form.createFrom.$pristine"></span>
+                                        <span style="color:red">{{caller.errMessageDateFrom}}</span>
+                                        <div class="error" ng-messages="form.createFrom.$error" ng-if="form.createFrom.$invalid && !form.createFrom.$pristine">
+                                            <label ng-message="date" class="control-data" translate>Ngày
+                                                thực hiện từ không hợp lệ</label>
+                                            <label ng-message="required" class="control-data" translate>Ngày tạo từ không được để trống</label>
+                                        </div>
+                                        <div class="One_icon  One_icon1">
+                                            <label class="control-label" translate>Đến</label>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 ">
+                                        <input kendo-date-picker date-time k-format="'dd/MM/yyyy'" name="createTo" id="createTo"
+                                               ng-model="caller.hoanCongItem.endDate" style="width: 100%;"
+                                               data-required-msg="Ngày tạo đến không được để trống"
+                                               ng-blur="validateDate(caller.hoanCongItem.endDate,null,null,form.createTo)"
+                                               min-year="1000" data-minyear-msg="Ngày tạo đến không hợp lệ"
+                                               data-date-msg="Ngày tạo đến không hợp lệ" ng-change="caller.checkDateTo()" date-time/>
+                                        <span style="color:red">{{caller.errMessageDateTo}}</span>
+                                        <div class="error" ng-messages="form.createTo.$error" ng-if="form.createTo.$invalid && !form.createTo.$pristine">
+                                            <label ng-message="date" class="control-data" translate>Ngày
+                                                thực hiện đến không hợp lệ</label>
+                                            <label ng-message="date" class="control-data" translate>Ngày tạo đến không được để trống</label>
+                                        </div>
+                                        <div class="One_icon">
+                                            <i class="fa fa-times" aria-hidden="true"
+                                               ng-click="caller.cancelDateTo('hshc',form.createTo,form.createFrom)"></i>
+                                        </div>
+
+                                    </div>
+                                    <label class="col-md-2 control-label" translate>Phó giám đốc chuyên trách</label>
+                                    <div class="col-md-4">
+
+                                        <auto-search model-label="" caller="caller" req="req"
+                                                     template-url="views/popup/gridViewCreateUser.html"
+                                                     header-template="caller.directorHeaderTemplate"
+                                                     template-auto="caller.directorTemplate"
+                                                     page="1" page-size="10" popup-id="ar_deposit_browser_adOrgId"
+                                                     popup-type="gridplusDirector"
+                                                     combo-id="directorId"
+                                                     combo-source-link="sysUserCOMSRsService/getAutoComplete"
+                                                     combo-name="fullName" combo-value="sysUserId"
+                                                     combo-code="employeeCode"
+                                                     combo-search="caller.commonSearch" combo-grid="caller.gridCreator"
+                                                     model-id="caller.hoanCongItem.directorId"
+                                                     model-name="caller.hoanCongItem.directorName"
+                                                     ng-model="caller.hoanCongItem.directorName"></auto-search>
+
+                                    </div>
+                                </div>
+								<div class="clearfix row margin-top">
+									<label class="col-md-2 control-label" translate> Ghi chú</label>
+									<div class="col-md-10">
+										<textarea rows="3" class=" form-control width100" type="text"
+											ng-model="caller.hoanCongItem.description" />
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="portlet light">
+			<div class="portlet-title background-title" style="">
+				<div class="caption">
+					<span class="caption-subject bold lowercase" translate>Thông
+						tin thực hiện hạng mục</span>
+				</div>
+				<div class="text-right margin-row-title">
+					<i data-toggle="collapse" data-target="#part3"
+						class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+				</div>
+			</div>
+			<div id="part3" class="collapse in from-search">
+				<div class="padding-width18">
+					<div class="">
+						<div class="clearfix position-relative">
+							<div class="clearfix form-group">
+								<div class="clearfix row margin-top">
+								   <div class="clearfix position-relative">
+								 <!--        <div id="planDetailGrid" kendo-grid="caller.planDetailGrid"
+								             k-options="caller.planDetailGridOptions">
+								        </div> -->
+								        <div id="planDetailTab2Grid" kendo-grid="caller.sourceDetailGrid"
+								             k-options="caller.sourceDetailGridOptions">
+								        </div>
+								    </div>
+								</div>					
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		
+		
+	</div>
+	<div class="row modal-footer">
+        <div class="col-md-12 text-right">
+            <button type="button"
+                    class="btn btn-qlk padding-search-right closeQLK" id="cancel"
+                    ng-click="caller.cancelEditPopup()" translate>Hủy bỏ
+            </button>
+            <button type="button" id="savepopupApp"
+                    class="btn btn-qlk padding-search-right saveQLK"ng-disabled="caller.disabled||caller.invalidDate"
+                    ng-click="caller.saveHoanCongPopup()" translate>Ghi lại
+            </button>
+        </div>
+
+	</div>
+</form>

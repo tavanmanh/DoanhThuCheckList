@@ -1,0 +1,8 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Fri Nov 18 09:03:20 ICT 2022
+http\://repo.unicodee.com/repository/maven-snapshots/.error=Could not transfer artifact org.projectlombok\:lombok\:pom\:1.18.24 from/to maven-snapshots (http\://repo.unicodee.com/repository/maven-snapshots/)\: Transfer failed for http\://repo.unicodee.com/repository/maven-snapshots/org/projectlombok/lombok/1.18.24/lombok-1.18.24.pom ProxyInfo{host\='10.61.11.39', userName\='null', port\=3128, type\='http', nonProxyHosts\='null'}
+https\://repo.maven.apache.org/maven2/.error=Could not transfer artifact org.projectlombok\:lombok\:pom\:1.18.24 from/to central (https\://repo.maven.apache.org/maven2)\: Transfer failed for https\://repo.maven.apache.org/maven2/org/projectlombok/lombok/1.18.24/lombok-1.18.24.pom ProxyInfo{host\='10.61.11.39', userName\='null', port\=3128, type\='http', nonProxyHosts\='null'}
+@10.61.11.39\:3128>@default-maven-snapshots-http\://repo.unicodee.com/repository/maven-snapshots/.lastUpdated=1668736958613
+http\://repo.unicodee.com/repository/maven-releases/.error=Could not transfer artifact org.projectlombok\:lombok\:pom\:1.18.24 from/to maven-releases (http\://repo.unicodee.com/repository/maven-releases/)\: Transfer failed for http\://repo.unicodee.com/repository/maven-releases/org/projectlombok/lombok/1.18.24/lombok-1.18.24.pom ProxyInfo{host\='10.61.11.39', userName\='null', port\=3128, type\='http', nonProxyHosts\='null'}
+@10.61.11.39\:3128>@default-central-https\://repo.maven.apache.org/maven2/.lastUpdated=1668737000670
+@10.61.11.39\:3128>@default-maven-releases-http\://repo.unicodee.com/repository/maven-releases/.lastUpdated=1668736979642

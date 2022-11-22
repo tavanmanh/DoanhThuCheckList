@@ -1,0 +1,113 @@
+<style>
+.hover {
+	background-color: Silver;
+}
+
+.appFile1 {
+	color: red;
+}
+
+.k-button.k-upload-button {
+	width: 100%;
+	border: 1px dotted;
+}
+</style>
+<form class="form-horizontal row" role="form" name="shipment"
+	id="shipment" >
+	
+	
+
+	<div class="portlet-title margin-top15">
+		<div class="caption">
+			<span class="caption-subject bold lowercase" translate>Thông
+				tin công việc</span>
+		</div>
+	</div>
+	<div class="padding-width18">
+		<div class="border-gray">
+			<div class="clearfix" style="margin-top: 10px;">
+				<div class="col-md-6">
+					<label class="col-md-4 control-label " translate>Tên hạng mục</label>
+					<div class="col-md-8">
+						<input class="form-control"  ng-disabled = "caller.showDetailGpon == true"
+							name="workItemName" id="workItemName" maxlength="100"
+							ng-model="caller.projExpense.workItemName" 
+							 /> 
+					</div>
+				</div>
+
+				<div class="col-md-6">
+					<label class="col-md-4 control-label " translate>Loại hạng mục</label>
+					<div class="col-md-8">
+						<input class="form-control" 
+							name="name" id="name" maxlength="100" ng-disabled = "caller.showDetailGpon == true"
+							ng-model="caller.projExpense.name" 
+							 /> 
+					</div>
+				</div>
+			</div>
+			<div class="clearfix" style="margin-top: 10px;">
+				<div class="col-md-6">
+					<label class="col-md-4 control-label " translate>Tên công việc</label>
+					<div class="col-md-8">
+						<input class="form-control" 
+							name="taskName" id="taskName" ng-disabled = "caller.showDetailGpon == true"
+							maxlength="100"
+							ng-model="caller.projExpense.taskName" 
+							 /> 
+					</div>
+				</div>
+
+				<div class="col-md-6">
+					<label class="col-md-4 control-label " translate>Khối lượng thi công</label>
+					<div class="col-md-8">
+						<input class="form-control" 
+						 type="number" min="0" oninput="validity.valid||(value='');" step="0.01"
+							name="amount" id="amount" maxlength="100"
+							ng-model="caller.projExpense.amount" 
+							 />
+						
+					</div>
+				</div>
+
+			</div>
+			<div class="clearfix" style="margin-top: 10px;">
+				<div class="col-md-6">
+					<label class="col-md-4 control-label " translate>Đơn giá thi công</label>
+					<div class="col-md-6">
+						<input class="form-control"  name="price" 
+						step="any" type="number" min="0" oninput="validity.valid||(value='');"
+							id="price" maxlength="100" 
+							ng-model="caller.projExpense.price" />
+						
+					</div>
+					<div class="col-md-0" style="padding: 5px 0px 0px 8px;">
+								(Triệu đồng)</div>
+				</div>
+
+
+			<div>
+			
+			</div>
+			</div>
+				
+			
+
+		</div>
+	</div>
+
+
+	
+
+	
+	<div class="clearfix">
+		<div class="portlet light" align="right">
+			<button type="button"
+				class="btn btn-qlk padding-search-right closeQLK" id="cancel11"
+				tabindex="12" ng-click="cancel()" translate>Hủy bỏ</button>
+			<button type="button" id="sav"
+				class="btn btn-qlk margin_right10 padding-search-right saveQLK"
+				ng-click="caller.saveProjExpense(caller.projExpense)" tabindex="11" translate>Ghi lại</button>
+		</div>
+	</div>
+</form>

@@ -1,0 +1,30 @@
+<!-- VietNT_27112018_start -->
+<div id="assignHandoverAttachNV">
+<form class="form-horizontal row" role="form" name="shipment"
+      id="shipment" kendo-validator="validator" k-options="validatorOptions">
+    <div class="portlet light">
+
+        <div class="portlet light">
+            <div class="portlet-title background-title">
+                <div class="caption">
+				<span class="caption-subject bold lowercase ng-scope" translate="">Danh
+					sách file đính kèm</span>
+                </div>
+                <div class="text-right margin-row-title">
+                    <i data-toggle="collapse" data-target="#upload"
+                       class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div id="upload"
+                 class="portlet light bordered collapse in from-search">
+                      <div >
+                          <div id="attachFileEditGridNV" kendo-grid="caller.attachFileEditGrid"
+                               k-options="caller.attachFileEditGridOptions" k-editable="false"
+                               k-on-change="onGridChange(kendoEvent, { selected: selected }, data)"></div>
+                      </div>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+<!--VietNT_end-->

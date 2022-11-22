@@ -1,0 +1,102 @@
+<form class="form-horizontal row" role="form" id="formConfirm">
+	<div class="form-body" style="padding-bottom: 100px;">
+		<div class="portlet light">
+			<div class="portlet-title background-title">
+				<div class="caption">
+					<span class="caption-subject bold lowercase" translate>Thông
+						tin chung</span>
+				</div>
+				<div class="text-right margin-row-title">
+					<i data-toggle="collapse" data-target="#part11"
+						class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+				</div>
+			</div>
+			<div id="part11" class="collapse in from-search">
+				<div class="padding-width18">
+					<div class="border-gray">
+						<div class="clearfix position-relative">
+							<div class="clearfix form-group">
+								<div class="clearfix position-relative">
+									<label class="col-md-2 control-label" translate>Hợp
+										đồng</label> 
+									<label class="col-md-4 control-label"
+										ng-bind="caller.viewForm.cntContractCode"></label> 
+									<label
+										class="col-md-2 control-label" translate>Người thực
+										hiện</label> 
+									<label class=" col-md-4 control-label"
+										ng-bind="caller.viewForm.performerName"></label>
+								</div>
+								<div class="clearfix">
+									<label class="col-md-2 control-label" translate>Người
+										điều hành</label> 
+									<label class="col-md-4 control-label"
+										ng-bind="caller.viewForm.supervisorName"> </label> 
+									<label
+										class="col-md-2 control-label" translate>Chỉ tiêu sản lượng</label> 
+									<label class="col-md-4 control-label"
+										ng-bind="caller.viewForm.quantityTarget"></label>
+								</div>
+								<div class="clearfix">
+									<label class="col-md-2 control-label" translate>Chỉ tiêu doanh thu</label> 
+									<label class="col-md-4 control-label"
+										ng-bind="caller.viewForm.revenueTarget"></label>
+									<label
+										class="col-md-2 control-label" translate>Yêu cầu khác</label> 
+									<label class="col-md-4 control-label"
+										ng-bind="caller.viewForm.otherTarget"></label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="portlet light">
+			<div class="portlet-title background-title" style="">
+				<div class="caption">
+					<span class="caption-subject bold lowercase" translate>Danh
+						sách ảnh</span>
+				</div>
+				<div class="text-right margin-row-title">
+					<i data-toggle="collapse" data-target="#part3"
+						class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+				</div>
+			</div>
+
+			<div id="part3" class="collapse in from-search"
+				ng-if="caller.viewForm.listImage.length > 0">
+				<div class="padding-width18">
+					<div class="border-gray">
+						<div class="clearfix position-relative">
+							<div>
+								<div style="width: 500px; height: 500px; margin: auto;">
+									<img class="image-cus"
+										ng-src="data:image/jpg;base64,{{caller.imageSelected.base64String}}">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="padding-width18">
+					<div class="border-gray">
+						<div class="clearfix position-relative">
+							<div ng-repeat="image in caller.viewForm.listImage">
+								<div class="wrap-image" ng-click="caller.changeImage(image)">
+									<img class="image-cus"
+										ng-src="data:image/jpg;base64,{{image.base64String}}">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+	</div>
+
+
+</form>

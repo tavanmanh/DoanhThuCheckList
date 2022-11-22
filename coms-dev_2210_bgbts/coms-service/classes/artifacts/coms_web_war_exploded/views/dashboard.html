@@ -1,0 +1,274 @@
+<!-- BEGIN PAGE HEADER-->
+
+<script type="text/x-kendo-template" id="windowPromptTemplate">
+    <div class="modal-body">
+   		<label class="control-label" traslate>#= message #</label>
+		<div class="col-md-12">
+			<textarea class="form-control" id="promptPopup_txtReason" name="promptPopup_txtReason" maxlength = "2000" rows="5"></textarea>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button id="promptPopup_btnCancel" type="button" class="btn green btn-outline padding-search" translate>Bá»� qua</button>
+		<button id="promptPopup_btnConfirm" type="button" class="btn green border-button-tree padding-search-right" translate>XÃ¡c nháº­n</button>
+	</div>
+</script>
+	
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+<style>
+	#chartdiv, #chartdiv2 , #chartdiv3 , #chartdiv4, #chartDivThueMatBang, #chartDivKhoiCong, #chartDivDongBo, #chartDivPhatSong, #chartDivHshc {
+		width	: 100%;
+		height	:400px;
+	}
+	#lineBorder{
+		border: 2px dotted #f39c12;
+	}
+	#dashA, #dashB , #dashC , #dashD, #dashE{
+		font-family: time new roman;
+		font-size: 15px;
+		margin: 3px;
+		background: #ecf0f1;
+		font-weight: bold;
+		color:#1abc9c;
+		font-style:italic;
+		text-align:center;
+	}
+	.amcharts-chart-div a {display:none !important;}
+</style>
+<div data-ng-controller="ChartController  as vm">
+<form class="form-horizontal row" role="form" id="chartSearch">
+    <div class="form-body">
+        <div class="portlet light bordered">
+            <div class="portlet-title background-title">
+                <div class="caption">
+							<span class="caption-subject bold lowercase" translate>Thông tin tìm kiếm </span>
+
+                </div>
+            </div>
+            <div id="workItem1" class="collapse in from-search">
+                <div class="clearfix position-relative">
+                    <div class="clearfix">
+						<div class="form-group col-md-6">    
+							<label class="col-md-4 form-horizontal control-label " translate>Đơn vị thực hiện</label>
+							<div class="col-md-8">
+								<div class="input-icon right ">
+									<i class="fa fa-search directive"
+										ng-click="vm.openDepartmentTo('dept')"></i>
+								</div>
+								<input kendo-auto-complete k-options="vm.deprtOptions1"
+									ng-blur="vm.changeDataAuto('dept')"
+									class=" form-control width100" type="text"
+									ng-model="vm.chartSearch.sysGroupName" name="dept"
+									onclick="reset_msg();" required
+									data-required-msg="Đơn vị không để trống" /> <span id="msg"
+									data-for='dvn1' class='k-invalid-msg'></span>
+								<div class="One_icon">
+									<i class="fa fa-times" aria-hidden="true"
+										ng-click="vm.cancelInput('dept')"></i>
+								</div>
+								<script>
+									function reset_msg() {
+										document.getElementById('msg').innerHTML = '';
+									}
+								</script>
+							</div>
+                        </div>
+                        
+                        <div class="form-group col-md-6">
+                           	<label class="col-md-4 control-label" translate>Từ ngày</label>
+                            <div class="col-md-8">
+                                <div class="col-md-5 no-padding position-relative">
+									<input kendo-date-picker k-format="'dd/MM/yyyy'"
+                                           ng-model="vm.chartSearch.dateFrom"
+                                           style="width: 100%;"
+                                           min-year="1000" date-time />
+                                </div>
+								<div class="col-md-2" style="text-align: center;"><label class="control-label" translate>đến</label></div>
+									<div class="col-md-5 no-padding position-relative">
+										<input kendo-date-picker k-format="'dd/MM/yyyy'"
+                                           ng-model="vm.chartSearch.dateTo"
+                                           style="width: 100%;"
+                                           min-year="1000" date-time />
+									</div>
+<!--                                     hungnx 20170703 end -->
+                            </div>
+                            <div class="One_icon">
+                                <i class="fa fa-times" aria-hidden="true" ng-click = "vm.cancelListYear()"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="borderCount"></div>
+                    <div class="clearfix form-actions margin-top">
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <!-- <button type="button" id="find"
+                                    class="btn green btn-outline padding-search-right"
+                                    ng-click="vm.doSearch()" translate>Tìm kiếm</button> -->
+                                <button type="button" id="doSearchQuantity" ng-click="vm.doSearch()" class="btn btn-qlk padding-search-right searchQLK" translate>Tìm kiếm</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="portlet light bordered">
+    <div class="portlet-title background-title">
+        <div class="caption">
+			<span class="caption-subject bold lowercase" translate>Kết quả tìm kiếm</span>
+        </div>
+    </div>
+    <div id=dashA>Biểu đồ sản lượng, hoàn công theo ngày</div>
+    <div id="chartdiv">
+    </div>
+    <div id ="lineBorder"></div>
+    <div id=dashB>Biểu đồ sản lượng, hoàn công lũy kế</div>
+    <div id="chartdiv2">
+    </div>
+    
+    <div id ="lineBorder"></div>
+    <div id=dashC>PXK quá hạn 7 ngày</div>
+    <div id="chartdiv3">
+    </div>
+    
+     <div id ="lineBorder"></div>
+    <div id=dashD>VTTB quá hạn 45 ngày</div>
+    <div id="chartdiv4">
+    </div>
+
+</div>
+</div>
+<!-- <div ng-controller="ChartController as vm" id="chartdiv"> -->
+<!--  <div ng-controller="DashboardController as vm">-->
+	<!-- BEGIN DASHBOARD STATS -->
+	<!--<div class="row margin-top15">-->
+		<!--<div class="col-md-7" >-->
+			<!--<div class="col-md-12 background-header-deal">-->
+				<!--<div class="col-md-6 text-left header-chart-line">-->
+						<!--<img src="assets/layouts/layout/img/input/YeuCauMoi.png"/>-->
+						<!--<p>Yêu cầu mới</p>-->
+				<!--</div>-->
+				<!--<div class="col-md-6 text-right">-->
+						<!--<a><img ng-click="vm.exportOrder()" src="assets/layouts/layout/img/input/Export_Excel.png"/></a>-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--<div class="col-md-12 border-dash"><canvas id="bar-chart-grouped" style="height:305px"></canvas></div>-->
+		<!--</div>-->
+		<!--<div class="col-md-5">-->
+			<!--<div class="col-md-12 background-header-deal">-->
+				<!--<div class="col-md-8 text-left header-chart-line">-->
+						<!--<img src="assets/layouts/layout/img/input/GiaoDich.png"/>-->
+						<!--<p>Giao dịch nhập/xuất kho</p>-->
+				<!--</div>-->
+				<!--<div class="col-md-4 text-right button-header">-->
+					<!--<a id="week" ng-click="vm.getCharTwoWeek()">Tuần</a>-->
+					<!--<a id="month"  ng-click="vm.getCharTwoMonth()">Tháng</a>-->
+					<!--<a class="a-img"><img ng-click="vm.exportCharTwo()" src="assets/layouts/layout/img/input/Export_Excel.png"/></a>-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--<div class="col-md-12 border-dash"><canvas id="myChart" style="height:305px"></canvas></div>-->
+		<!--</div>-->
+	<!--</div>-->
+	<!--<div class="row margin_top30">-->
+		<!--<div class="col-md-7">-->
+			<!--<div class="col-md-12 background-header-deal">-->
+				<!--<div class="col-md-8 text-left header-chart-line kpi">-->
+						<!--<img src="assets/layouts/layout/img/input/KPI.png"/>-->
+						<!--<p>KPI tồn kho</p>-->
+						<!---->
+				<!--</div>-->
+				<!--<div class="col-md-4 text-right button-header ">-->
+					<!--<a id="amount" ng-click="vm.getCharOneAmount()">Số lượng</a>-->
+					<!--<a id="time" ng-click="vm.getCharOneTimes()">Thời gian</a>-->
+					<!--<a class="a-img"><img ng-click="vm.exportKpi()" src="assets/layouts/layout/img/input/Export_Excel.png"/></a>-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--<div class="col-md-12 border-dash"><canvas id="myChartLine" style="height:305px"></canvas></div>-->
+		<!--</div>-->
+		<!--<div class="col-md-5">-->
+			<!--<div class="col-md-12 background-header-deal">-->
+				<!--<div class="col-md-10 text-left header-chart-line">-->
+						<!--<img src="assets/layouts/layout/img/input/PhieuXuatNhap.png"/>-->
+						<!--<p>Phiếu nhập/xuất chưa hoàn thành</p>-->
+				<!--</div>-->
+				<!--<div class="col-md-2 text-right">-->
+					<!--<a><img ng-click="vm.exportCharFour()" src="assets/layouts/layout/img/input/Export_Excel.png"/></a>-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--<div class="col-md-12 border-dash" id="progressBarId">-->
+				 <!--<p class="text-import">Nhập</p>-->
+				 <!--<div class="row">-->
+				 	<!--<div class="col-md-4">-->
+				 		<!--Chưa ký CA-->
+				 	<!--</div>-->
+				 	<!--<div class="col-md-7">-->
+				 		<!--<div class="progress">-->
+						    <!--<div class="progress-bar progress-bar-danger " id="progressbarOne" role="progressbar" aria-valuenow="{{vm.ImNotSignRate}}" aria-valuemin="0" aria-valuemax="100" style="width:50%">-->
+						    <!--</div>-->
+						 <!--</div>-->
+				 	<!--</div>-->
+				 	<!--<div class="col-md-1">{{vm.ImNotSign}}</div>-->
+				 <!--</div>-->
+				  <!--<div class="row">-->
+				 	<!--<div class="col-md-4">-->
+				 		<!--Chưa thực nhập-->
+				 	<!--</div>-->
+				 	<!--<div class="col-md-7">-->
+				 		 <!--<div class="progress">-->
+						    <!--<div class="progress-bar progress-bar-info " id="progressbarTwo" "role="progressbar" aria-valuenow="{{vm.ImNotRealRate}}" aria-valuemin="0" aria-valuemax="100">-->
+						    <!--</div>-->
+						 <!--</div>-->
+				 	<!--</div>-->
+				 	<!--<div class="col-md-1">{{vm.ImNotReal}}</div>-->
+				 <!--</div>-->
+				 <!--<p class="text-import">Xuất</p>-->
+				 <!--<div class="row">-->
+				 	<!--<div class="col-md-4">-->
+				 		<!--Chưa ký CA-->
+				 	<!--</div>-->
+				 	<!--<div class="col-md-7">-->
+				 		 <!--<div class="progress">-->
+						    <!--<div class="progress-bar progress-bar-danger " id="progressbarThree" role="progressbar" aria-valuenow="{{vm.ExNotSignRate}}" aria-valuemin="0" aria-valuemax="100 - {{vm.ExNotSignRate}}" style="width:50%">-->
+						    <!--</div>-->
+						 <!--</div>-->
+				 	<!--</div>-->
+				 	<!--<div class="col-md-1">{{vm.ExNotSign}}</div>-->
+				 <!--</div>-->
+				 <!--<div class="row">-->
+				 	<!--<div class="col-md-4">-->
+				 		<!--Chưa thực xuất-->
+				 	<!--</div>-->
+				 	<!--<div class="col-md-7">-->
+				 		 <!--<div class="progress">-->
+						    <!--<div class="progress-bar progress-bar-info " id="progressbarFour" role="progressbar" aria-valuenow="{{vm.ExNotRealRate}}" aria-valuemin="0" aria-valuemax="100" style="width:50%">-->
+						    <!--</div>-->
+						 <!--</div>-->
+				 	<!--</div>-->
+				 	<!--<div class="col-md-1">{{vm.ExNotReal}}</div>-->
+				 <!--</div>-->
+				 <!--<div class="row">-->
+				 	<!--<div class="col-md-4">-->
+				 		<!--Đang đi đường-->
+				 	<!--</div>-->
+				 	<!--<div class="col-md-7">-->
+				 		 <!--<div class="progress">-->
+						    <!--<div class="progress-bar progress-bar-warning " id="progressbarFive" role="progressbar" aria-valuenow="{{vm.ExInRoadRate}}" aria-valuemin="0" aria-valuemax="100" style="width:50%">-->
+						    <!--</div>-->
+						 <!--</div>-->
+				 	<!--</div>-->
+				 	<!--<div class="col-md-1">{{vm.ExInRoad}}</div>-->
+				 <!--</div>-->
+			<!--</div>-->
+		<!--</div>-->
+	<!--</div>-->
+
+	<!-- <div class="scroll-to-top">
+	    <i class="icon-arrow-up"></i>
+	</div> -->
+	<!-- END PORTLET-->
+<!--</div> -->
+
+<!-- END MAIN CONTENT -->
+<!-- BEGIN MAIN JS & CSS -->
+<!-- BEGIN MAIN JS & CSS -->

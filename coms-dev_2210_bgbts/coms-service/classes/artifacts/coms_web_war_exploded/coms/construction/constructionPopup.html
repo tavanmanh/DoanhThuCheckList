@@ -1,0 +1,1754 @@
+<style>
+.portlet-title {
+	font-size: 120%;
+	padding: 10px;
+}
+
+.k-link {
+	margin-top: -3px;
+}
+
+.k-upload-files, .k-upload-status {
+	display: none;
+}
+</style>
+<div id="constructionPopup"
+	kendo-validator="caller.validator3" k-options="caller.validatorOptions">
+	<form name="form" novalidate>
+		<div id="creExtReMa1" class="collapse in from-search row">
+			<div class="row border-popup-management" style="display: flex">
+				<div class="col-md-12 col-lg-2 border-right ">
+					<form class="padding-height-20 form-horizontal row" role="form"
+						id="form">
+						<div class="form-body">
+							<div class="portlet-title light">
+								<div class="caption">
+									<span class="bold lowercase" translate>Loại công trình</span>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10">
+									<label><input type="radio" value="1"
+										ng-change="caller.checkboxAction(caller.constrObj.catConstructionTypeId)"
+										ng-disabled="caller.disOpt"
+										ng-model="caller.constrObj.catConstructionTypeId" /> 1. Công
+										trình BTS</label>
+								</div>
+								<div class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10">
+									<label><input type="radio" value="2"
+										ng-change="caller.checkboxAction(caller.constrObj.catConstructionTypeId)"
+										ng-disabled="caller.disOpt"
+										ng-model="caller.constrObj.catConstructionTypeId" /> 2. Công
+										trình tuyến</label>
+								</div>
+								<div class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10">
+									<label><input type="radio" value="3"
+										ng-change="caller.checkboxAction(caller.constrObj.catConstructionTypeId)"
+										ng-disabled="caller.disOpt"
+										ng-model="caller.constrObj.catConstructionTypeId" /> 3. Công
+										trình GPON</label>
+								</div>
+								<div class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10">
+									<label><input type="radio" value="4"
+										ng-change="caller.checkboxAction(caller.constrObj.catConstructionTypeId)"
+										ng-disabled="caller.disOpt"
+										ng-model="caller.constrObj.catConstructionTypeId" /> 4. Công
+										trình lẻ</label>
+								</div>
+
+								<div class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10">
+									<label><input type="radio" value="5"
+												  ng-change="caller.checkboxAction(caller.constrObj.catConstructionTypeId)"
+												  ng-disabled="caller.disOpt"
+												  ng-model="caller.constrObj.catConstructionTypeId" /> 5. Công
+										trình gia cố</label>
+								</div>
+
+								<div class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10">
+									<label><input type="radio" value="6"
+												  ng-change="caller.checkboxAction(caller.constrObj.catConstructionTypeId)"
+												  ng-disabled="caller.disOpt"
+												  ng-model="caller.constrObj.catConstructionTypeId" /> 6. Công
+										trình nhà máy nổ</label>
+								</div>
+								<div class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10">
+									<label class="stt_radio"><input type="radio" value="7"
+										ng-change="caller.checkboxAction(caller.constrObj.catConstructionTypeId)"
+										ng-disabled="caller.disOpt"
+										ng-model="caller.constrObj.catConstructionTypeId" /> 7. Công
+										trình Năng lượng mặt trời</label>
+								</div>
+								
+								<div class="col-md-6 col-lg-12 col-sm-3 col-xs-6 margin-top10">
+									<label class="stt_radio"><input type="radio" value="8"
+										ng-change="caller.checkboxAction(caller.constrObj.catConstructionTypeId)"
+										ng-disabled="caller.disOpt"
+										ng-model="caller.constrObj.catConstructionTypeId" /> 8. Công
+										trình XDDD</label>
+								</div>
+							</div>
+
+						</div>
+					</form>
+				</div>
+				<div class="form-horizontal  padding-height-20  col-md-12 col-lg-10"
+					role="form">
+					<div class="form-body ">
+						<div class="portlet-title">
+							<div class="caption">
+								<span class="caption-subject bold lowercase" translate>Thông
+									tin công trình</span>
+							</div>
+						</div>
+
+						<div class="padding-width18">
+							<div class="border-gray">
+								<div ng-show="caller.option1Show">
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Mã
+												trạm</label>
+											<div class="col-md-8">
+												<input kendo-auto-complete k-options="caller.catStationOptions1"
+													ng-blur="caller.changeDataAuto('dept')"
+													class=" form-control width100" type="text"
+													id="catStationCode" ng-model="caller.constrObj.catStationCode"
+													name="catStationCode" />
+												<div class="One_icon">
+													<i class="fa fa-times" aria-hidden="true"
+														ng-click="caller.cancelStationInput('catStationCode')"></i>
+												</div>
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Mã
+												công trình</label>
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text"
+													ng-model="caller.constrObj.code" ng-blur="caller.checkCodeConstr()"
+													data-required-msg="Mã công trình không được để trống" />
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Tên
+												công trình</label>
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text"
+													ng-model="caller.constrObj.name"
+													data-required-msg="Tên công trình không được để trống" />
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Vùng
+												miền</label>
+											<div class="col-md-8">
+												<select kendo-drop-down-list style="width: 100%"
+													ng-model="caller.constrObj.region" k-data-text-field="'name'"
+													k-data-value-field="'code'" k-option-label="'---Chọn---'"
+													k-data-source="caller.regionDataList">
+												</select>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Ngày
+												khởi công dự kiến</label>
+											<div class="col-md-8">
+												<input  kendo-date-picker  k-format="'dd/MM/yyyy'"date-time id="1" name="excpectedStartingDate1"
+                                                 ng-model="caller.constrObj.excpectedStartingDate" style="width: 100%;" ng-blur="validateDate(caller.constrObj.excpectedStartingDate,null,null,form.excpectedStartingDate1)" placeholder="DD/MM/YYYY" />
+
+												<div class="One_icon">
+													<i class="fa fa-times" aria-hidden="true"
+														ng-click="caller.cancelInput('excpectedStartingDate',form.excpectedStartingDate1)"></i>
+												</div>
+												<div class="error"
+													ng-messages="form.excpectedStartingDate1.$error">
+													<label ng-message="date" class="control-data" translate>Ngày
+														khởi công dự kiến không hợp lệ</label>
+												</div>
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Hình
+												thức thi công</label>
+											<div class="col-md-8">
+
+												<select kendo-drop-down-list style="width: 100%"
+													ng-model="caller.constrObj.catConstructionDeployId"
+													k-data-text-field="'name'" k-data-value-field="'id'"
+													k-option-label="'---Chọn---'"
+													k-data-source="caller.catConstructionDeployDataList">
+												</select>
+
+											</div>
+										</div>
+									</div>
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Đơn
+												vị thi công</label>
+											<div class="col-md-8">
+												<div class="input-icon right ">
+													<i class="fa fa-search directive"
+														ng-click="caller.openDepartmentTo('dept1')"></i>
+												</div>
+												<input kendo-auto-complete k-options="caller.deprtOptions1"
+													ng-blur="caller.changeDataAuto('dept1')"
+													class=" form-control width100" type="text"
+													ng-model="caller.constrObj.sysGroupName" name="dept"
+													onclick="reset_msg();"
+													data-required-msg="Đơn vị không để trống" /> <span
+													id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+												<div class="One_icon">
+													<i class="fa fa-times" aria-hidden="true"
+														ng-click="caller.cancelInput('dept1')"></i>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix">
+										<div class="form-group col-md-12">
+											<div class="form-group col-md-12">
+												<label class="col-md-2 control-label" translate>Ghi
+													chú</label>
+												<div class="col-md-10">
+													<textarea class=" form-control width100"
+														ng-model="caller.constrObj.description"></textarea>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<!-- hienvd: Add 5-8-2019  -->
+									<div class="clearfix" ng-show="caller.constrObj.isStationHtct==1">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Hạ tầng cho thuê</label>
+											<div class="col-md-8">
+												<input type="checkbox" id="checkHTCTPopup" name="checkHTCT" disabled
+													   ng-click="caller.selectCheckRentalPopup()" ng-model="caller.constrObj.checkHTCT">
+											</div>
+										</div>
+										<div class="form-group col-md-6" ng-show="caller.constrObj.isStationHtct==1">
+											<label class="col-md-4 control-label" translate>Vị trí</label>
+											<div class="col-md-8">
+												<select kendo-drop-down-list style="width: 100%"
+														ng-model="caller.constrObj.locationHTCT" k-data-text-field="'name'"
+														k-data-value-field="'code'" k-option-label="'---Chọn---'"
+														k-data-source="caller.locationDataList">
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="clearfix" ng-show="caller.constrObj.isStationHtct==1">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Chiều cao cột angten</label>
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text"
+													   ng-model="caller.constrObj.highHTCT" maxlength="19"
+													   id="highHTCT" ng-keydown="caller.checkNum()"
+													   ng-change="caller.addComma('constrObj','highHTCT')"
+													   data-required-msg="Chiều cao không được để trống" />
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Tổng capex tạm tính</label>
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text"
+													   ng-model="caller.constrObj.capexHTCT"
+													   id="capexHTCT" maxlength="19"
+													   ng-keydown="caller.checkNum()"
+													   ng-change="caller.addComma('constrObj','capexHTCT')"
+													   data-required-msg="Tổng capex tạm tính không được để trống" />
+											</div>
+										</div>
+<!--										<div class="form-group col-md-6">-->
+<!--											<label class="col-md-4 control-label" translate>Chiều cao</label>-->
+<!--											<div class="col-md-8">-->
+<!--												<input class=" form-control width100" type="text"-->
+<!--													   ng-model="caller.constrObj.highHTCT"-->
+<!--													   data-required-msg="Chiều cao không được để trống" />-->
+<!--											</div>-->
+<!--										</div>-->
+<!--										<div class="form-group col-md-6">-->
+<!--											<label class="col-md-4 control-label" translate>Tổng capex tạm tính</label>-->
+<!--											<div class="col-md-8">-->
+<!--												<input class=" form-control width100" type="text"-->
+<!--													   ng-model="caller.constrObj.capexHTCT"-->
+<!--													   data-required-msg="Tổng capex tạm tính không được để trống" />-->
+<!--											</div>-->
+<!--										</div>-->
+									</div>
+									<!-- hienvd: End 5-8-2019 -->
+								</div>
+
+								<div ng-show="caller.option2Show">
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Mã tuyến</label>
+											<div class="col-md-8">
+												<input kendo-auto-complete k-options="caller.catStationOptions2"
+                                                       ng-blur="caller.changeDataAuto('deptEdit')"
+													class=" form-control width100" type="text"
+													ng-model="caller.constrObj.catStationCode"
+													name="catStationCode" onclick="reset_msg();" /> <span
+													id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+												<div class="One_icon">
+													<i class="fa fa-times" aria-hidden="true"
+														ng-click="caller.cancelStationInput('catStationCode')"></i>
+												</div>
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Mã
+												công trình</label>
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text"
+													ng-model="caller.constrObj.code" ng-blur="caller.checkCodeConstr()"/>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Tên
+												công trình</label>
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text"
+													ng-model="caller.constrObj.name" />
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Loại
+												tuyến</label>
+											<div class="col-md-8">
+												<select kendo-drop-down-list style="width: 100%"
+													ng-model="caller.constrObj.deployType"
+													k-data-text-field="'name'" k-data-value-field="'code'"
+													k-option-label="'---Chọn---'"
+													k-data-source="caller.lineTypeDataList">
+												</select>
+
+
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Ngày
+												khởi công dự kiến</label>
+											<div class="col-md-8">
+												<input kendo-date-picker k-format="'dd/MM/yyyy'" date-time
+													id="2" name="excpectedStartingDate2"
+													ng-model="caller.constrObj.excpectedStartingDate"
+													style="width: 100%;"
+													ng-blur="validateDate(caller.constrObj.excpectedStartingDate,null,null,form.excpectedStartingDate2)"
+													placeholder="DD/MM/YYYY" />
+												<div class="One_icon">
+													<i class="fa fa-times" aria-hidden="true"
+														ng-click="caller.cancelInput('excpectedStartingDate',form.excpectedStartingDate2)"></i>
+												</div>
+												<div class="error"
+													ng-messages="form.excpectedStartingDate2.$error">
+													<label ng-message="date" class="control-data" translate>Ngày
+														khởi công dự kiến không hợp lệ</label>
+												</div>
+											</div>
+
+
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Đơn
+												vị thi công</label>
+											<div class="col-md-8">
+												<div class="input-icon right ">
+													<i class="fa fa-search directive"
+														ng-click="caller.openDepartmentTo('dept1')"></i>
+												</div>
+												<input kendo-auto-complete k-options="caller.deprtOptions1"
+													ng-blur="caller.changeDataAuto('dept1')"
+													class=" form-control width100" type="text"
+													ng-model="caller.constrObj.sysGroupName" name="dept"
+													onclick="reset_msg();"
+													data-required-msg="Đơn vị không để trống" /> <span
+													id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+												<div class="One_icon">
+													<i class="fa fa-times" aria-hidden="true"
+														ng-click="caller.cancelInput('dept1')"></i>
+												</div>
+											</div>
+										</div>
+									</div>
+<!-- 									hungnx 20180621 start -->
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Khối lượng (mét)</label>
+											<div class="col-md-8">
+												<input id="amount" class=" form-control width100" type="text" maxlength="19"
+													ng-model="caller.constrObj.amount"ng-keydown="caller.checkNum()" />
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Giá</label>
+												<div class="col-md-4">
+												<input id="price" class="form-control style-number" name="price" maxlength="19" 
+												ng-keydown="caller.checkNum()" ng-model="caller.constrObj.price"  
+												ng-change="caller.addComma('constrObj','price')" />
+											</div>
+											<label class="col-md-4 control-label" translate>(Triệu VNĐ/mét)</label>
+										</div>
+									</div>
+<!-- 									hungnx 20180621 end -->
+
+									<!-- hoangnh start -->
+									<!-- <div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Khối lượng cáp thi công TT</label>
+											<div class="col-md-8">
+												<input id="amountCableLive" class=" form-control width100" type="text" maxlength="19"
+													ng-model="caller.constrObj.amountCableLive"ng-keydown="caller.checkNum()" />
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Khối lượng cáp thuê ngoài</label>
+											<div class="col-md-8">
+												<input id="amountCableRent" class=" form-control width100" type="text" maxlength="19"
+													ng-model="caller.constrObj.amountCableRent"ng-keydown="caller.checkNum()" />
+											</div>
+										</div>
+									</div> -->
+									<!-- hoangnh end -->
+										
+									<div class="clearfix">
+										<div class="form-group col-md-12">
+											<div class="form-group col-md-12">
+												<label class="col-md-2 control-label" translate>Ghi
+													chú</label>
+												<div class="col-md-10">
+													<textarea class=" form-control width100"
+														ng-model="caller.constrObj.description"></textarea>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									<div class="clearfix" ng-show="caller.constrObj.isStationHtct==1">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Hạ tầng cho thuê</label>
+											<div class="col-md-8">
+												<input type="checkbox" id="checkHTCTPopup" name="checkHTCT" disabled
+													   ng-click="caller.selectCheckRentalPopup()" ng-model="caller.constrObj.checkHTCT">
+											</div>
+										</div>
+										<div class="form-group col-md-6" ng-show="caller.constrObj.isStationHtct==1">
+											<label class="col-md-4 control-label" translate>Vị trí</label>
+											<div class="col-md-8">
+												<select kendo-drop-down-list style="width: 100%"
+														ng-model="caller.constrObj.locationHTCT" k-data-text-field="'name'"
+														k-data-value-field="'code'" k-option-label="'---Chọn---'"
+														k-data-source="caller.locationDataList">
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="clearfix" id="highHTCTPopup" ng-show="caller.constrObj.isStationHtct==1">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Chiều cao cột angten</label>
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text"
+													   ng-model="caller.constrObj.highHTCT" maxlength="19"
+													   id="highHTCT" ng-keydown="caller.checkNum()"
+													   ng-change="caller.addComma('constrObj','highHTCT')"
+													   data-required-msg="Chiều cao không được để trống" />
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Tổng capex tạm tính</label>
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text"
+													   ng-model="caller.constrObj.capexHTCT"
+													   id="capexHTCT" maxlength="19"
+													   ng-keydown="caller.checkNum()"
+													   ng-change="caller.addComma('constrObj','capexHTCT')"
+													   data-required-msg="Tổng capex tạm tính không được để trống" />
+											</div>
+										</div>
+									</div>
+									
+								</div>
+
+								<div ng-show="caller.option3Show">
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Mã
+												trạm</label>
+											<div class="col-md-8">
+
+												<input kendo-auto-complete k-options="caller.catStationOptions1"
+													ng-blur="caller.changeDataAuto('dept')"
+													class=" form-control width100" type="text"
+													ng-model="caller.constrObj.catStationCode"
+													name="catStationCode" onclick="reset_msg();" /> <span
+													id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+												<div class="One_icon">
+													<i class="fa fa-times" aria-hidden="true"
+														ng-click="caller.cancelStationInput('catStationCode')"></i>
+												</div>
+											</div>
+
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Mã
+												công trình</label>
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text"
+													ng-model="caller.constrObj.code" ng-blur="caller.checkCodeConstr()"/>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Tên
+												công trình</label>
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text"
+													ng-model="caller.constrObj.name" />
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Loại GPON</label>
+											<div class="col-md-8">
+												<select kendo-drop-down-list style="width: 100%"
+													ng-model="caller.constrObj.deployType"
+													k-data-text-field="'name'" k-data-value-field="'code'"
+													k-option-label="'---Chọn---'"
+													k-data-source="caller.gponTypeDataList">
+												</select>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Ngày
+												khởi công dự kiến</label>
+											<div class="col-md-8">
+												<input kendo-date-picker k-format="'dd/MM/yyyy'" date-time
+													id="3" name="excpectedStartingDate3"
+													ng-model="caller.constrObj.excpectedStartingDate"
+													style="width: 100%;"
+													ng-blur="validateDate(caller.constrObj.excpectedStartingDate,null,null,form.excpectedStartingDate3)"
+													placeholder="DD/MM/YYYY" />
+												<div class="One_icon">
+													<i class="fa fa-times" aria-hidden="true"
+														ng-click="caller.cancelInput('excpectedStartingDate',form.excpectedStartingDate3)"></i>
+												</div>
+												<div class="error"
+													ng-messages="form.excpectedStartingDate3.$error">
+													<label ng-message="date" class="control-data" translate>Ngày
+														khởi công dự kiến không hợp lệ</label>
+												</div>
+											</div>
+
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Đơn
+												vị thi công</label>
+											<div class="col-md-8">
+												<div class="input-icon right ">
+													<i class="fa fa-search directive"
+														ng-click="caller.openDepartmentTo('dept1')"></i>
+												</div>
+												<input kendo-auto-complete k-options="caller.deprtOptions1"
+													ng-blur="caller.changeDataAuto('dept1')"
+													class=" form-control width100" type="text"
+													ng-model="caller.constrObj.sysGroupName" name="dept"
+													onclick="reset_msg();"
+													data-required-msg="Đơn vị không để trống" /> <span
+													id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+												<div class="One_icon">
+													<i class="fa fa-times" aria-hidden="true"
+														ng-click="caller.cancelInput('dept1')"></i>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- hoangnh start -->
+									<!-- <div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Tổng khối lượng cáp toàn tuyến</label>
+											<div class="col-md-8">
+												<input id="totalAmount" class=" form-control width100" type="text" maxlength="19"
+													ng-model="caller.constrObj.amount"ng-keydown="caller.checkNum()" />
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Đơn giá thi công cáp</label>
+												<div class="col-md-5">
+												<input id="price" class="form-control style-number" name="price" maxlength="19" 
+												ng-keydown="caller.checkNum()" ng-model="caller.constrObj.price"  
+												ng-change="caller.addComma('constrObj','price')" />
+											</div>
+											<div class="col-md-3" style="padding-left: 0;">
+												<select ng-init="caller.constrObj.moneyType='1'" class="form-control" id="moneyType" name="moneyType" ng-model="caller.constrObj.moneyType">
+												<option ng-repeat="x in caller.moneyType" value="{{x.code}}">{{x.name}}</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Tổng số tủ</label>
+											<div class="col-md-8">
+												<input id="totalAmountChest" class=" form-control width100" type="text" maxlength="19"
+													ng-model="caller.constrObj.totalAmountChest"ng-keydown="caller.checkNum()" />
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Đơn giá thi công tủ</label>
+												<div class="col-md-5">
+												<input id="priceChest" class="form-control style-number" name="price" maxlength="19" 
+												ng-keydown="caller.checkNum()" ng-model="caller.constrObj.priceChest"  
+												ng-change="caller.addComma('constrObj','priceChest')" />
+											</div>
+											<div class="col-md-3" style="padding-left: 0;">
+												<select ng-init="caller.constrObj.moneyType='1'" class="form-control" id="moneyType" name="moneyType" ng-model="caller.constrObj.moneyType">
+												<option ng-repeat="x in caller.moneyType" value="{{x.code}}">{{x.name}}</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Tổng số cổng</label>
+											<div class="col-md-8">
+												<input id="totalAmountGate" class=" form-control width100" type="text" maxlength="19"
+													ng-model="caller.constrObj.totalAmountGate"ng-keydown="caller.checkNum()" />
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Đơn giá thi công cổng</label>
+												<div class="col-md-5">
+												<input id="priceGate" class="form-control style-number" name="price" maxlength="19" 
+												ng-keydown="caller.checkNum()" ng-model="caller.constrObj.priceGate"  
+												ng-change="caller.addComma('constrObj','priceGate')" />
+											</div>
+											<div class="col-md-3" style="padding-left: 0;">
+												<select ng-init="caller.constrObj.moneyType='1'" class="form-control" id="moneyType" name="moneyType" ng-model="caller.constrObj.moneyType">
+												<option ng-repeat="x in caller.moneyType" value="{{x.code}}">{{x.name}}</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Khối lượng cáp thi công TT</label>
+											<div class="col-md-8">
+												<input id="amountCableLiveS" class=" form-control width100" type="text" maxlength="19"
+													ng-model="caller.constrObj.amountCableLive"ng-keydown="caller.checkNum()" />
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Khối lượng cáp thuê ngoài</label>
+											<div class="col-md-8">
+												<input id="amountCableRentS" class=" form-control width100" type="text" maxlength="19"
+													ng-model="caller.constrObj.amountCableRent"ng-keydown="caller.checkNum()" />
+											</div>
+										</div>
+									</div> -->
+									<!-- hoangnh end -->
+									<!-- Huypq-17082020-start -->
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Khối lượng (mét)</label>
+											<div class="col-md-8">
+												<input id="amount" class=" form-control width100" type="text" maxlength="19"
+													ng-model="caller.constrObj.amount"ng-keydown="caller.checkNum()" />
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Giá</label>
+												<div class="col-md-4">
+												<input id="price" class="form-control style-number" name="price" maxlength="19" 
+												ng-keydown="caller.checkNum()" ng-model="caller.constrObj.price"  
+												ng-change="caller.addComma('constrObj','price')" />
+											</div>
+											<label class="col-md-4 control-label" translate>(Triệu VNĐ/mét)</label>
+										</div>
+									</div>
+									<!-- Huy-end -->
+									<div class="clearfix">
+										<div class="form-group col-md-12">
+											<div class="form-group col-md-12">
+												<label class="col-md-2 control-label" translate>Ghi
+													chú</label>
+												<div class="col-md-10">
+													<textarea class=" form-control width100"
+														ng-model="caller.constrObj.description"></textarea>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									<div class="clearfix" ng-show="caller.constrObj.isStationHtct==1">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Hạ tầng cho thuê</label>
+											<div class="col-md-8">
+												<input type="checkbox" id="checkHTCTPopup" name="checkHTCT" disabled
+													   ng-click="caller.selectCheckRentalPopup()" ng-model="caller.constrObj.checkHTCT">
+											</div>
+										</div>
+										<div class="form-group col-md-6" ng-show="caller.constrObj.isStationHtct==1">
+											<label class="col-md-4 control-label" translate>Vị trí</label>
+											<div class="col-md-8">
+												<select kendo-drop-down-list style="width: 100%"
+														ng-model="caller.constrObj.locationHTCT" k-data-text-field="'name'"
+														k-data-value-field="'code'" k-option-label="'---Chọn---'"
+														k-data-source="caller.locationDataList">
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="clearfix" id="highHTCTPopup" ng-show="caller.constrObj.isStationHtct==1">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Chiều cao cột angten</label>
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text"
+													   ng-model="caller.constrObj.highHTCT" maxlength="19"
+													   id="highHTCT" ng-keydown="caller.checkNum()"
+													   ng-change="caller.addComma('constrObj','highHTCT')"
+													   data-required-msg="Chiều cao không được để trống" />
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Tổng capex tạm tính</label>
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text"
+													   ng-model="caller.constrObj.capexHTCT"
+													   id="capexHTCT" maxlength="19"
+													   ng-keydown="caller.checkNum()"
+													   ng-change="caller.addComma('constrObj','capexHTCT')"
+													   data-required-msg="Tổng capex tạm tính không được để trống" />
+											</div>
+										</div>
+									</div>
+									
+								</div>
+
+								<div ng-show="caller.option4Show">
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Mã
+												trạm</label>
+											<div class="col-md-8">
+												<input kendo-auto-complete k-options="caller.catStationOptions1"
+													ng-blur="caller.changeDataAuto('dept')"
+													class=" form-control width100" type="text"
+													ng-model="caller.constrObj.catStationCode"
+													name="catStationCode" onclick="reset_msg();" /> <span
+													id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+												<div class="One_icon">
+													<i class="fa fa-times" aria-hidden="true"
+														ng-click="caller.cancelStationInput('catStationCode')"></i>
+												</div>
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Mã
+												công trình</label>
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text"
+													ng-model="caller.constrObj.code" ng-blur="caller.checkCodeConstr()"/>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Tên
+												công trình</label>
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text"
+													ng-model="caller.constrObj.name" />
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Loại
+												công trình lẻ</label>
+											<div class="col-md-8">
+												<select kendo-drop-down-list style="width: 100%"
+													ng-model="caller.constrObj.deployType"
+													k-data-text-field="'name'" k-data-value-field="'code'"
+													k-option-label="'---Chọn---'"
+													k-data-source="caller.otherTypeDataList">
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Ngày
+												khởi công dự kiến</label>
+											<div class="col-md-8">
+												<input kendo-date-picker k-format="'dd/MM/yyyy'" date-time
+													id="4" name="excpectedStartingDate4"
+													ng-model="caller.constrObj.excpectedStartingDate"
+													style="width: 100%;"
+													ng-blur="validateDate(caller.constrObj.excpectedStartingDate,null,null,form.excpectedStartingDate4)"
+													placeholder="DD/MM/YYYY" />
+												<div class="One_icon">
+													<i class="fa fa-times" aria-hidden="true"
+														ng-click="caller.cancelInput('excpectedStartingDate',form.excpectedStartingDate4)"></i>
+												</div>
+												<div class="error"
+													ng-messages="form.excpectedStartingDate4.$error">
+													<label ng-message="date" class="control-data" translate>Ngày
+														khởi công dự kiến không hợp lệ</label>
+												</div>
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Đơn
+												vị thi công</label>
+											<div class="col-md-8">
+												<div class="input-icon right ">
+													<i class="fa fa-search directive"
+														ng-click="caller.openDepartmentTo('dept1')"></i>
+												</div>
+												<input kendo-auto-complete k-options="caller.deprtOptions1"
+													ng-blur="caller.changeDataAuto('dept1')"
+													class=" form-control width100" type="text"
+													ng-model="caller.constrObj.sysGroupName" name="dept"
+													onclick="reset_msg();"
+													data-required-msg="Đơn vị không để trống" /> <span
+													id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+												<div class="One_icon">
+													<i class="fa fa-times" aria-hidden="true"
+														ng-click="caller.cancelInput('dept1')"></i>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix">
+										<div class="form-group col-md-12">
+											<div class="form-group col-md-12">
+												<label class="col-md-2 control-label" translate>Ghi
+													chú</label>
+												<div class="col-md-10">
+													<textarea class=" form-control width100"
+														ng-model="caller.constrObj.description"></textarea>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									<div class="clearfix" ng-show="caller.constrObj.isStationHtct==1">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Hạ tầng cho thuê</label>
+											<div class="col-md-8">
+												<input type="checkbox" id="checkHTCTPopup" name="checkHTCT" disabled
+													   ng-click="caller.selectCheckRentalPopup()" ng-model="caller.constrObj.checkHTCT">
+											</div>
+										</div>
+										<div class="form-group col-md-6" ng-show="caller.constrObj.isStationHtct==1">
+											<label class="col-md-4 control-label" translate>Vị trí</label>
+											<div class="col-md-8">
+												<select kendo-drop-down-list style="width: 100%"
+														ng-model="caller.constrObj.locationHTCT" k-data-text-field="'name'"
+														k-data-value-field="'code'" k-option-label="'---Chọn---'"
+														k-data-source="caller.locationDataList">
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="clearfix" id="highHTCTPopup" ng-show="caller.constrObj.isStationHtct==1">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Chiều cao cột angten</label>
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text"
+													   ng-model="caller.constrObj.highHTCT" maxlength="19"
+													   id="highHTCT" ng-keydown="caller.checkNum()"
+													   ng-change="caller.addComma('constrObj','highHTCT')"
+													   data-required-msg="Chiều cao không được để trống" />
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Tổng capex tạm tính</label>
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text"
+													   ng-model="caller.constrObj.capexHTCT"
+													   id="capexHTCT" maxlength="19"
+													   ng-keydown="caller.checkNum()"
+													   ng-change="caller.addComma('constrObj','capexHTCT')"
+													   data-required-msg="Tổng capex tạm tính không được để trống" />
+											</div>
+										</div>
+									</div>
+									
+								</div>
+
+								<div ng-show="caller.option5Show">
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Mã
+												trạm</label>
+											<div class="col-md-8">
+												<input kendo-auto-complete k-options="caller.catStationOptions1"
+													   ng-blur="caller.changeDataAuto('dept')"
+													   class=" form-control width100" type="text"
+													   id="catStationCode" ng-model="caller.constrObj.catStationCode"
+													   name="catStationCode" />
+												<div class="One_icon">
+													<i class="fa fa-times" aria-hidden="true"
+													   ng-click="caller.cancelStationInput('catStationCode')"></i>
+												</div>
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Mã
+												công trình</label>
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text"
+													   ng-model="caller.constrObj.code" ng-blur="caller.checkCodeConstr()"
+													   data-required-msg="Mã công trình không được để trống" />
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Tên
+												công trình</label>
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text"
+													   ng-model="caller.constrObj.name"
+													   data-required-msg="Tên công trình không được để trống" />
+											</div>
+										</div>
+
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Đơn
+												vị thi công</label>
+											<div class="col-md-8">
+												<div class="input-icon right ">
+													<i class="fa fa-search directive"
+													   ng-click="caller.openDepartmentTo('dept1')"></i>
+												</div>
+												<input kendo-auto-complete k-options="caller.deprtOptions1"
+													   ng-blur="caller.changeDataAuto('dept1')"
+													   class=" form-control width100" type="text"
+													   ng-model="caller.constrObj.sysGroupName" name="dept"
+													   onclick="reset_msg();"
+													   data-required-msg="Đơn vị không để trống" /> <span
+													id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+												<div class="One_icon">
+													<i class="fa fa-times" aria-hidden="true"
+													   ng-click="caller.cancelInput('dept1')"></i>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix">
+										<div class="form-group col-md-12">
+											<div class="form-group col-md-12">
+												<label class="col-md-2 control-label" translate>Ghi
+													chú</label>
+												<div class="col-md-10">
+													<textarea class=" form-control width100"
+															  ng-model="caller.constrObj.description"></textarea>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									<div class="clearfix" ng-show="caller.constrObj.isStationHtct==1">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Hạ tầng cho thuê</label>
+											<div class="col-md-8">
+												<input type="checkbox" id="checkHTCTPopup" name="checkHTCT" disabled
+													   ng-click="caller.selectCheckRentalPopup()" ng-model="caller.constrObj.checkHTCT">
+											</div>
+										</div>
+										<div class="form-group col-md-6" ng-show="caller.constrObj.isStationHtct==1">
+											<label class="col-md-4 control-label" translate>Vị trí</label>
+											<div class="col-md-8">
+												<select kendo-drop-down-list style="width: 100%"
+														ng-model="caller.constrObj.locationHTCT" k-data-text-field="'name'"
+														k-data-value-field="'code'" k-option-label="'---Chọn---'"
+														k-data-source="caller.locationDataList">
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="clearfix" id="highHTCTPopup" ng-show="caller.constrObj.isStationHtct==1">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Chiều cao cột angten</label>
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text"
+													   ng-model="caller.constrObj.highHTCT" maxlength="19"
+													   id="highHTCT" ng-keydown="caller.checkNum()"
+													   ng-change="caller.addComma('constrObj','highHTCT')"
+													   data-required-msg="Chiều cao không được để trống" />
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Tổng capex tạm tính</label>
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text"
+													   ng-model="caller.constrObj.capexHTCT"
+													   id="capexHTCT" maxlength="19"
+													   ng-keydown="caller.checkNum()"
+													   ng-change="caller.addComma('constrObj','capexHTCT')"
+													   data-required-msg="Tổng capex tạm tính không được để trống" />
+											</div>
+										</div>
+									</div>
+									
+								</div>
+								<!--hienvd:  START 22-7-2019-->
+								<div ng-show="caller.option6Show">
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Mã
+												trạm</label>
+											<div class="col-md-8">
+												<input kendo-auto-complete k-options="caller.catStationOptions1"
+													   ng-blur="caller.changeDataAuto('dept')"
+													   class=" form-control width100" type="text"
+													   id="catStationCode" ng-model="caller.constrObj.catStationCode"
+													   name="catStationCode" />
+												<div class="One_icon">
+													<i class="fa fa-times" aria-hidden="true"
+													   ng-click="caller.cancelStationInput('catStationCode')"></i>
+												</div>
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Mã
+												công trình</label>
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text"
+													   ng-model="caller.constrObj.code" ng-blur="caller.checkCodeConstr()"
+													   data-required-msg="Mã công trình không được để trống" />
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Tên
+												công trình</label>
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text"
+													   ng-model="caller.constrObj.name"
+													   data-required-msg="Tên công trình không được để trống" />
+											</div>
+										</div>
+
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Đơn
+												vị thi công</label>
+											<div class="col-md-8">
+												<div class="input-icon right ">
+													<i class="fa fa-search directive"
+													   ng-click="caller.openDepartmentTo('dept1')"></i>
+												</div>
+												<input kendo-auto-complete k-options="caller.deprtOptions1"
+													   ng-blur="caller.changeDataAuto('dept1')"
+													   class=" form-control width100" type="text"
+													   ng-model="caller.constrObj.sysGroupName" name="dept"
+													   onclick="reset_msg();"
+													   data-required-msg="Đơn vị không để trống" /> <span
+													id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+												<div class="One_icon">
+													<i class="fa fa-times" aria-hidden="true"
+													   ng-click="caller.cancelInput('dept1')"></i>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix">
+										<div class="form-group col-md-12">
+											<div class="form-group col-md-12">
+												<label class="col-md-2 control-label" translate>Ghi
+													chú</label>
+												<div class="col-md-10">
+													<textarea class=" form-control width100"
+															  ng-model="caller.constrObj.description"></textarea>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									<div class="clearfix" ng-show="caller.constrObj.isStationHtct==1">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Hạ tầng cho thuê</label>
+											<div class="col-md-8">
+												<input type="checkbox" id="checkHTCTPopup" name="checkHTCT" disabled
+													   ng-click="caller.selectCheckRentalPopup()" ng-model="caller.constrObj.checkHTCT">
+											</div>
+										</div>
+										<div class="form-group col-md-6" ng-show="caller.constrObj.isStationHtct==1">
+											<label class="col-md-4 control-label" translate>Vị trí</label>
+											<div class="col-md-8">
+												<select kendo-drop-down-list style="width: 100%"
+														ng-model="caller.constrObj.locationHTCT" k-data-text-field="'name'"
+														k-data-value-field="'code'" k-option-label="'---Chọn---'"
+														k-data-source="caller.locationDataList">
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="clearfix" id="highHTCTPopup" ng-show="caller.constrObj.isStationHtct==1">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Chiều cao cột angten</label>
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text"
+													   ng-model="caller.constrObj.highHTCT" maxlength="19"
+													   id="highHTCT" ng-keydown="caller.checkNum()"
+													   ng-change="caller.addComma('constrObj','highHTCT')"
+													   data-required-msg="Chiều cao không được để trống" />
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Tổng capex tạm tính</label>
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text"
+													   ng-model="caller.constrObj.capexHTCT"
+													   id="capexHTCT" maxlength="19"
+													   ng-keydown="caller.checkNum()"
+													   ng-change="caller.addComma('constrObj','capexHTCT')"
+													   data-required-msg="Tổng capex tạm tính không được để trống" />
+											</div>
+										</div>
+									</div>
+									
+								</div>
+								<!--hienvd: 22-07-2109 end -->
+								<!-- Huypq-05102020-start -->
+								<div ng-show="caller.option7Show">
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Mã
+												trạm</label>
+											<div class="col-md-8">
+												<input kendo-auto-complete k-options="caller.catStationOptions1"
+													ng-blur="caller.changeDataAuto('dept')"
+													class=" form-control width100" type="text"
+													ng-model="caller.constrObj.catStationCode"
+													ng-disabled="caller.checkTotalPxk" name="catStationCode"
+													onclick="reset_msg();"
+													data-required-msg="Mã trạm không được để trống" /> <span
+													id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+
+												<div class="One_icon">
+													<i ng-hide="caller.checkTotalPxk" class="fa fa-times"
+														aria-hidden="true"
+														ng-click="caller.cancelStationInput('catStationCode')"></i>
+												</div>
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Mã
+												công trình</label>
+
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text"
+													ng-model="caller.constrObj.code" ng-blur="caller.checkCodeConstr()"
+													data-required-msg="Mã công trình không được để trống" />
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Tên
+												công trình</label>
+
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text"
+													ng-model="caller.constrObj.name"
+													data-required-msg="Tên công trình không được để trống" />
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Vùng
+												miền</label>
+
+											<div class="col-md-8">
+												<select kendo-drop-down-list style="width: 100%"
+													ng-model="caller.constrObj.region" k-data-text-field="'name'"
+													k-data-value-field="'code'" k-option-label="'---Chọn---'"
+													k-data-source="caller.regionDataList">
+												</select>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Ngày
+												khởi công dự kiến</label>
+
+											<div class="col-md-8">
+												<input kendo-date-picker k-format="'dd/MM/yyyy'" date-time
+													id="excpectedStartingDate1" name="excpectedStartingDate1"
+													ng-model="caller.constrObj.excpectedStartingDate"
+													style="width: 100%;"
+													ng-blur="validateDate(caller.constrObj.excpectedStartingDate,null,null,form.excpectedStartingDate1)"
+													placeholder="DD/MM/YYYY" />
+												<div class="One_icon">
+													<i class="fa fa-times" aria-hidden="true"
+														ng-click="caller.cancelInput('excpectedStartingDate',form.excpectedStartingDate1)"></i>
+												</div>
+												<div class="error"
+													ng-messages="form.excpectedStartingDate1.$error"
+													ng-if="form.excpectedStartingDate1.$invalid && form.excpectedStartingDate1.$dirty">
+													<label ng-message="date" class="control-data" translate>Ngày
+														khởi công dự kiến không hợp lệ</label>
+												</div>
+											</div>
+
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Hình
+												thức thi công</label>
+
+											<div class="col-md-8">
+
+												<select kendo-drop-down-list style="width: 100%"
+													ng-model="caller.constrObj.catConstructionDeployId"
+													k-data-text-field="'name'" k-data-value-field="'id'"
+													k-option-label="'---Chọn---'"
+													k-data-source="caller.catConstructionDeployDataList">
+												</select>
+
+											</div>
+										</div>
+									</div>
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Đơn
+												vị thi công</label>
+											<div class="col-md-8">
+												<div class="input-icon right ">
+													<i class="fa fa-search directive"
+														ng-click="caller.openDepartmentTo('dept1')"></i>
+												</div>
+												<input kendo-auto-complete k-options="caller.deprtOptions1"
+													ng-blur="caller.changeDataAuto('deptGroup')"
+													class=" form-control width100" type="text"
+													ng-model="caller.constrObj.sysGroupName" name="dept"
+													onclick="reset_msg();"
+													data-required-msg="Đơn vị không để trống" /> <span
+													id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+												<div class="One_icon">
+													<i class="fa fa-times" aria-hidden="true"
+														ng-click="caller.cancelInput('dept1')"></i>
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group col-md-6"
+											ng-show="caller.constrObj.checkHTCT">
+											<label class="col-md-4 control-label" translate>Mã dự
+												án</label>
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text"
+													ng-model="caller.constrObj.projectCode" readonly />
+											</div>
+										</div>
+									</div>
+									<div class="clearfix">
+										<div class="form-group col-md-12">
+											<div class="form-group col-md-12">
+												<label class="col-md-2 control-label" translate>Ghi
+													chú</label>
+
+												<div class="col-md-10">
+													<textarea class=" form-control width100"
+														ng-model="caller.constrObj.description"></textarea>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix">
+										<div class="form-group col-md-12">
+											<div class="form-group col-md-12">
+												<label class="col-md-2 control-label" translate>Cần
+													GPXD</label>
+												<div class="col-md-10">
+													<input type="checkbox" ng-true-value="1"
+														ng-false-value="null" ng-click="caller.handleCheck(dataItem)"
+														ng-model="caller.constrObj.isBuildingPermit" />
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix" ng-show="caller.constrObj.isStationHtct==1">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Hạ
+												tầng cho thuê</label>
+											<div class="col-md-8">
+												<input type="checkbox" id="checkRental" name="checkRental"
+													disabled ng-click="caller.selectCheckRental()"
+													ng-model="caller.constrObj.checkHTCT"
+													class="ng-untouched ng-valid ng-dirty ng-valid-parse">
+											</div>
+										</div>
+
+										<div class="form-group col-md-6"
+											ng-show="caller.constrObj.isStationHtct==1">
+											<label class="col-md-4 control-label" translate>Vị
+												trí</label>
+											<div class="col-md-8">
+												<select kendo-drop-down-list style="width: 100%"
+													ng-model="caller.constrObj.locationHTCT"
+													k-data-text-field="'name'" k-data-value-field="'code'"
+													k-option-label="'---Chọn---'"
+													k-data-source="caller.locationDataList">
+												</select>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix">
+										<div class="form-group col-md-6" id="highHTCT"
+											ng-show="caller.constrObj.checkHTCT">
+											<label class="col-md-4 control-label" translate>Chiều
+												cao</label>
+											<div class="col-md-8">
+												<input class="form-control width100" ng-blur="focusOut()"
+													name="conHighHTCT" id="conHighHTCT" maxlength="19"
+													ng-model="caller.constrObj.highHTCT"
+													data-required-msg="Chiều cao không được để trống"
+													ng-keydown="caller.checkNum()"
+													ng-change="caller.addComma('constrObj','conHighHTCT')" /> <span
+													data-for='quantity' class='k-invalid-msg'></span>
+											</div>
+										</div>
+
+										<div class="form-group col-md-6" id="capexHTCT"
+											ng-show="caller.constrObj.checkHTCT">
+											<label class="col-md-4 control-label" translate>Tổng
+												capex tạm tính</label>
+											<div class="col-md-8">
+												<input class="form-control width100" ng-blur="focusOut()"
+													name="conCapexHTCT" id="conCapexHTCT" maxlength="19"
+													data-required-msg="Tổng capex tạm tính không được để trống"
+													ng-model="caller.constrObj.capexHTCT"
+													ng-keydown="caller.checkNum()"
+													ng-change="caller.addComma('constrObj','conCapexHTCT')" /> <span
+													data-for='price' class='k-invalid-msg'></span>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<!-- Công trình XDDD -->
+								<div ng-show="caller.option8Show" ng-disabled="!caller.roleXDDD">
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Mã
+												trạm</label>
+											<div class="col-md-8">
+												<input kendo-auto-complete k-options="caller.catStationOptions1"
+													ng-blur="caller.changeDataAuto('dept')"
+													class=" form-control width100" type="text"
+													ng-model="caller.constrObj.catStationCode"
+													ng-disabled="caller.checkTotalPxk || !caller.roleXDDD" name="catStationCode"
+													onclick="reset_msg();"
+													data-required-msg="Mã trạm không được để trống" /> <span
+													id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+
+												<div class="One_icon">
+													<i ng-hide="caller.checkTotalPxk" class="fa fa-times"
+														aria-hidden="true"
+														ng-click="caller.cancelStationInput('catStationCode')"></i>
+												</div>
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Mã
+												công trình</label>
+
+											<div class="col-md-8">
+												<input ng-disabled="!caller.roleXDDD" class=" form-control width100" type="text"
+													ng-model="caller.constrObj.code" ng-blur="caller.checkCodeConstr()"
+													data-required-msg="Mã công trình không được để trống" />
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Tên
+												công trình</label>
+
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text" ng-disabled="!caller.roleXDDD"
+													ng-model="caller.constrObj.name"
+													data-required-msg="Tên công trình không được để trống" />
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Vùng
+												miền</label>
+
+											<div class="col-md-8">
+												<select kendo-drop-down-list style="width: 100%"
+													ng-disabled="!caller.roleXDDD"
+													ng-model="caller.constrObj.region" k-data-text-field="'name'"
+													k-data-value-field="'code'" k-option-label="'---Chọn---'"
+													k-data-source="caller.regionDataList">
+												</select>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Ngày
+												khởi công dự kiến</label>
+
+											<div class="col-md-8">
+												<input kendo-date-picker k-format="'dd/MM/yyyy'" date-time
+													ng-disabled="!caller.roleXDDD"
+													id="excpectedStartingDate1" name="excpectedStartingDate1"
+													ng-model="caller.constrObj.excpectedStartingDate"
+													style="width: 100%;"
+													ng-blur="validateDate(caller.constrObj.excpectedStartingDate,null,null,form.excpectedStartingDate1)"
+													placeholder="DD/MM/YYYY" />
+												<div class="One_icon">
+													<i class="fa fa-times" aria-hidden="true"
+														ng-disabled="!caller.roleXDDD"
+														ng-click="caller.cancelInput('excpectedStartingDate',form.excpectedStartingDate1)"></i>
+												</div>
+												<div class="error"
+													ng-messages="form.excpectedStartingDate1.$error"
+													ng-if="form.excpectedStartingDate1.$invalid && form.excpectedStartingDate1.$dirty">
+													<label ng-message="date" class="control-data" translate>Ngày
+														khởi công dự kiến không hợp lệ</label>
+												</div>
+											</div>
+
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Hình
+												thức thi công</label>
+
+											<div class="col-md-8">
+
+												<select kendo-drop-down-list style="width: 100%"
+													ng-model="caller.constrObj.catConstructionDeployId"
+													k-data-text-field="'name'" k-data-value-field="'id'"
+													k-option-label="'---Chọn---'" ng-disabled="!caller.roleXDDD"
+													k-data-source="caller.catConstructionDeployDataList">
+												</select>
+
+											</div>
+										</div>
+									</div>
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>Đơn
+												vị thi công</label>
+											<div class="col-md-8">
+												<div class="input-icon right" ng-show="caller.roleXDDD">
+													<i class="fa fa-search directive"
+														ng-click="caller.openDepartmentTo('dept1')"></i>
+												</div>
+												<input kendo-auto-complete k-options="caller.deprtOptions1"
+													ng-blur="caller.changeDataAuto('deptGroup')"
+													class=" form-control width100" type="text"
+													ng-model="caller.constrObj.sysGroupName" name="dept"
+													onclick="reset_msg();" ng-disabled="!caller.roleXDDD"
+													data-required-msg="Đơn vị không để trống" /> <span
+													id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+												<div class="One_icon">
+													<i class="fa fa-times" aria-hidden="true" ng-disabled="!caller.roleXDDD"
+														ng-click="caller.cancelInput('dept1')"></i>
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group col-md-6"
+											ng-show="caller.constrObj.checkHTCT">
+											<label class="col-md-4 control-label" translate>Mã dự
+												án</label>
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text"
+													ng-disabled="!caller.roleXDDD"
+													ng-model="caller.constrObj.projectCode" readonly />
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label req" translate>B2B/B2C</label>
+											<div class="col-md-8">
+												<select kendo-drop-down-list id="b2bB2c"
+													ng-model="caller.constrObj.b2bB2c" k-data-text-field="'name'"
+													k-data-value-field="'code'" ng-disabled="!caller.roleXDDD"
+													k-data-source="caller.b2bB2cList"
+													class="form-control width100">
+												</select>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix">
+										<div class="form-group col-md-12">
+											<div class="form-group col-md-12">
+												<label class="col-md-2 control-label" translate>Ghi
+													chú</label>
+
+												<div class="col-md-10">
+													<textarea class=" form-control width100" ng-disabled="!caller.roleXDDD"
+														ng-model="caller.constrObj.description"></textarea>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix">
+										<div class="form-group col-md-12">
+											<div class="form-group col-md-12">
+												<label class="col-md-2 control-label" translate>Cần
+													GPXD</label>
+												<div class="col-md-10">
+													<input type="checkbox" ng-true-value="1" ng-disabled="!caller.roleXDDD"
+														ng-false-value="null" ng-click="caller.handleCheck(dataItem)"
+														ng-model="caller.constrObj.isBuildingPermit" />
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix" ng-show="caller.constrObj.isStationHtct==1">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Hạ
+												tầng cho thuê</label>
+											<div class="col-md-8">
+												<input type="checkbox" id="checkRental" name="checkRental"
+													ng-disabled="!caller.roleXDDD" ng-click="caller.selectCheckRental()"
+													ng-model="caller.constrObj.checkHTCT"
+													class="ng-untouched ng-valid ng-dirty ng-valid-parse">
+											</div>
+										</div>
+
+										<div class="form-group col-md-6"
+											ng-show="caller.constrObj.isStationHtct==1">
+											<label class="col-md-4 control-label" translate>Vị
+												trí</label>
+											<div class="col-md-8">
+												<select kendo-drop-down-list style="width: 100%"
+													ng-model="caller.constrObj.locationHTCT"
+													k-data-text-field="'name'" k-data-value-field="'code'"
+													k-option-label="'---Chọn---'" ng-disabled="!caller.roleXDDD"
+													k-data-source="caller.locationDataList">
+												</select>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix">
+										<div class="form-group col-md-6" id="highHTCT"
+											ng-show="caller.constrObj.checkHTCT">
+											<label class="col-md-4 control-label" translate>Chiều
+												cao</label>
+											<div class="col-md-8">
+												<input class="form-control width100" ng-blur="focusOut()"
+													name="conHighHTCT" id="conHighHTCT" maxlength="19"
+													ng-model="caller.constrObj.highHTCT"
+													data-required-msg="Chiều cao không được để trống"
+													ng-keydown="caller.checkNum()" ng-disabled="!caller.roleXDDD"
+													ng-change="caller.addComma('constrObj','conHighHTCT')" /> <span
+													data-for='quantity' class='k-invalid-msg'></span>
+											</div>
+										</div>
+
+										<div class="form-group col-md-6" id="capexHTCT"
+											ng-show="caller.constrObj.checkHTCT">
+											<label class="col-md-4 control-label" translate>Tổng
+												capex tạm tính</label>
+											<div class="col-md-8">
+												<input class="form-control width100" ng-blur="focusOut()"
+													name="conCapexHTCT" id="conCapexHTCT" maxlength="19"
+													data-required-msg="Tổng capex tạm tính không được để trống"
+													ng-model="caller.constrObj.capexHTCT"
+													ng-keydown="caller.checkNum()" ng-disabled="!caller.roleXDDD"
+													ng-change="caller.addComma('constrObj','conCapexHTCT')" /> <span
+													data-for='price' class='k-invalid-msg'></span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!-- Huy-end -->
+								<!--hungnx 07062018 attach file -->
+								<!-- taotq start 11052021 -->
+								<div class="clearfix" ng-show="caller.constrObj.isStationHtct==1">
+										<div class="form-group col-md-6">
+											<label class="col-md-4 control-label" translate>Đơn vị nhà thầu thi công</label>
+											<div class="col-md-8">
+												<input type="checkbox" id="checkHTCTPopup" name="checkDVNTTC" ng-disabled="caller.option8Show && !caller.roleXDDD"
+													   ng-model="caller.constrObj.checkDVNTTC">
+											</div>
+										</div>
+										<div class="form-group col-md-6" ng-show="caller.constrObj.checkDVNTTC==true">
+											<label class="col-md-4 control-label req" translate>Tên đơn vị nhà thầu thi công</label>
+											<div class="col-md-8">
+												<input class=" form-control width100" type="text"
+														maxlength="250" ng-disabled="caller.option8Show && !caller.roleXDDD"
+													   ng-model="caller.constrObj.unitConstructionName"
+													   data-required-msg="Tên đơn vị nhà thầu thi công không được để trống" />
+												</select>
+											</div>
+										</div>
+									</div>
+									<!-- taotq start 11052021 -->
+<div class="portlet light">
+		<div class="portlet-title background-title">
+			<div class="caption">
+				<span class="caption-subject bold lowercase ng-scope" translate="">Danh
+					sách file đính kèm</span>
+			</div>
+			<div class="text-right margin-row-title">
+				<i data-toggle="collapse" data-target="#upload"
+					class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+			</div>
+		</div>
+		<div id="upload"
+			class="portlet light bordered collapse in from-search">
+			<div ng-hide="caller.option8Show && !caller.roleXDDD">
+				<div id="upload2" class="portlet light  collapse in from-search">
+					<div>
+						<div>
+							<center>Kéo thả các file vào đây hoặc click để chọn file
+							</center>
+						</div>
+						<div class="clearfix">
+							<div class="form-group col-md-12">
+								<div class="col-md-12 k-content">
+									<input class="col-md-12" name="attachfiles" id="attachfiles"
+										k-select="caller.submitAttachFile" type="file"
+										list-file-type="xls,xlsx,doc,docx,pdf" />
+
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							<center>
+								<span style="color: gray">Dung lượng &#60;&#61; 100MB,
+									định dạng xls,xlsx,doc,docx,pdf</span>
+							</center>
+							<div class="clearfix">
+								<div id="contractFileGrid" kendo-grid="caller.contractFileGrid"
+									k-options="caller.gridFileOptions" k-editable="false"
+									k-on-change="onGridChange(kendoEvent, { selected: selected }, data)"></div>
+							</div>
+							<script>
+								$(document)
+										.ready(
+												function() {
+													var caller = angular
+															.element(
+																	document
+																			.getElementById('constructionPopup'))
+															.scope().caller;
+													var urlUpload = window.location.protocol
+															+ '//'
+															+ window.location.hostname
+															+ ':'
+															+ window.location.port;
+
+													function onSuccess(data) {
+														caller.callback(data);
+													}
+													//	setTimeout(function(){ 
+													$("#attachfiles")
+															.kendoUpload(
+																	{
+																		async : {
+																			/* saveUrl : urlUpload
+																					+ API_URL
+																					+ "fileservice/uploadATTT", */
+																			removeUrl : urlUpload
+																					+ API_URL
+																					+ "fileservice/removeFileUpload",
+																		/* autoUpload : true */
+
+																		},
+																		select : caller.submitAttachFile,
+																		validation : {
+																			allowedExtensions : [
+																					".xls",
+																					".xlsx",
+																					".doc",
+																					".docx",
+																					".pdf" ]
+																		},
+																		success : onSuccess,
+																		localization : {
+																			uploadSelectedFiles : "Chọn tệp"
+																		}
+
+																	});
+													//}, 1000);
+												});
+							</script>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+<!-- 							hungnx 070618 end file -->
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer" align="right">
+			<button type="button" id="saveData"
+				class="btn btn-qlk   padding-search-right btn pull-right  saveQLK"
+				ng-click="caller.createConstruction()" translate>Ghi lại</button>
+			<button type="button" id="cancel"
+				class="btn btn-qlk padding-search-right margin_right10 closeQLK btn pull-right"
+				ng-click="caller.cancelImport()" translate>Hủy bỏ</button>
+		</div>
+	</form>
+</div>
+<!--<script type="text/javascript">-->
+<!--document.onkeydown= keyDown;-->
+<!--function keyDown(e){-->
+<!--switch(e.keyCode) {-->
+<!--case 27:-->
+<!--$("#cancel").click();-->
+<!--break;-->
+<!--case 13:-->
+<!--$("#saveData").click();-->
+<!--break;-->
+<!--}-->
+<!--}-->
+<!--</script> -->

@@ -1,0 +1,109 @@
+<style>
+.form-control[readonly]: {
+	background-color: #e5e5e5 !important;
+}
+</style>
+
+<div id="staffPopupId">
+	<form class="form-horizontal row" role="form" name="addForm"
+		id="addFormId" k-options="validatorOptions">
+		<div class="form-body padding10">
+			<div class="portlet light bordered">
+				<div class="form-body padding10">
+					<!-- <div class="portlet light bordered collapse in from-search"
+						id="thongTinChung"> -->
+						<div class="clearfix">
+							<div class="form-group col-md-12">
+								<label class="col-md-2 control-label req" translate>Tỉnh</label>
+								<div class="col-md-10">
+									<div class="input-icon right " >
+										<i class="fa fa-search directive" ng-show="caller.isCreateNew"
+											ng-click="caller.openCatProvincePopup('addForm')"></i>
+									</div>
+									<input kendo-auto-complete k-options="caller.provinceOptions" ng-disabled="!caller.isCreateNew"
+										class=" form-control width100" type="text" id="provinceCode"
+										ng-model="caller.addForm.provinceCode" name="provinceCode" />
+									<div class="One_icon" ng-hide="!caller.isCreateNew">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.clearInputPopup('provinceCode')"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix">
+							<div class="form-group col-md-12" >
+								<label class="col-md-2 control-label req" translate>Cấp</label>
+							<div class="col-md-10">
+								<select kendo-combo-box style="width: 100%" name="type"
+										id="type" ng-model="caller.addForm.type" ng-disabled="!caller.isCreateNew">
+									<option value="1">Quản lý</option>
+									<option value="2">Nhân viên</option>
+								</select>
+								<div class="One_icon" ng-hide="!caller.isCreateNew">
+										<i class="fa fa-times" aria-hidden="true" 
+											ng-click="caller.clearInputPopup('type')"></i>
+									</div>
+							</div>
+						</div>
+						</div>
+						
+						<div class="clearfix">
+							<div class="form-group col-md-12">
+								<label class="col-md-2 control-label req" translate>Mã nhân viên</label>
+								<div class="col-md-10">
+									<div class="input-icon right ">
+										<i class="fa fa-search directive"
+											ng-click="caller.openStaffPopup('addForm')"></i>
+									</div>
+									<input kendo-auto-complete k-options="caller.staffEditOptions"
+										class=" form-control width100" type="text" id="staffCode"
+										ng-model="caller.addForm.staffCode" name="staffCode" />
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.clearInputPopup('staffCode')"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix" ng-show="caller.addForm.staffCode">
+							<div class="form-group col-md-12">
+								<label class="col-md-2 control-label" translate>Tên nhân viên</label>
+								<div class="col-md-10">
+									<label class="control-label" translate>{{caller.addForm.staffName}}</label>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix" ng-show="caller.addForm.staffCode">
+							<div class="form-group col-md-12">
+								<label class="col-md-2 control-label" translate>Số điện thoại</label>
+								<div class="col-md-10">
+									<label class="control-label" translate>{{caller.addForm.staffPhone}}</label>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix" ng-show="caller.addForm.staffCode">
+							<div class="form-group col-md-12">
+								<label class="col-md-2 control-label" translate>Email</label>
+								<div class="col-md-10">
+									<label class="control-label" translate>{{caller.addForm.email}}</label>
+								</div>
+							</div>
+						</div>
+						
+					<!-- </div> -->
+
+					<div class="clearfix form-actions" align="right">
+						<button type="button" id="saveData"
+							class="btn btn-qlk   padding-search-right btn pull-right  saveQLK"
+							ng-click="caller.saveConfig()" translate>Ghi lại</button>
+						<button type="button" id="cancel"
+							class="btn btn-qlk padding-search-right margin_right10 closeQLK btn pull-right"
+							ng-click="caller.cancel()" translate>Hủy bỏ</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

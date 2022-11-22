@@ -1,0 +1,173 @@
+
+<style>
+/*import - export css*/
+.import-export {
+	display: flex;
+	justify-content: end;
+}
+
+.import {
+	
+}
+
+.excelQLK, .TkQLK {
+	padding: 0 23px;
+}
+
+.export {
+	padding: 0 15px;
+}
+</style>
+<div data-ng-controller="manageController as vm" id="manageController">
+	<div>
+		<p class="text-brecum">{{vm.String}}</p>
+		<form class="form-horizontal row" role="form">
+			<div class="form-body">
+				<div class="portlet light bordered">
+					<div class="portlet-title background-title">
+						<div class="caption">
+							<span class="caption-subject bold lowercase" translate>Thông
+								tin tìm kiếm </span>
+
+						</div>
+						<div class="text-right margin-row-title">
+							<i data-toggle="collapse" data-target="#demoapp"
+								class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+						</div>
+					</div>
+					<div id="demoapp" class="collapse in from-search"
+						style="position: relative">
+						<i data-toggle="dropdown"
+							class="tooltip1  tooltipshow_search_advance"
+							aria-expanded="false">
+							<button style="overflow: hidden;" class="search_advance"
+								ng-show="vm.iconDiss" ng-click="vm.iconDiss=!vm.iconDiss">
+								<span class="tooltiptext">Mở rộng</span>
+							</button>
+						</i> <i data-toggle="dropdown"
+							class="tooltip1 tooltiphide_search_advance" aria-expanded="false">
+							<button style="overflow: hidden;" class="search_advance"
+								ng-show="!vm.iconDiss" ng-click="vm.iconDiss=!vm.iconDiss">
+								<span class="tooltiptext">Rút gọn</span>
+							</button>
+						</i>
+
+						<div class="clearfix position-relative">
+							<div class="clearfix">
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label" translate>Chọn
+										loại quản lý</label>
+									<div class="col-md-8" ng-enter="vm.doSearch()">
+										<select kendo-drop-down-list style="width: 100%"
+											ng-model="vm.managerSearch.manageUserName" k-data-text-field="'name'"
+											k-data-value-field="'name'" k-data-source="vm.managerList">
+										</select>
+									</div>
+
+								</div>
+							</div>
+							<div class="clearfix">
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label" translate>Tên
+										thiết bị</label>
+									<div class="col-md-8">
+										<input id="keySearch" ng-enter="vm.doSearch()"
+											class=" form-control width100" type="text" autofocus="true"
+											ng-model="vm.managerSearch.deviceName"
+											placeholder="Tên thiết bị" />
+									</div>
+								</div>
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label" translate>Mã WO</label>
+									<div class="col-md-8">
+										<input id="keySearch" ng-enter="vm.doSearch()"
+											class=" form-control width100" type="text" autofocus="true"
+											ng-model="vm.managerSearch.woCode" placeholder="Mã wo" />
+									</div>
+								</div>
+							</div>
+							<div class="clearfix">
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label" translate>Mã trạm</label>
+									<div class="col-md-8">
+										<input id="keySearch" ng-enter="vm.doSearch()"
+											class=" form-control width100" type="text" autofocus="true"
+											ng-model="vm.managerSearch.stationCode" placeholder="Mã trạm" />
+									</div>
+								</div>
+								<div class="form-group col-md-6">
+									<div class="import-export">
+										<div class="import">
+											<button type="button" id="findParam"
+												class="btn btn-qlk padding-search-right TkQLK" translate>Nhập
+												Excel</button>
+										</div>
+										<div class="export">
+											<button type="button" id="findParam" ng-click="vm.exportFile()"
+												class="btn btn-qlk padding-search-right excelQLK" translate>Xuất
+												Excel</button>
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+							<div class="clearfix form-actions margin-top">
+								<div class="row">
+									<div class="col-md-12 text-center">
+										<button type="button" id="findParam" ng-click="vm.doSearch()"
+											class="btn btn-qlk padding-search-right searchQLK" translate>Tìm
+											kiếm</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<div class="portlet light bordered">
+			<div class="portlet-title background-title">
+				<div class="caption">
+					<span class="caption-subject bold lowercase" translate>Kết
+						quả tìm kiếm: </span>&nbsp; <label class="control-label bold lowercase">{{vm.countCons}}</label>
+					<label class="control-label bold lowercase">&nbsp;bản ghi</label>
+				</div>
+				<div class="text-right margin-row-title">
+					<i data-toggle="collapse" data-target="#demoapp2"
+						class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+				</div>
+			</div>
+			
+			<div id="demoapp2" class="collapse in from-search">
+				<div class="clearfix position-relative">
+					<div id="manageMEGrid" kendo-grid="vm.manageMEGrid"
+						k-editable="false" k-options="vm.managerGridOptions"></div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<script type="text/javascript">
+		$('#appIdSearch').keypress(
+				function(event) {
+					$("input").change(function() {
+						$(this).val($.trim($(this).val()));
+					});
+					document.onkeydown = keyDown;
+					function keyDown(e) {
+						switch (e.keyCode) {
+						case 27:
+							$("#cancel").click();
+							break;
+						case 13:
+							if ($('.k-widget.k-window.fix-footer').css(
+									'display') !== 'block') {
+								$("#findParam").click();
+							}
+							break;
+						}
+					}
+				});
+	</script>
+	</div>

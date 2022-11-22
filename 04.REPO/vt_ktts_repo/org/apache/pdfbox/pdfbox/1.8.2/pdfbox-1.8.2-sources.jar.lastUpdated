@@ -1,0 +1,7 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Fri Nov 18 10:02:22 ICT 2022
+http\://repo.unicodee.com/repository/maven-snapshots/.error=Could not transfer artifact org.apache.pdfbox\:pdfbox\:jar\:sources\:1.8.2 from/to maven-snapshots (http\://repo.unicodee.com/repository/maven-snapshots/)\: Transfer failed for http\://repo.unicodee.com/repository/maven-snapshots/org/apache/pdfbox/pdfbox/1.8.2/pdfbox-1.8.2-sources.jar ProxyInfo{host\='10.61.11.39', userName\='null', port\=3128, type\='http', nonProxyHosts\='null'}
+https\://repo.maven.apache.org/maven2/.lastUpdated=1668740542786
+@10.61.11.39\:3128>@default-maven-snapshots-http\://repo.unicodee.com/repository/maven-snapshots/.lastUpdated=1668740517960
+http\://repo.unicodee.com/repository/maven-releases/.error=Could not transfer artifact org.apache.pdfbox\:pdfbox\:jar\:sources\:1.8.2 from/to maven-releases (http\://repo.unicodee.com/repository/maven-releases/)\: Transfer failed for http\://repo.unicodee.com/repository/maven-releases/org/apache/pdfbox/pdfbox/1.8.2/pdfbox-1.8.2-sources.jar ProxyInfo{host\='10.61.11.39', userName\='null', port\=3128, type\='http', nonProxyHosts\='null'}
+@10.61.11.39\:3128>@default-maven-releases-http\://repo.unicodee.com/repository/maven-releases/.lastUpdated=1668740538994

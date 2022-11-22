@@ -1,0 +1,221 @@
+<form name="formWork" novalidate="">
+	<div class="clearfix">
+		<div class="row">
+			<div class="form-group col-md-12">
+				<label class="col-md-4 control-label text-right req" translate>Thực
+					hiện</label>
+
+				<div class="col-md-8 margin_top">
+
+					<label><input style="float: left;" type="radio"
+						id="isInternal1" name="status"
+						ng-model="caller.workItemRecord.isInternal"
+						ng-checked="caller.workItemRecord.isInternal == 1" value="1">
+						<span class="padding_radio">Nội bộ</span></label> <label> <input
+						style="float: left;" type="radio" id="isInternal2" name="status"
+						ng-model="caller.workItemRecord.isInternal"
+						ng-checked="caller.workItemRecord.isInternal == 2" value="2">
+						<span class="padding_radio">Đối tác</span></label>
+				</div>
+			</div>
+		</div>
+		<div class="row form-group"
+			ng-show="caller.workItemRecord.isInternal==1">
+			<div class="col-md-12">
+				<label class="col-md-4 control-label text-right req" translate>Đơn
+					vị thực hiện</label>
+
+				<div class="col-md-8">
+					<div class="input-icon right ">
+						<i class="fa fa-search directive"
+							ng-click="caller.openDepartmentChoose('deptWork')"></i>
+					</div>
+					<input kendo-auto-complete k-options="caller.deptWorkOptions"
+						ng-blur="caller.changeDataDept('deptWork')"
+						class=" form-control width100" type="text"
+						ng-model="caller.workItemRecord.constructorName1" name="dept"
+						onclick="reset_msg();" required
+						data-required-msg="Đơn vị không để trống" /> <span id="msg"
+						data-for='dvn1' class='k-invalid-msg'></span>
+
+					<div class="One_icon">
+						<i class="fa fa-times" aria-hidden="true"
+							ng-click="caller.cancelInput('deptWork')"></i>
+					</div>
+					<script>
+						function reset_msg() {
+							document.getElementById('msg').innerHTML = '';
+						}
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="row form-group"
+			ng-show="caller.workItemRecord.isInternal==2">
+			<div class="col-md-12">
+				<label class="col-md-4 control-label text-right req" translate>Đối
+					tác thực hiện</label>
+
+				<div class="col-md-8">
+					<div class="input-icon right ">
+						<i class="fa fa-search directive"
+							ng-click="caller.openPartnerChoose('deptWork')"></i>
+					</div>
+					<input kendo-auto-complete k-options="caller.partOptions"
+						ng-blur="caller.changeDataDept('part')"
+						class=" form-control width100" type="text"
+						ng-model="caller.workItemRecord.constructorName2" name="dept"
+						onclick="reset_msg();" required
+						data-required-msg="Đối tác không để trống" /> <span id="msgp"
+						data-for='dvn1' class='k-invalid-msg'></span>
+
+					<div class="One_icon">
+						<i class="fa fa-times" aria-hidden="true"
+							ng-click="caller.cancelInput('part')"></i>
+					</div>
+					<script>
+						function reset_msg() {
+							document.getElementById('msgp').innerHTML = '';
+						}
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="row form-group">
+			<div class="col-md-12">
+
+				<label class="col-md-4 control-label text-right req" translate>Đơn
+					vị giám sát</label>
+
+				<div class="col-md-8">
+					<div class="input-icon right ">
+						<i class="fa fa-search directive"
+							ng-click="caller.openDepartmentChoose('sup')"></i>
+					</div>
+					<input kendo-auto-complete k-options="caller.supOptions"
+						ng-blur="caller.changeDataDept('sup')"
+						class=" form-control width100" type="text"
+						ng-model="caller.workItemRecord.supervisorName" name="dept"
+						onclick="reset_msg();" required
+						data-required-msg="Đơn vị không để trống" /> <span id="msg2"
+						data-for='dvn1' class='k-invalid-msg'></span>
+
+					<div class="One_icon">
+						<i class="fa fa-times" aria-hidden="true"
+							ng-click="caller.cancelInput('sup')"></i>
+					</div>
+					<script>
+						function reset_msg() {
+							document.getElementById('msg2').innerHTML = '';
+						}
+					</script>
+				</div>
+			</div>
+		</div>
+		<!-- Huypq-30112021-start -->
+		<div class="row form-group">
+			<div class="col-md-12">
+				<label class="col-md-4 control-label text-right" translate>Trụ</label>
+				<div class="col-md-8">
+					<select kendo-drop-down-list style="width: 100%"
+						ng-model="caller.workItemRecord.branch" k-data-text-field="'name'"
+						k-data-value-field="'code'" k-option-label="'---Chọn---'"
+						k-data-source="caller.branchList">
+					</select>
+				</div>
+			</div>
+		</div>
+		<!-- Huy-end -->
+		<!-- HienLT56 start 10112020 -->
+		<div class="row form-group">
+			<div class="col-md-12">
+				<label class="col-md-4 control-label text-right req" translate>Tìm
+					kiếm hạng mục</label>
+				<div class="col-md-8">
+					<input class=" form-control width100" type="text"
+						ng-model="vm.workItemRecord.workISearch"	
+						placeholder="Nhập hạng mục cần tìm kiếm" />
+				</div>
+			</div>
+		</div>
+		<!-- HienLT56 end 10112020 -->
+		<div class="row form-group">
+			<div class="col-md-12">
+				<div style="padding-bottom: inherit; height: 1rem;"
+					class="form-group">
+					<div style="padding-bottom: 0;" class="col-md-4 text-right">
+						<label ng-show="caller.showHm"
+							class="control-label text-right req">Tên hạng mục</label> <label
+							ng-show="caller.showHm1" class="control-label text-right">Tên
+							hạng mục</label>
+					</div>
+					<div style="padding-bottom: 50px;" class="col-md-8 "
+						ng-show="caller.showHm">
+						<!-- HienLT56 start 10112020 -->
+						<label ng-repeat="workItem in caller.catWorkItemTypeList| filter:vm.workItemRecord.workISearch"
+							style="width: 100%"> <input type="checkbox"
+							data-checklist-model="caller.workItemRecord.workItemTypeList"
+							data-checklist-value="workItem"> {{workItem.name}}
+						</label> <!-- HienLT56 end 10112020 -->
+					</div>
+					<div class="col-md-8" ng-show="caller.showHm1">
+						<label class="control-data" style="width: 100%">
+							{{caller.workItemRecord.catWorkItemType}} </label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- chinhpxn 20180606 start  -->
+		<!-- <div ng-show="caller.showHm1" class="row form-group">
+			<div style="padding-bottom: inherit;" class="col-md-12">
+				<label class="col-md-4 control-label text-right req" translate>Nhân
+					viên phụ trách hạng mục</label>
+				<div class="col-md-8">
+					<div class="input-icon right ">
+						<i class="fa fa-search directive"
+							ng-click="caller.openTaskPopup('4')"></i>
+					</div>
+					<input ng-blur="caller.changeDataAuto('people')"
+						class=" form-control width100" type="text"
+						ng-model="caller.workItemRecord.performerName" kendo-auto-complete
+						k-options="caller.performerItemOptions" />
+
+					<div class="One_icon">
+						<i class="fa fa-times" aria-hidden="true"
+							ng-click="caller.cancelInput('people')"></i>
+					</div>
+					<script>
+						function reset_msg() {
+							document.getElementById('msg2').innerHTML = '';
+						}
+					</script>
+				</div>
+			</div>
+		</div>
+		<div ng-show="caller.showHm1" class="row form-group">
+			<div style="padding-bottom: 30px;" class="col-md-12">
+				<label class="col-md-4 control-label text-right" translate>Đơn
+					giá hạng mục(VNĐ):</label>
+				<div class="col-md-8">
+					<input 
+						class=" form-control width100" type="text"
+						ng-model="caller.workItemRecord.price" 
+						/>
+				</div>
+			</div>
+		</div> -->
+		<!-- chinhpxn 20180606 end -->
+		<div class="row modal-footer">
+			<div class="col-md-12 ">
+				<button type="button"
+					class="btn btn-qlk padding-search-right closeQLK" id="cancel"
+					ng-click="caller.cancelWorkItemPopup()" translate>Hủy bỏ</button>
+				<button type="button" id="savepopupApp"
+					class="btn btn-qlk padding-search-right saveQLK"
+					ng-disabled="caller.disabledHangMuc ||caller.Categories"
+					ng-click="caller.saveWorkItem(caller.workItemRecord)" translate>Ghi
+					lại</button>
+			</div>
+		</div>
+	</div>
+</form>

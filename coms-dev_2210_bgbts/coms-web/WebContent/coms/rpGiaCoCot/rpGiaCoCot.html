@@ -1,0 +1,158 @@
+<style>
+    #approvepopupApp:before{
+        content: "";
+        font-family: FontAwesome;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: inherit;
+        font-size: 18px;
+        padding-right: 0.5em;
+        position: absolute;
+        top: 1px;
+        left: 7px;
+        color: #0F0;
+    }
+
+    #approvepopupApp {
+        padding: 4px 17px 4px 30px;
+        width: initial;
+        position: relative;
+    }
+    .no-padding {
+    	padding:  0;
+    }
+    
+    html{
+    	overflow-y: scroll;
+    }
+</style>
+<div data-ng-controller="rpGiaCoCotController as vm">
+<p class="text-brecum">{{vm.String}}</p>
+<form class="form-horizontal row" role="form" id="quantityManagementSearch">
+    <div class="form-body">
+        <div class="portlet light bordered">
+            <div class="portlet-title background-title">
+                <div class="caption">
+							<span class="caption-subject bold lowercase" translate>Thông
+								tin tìm kiếm </span>
+
+                </div>
+                <div class="text-right margin-row-title">
+                    <i data-toggle="collapse" data-target="#workItem1"
+                       class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div id="workItem1" class="collapse in from-search">
+                <div class="clearfix position-relative">
+                    <div class="clearfix position-relative">
+                        <div class="form-group col-md-6" style="margin-left: -3%;">
+                                    <label class="col-md-4 control-label req" translate>File hợp đồng</label>
+                                    <div class="col-md-7" ng-enter="vm.doSearch()">
+                                        <input type="file" id="fileSearchContract"
+                                        accept=".xls, .xlsx">
+                                        <div class="One_icon col-md-1">
+                                            <i class="fa fa-times" aria-hidden="true"
+                                               ng-click="vm.deleteListData(6)"></i>
+                                        </div>
+                                    </div>
+                                    <div style="position: absolute;top: 3px;right: -1%;font-size: 11px"><a href="" ng-click="vm.getContractTemplate()"><u>Tải biểu mẫu</u></a></div>
+                              </div>
+
+                        <div class="form-group col-md-6">
+                                    <label class="col-md-4 control-label" translate>File mã trạm</label>
+                                    <div class="col-md-7" ng-enter="vm.doSearch()">
+                                        <input type="file" id="fileSearchStation"
+                                        accept=".xls, .xlsx">
+                                        <div class="One_icon col-md-1">
+                                            <i class="fa fa-times" aria-hidden="true"
+                                               ng-click="vm.deleteListData(5)"></i>
+                                        </div>
+                                    </div>
+                                    <div style="position: absolute;top: 3px;right: -1%;font-size: 11px"><a href="" ng-click="vm.getStationCodeTemplate()"><u>Tải biểu mẫu</u></a></div>
+                              </div>
+                    </div>                   
+                </div>
+                	<div class="clearfix">
+                		<div class="form-group col-md-6"></div>
+							<div class="form-group col-md-6" style="margin-left: -3%">
+								<label class="col-md-4 control-label req" translate>Tháng thực hiện</label>
+									<div class="col-md-7">
+										<input kendo-date-picker k-format="'MM/yyyy'"
+											ng-enter="vm.doSearch()"
+											ng-model="vm.rpGiaCoCotSearch.fullYear" 
+											k-options="vm.monthSelectorOptions" style="width: 95%;"
+											min-year="1000" date-time />
+										<div class="One_icon col-md-1">
+											<i class="fa fa-times" aria-hidden="true"
+												ng-click="vm.deleteListData(3)"></i>
+										</div>
+									</div>
+
+								</div>
+
+							</div>
+						
+                <div class="clearfix form-actions" style="margin-top: 1%;">
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<button type="button" id="doSearchTrans"
+									class="btn btn-qlk padding-search-right padding-lable noteQLK"
+									ng-click="vm.doSearch()" translate>Xem trước</button>
+								<button type="button" id="excel" ng-disabled="vm.disableBtnExcel"
+									class="btn btn-qlk padding-search-right padding-lable excelQLK"
+									ng-click="vm.exportFile()" translate>Xuất excel</button>
+								<!-- <button type="button" id="pdf" ng-disabled="vm.disableBtnPDF"
+									class="btn btn-qlk padding-search-right  pdfQLK"
+									ng-click="vm.exportpdf()" translate>Xuất pdf</button> -->
+							</div>
+						</div>
+					</div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="portlet light bordered">
+    <div class="portlet-title background-title">
+        <div class="caption">
+			<span class="caption-subject bold lowercase" translate>Kết
+					quả tìm kiếm:  </span>&nbsp;<label class="control-label bold lowercase" id="appCountGiaCoCot">{{vm.countGiaCoCot}}</label><label class="control-label bold lowercase">&nbsp;bản ghi</label>
+
+        </div>
+        <div class="text-right margin-row-title">
+            <i data-toggle="collapse" data-target="#workItem2"
+               class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+        </div>
+    </div>
+    <div id="workItem2" class="collapse in from-search">
+        <div class="clearfix position-relative">
+            <div id="rpGiaCoCotGrid" kendo-grid="vm.rpGiaCoCotGrid"
+                 k-options="vm.rpGiaCoCotGridOptions"
+                    ></div>
+        </div>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+/* chinhpxn20180704_start */
+    $('#quantityManagementSearch').keypress(function(event){
+/* chinhpxn20180704_end */
+        $("input").change(function(){
+            $(this).val($.trim($(this).val()));
+        });
+        document.onkeydown= keyDown;
+        function keyDown(e){
+            switch(e.keyCode) {
+                case 27:
+                    $("#cancel").click();
+                    break;
+                case 13:
+                    if($('.k-widget.k-window.fix-footer').css('display')!=='block'){
+                        $("#doSearchQuantity").click();
+                    }
+                    break;
+
+            }
+        }
+    });
+</script>
+			

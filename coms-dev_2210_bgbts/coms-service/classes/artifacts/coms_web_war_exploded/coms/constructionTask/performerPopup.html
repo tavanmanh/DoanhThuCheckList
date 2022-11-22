@@ -1,0 +1,21 @@
+<form name="formWork" style="padding:25px;">
+    <div class="clearfix">
+    	<div class="row">
+		<div class="form-group col-md-8">
+            <label class="col-md-4 control-label" translate>Nội dung tìm kiếm</label>
+            <div class="col-md-8">
+                <input id="keySearch" class=" form-control width100" type="text"
+                       ng-model="caller.performerSearch.keySearch" placeholder="Tên đăng nhập/ Họ tên/ Email" ng-enter="caller.doSearchPerformer()"/>
+            </div>
+            
+        </div>
+        <div class="col-md-4 text-center">
+                <button type="button" ng-click="caller.doSearchPerformer()" class="btn btn-qlk padding-search-right searchQLK" translate>Tìm kiếm</button>
+            </div>
+        </div>
+        <div class="row">
+        	<div id="performerPopup1" kendo-grid="caller.performerPopupGrid1"  k-options="caller.performerOptions1" ></div>
+        </div>
+        </div>
+    </div>
+</form>

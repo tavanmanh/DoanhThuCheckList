@@ -1,0 +1,50 @@
+<form name="form" class="form-horizontal row " role="form"
+	kendo-validator="validator" k-options="validatorOptions" style="">
+	<div class="form-body ">
+		<div class="padding-width18">
+			<div class="clearfix">
+				<div style="padding-top: 10px" class="form-group col-md-12">
+					<div class="form-group col-md-12">
+						<label class="col-md-4 control-label req" translate>Lý do
+							hủy bỏ xác nhận</label>
+						<div class="col-md-8">
+							<textarea class=" form-control width400"
+								ng-model="caller.constrObj.approveRevenueDescription"></textarea>
+						</div>
+					</div>
+
+				</div>
+				<div class="row">
+					<div class="col-md-12 text-right">
+						<button type="button"
+							class="btn btn-qlk padding-search-right closeQLK" id="cancel"
+							ng-click="caller.cancelPopup()" translate>Hủy bỏ</button>
+						<button type="button"
+							class="btn btn-qlk padding-search-right saveQLK"
+							ng-click="caller.rejectionDT()" translate>Ghi
+							lại</button>
+					</div>
+				</div>
+				<script type="text/javascript">
+					$("input").change(function() {
+						$(this).val($.trim($(this).val()));
+					});
+					document.onkeydown = keyDown;
+					function keyDown(e) {
+						switch (e.keyCode) {
+						case 27:
+							$("#cancel").click();
+							break;
+						case 13:
+							if (e.keyCode === 13 && !$('#cancel:focus').length
+									&& !$('#savepopupApp:focus').length) {
+								$("#savepopupApp").click();
+								break;
+							}
+						}
+					}
+				</script>
+
+			</div>
+		</div>
+</form>

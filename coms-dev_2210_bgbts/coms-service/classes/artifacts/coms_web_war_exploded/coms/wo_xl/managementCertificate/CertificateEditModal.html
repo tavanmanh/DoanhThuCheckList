@@ -1,0 +1,51 @@
+<style>
+    .app-modal-window .modal-dialog {
+        min-width: 1000px;
+    }
+
+    .modal-content{
+        width: 100%;
+        padding: 0;
+    }
+
+    .close-modal-x{
+        position: absolute;
+        top: 6px;
+        right: 6px;
+    }
+
+    .input-half{
+        width: 40%;
+        display: inline;
+    }
+
+    .display-block{
+        display: block;
+        width: 100%;
+    }
+
+    .k-widget.k-autocomplete {
+        width: 100%;
+    }
+
+</style>
+
+<!-- Edit WO Modal -->
+
+<div class="modal-header" style="background-color: #33CCCC;">
+    <h5 class="modal-title">Sửa chứng chỉ</h5>
+    <button type="button" class="close close-modal-x" data-dismiss="modal" aria-label="Close" ng-click="$dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div data-ng-include="'coms/wo_xl/certificateCreateNew/certificateCreateEditTemplate.html'"></div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="$dismiss()">
+        <i class="fa fa-ban"></i> Hủy bỏ
+    </button>
+    <button type="button" class="btn btn-secondary" ng-click="validateCreateNew()?$close():return;">
+        <i class="fa fa-floppy-o azure"></i> Ghi lại
+    </button>
+</div>

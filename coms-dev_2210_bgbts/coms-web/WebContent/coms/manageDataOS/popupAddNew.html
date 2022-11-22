@@ -1,0 +1,1562 @@
+<style>
+	.form-control[readonly]: {
+		background-color: #e5e5e5 !important;
+}
+</style>
+
+<div id="assignHandoverPopup">
+	<form class="form-horizontal row" role="form" name="addForm"
+		id="addForm" k-options="validatorOptions">
+		<div class="form-body padding10">
+			<div class="portlet light bordered">
+				<div class="form-body padding10">
+					<div class="row caption" id="thongTinChungSpan" ng-show="caller.thongTinChungShow">
+						<span class="caption-subject bold lowercase"
+							style="margin-left: 1px !important;" translate >Thông tin
+							chung</span>
+					</div>
+					<div class="portlet light bordered collapse in from-search" id="thongTinChung" ng-show="caller.thongTinChungShow">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Mã công
+									trình</label>
+								<div class="col-md-8">
+									<div class="input-icon right ">
+										<i class="fa fa-search directive"
+											ng-click="caller.openConstruction('add')"></i>
+									</div>
+									<input kendo-auto-complete
+										k-options="caller.constructionOptions"
+										class=" form-control width100" type="text"
+										ng-model="caller.addForm.constructionCode"
+										name="constructionCode" id="constructionCode" />
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" ng-hide="caller.checkStatus"
+											ng-click="caller.resetFormAdd('constructionCode')"></i>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Hợp đồng</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text" readonly
+										ng-model="caller.addForm.hdContractCode" name="hdContractCode"
+										id="hdContractCode" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"  
+											ng-click="caller.resetFormAdd('hdContractCode')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Ngày ký
+									hợp đồng</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="hdSignDate" name="hdSignDate"
+										readonly style="width: 100%;"
+										ng-model="caller.addForm.hdSignDate" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"  
+											ng-click="caller.resetFormAdd('hdSignDate')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Giá trị
+									hợp đồng(triệu)</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										readonly id="hdContractValue"
+										ng-model="caller.addForm.hdContractValue"
+										name="hdContractValue" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"  
+											ng-click="caller.resetFormAdd('hdContractValue')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Thời
+									gian thực hiện HĐ</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										readonly id="hdPerformDay"
+										ng-model="caller.addForm.hdPerformDay" name="hdPerformDay" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"  
+											ng-click="caller.resetFormAdd('hdPerformDay')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Tỉnh</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										readonly id="provinceCode"
+										ng-model="caller.addForm.provinceCode" name="provinceCode" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"  
+											ng-click="caller.resetFormAdd('provinceCode')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Mã trạm
+									tuyến</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										id="stationCode" ng-model="caller.addForm.stationCode"
+										name="stationCode" readonly/>
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"  
+											ng-click="caller.resetFormAdd('stationCode')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Loại
+									công trình</label>
+								<div class="col-md-8">
+									<select kendo-drop-down-list style="width: 100%"
+										ng-model="caller.addForm.constructionType"
+										k-data-text-field="'name'" k-data-value-field="'code'"
+										id="constructionType"
+										k-data-source="caller.constructionTypeList">
+									</select>
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" ng-hide="caller.checkStatus"
+											ng-click="caller.resetFormAdd('constructionType')"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Nội dung</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text" id="content"
+										ng-model="caller.addForm.content" name="content" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"  
+											ng-click="caller.resetFormAdd('content')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Nguồn
+									vốn</label>
+								<div class="col-md-8">
+									<select kendo-drop-down-list style="width: 100%"
+										ng-model="caller.addForm.capitalNtd"
+										k-data-text-field="'name'" k-data-value-field="'code'"
+										id="capitalNtd" k-data-source="caller.capitalNtdList">
+									</select>
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" ng-hide="caller.checkStatus"
+											ng-click="caller.resetFormAdd('capitalNtd')"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Kế hoạch thi công tháng -->
+
+					<div class="row caption" id="keHoachThiCongChiTietSpan" ng-show="caller.keHoachThiCongChiTietShow">
+						<span class="caption-subject bold lowercase"
+							style="margin-left: 1px !important;" translate>Kế hoạch
+							thi công tháng</span>
+					</div>
+					<div class="portlet light bordered collapse in from-search" id="keHoachThiCongChiTiet" ng-show="caller.keHoachThiCongChiTietShow">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Lương</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										id="khtcSalary" ng-model="caller.addForm.khtcSalary"
+										name="khtcSalary" ng-change="caller.changeValue()"/>
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"  
+											ng-click="caller.resetFormAdd('khtcSalary')"></i>
+									</div> -->
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Nhân
+									công thuê ngoài</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.khtcLaborOutsource" ng-change="caller.changeValue()"
+										name="khtcLaborOutsource" id="khtcLaborOutsource" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"  
+											ng-click="caller.resetFormAdd('khtcLaborOutsource')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Chi phí
+									vật liệu</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.khtcCostMaterial" ng-change="caller.changeValue()"
+										name="khtcCostMaterial" id="khtcCostMaterial" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"  
+											ng-click="caller.resetFormAdd('khtcCostMaterial')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Chi phí
+									HSHC</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										id="khtcCostHshc" ng-model="caller.addForm.khtcCostHshc"
+										name="khtcCostHshc" ng-change="caller.changeValue()"/>
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"  
+											ng-click="caller.resetFormAdd('khtcCostHshc')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Chi phí
+									vận chuyển</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										id="khtcCostTransport"
+										ng-model="caller.addForm.khtcCostTransport"
+										name="khtcCostTransport" ng-change="caller.changeValue()"/>
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"  
+											ng-click="caller.resetFormAdd('khtcCostTransport')"></i>
+									</div> -->
+								</div>
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Chi phí
+									khác</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										id="khtcCostOrther"
+										ng-model="caller.addForm.khtcCostOrther"
+										name="khtcCostOrther" ng-change="caller.changeValue()"/>
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"  
+											ng-click="caller.resetFormAdd('khtcCostOrther')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Tháng
+									triển khai</label>
+								<div class="col-md-8">
+									<input id="khtcDeploymentMonth" class=" form-control width100"
+										type="number" ng-model="caller.addForm.khtcDeploymentMonth"
+										k-model="caller.addForm.khtcDeploymentMonth" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('khtcDeploymentMonth')"></i>
+									</div> -->
+								</div>
+								<script type="text/javascript">
+									$("#khtcDeploymentMonth").kendoDatePicker({
+										dateInput : true,
+										format : "MM/yyyy",
+										start : "year",
+										depth : "year",
+										date : true
+									});
+								</script>
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Tổng
+									cộng</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										id="khtcTotalMoney" ng-model="caller.addForm.khtcTotalMoney"
+										name="khtcTotalMoney" ng-change="caller.changeValue()"/>
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('khtcTotalMoney')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Hiệu
+									quả(%)</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										id="khtcEffective" ng-model="caller.addForm.khtcEffective"
+										name="khtcEffective" readonly/>
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"  
+											ng-click="caller.resetFormAdd('khtcEffective')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Ghi chú</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										id="khtcDescription" ng-model="caller.addForm.khtcDescription"
+										name="khtcDescription" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"  
+											ng-click="caller.resetFormAdd('khtcDescription')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Tạm ứng kinh phí -->
+					<div class="row caption" id="tamUngSpan" ng-show="caller.tamUngShow">
+						<span class="caption-subject bold lowercase"
+							style="margin-left: 1px !important;" translate>Tạm ứng
+							kinh phí</span>
+					</div>
+					<div class="portlet light bordered collapse in from-search" id="tamUng" ng-show="caller.tamUngShow">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Ngày tạm
+									ứng</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="tuAdvanceDate" name="tuAdvanceDate"
+										style="width: 100%;" ng-model="caller.addForm.tuAdvanceDate" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"  
+											ng-click="caller.resetFormAdd('tuAdvanceDate')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Nhân
+									công</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.tuLabor" name="tuLabor" id="tuLabor" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"  
+											ng-click="caller.resetFormAdd('tuLabor')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Vật liệu</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.tuMaterial" name="tuMaterial"
+										id="tuMaterial" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"  
+											ng-click="caller.resetFormAdd('tuMaterial')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Hồ sơ
+									hoàn công</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.tuHshc" name="tuHshc" id="tuHshc" />
+									<!-- <div class="One_icon"> 
+										<i class="fa fa-times" aria-hidden="true"  
+											ng-click="caller.resetFormAdd('tuHshc')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Chi phí
+									vận chuyển</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.tuCostTransport"
+										name="tuCostTransport" id="tuCostTransport" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"  
+											ng-click="caller.resetFormAdd('tuCostTransport')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Chi phí
+									khác</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.tuCostOrther" name="tuCostOrther"
+										id="tuCostOrther" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"  
+											ng-click="caller.resetFormAdd('tuCostOrther')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Vật tư A cấp -->
+					<div class="row caption" id="vatTuACapSpan" ng-show="caller.vatTuACapShow">
+						<span class="caption-subject bold lowercase"
+							style="margin-left: 1px !important;" translate>Vật tư A
+							cấp</span>
+					</div>
+					<div class="portlet light bordered collapse in from-search" id="vatTuACap" ng-show="caller.vatTuACapShow">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Ngày
+									nhận đồng bộ vật tư</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="vtaSynchronizeDate" disabled
+										name="vtaSynchronizeDate" style="width: 100%;"
+										ng-model="caller.addForm.vtaSynchronizeDate" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"  
+											ng-click="caller.resetFormAdd('vtaSynchronizeDate')"></i>
+									</div> -->
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Giá trị</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.vtaValue" name="vtaValue"
+										id="vtaValue" disabled/>
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" 
+											ng-click="caller.resetFormAdd('vtaValue')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Kế hoạch thi công giá trị sản lượng -->
+
+					<div class="row caption" id="keHoachThiCongSanLuongSpan" ng-show="caller.keHoachThiCongSanLuongShow">
+						<span class="caption-subject bold lowercase"
+							style="margin-left: 1px !important;" translate>Kế hoạch
+							thi công giá trị sản lượng</span>
+					</div>
+					<div class="portlet light bordered collapse in from-search" id="keHoachThiCongSanLuong" ng-show="caller.keHoachThiCongSanLuongShow">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label  req" translate>Giá trị
+									sản lượng(triệu)</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.gtslQuantityValue"
+										name="gtslQuantityValue" id="gtslQuantityValue" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" 
+											ng-click="caller.resetFormAdd('gtslQuantityValue')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label  req" translate>Hình thức thi công</label>
+								<div class="col-md-8">
+									<select kendo-multi-select style="width: 100%"
+                                            ng-model="caller.addForm.listHttc" id="listHttc"
+                                            k-data-text-field="'name'" k-data-value-field="'code'"
+                                            k-data-source="caller.httcTdtDataList">
+                                    </select>
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"  
+											ng-click="caller.resetFormAdd('httcTdt')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label  req" translate>Ngày bắt
+									đầu</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="tttcStartDate" name="tttcStartDate"
+										style="width: 100%;" ng-model="caller.addForm.tttcStartDate" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" 
+											ng-click="caller.resetFormAdd('tttcStartDate')"></i>
+									</div> -->
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Ngày kết
+									thúc</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="tttcEndDate" name="tttcEndDate"
+										style="width: 100%;" ng-model="caller.addForm.tttcEndDate" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" 
+											ng-click="caller.resetFormAdd('tttcEndDate')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Vướng</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.tttcVuong" name="tttcVuong"
+										id="tttcVuong" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" 
+											ng-click="caller.resetFormAdd('tttcVuong')"></i>
+									</div> -->
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Hủy</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.tttcClose" name="tttcClose"
+										id="tttcClose" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" 
+											ng-click="caller.resetFormAdd('tttcClose')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Ngày dự
+									kiến hoàn thành</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="gtslCompleteExpectedDate"
+										name="gtslCompleteExpectedDate" style="width: 100%;"
+										ng-model="caller.addForm.gtslCompleteExpectedDate" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('gtslCompleteExpectedDate')"></i>
+									</div> -->
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Ghi chú</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.gtslDescription"
+										name="gtslDescription" id="gtslDescription" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('gtslDescription')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Tiến độ nghiệm thu -->
+
+					<div class="row caption" id="tienDoNghiemThuSpan" ng-show="caller.tienDoNghiemThuShow">
+						<span class="caption-subject bold lowercase"
+							style="margin-left: 1px !important;" translate>Tiến độ nghiệm thu</span>
+					</div>
+					<div class="portlet light bordered collapse in from-search" id="tienDoNghiemThu" ng-show="caller.tienDoNghiemThuShow">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Ngày bắt
+									đầu dựng HSHC</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="tdntHshcStartDate" name="tdntHshcStartDate"
+										style="width: 100%;" ng-model="caller.addForm.tdntHshcStartDate" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" 
+											ng-click="caller.resetFormAdd('tdntHshcStartDate')"></i>
+									</div> -->
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Ngày bắt đầu nghiệm thu</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="tdntAcceptanceStartDate" name="tdntAcceptanceStartDate"
+										style="width: 100%;" ng-model="caller.addForm.tdntAcceptanceStartDate" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" 
+											ng-click="caller.resetFormAdd('tdntAcceptanceStartDate')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Ngày gửi P.KTHT thẩm duyệt</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="tdntKthtExpertiseDate" name="tdntKthtExpertiseDate"
+										style="width: 100%;" ng-model="caller.addForm.tdntKthtExpertiseDate" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" 
+											ng-click="caller.resetFormAdd('tdntKthtExpertiseDate')"></i>
+									</div> -->
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-labe req" translate>Ngày bắt đầu làm đối soát 4A</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="tdnt4AControlStartDate" name="tdnt4AControlStartDate"
+										style="width: 100%;" ng-model="caller.addForm.tdnt4AControlStartDate" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" 
+											ng-click="caller.resetFormAdd('tdnt4AControlStartDate')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Ngày trình ký GĐ tỉnh</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="tdntSignProvinceDate" name="tdntSignProvinceDate"
+										style="width: 100%;" ng-model="caller.addForm.tdntSignProvinceDate" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" 
+											ng-click="caller.resetFormAdd('tdntSignProvinceDate')"></i>
+									</div> -->
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Ngày gửi Hồ sơ lên TCT</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="tdntSendTctDate" name="tdntSendTctDate"
+										style="width: 100%;" ng-model="caller.addForm.tdntSendTctDate" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" 
+											ng-click="caller.resetFormAdd('tdntSendTctDate')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Ngày dự kiến hoàn thành</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="tdntCompleteExpectedDate" name="tdntCompleteExpectedDate"
+										style="width: 100%;" ng-model="caller.addForm.tdntCompleteExpectedDate" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" 
+											ng-click="caller.resetFormAdd('tdntCompleteExpectedDate')"></i>
+									</div> -->
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Ngày vướng</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="tdntVuongDate" name="tdntVuongDate"
+										style="width: 100%;" ng-model="caller.addForm.tdntVuongDate" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" 
+											ng-click="caller.resetFormAdd('tdntVuongDate')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Nguyên nhân vướng</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										ng-model="caller.addForm.tdntVuongReason" name="tdntVuongReason"
+										id="tdntVuongReason" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('tdntVuongReason')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Đề nghị quyết toán -->
+					<div class="row caption" id="deNghiQuyetToanSpan" ng-show="caller.deNghiQuyetToanShow">
+						<span class="caption-subject bold lowercase"
+							style="margin-left: 1px !important;" translate>Đề nghị quyết toán</span>
+					</div>
+					<div class="portlet light bordered collapse in from-search" id="deNghiQuyetToan" ng-show="caller.deNghiQuyetToanShow">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Giá trị quyết toán CĐT(chưa VAT)</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.dnqtQtCdtNotVat" name="dnqtQtCdtNotVat"
+										id="dnqtQtCdtNotVat" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('dnqtQtCdtNotVat')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Giá trị quyết toán CĐT(có VAT)</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.dnqtQtCdtVat" name="dnqtQtCdtVat"
+										id="dnqtQtCdtVat" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('dnqtQtCdtVat')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Thủ tục điện lực (GPON)</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.dnqtElectricalProcedures" name="dnqtElectricalProcedures"
+										id="dnqtElectricalProcedures" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('dnqtElectricalProcedures')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Nhân công kéo cáp/Nhân công (GPON)</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.dnqtPullCableLabor" name="dnqtPullCableLabor"
+										id="dnqtPullCableLabor" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('dnqtPullCableLabor')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Chi phí vật liệu</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.dnqtCostMaterial" name="dnqtCostMaterial"
+										id="dnqtCostMaterial" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('dnqtCostMaterial')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Chi phí HSHC</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.dnqtCostHshc" name="dnqtCostHshc"
+										id="dnqtCostHshc" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('dnqtCostHshc')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Chi phí vận chuyển kho bãi</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.dnqtCostTransportWarehouse" name="dnqtCostTransportWarehouse"
+										id="dnqtCostTransportWarehouse" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('dnqtCostTransportWarehouse')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Chi phí khác</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.dnqtCostOrther" name="dnqtCostOrther"
+										id="dnqtCostOrther" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('dnqtCostOrther')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Lương kéo cáp/lương khác (GPON)</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.dnqtSalaryCableOrther" name="dnqtSalaryCableOrther"
+										id="dnqtSalaryCableOrther" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('dnqtSalaryCableOrther')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Lương hàn nối (GPON)</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.dnqtWeldingSalary" name="dnqtWeldingSalary"
+										id="dnqtWeldingSalary" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('dnqtWeldingSalary')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>VAT</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.dnqtVat" name="dnqtVat"
+										id="dnqtVat" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('dnqtVat')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Tổng</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.dnqtTotalMoney" name="dnqtTotalMoney"
+										id="dnqtTotalMoney" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('dnqtTotalMoney')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>						
+					</div>
+					
+					<!-- Thẩm định quyết toán -->
+					<div class="row caption" id="thamDinhQuyetToanSpan" ng-show="caller.thamDinhQuyetToanShow">
+						<span class="caption-subject bold lowercase"
+							style="margin-left: 1px !important;" translate>Thẩm định quyết toán</span>
+					</div>
+					<div class="portlet light bordered collapse in from-search" id="thamDinhQuyetToan" ng-show="caller.thamDinhQuyetToanShow">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Ngày nhận HSHC bản cứng</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="gttdHshcHardDate" name="gttdHshcHardDate"
+										style="width: 100%;" ng-model="caller.addForm.gttdHshcHardDate" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" 
+											ng-click="caller.resetFormAdd('gttdHshcHardDate')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Ngày thẩm định xong</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="gttdCompleteExpertiseDate" name="gttdCompleteExpertiseDate"
+										style="width: 100%;" ng-model="caller.addForm.gttdCompleteExpertiseDate" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" 
+											ng-click="caller.resetFormAdd('gttdCompleteExpertiseDate')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Thủ tục điện lực (GPON)</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.gttdElectricalProcedures" name="gttdElectricalProcedures"
+										id="gttdElectricalProcedures" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('gttdElectricalProcedures')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Nhân công kéo cáp/Nhân công (GPON)</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.gttdPullCableLabor" name="gttdPullCableLabor"
+										id="gttdPullCableLabor" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('gttdPullCableLabor')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Chi phí vật liệu</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.gttdCostMaterial" name="gttdCostMaterial"
+										id="gttdCostMaterial" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('gttdCostMaterial')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Chi phí HSHC</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.gttdCostHshc" name="gttdCostHshc"
+										id="gttdCostHshc" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('gttdCostHshc')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Chi phí vận chuyển kho bãi</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.gttdCostTransportWarehouse" name="gttdCostTransportWarehouse"
+										id="gttdCostTransportWarehouse" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('gttdCostTransportWarehouse')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Chi phí khác</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.gttdCostOrther" name="gttdCostOrther"
+										id="gttdCostOrther" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('gttdCostOrther')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label  req" translate>Lương kéo cáp/lương khác (GPON)</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.dnqtSalaryCableOrther" name="gttdSalaryCableOrther"
+										id="dnqtSalaryCableOrther" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('dnqtSalaryCableOrther')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Lương hàn nối (GPON)</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.gttdWeldingSalary" name="gttdWeldingSalary"
+										id="gttdWeldingSalary" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('gttdWeldingSalary')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>VAT</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.gttdVat" name="gttdVat"
+										id="gttdVat" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('gttdVat')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Tổng</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.gttdTotalMoney" name="gttdTotalMoney"
+										id="gttdTotalMoney" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('gttdTotalMoney')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>	
+						
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Giá trị thẩm định PTK</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.gttdGttdPtk" name="gttdGttdPtk"
+										id="gttdGttdPtk" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('gttdGttdPtk')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Tháng ghi nhận HSHC</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										ng-model="caller.addForm.gttdTotalMoney" name="gttdHshcMonth"
+										id="gttdHshcMonth" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('gttdHshcMonth')"></i>
+									</div> -->
+								</div>
+							</div>
+							<script type="text/javascript">
+									$("#gttdHshcMonth").kendoDatePicker({
+										dateInput : true,
+										format : "MM/yyyy",
+										start : "year",
+										depth : "year",
+										date : true
+									});
+								</script>
+						</div>
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Tháng
+									ghi nhận quỹ lương</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										ng-model="caller.addForm.gttdSalaryMonth"
+										name="gttdSalaryMonth" id="gttdSalaryMonth" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('gttdSalaryMonth')"></i>
+									</div> -->
+								</div>
+								<script type="text/javascript">
+									$("#gttdSalaryMonth").kendoDatePicker({
+										dateInput : true,
+										format : "MM/yyyy",
+										start : "year",
+										depth : "year",
+										date : true
+									});
+								</script>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Lương
+									thực nhận</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.gttdSalaryReal" name="gttdSalaryReal"
+										id="gttdSalaryReal" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('gttdSalaryReal')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Lỗi HSHC</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										ng-model="caller.addForm.gttdHshcError"
+										name="gttdHshcError" id="gttdHshcError" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('gttdHshcError')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Nguyên nhân lỗi</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										ng-model="caller.addForm.gttdErrorReason" name="gttdErrorReason"
+										id="gttdErrorReason" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('gttdErrorReason')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Quyết toán CĐT-->
+					<div class="row caption" id="quyetToanSpan" ng-show="caller.quyetToanshow">
+						<span class="caption-subject bold lowercase"
+							style="margin-left: 1px !important;" translate>Quyết toán CĐT</span>
+					</div>
+					<div class="portlet light bordered collapse in from-search" id="quyetToan" ng-show="caller.quyetToanshow">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Ngày lập đề nghị quyết toán VTNet</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="qtdnSuggestionsDate" name="qtdnSuggestionsDate"
+										style="width: 100%;" ng-model="caller.addForm.qtdnSuggestionsDate" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" 
+											ng-click="caller.resetFormAdd('qtdnSuggestionsDate')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Giá trị đề nghị quyết toán VTNet</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.qtdnValue" name="qtdnValue"
+										id="qtdnValue" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('qtdnValue')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Ngày nộp VTNet</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="qtdnVtnetDate" name="qtdnVtnetDate"
+										style="width: 100%;" ng-model="caller.addForm.qtdnVtnetDate" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" 
+											ng-click="caller.resetFormAdd('qtdnVtnetDate')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Ghi chú đề nghị</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										ng-model="caller.addForm.qtdnDescription" name="qtdnDescription"
+										id="qtdnDescription" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('qtdnDescription')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Nhân viên thẩm định</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										ng-model="caller.addForm.qttdExpertiseEmployee" name="qttdExpertiseEmployee"
+										id="qttdExpertiseEmployee" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('qttdExpertiseEmployee')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Ngày thẩm định xong</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="qttdExpertiseCompleteDate" name="qttdExpertiseCompleteDate"
+										style="width: 100%;" ng-model="caller.addForm.qttdExpertiseCompleteDate" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" 
+											ng-click="caller.resetFormAdd('qttdExpertiseCompleteDate')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Giá trị thẩm định</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.qttdValue" name="qttdValue"
+										id="qttdValue" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('qttdValue')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Ghi chú thẩm định</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										ng-model="caller.addForm.qttdDescription" name="qttdDescription"
+										id="qttdDescription" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('qttdDescription')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Xuất hóa đơn -->
+					<div class="row caption" id="xuatHoaDonSpan" ng-show="caller.xuatHoaDonShow">
+						<span class="caption-subject bold lowercase"
+							style="margin-left: 1px !important;" translate>Xuất hóa đơn</span>
+					</div>
+					<div class="portlet light bordered collapse in from-search" id="xuatHoaDon" ng-show="caller.xuatHoaDonShow">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Ngày chuyển PTC</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="xhdPtcDate" name="xhdPtcDate"
+										style="width: 100%;" ng-model="caller.addForm.xhdPtcDate" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" 
+											ng-click="caller.resetFormAdd('xhdPtcDate')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Ngày xuất hóa đơn</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="xhdXhdDate" name="xhdXhdDate"
+										style="width: 100%;" ng-model="caller.addForm.xhdXhdDate" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" 
+											ng-click="caller.resetFormAdd('xhdXhdDate')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Số hóa đơn</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										ng-model="caller.addForm.xhdSoHd" name="xhdSoHd"
+										id="xhdSoHd" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('xhdSoHd')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Tháng chốt doanh thu</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										ng-model="caller.addForm.xhdRevenueMonth" name="xhdRevenueMonth"
+										id="xhdRevenueMonth" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('xhdRevenueMonth')"></i>
+									</div> -->
+								</div>
+							</div>
+							<script type="text/javascript">
+									$("#xhdRevenueMonth").kendoDatePicker({
+										dateInput : true,
+										format : "MM/yyyy",
+										start : "year",
+										depth : "year",
+										date : true
+									});
+								</script>
+						</div>
+						
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Ghi chú</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.xhdDescription" name="xhdDescription"
+										id="xhdDescription" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('xhdDescription')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Thanh lý hợp đồng -->
+					<div class="row caption" id="thanhLySpan" ng-show="caller.thanhLyShow">
+						<span class="caption-subject bold lowercase"
+							style="margin-left: 1px !important;" translate>Thanh lý hợp đồng</span>
+					</div>
+					<div class="portlet light bordered collapse in from-search" id="thanhLy" ng-show="caller.thanhLyShow">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label  req" translate>Ngày ký thanh lý</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="tlSignDate" name="tlSignDate"
+										style="width: 100%;" ng-model="caller.addForm.tlSignDate" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" 
+											ng-click="caller.resetFormAdd('tlSignDate')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Giá trị</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.tlValue" name="tlValue"
+										id="tlValue" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('tlValue')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Ghi chú</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										ng-model="caller.addForm.tlDescription" name="tlDescription"
+										id="tlDescription" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('tlDescription')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Chênh lệch sản lượng thanh lý</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.tlDifferenceQuantity" name="tlDifferenceQuantity"
+										id="tlDifferenceQuantity" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('tlDifferenceQuantity')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Tỷ lệ</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="number"
+										ng-model="caller.addForm.tlRate" name="tlRate"
+										id="tlRate" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('tlRate')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Quyết toán nhân công, vật tư A cấp -->
+					<div class="row caption" id="quyetToanNhanCongSpan" ng-show="caller.quyetToanNhanCongShow">
+						<span class="caption-subject bold lowercase"
+							style="margin-left: 1px !important;" translate>Quyết toán nhân công, vật tư A cấp</span>
+					</div>
+					<div class="portlet light bordered collapse in from-search" id="quyetToanNhanCong" ng-show="caller.quyetToanNhanCongShow">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Ngày chuyển hồ sơ lên PHT</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="qtncPhtDate" name="qtncPhtDate"
+										style="width: 100%;" ng-model="caller.addForm.qtncPhtDate" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" 
+											ng-click="caller.resetFormAdd('qtncPhtDate')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Ngày chuyển hồ sơ lên PTC</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="qtncPtcDate" name="qtncPtcDate"
+										style="width: 100%;" ng-model="caller.addForm.qtncPtcDate" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" 
+											ng-click="caller.resetFormAdd('qtncPtcDate')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Ngày hạch toán nhân công và vật tư A cấp</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="qtncVtaAccountDate" name="qtncVtaAccountDate"
+										style="width: 100%;" ng-model="caller.addForm.qtncVtaAccountDate" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" 
+											ng-click="caller.resetFormAdd('qtncVtaAccountDate')"></i>
+									</div> -->
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Ngày nhận tiền</label>
+								<div class="col-md-8">
+									<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+										min-year="1000" id="qtncTakeMoneyDate" name="qtncTakeMoneyDate"
+										style="width: 100%;" ng-model="caller.addForm.qtncTakeMoneyDate" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true" 
+											ng-click="caller.resetFormAdd('qtncTakeMoneyDate')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Vướng mắc</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										ng-model="caller.addForm.qtncVuong" name="qtncVuong"
+										id="qtncVuong" />
+									<!-- <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="caller.resetFormAdd('qtncVuong')"></i>
+									</div> -->
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!-- ---------------- -->
+					<div class="clearfix form-actions" align="right">
+						<button type="button" id="saveData"
+							class="btn btn-qlk   padding-search-right btn pull-right  saveQLK"
+							ng-click="caller.saveAdd()" translate>Ghi lại</button>
+						<button type="button" id="cancel"
+							class="btn btn-qlk padding-search-right margin_right10 closeQLK btn pull-right"
+							ng-click="caller.cancel()" translate>Hủy bỏ</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<script>
+	$(document)
+	.ready(
+			function() {
+				var caller = angular.element(document.getElementById('addForm')).scope().caller;
+				//Disabled form
+				$("#thongTinChung :input").prop('disabled', caller.thongTinChung);
+				$("#keHoachThiCongChiTiet :input").prop('disabled', caller.keHoachThiCongChiTiet);
+				$("#tamUng :input").prop('disabled', caller.tamUng);
+				$("#vatTuACap :input").prop('disabled', caller.vatTuACap);
+				$("#keHoachThiCongSanLuong :input").prop('disabled', caller.keHoachThiCongSanLuong);
+				$("#tienDoNghiemThu :input").prop('disabled', caller.tienDoNghiemThu);
+				$("#deNghiQuyetToan :input").prop('disabled', caller.deNghiQuyetToan);
+				$("#thamDinhQuyetToan :input").prop('disabled', caller.thamDinhQuyetToan);
+				$("#quyetToan :input").prop('disabled', caller.quyetToan);
+				$("#xuatHoaDon :input").prop('disabled', caller.xuatHoaDon);
+				$("#thanhLy :input").prop('disabled', caller.thanhLy);
+				$("#quyetToanNhanCong :input").prop('disabled', caller.quyetToanNhanCong);
+				
+				$("#khtcDeploymentMonth").val(caller.addForm.khtcDeploymentMonth);
+				$("#gttdHshcMonth").val(caller.addForm.gttdHshcMonth);
+        		$("#gttdSalaryMonth").val(caller.addForm.gttdSalaryMonth);
+        		$("#xhdRevenueMonth").val(caller.addForm.xhdRevenueMonth);
+        		
+        		$("#khtcDeploymentMonth").data("kendoDatePicker").enable(!caller.thongTinChung);
+			});
+</script>

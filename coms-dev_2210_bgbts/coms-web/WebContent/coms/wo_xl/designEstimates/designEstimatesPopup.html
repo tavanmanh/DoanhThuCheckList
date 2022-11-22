@@ -1,0 +1,694 @@
+<style>
+    .app-modal-window .modal-dialog {
+        min-width: 1000px;
+    }
+
+    .modal-content{
+        width: 100%;
+        padding: 0;
+    }
+
+    .close-modal-x{
+        position: absolute;
+        top: 6px;
+        right: 6px;
+    }
+
+    .input-half{
+        width: 40%;
+        display: inline;
+    }
+
+    .display-block{
+        display: block;
+        width: 100%;
+    }
+    .animate-show-hide.ng-hide {
+        opacity: 0;
+    }
+
+    .animate-show-hide.ng-hide-add,
+    .animate-show-hide.ng-hide-remove {
+        transition: all linear 0.5s;
+    }
+
+    .check-element {
+        border: 1px solid black;
+        opacity: 1;
+        padding: 10px;
+    }
+
+    .mheight-400{
+        max-height: 350px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+    .top{
+    margin-top: 25px}
+</style>
+
+<div class="modal-body">
+    <form class="form-horizontal row" role="form" name="designEstimate" id="constructionPopup">
+        <div class="form-body">
+            <div class="portlet light bordered">
+                <div class="portlet-title background-title">
+                    <div class="caption">
+                        <span class="caption-subject bold lowercase" ng-bind-html="caller.sectionHeader" translate>Thông tin chung</span>
+                    </div>
+                </div>
+                <div id="details_container" class="collapse in from-search">
+                    <div class="clearfix position-relative">
+                        <div class="clearfix">
+                            <div class="form-group row" style="margin-top: 10px">
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                       <label class="form-horizontal control-label req" translate>Khu vực</label>
+                                    </div>
+                                    <div class="col-md-9">
+	                                   <select kendo-drop-down-list id="area"
+											ng-change=""
+											ng-model="caller.addForm.area"
+											k-data-text-field="'name'" k-data-value-field="'name'"
+											k-data-source="caller.areaLocation"
+											class="form-control width100">
+										</select>
+									 </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                        <label class="form-horizontal control-label req" translate>Tỉnh</label>
+                                    </div>
+                                    <div class="col-md-9" style="display: flex;">
+	                                    <input kendo-auto-complete k-options="caller.provinceOptions"
+											class=" form-control width100" type="text" id="provinceCode"
+											ng-model="caller.addForm.provinceName" name="provinceCode" />
+									</div>
+                                </div>
+
+                                <div class="col-md-4">
+                                	<div class="col-md-3">
+                                    	<label class="display-block control-label req" style="text-align: left !important;" translate>Mã trạm VTNET</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                    	<!-- <input type="text" ng-model="caller.addForm.stationVTNET" class="form-control display-block"/> -->
+                                    	<input kendo-auto-complete k-options="caller.stationVTNETOptions"
+											class=" form-control width100" type="text" id="stationVTNET"
+											ng-model="caller.addForm.stationVTNET" name="stationVTNET" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row" style="margin-top: 10px">
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                        <label class="form-horizontal control-label req" translate>Mã trạm VCC</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                    	<input kendo-auto-complete k-options="caller.stationVCCOptions"
+											class=" form-control width100" type="text" id="stationVCC"
+											ng-model="caller.addForm.stationVCC" name="stationVCC" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                        <label class="form-horizontal control-label req" translate>Huyện</label>
+                                    </div>
+                                    <div class="col-md-9" style="display: flex;">
+										<input kendo-auto-complete k-options="caller.districtOptions"
+											class=" form-control width100" type="text" id="districtId"
+											ng-model="caller.addForm.districtName" name="districtId" />
+									</div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                       <label class="form-horizontal control-label" translate>Loại trạm</label>
+                                    </div>
+                                    <div class="col-md-9">
+	                                   <select kendo-drop-down-list id="stationType"
+											ng-model="caller.addForm.stationType"
+											k-data-text-field="'name'" k-data-value-field="'name'"
+											k-data-source="caller.stationTypeList"
+											class="form-control width100">
+										</select>
+									 </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row top">
+                            	<div class="col-md-4">
+                                    <div class="col-md-3">
+                                       <label class="form-horizontal control-label" translate>Địa hình</label>
+                                    </div>
+                                    <div class="col-md-9">
+	                                   <select kendo-drop-down-list id="terrain"
+											ng-change=""
+											ng-model="caller.addForm.terrain"
+											k-data-text-field="'name'" k-data-value-field="'name'"
+											k-data-source="caller.terainList"
+											class="form-control width100">
+										</select>
+									 </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                        <label class="form-horizontal control-label" translate>Địa chỉ</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                    	<input type="text" ng-model="caller.addForm.stationAddress" class="form-control display-block"/>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                        <label class="form-horizontal control-label" translate>Ghi chú</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                    	<textarea class=" form-control width100" type="text" id="node" rows="3" ng-model="caller.addForm.node" name="node" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row top" ng-show="caller.isCreateNew">
+                            	<div class="col-md-4">
+                                    <div class="col-md-3">
+                                       <label class="form-horizontal control-label" translate>File thiết kế dự toán</label>
+                                    </div>
+                                    <div class="col-md-9">
+	                                   <a href='' ng-click='caller.downloadFile(caller.file)'>{{caller.file.fileName}}</a>
+									 </div>
+                                </div>
+                             </div>
+                            <div class="portlet light" ng-show="!caller.isCreateNew">
+								<div class="portlet-title background-title">
+									<div class="caption">
+										<span class="caption-subject bold lowercase ng-scope" translate="">Danh sách file</span>
+									</div>
+									<div class="text-right margin-row-title">
+										<i data-toggle="collapse" data-target="#upload"
+											class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+									</div>
+								</div>
+								<div id="upload" class="portlet light bordered collapse in from-search">
+									<div>
+										<div id="upload2" class="portlet light  collapse in from-search">
+											<div>
+												<div>
+													<center>Kéo thả các file vào đây hoặc click để chọn file
+													</center>
+												</div>
+												<div class="clearfix">
+													<div class="form-group col-md-12">
+														<div class="col-md-12 k-content">
+															<input class="col-md-12" name="attachfiles" id="attachfiles"
+																k-select="caller.submitAttachFile" type="file"
+																list-file-type="xls,xlsx,doc,docx,pdf" />
+						
+														</div>
+													</div>
+													<div class="clearfix"></div>
+													<center>
+														<span style="color: gray">Dung lượng &#60;&#61; 100MB,
+															định dạng xls,xlsx,doc,docx,pdf</span>
+													</center>
+													<div class="clearfix">
+														<div id="designEstimatesFileGrid" kendo-grid="caller.designEstimatesFileGrid"
+															k-options="caller.gridFileOptions" k-editable="false"
+															k-on-change="onGridChange(kendoEvent, { selected: selected }, data)"></div>
+													</div>
+													<script>
+														$(document)
+																.ready(
+																		function() {
+																			var caller = angular
+																					.element(
+																							document
+																									.getElementById('constructionPopup'))
+																					.scope().caller;
+																			var urlUpload = window.location.protocol
+																					+ '//'
+																					+ window.location.hostname
+																					+ ':'
+																					+ window.location.port;
+						
+																			function onSuccess(data) {
+																				caller.callback(data);
+																			}
+																			//	setTimeout(function(){ 
+																			$("#attachfiles")
+																					.kendoUpload(
+																							{
+																								async : {
+																									/* saveUrl : urlUpload
+																											+ API_URL
+																											+ "fileservice/uploadATTT", */
+																									removeUrl : urlUpload
+																											+ API_URL
+																											+ "fileservice/removeFileUpload",
+																								/* autoUpload : true */
+						
+																								},
+																								select : caller.submitAttachFile,
+																								validation : {
+																									allowedExtensions : [
+																											".xls",
+																											".xlsx",
+																											".doc",
+																											".docx",
+																											".pdf" ]
+																								},
+																								success : onSuccess,
+																								localization : {
+																									uploadSelectedFiles : "Chọn tệp"
+																								}
+						
+																							});
+																			//}, 1000);
+																		});
+													</script>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+						
+							</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="form-body">
+            <div class="portlet light bordered">
+                <div class="portlet-title background-title">
+                    <div class="caption">
+                        <span class="caption-subject bold lowercase" ng-bind-html="caller.sectionHeader" translate>Thông tin trạm</span>
+                    </div>
+                </div>
+                <div id="tr_details_container" class="collapse in from-search">
+                    <div class="clearfix position-relative">
+                        <div class="clearfix">
+                            <div class="form-group row" style="margin-top: 10px">
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                       <label class="form-horizontal control-label" translate>Long</label>
+                                    </div>
+                                    <div class="col-md-9">
+	                                   <input type="text" ng-model="caller.addForm.stationLong" class="form-control display-block" only-numbers />
+									 </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                       <label class="form-horizontal control-label" translate>Lat</label>
+                                    </div>
+                                    <div class="col-md-9">
+	                                   <input type="text" ng-model="caller.addForm.stationLat" class="form-control display-block" only-numbers />
+									 </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                       <label class="form-horizontal control-label" translate>Loại cột</label>
+                                    </div>
+                                    <div class="col-md-9">
+	                                   <select kendo-drop-down-list id="area"
+											ng-change=""
+											ng-model="caller.addForm.pillarType"
+											k-data-text-field="'name'" k-data-value-field="'name'"
+											k-data-source="caller.pillarTypeList" 
+											class="form-control width100">
+										</select>
+										</select>
+									 </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row top">
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                        <label class="form-horizontal control-label" translate>Vị trí</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                    	<select kendo-drop-down-list id="location"
+											ng-change=""
+											ng-model="caller.addForm.location"
+											k-data-text-field="'name'" k-data-value-field="'name'"
+											k-data-source="caller.locationList"
+											class="form-control width100">
+										</select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                        <label class="form-horizontal control-label" translate>Độ cao cột</label>
+                                    </div>
+                                    <div class="col-md-9" style="display: flex;">
+	                                    <input type="text" ng-model="caller.addForm.pillarHight" class="form-control display-block" only-numbers />
+									</div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                       <label class="form-horizontal control-label" translate>Ống</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                    <input type="text" ng-model="caller.addForm.tube" class="form-control display-block" only-numbers />
+									 </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row top">
+                            	<div class="col-md-4">
+                                    <div class="col-md-3">
+                                       <label class="form-horizontal control-label" translate>Móng co</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                     <input type="text" ng-model="caller.addForm.fundamental" class="form-control display-block" only-numbers />
+										</select>
+									 </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                        <label class="form-horizontal control-label" translate>Cấp đất/đá</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                    	<select kendo-drop-down-list id="area"
+											ng-model="caller.addForm.levelRockEarth"
+											k-data-text-field="'name'" k-data-value-field="'name'"
+											k-data-source="caller.levelRockEarthList"
+											class="form-control width100">
+										</select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                       <label class="form-horizontal control-label" translate>Phòng máy</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                     <input type="text" ng-model="caller.addForm.engineRoom" class="form-control"/>
+										</select>
+									 </div>
+                                </div>
+                            </div>
+                            <div class="form-group row top">
+                            	<div class="col-md-4">
+                                    <div class="col-md-3">
+                                       <label class="form-horizontal control-label" translate>Vượt lũ(m)</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                     <input type="text" ng-model="caller.addForm.flootPass" class="form-control display-block" only-numbers />
+										</select>
+									 </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                        <label class="form-horizontal control-label" translate>Nhà máy nổ</label>
+                                    </div>
+                                    <div class="col-md-9">
+										<input type="text" ng-model="caller.addForm.explosionFactory" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                       <label class="form-horizontal control-label" translate>Nguồn Macro</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                     <input type="text" ng-model="caller.addForm.sourceMacro" class="form-control"/>
+										</select>
+									 </div>
+                                </div>
+                            </div>
+                            <div class="form-group row top">
+                            	<div class="col-md-4">
+                                    <div class="col-md-3">
+                                       <label class="form-horizontal control-label" translate>Nguồn RRU</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                     <input type="text" ng-model="caller.addForm.sourceRRU" class="form-control"/>
+										</select>
+									 </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                        <label class="form-horizontal control-label" translate>Cọc</label>
+                                    </div>
+                                    <div class="col-md-9">
+										<input type="text" ng-model="caller.addForm.groundingPile" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                       <label class="form-horizontal control-label" translate>Gem</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                     <input type="text" ng-model="caller.addForm.groundingGem" class="form-control"/>
+										</select>
+									 </div>
+                                </div>
+                            </div>
+                            <div class="form-group row top">
+                            	<div class="col-md-4">
+                                    <div class="col-md-3">
+                                       <label class="form-horizontal control-label" translate>Khoan</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                     <input type="text" ng-model="caller.addForm.groundingDrill" class="form-control"/>
+										</select>
+									 </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                        <label class="form-horizontal control-label" translate>Dây 2x25</label>
+                                    </div>
+                                    <div class="col-md-9">
+										<input type="text" ng-model="caller.addForm.wire2x25" class="form-control" only-numbers/>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                        <label class="form-horizontal control-label" translate>Dây 2x35</label>
+                                    </div>
+                                    <div class="col-md-9">
+										<input type="text" ng-model="caller.addForm.wire2x35" class="form-control" only-numbers/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row top">
+                            	<div class="col-md-4">
+                                    <div class="col-md-3">
+                                       <label class="form-horizontal control-label" translate>Dây 2x50</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                     <input type="text" ng-model="caller.addForm.wire2x50" class="form-control" only-numbers/>
+										</select>
+									 </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                        <label class="form-horizontal control-label" translate>Dây 2x70</label>
+                                    </div>
+                                    <div class="col-md-9">
+										<input type="text" ng-model="caller.addForm.wire2x70" class="form-control" only-numbers/>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                        <label class="form-horizontal control-label" translate>Dây 4x25</label>
+                                    </div>
+                                    <div class="col-md-9">
+										<input type="text" ng-model="caller.addForm.wire4x25" class="form-control" only-numbers/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row top">
+                            	<div class="col-md-4">
+                                    <div class="col-md-3">
+                                       <label class="form-horizontal control-label" translate>Dây 4x35</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                     <input type="text" ng-model="caller.addForm.wire4x35" class="form-control" only-numbers/>
+										</select>
+									 </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                        <label class="form-horizontal control-label" translate>Cột có sẵn</label>
+                                    </div>
+                                    <div class="col-md-9">
+										<input type="text" ng-model="caller.addForm.pillarAvailable" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                        <label class="form-horizontal control-label" translate>TM cột 6m</label>
+                                    </div>
+                                    <div class="col-md-9">
+										<input type="text" ng-model="caller.addForm.tmPillar60" class="form-control" only-numbers/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row top">
+                            	<div class="col-md-4">
+                                    <div class="col-md-3">
+                                       <label class="form-horizontal control-label" translate>TM cột 7m</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                     <input type="text" ng-model="caller.addForm.tmPillar70" class="form-control" only-numbers/>
+										</select>
+									 </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                        <label class="form-horizontal control-label" translate>TM cột 7.5m</label>
+                                    </div>
+                                    <div class="col-md-9">
+										<input type="text" ng-model="caller.addForm.tmPillar75" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                        <label class="form-horizontal control-label" translate>TM cột 8m</label>
+                                    </div>
+                                    <div class="col-md-9">
+										<input type="text" ng-model="caller.addForm.tmPillar80" class="form-control" only-numbers/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row top">
+                            	<div class="col-md-4">
+                                    <div class="col-md-3">
+                                       <label class="form-horizontal control-label" translate>TM cột 8.5m</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                     <input type="text" ng-model="caller.addForm.tmPillar85" class="form-control" only-numbers/>
+										</select>
+									 </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                        <label class="form-horizontal control-label" translate>10m</label>
+                                    </div>
+                                    <div class="col-md-9">
+										<input type="text" ng-model="caller.addForm.tmPillar100" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                        <label class="form-horizontal control-label" translate>TM cột 6m</label>
+                                    </div>
+                                    <div class="col-md-9">
+										<input type="text" ng-model="caller.addForm.tmPillar60" class="form-control" only-numbers/>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="form-body">
+            <div class="portlet light bordered">
+                <div class="portlet-title background-title">
+                    <div class="caption">
+                        <span class="caption-subject bold lowercase" ng-bind-html="caller.sectionHeader" translate>Thiết kế dự toán</span>
+                    </div>
+                </div>
+                <div id="tr_details_container" class="collapse in from-search">
+                    <div class="clearfix position-relative">
+                        <div class="clearfix">
+                            <div class="form-group row" style="margin-top: 10px">
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                       <label class="form-horizontal control-label" translate>Ngày thiết kế</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                    <input kendo-date-picker k-format="'dd/MM/yyyy'"
+											class=" form-control width100"
+											ng-model="caller.addForm.designDate" style="width: 100%;"
+											id="designDate" min-year="1000" date-time />
+									 </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                        <label class="form-horizontal control-label" translate>Người thiết kế</label>
+                                    </div>
+                                    <div class="col-md-9" style="display: flex;">
+	                                    <input kendo-auto-complete k-options="caller.userOptions1"
+											class=" form-control width100" type="text" id="designUserId"
+											ng-model="caller.addForm.designUserName" name="designUserId" />
+									</div>
+                                </div>
+
+                                <div class="col-md-4">
+                                	<div class="col-md-3">
+                                    	<label class="display-block control-label" style="text-align: left !important;" translate>Ngày điều chỉnh</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                    	<input kendo-date-picker k-format="'dd/MM/yyyy'"
+											class=" form-control width100"
+											ng-model="caller.addForm.designUpdateDate" style="width: 100%;"
+											id="estimatingDate" min-year="1000" date-time />
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                            <div class="form-group row" style="margin-top: 10px">
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                        <label class="form-horizontal control-label" translate>Người điều chỉnh</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                    	<input kendo-auto-complete k-options="caller.userOptions2"
+											class=" form-control width100" type="text" id="designUpdateUser"
+											ng-model="caller.addForm.designUpdateUserName" name="designUpdateUser" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                        <label class="form-horizontal control-label" translate>Ngày dự toán</label>
+                                    </div>
+                                    <div class="col-md-9" style="display: flex;">
+										<input kendo-date-picker k-format="'dd/MM/yyyy'"
+											class=" form-control width100"
+											ng-model="caller.addForm.estimatingDate" style="width: 100%;"
+											id="estimatingDate" min-year="1000" date-time />
+									</div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-3">
+                                       <label class="form-horizontal control-label" translate>Người lập</label>
+                                    </div>
+                                    <div class="col-md-9">
+	                                   <input kendo-auto-complete k-options="caller.userOptions3"
+											class=" form-control width100" type="text" id="creatDesignEstimatesUser"
+											ng-model="caller.addForm.creatDesignEstimatesUserName" name="creatDesignEstimatesUser" />
+									 </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row top">
+                            	<div class="col-md-4">
+                                    <div class="col-md-3">
+                                       <label class="form-horizontal control-label" translate>Ghi chú</label>
+                                    </div>
+                                    <div class="col-md-9">
+	                                  <input type="text" ng-model="caller.addForm.note" class="form-control display-block"/>
+									 </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="$dismiss()">
+        <i class="fa fa-ban"></i> Hủy bỏ
+    </button>
+    <button type="button" class="btn btn-secondary" ng-click="caller.save()">
+        <i class="fa fa-floppy-o azure"></i> Ghi lại
+    </button>
+</div>
+
+<!-- End edit tr Modal -->

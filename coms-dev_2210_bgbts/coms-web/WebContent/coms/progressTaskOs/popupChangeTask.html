@@ -1,0 +1,112 @@
+<style>
+.form-control[readonly]: {
+	background-color: #e5e5e5 !important;
+}
+</style>
+
+<div id="assignHandoverPopup">
+	<form class="form-horizontal row" role="form" name="addForm"
+		id="addForm" k-options="validatorOptions">
+		<div class="form-body padding10">
+			<div class="portlet light bordered">
+				<div class="form-body padding10">
+					<div class="row caption" id="thongTinChungSpan">
+						<span class="caption-subject bold lowercase"
+							style="margin-left: 1px !important;" translate>Thông tin
+							chung</span>
+					</div>
+					<div class="portlet light bordered collapse in from-search"
+						id="thongTinChung">
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Tháng/Năm</label>
+
+								<div class="col-md-8">
+									<input id="dateOptionsId" class=" form-control width100"
+										type="number" ng-model="caller.addForm.monthYear" ng-disabled="!caller.isCreate"
+										k-model="caller.addForm.monthYear"/>
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Tỉnh</label>
+								<div class="col-md-8">
+									<div class="input-icon right ">
+										<i class="fa fa-search directive"
+											ng-click="caller.openCatProvincePopup('addForm')"></i>
+									</div>
+									<input kendo-auto-complete k-options="caller.provinceOptions"
+										class=" form-control width100" type="text" ng-disabled="!caller.isCreate"
+										ng-model="caller.addForm.provinceName" name="provinceName"
+										id="provinceName" />
+								</div>
+							</div>
+
+							<script type="text/javascript">
+								$("#dateOptionsId").kendoDatePicker({
+									dateInput : true,
+									format : "MM/yyyy",
+									start : "year",
+									depth : "year",
+									date : true
+								});
+								
+								var datepicker = $("#dateOptionsId").data("kendoDatePicker");
+
+				        		datepicker.bind("change", function() {
+				        			$("#provinceName").val(null);
+				        		});
+							</script>
+						</div>
+					</div>
+
+					<div class="portlet light bordered">
+						<div class="portlet-title background-title">
+							<div class="caption">
+								<span class="caption-subject bold lowercase" translate>Kết
+									quả: </span>&nbsp;<label class="control-label bold lowercase"
+									id="appCountProgress">{{vm.countProgress}}</label><label
+									class="control-label bold lowercase">&nbsp;bản ghi</label>
+
+							</div>
+							<div class="text-right margin-row-title">
+								<i data-toggle="collapse" data-target="#constr"
+									class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+							</div>
+						</div>
+						<div id="constr" class="collapse in from-search">
+							<div class="clearfix position-relative">
+								<div id="constrTaskGrid" kendo-grid="caller.constrTaskGrid"
+									k-options="caller.constrTaskGridOptions"></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="clearfix form-actions" align="right">
+						<button type="button" id="saveData"
+							class="btn btn-qlk   padding-search-right btn pull-right  saveQLK"
+							ng-click="caller.saveAdd()" translate>Ghi lại</button>
+						<button type="button" id="cancel"
+							class="btn btn-qlk padding-search-right margin_right10 closeQLK btn pull-right"
+							ng-click="caller.cancel()" translate>Hủy bỏ</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<script>
+	$(document)
+	.ready(
+			function() {
+				var caller = angular.element(document.getElementById('addForm')).scope().caller;
+				//Disabled form
+				$("#dateOptionsId :input").prop('disabled', !caller.isCreate);
+				
+        		$("#dateOptionsId").val(caller.addForm.monthYear);
+        		
+        		$("#dateOptionsId").data("kendoDatePicker").enable(caller.isCreate);
+        		
+			});
+</script>

@@ -1,0 +1,213 @@
+<form class="form-horizontal row" role="form">
+    <div class="form-body" style="padding-bottom: 100px;">
+        <div class="portlet light">
+            <div class="portlet-title background-title">
+                <div class="caption">
+					<span class="caption-subject bold lowercase" translate>Thông
+						tin chung</span>
+                </div>
+                <div class="text-right margin-row-title">
+                    <i data-toggle="collapse" data-target="#part11"
+                       class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div id="part11" class="collapse in from-search">
+                <div class="padding-width18">
+                    <div class="border-gray">
+                        <div class="clearfix position-relative">
+                            <div class="clearfix form-group">
+                                <div class="clearfix position-relative">
+                                    <label class="col-md-2 control-label" translate>Mã tỉnh</label>
+                                    <label class="col-md-4 control-label"
+                                           ng-bind="caller.workItemSearch.catProvinceCode"></label> <label
+                                        class="col-md-2 control-label" translate>Mã trạm</label> <label
+                                        class=" col-md-4 control-label"
+                                        ng-bind="caller.workItemSearch.catstationCode"></label>
+                                </div>
+                                <div class="clearfix">
+                                    <label class="col-md-2 control-label" translate>Mã công
+                                        trình</label>
+                                    <label class="col-md-4 control-label"
+                                           ng-bind="caller.workItemSearch.constructionCode"></label>
+                                    <label class="col-md-2 control-label" translate>Hợp
+                                        đồng đầu ra</label>
+                                    <label class="col-md-4 control-label"
+                                           ng-bind="caller.workItemSearch.cntContractCode"></label>
+                                </div>
+                                <div class="clearfix">
+                                    <label class="col-md-2 control-label" translate>Hạng mục</label>
+                                    <label class="col-md-4 control-label"
+                                           ng-bind="caller.workItemSearch.name"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="portlet light">
+            <div class="portlet-title background-title" style="">
+                <div class="caption">
+					<span class="caption-subject bold lowercase" translate>Thông
+						tin thực hiện, giám sát</span>
+                </div>
+                <div class="text-right margin-row-title">
+                    <i data-toggle="collapse" data-target="#part2"
+                       class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div id="part2" class="collapse in from-search">
+                <div class="padding-width18">
+                    <div class="border-gray">
+                        <div class="clearfix position-relative">
+                            <div class="clearfix form-group">
+
+                                <div class="clearfix row margin-top">
+                                    <label class="col-md-2 control-label " translate>Giá trị sản lượng (triệu
+                                        VNĐ)</label>
+                                    <input class="col-md-4 border-none" type ="text" ng-disabled="caller.disableDetailPopup"
+                                      ng-model="caller.workItemSearch.quantity">
+                                    <label class="col-md-2 control-label " translate>Nguồn
+                                        việc</label>
+<!-- vt-currency parsecurrency3 value-model="caller.workItemSearch.quantity1"  -->
+                                    <div class="col-md-4 margin_top">
+                                        <input style="float: left;" type="radio" id="status1"
+                                               name="status"disabled
+                                               ng-model="caller.workItemSearchDetail.groupLevel"
+                                               ng-checked="caller.workItemSearchDetail.groupLevel == 1"
+                                               value="1"> <span class="padding_radio">Công ty</span>
+                                        <input style="float: left;" type="radio" id="status2"
+                                               name="status"disabled
+                                               ng-model="caller.workItemSearchDetail.groupLevel"
+                                               ng-checked="caller.workItemSearchDetail.groupLevel == 2 ||caller.workItemSearch.groupLevel == 3 "
+                                               value="2"> <span class="padding_radio">Chi
+											nhánh</span>
+                                    </div>
+
+                                </div>
+                                <div class="clearfix row margin-top">
+                                    <label class="col-md-2 control-label " translate>Người
+                                        thực hiện</label>
+                                    <label class="col-md-4 control-label"
+                                           ng-bind="caller.workItemSearchDetail.performerName"></label>
+
+
+                                    <label class="col-md-2 control-label " translate>Hình
+                                        thức thi công</label>
+
+                                    <div class="col-md-4 margin_top">
+                                        <input style="float: left;" type="radio" id="deployType1"
+                                               name="deployType" disabled
+                                               ng-model="caller.workItemSearchDetail.isInternal"
+                                               ng-checked="caller.workItemSearchDetail.isInternal == 1"
+                                               value="1"> <span class="padding_radio">Nội bộ</span>
+                                        <input style="float: left;" type="radio" id="deployType2"
+                                               name="deployType"disabled
+                                               ng-model="caller.workItemSearchDetail.isInternal"
+                                               ng-checked="caller.workItemSearchDetail.isInternal == 2"
+                                               value="2"> <span class="padding_radio">Thuê
+											ngoài</span>
+                                    </div>
+                                </div>
+                                <div class="clearfix row margin-top">
+                                    <label class="col-md-2 control-label " translate>Ngày
+                                        thực hiện</label>
+
+                                    <div class="col-md-4 date_complete">
+                                        <label class=" control-label">{{caller.workItemSearchDetail.startingDate | date:'d/M/yyyy'}} - {{caller.workItemSearchDetail.completeDate | date:'d/M/yyyy'}}</label>
+                                        <label></label>
+                                    </div>
+
+
+                                    <label class="col-md-2 control-label " translate>Tỉnh trưởng phụ trách</label>
+                                    <label class="col-md-4 control-label"
+                                           ng-bind="caller.workItemSearchDetail.supervisorName"></label>
+                                </div>
+
+                                   <div class="clearfix row margin-top">
+                                    <label class="col-md-2 control-label" translate> Ghi chú</label>
+                                    <label class="col-md-4 control-label"s
+                                           ng-bind="caller.workItemSearchDetail.approveDescription"></label>
+
+      								<label class="col-md-2 control-label" translate>Đối tác</label>
+                                    <label class="col-md-4 control-label"
+                                           ng-bind="caller.workItemSearchDetail.sysGroupName"></label>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="portlet light">
+            <div class="portlet-title background-title" style="">
+                <div class="caption">
+                    <span class="caption-subject bold lowercase" translate>Lịch sử cập nhật tiến độ</span>
+                </div>
+                <div class="text-right margin-row-title">
+                    <i data-toggle="collapse" data-target="#part3"
+                       class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div id="part3" class="collapse in from-search" ng-if="caller.workItemSearch.listImage.length > 0">
+            	<div class="padding-width18">
+					<div class="border-gray">
+						<div class="clearfix position-relative">
+							<div>
+								<div style="width: 500px; height: 500px; margin: auto;">
+									<img class="image-cus" ng-src="data:image/jpg;base64,{{caller.imageSelected.base64String}}">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="padding-width18">
+					<div class="border-gray">
+						<div class="clearfix position-relative">
+							<div ng-repeat="image in caller.workItemSearch.listImage">
+								<div class="wrap-image" ng-click="caller.changeImage(image)">
+									<img class="image-cus" ng-src="data:image/jpg;base64,{{image.base64String}}">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <div class="row modal-footer">
+        <div class="col-md-12 text-right">
+            <button type="button"
+                    class="btn btn-qlk padding-search-right closeQLK" id="cancel"
+                    ng-click="caller.cancelConfirmPopup()" translate>Đóng
+            </button>
+                <button type="button"
+                        id="savepopupAppQuantity"
+                        class="btn btn-qlk padding-search-right "
+                        ng-hide="{{caller.workItemSearch.abc === '2'  || (!!caller.workItemSearch.quantityByDate && caller.workItemSearch.quantityByDate == 1)}}"
+                        ng-click="caller.saveCancelConfirmPopup(caller.workItemSearch)" translate>
+                    Hủy xác nhận
+                </button>
+            <button type="button"
+                    class="btn btn-qlk padding-search-right  confirmpopupApp"
+                    id ="confirmpopupApp"
+                    ng-hide="{{caller.workItemSearch.abc === '2' || (!!caller.workItemSearch.quantityByDate && caller.workItemSearch.quantityByDate == 1)}}"
+                    ng-click="caller.approveQuantity(caller.workItemSearch)"
+                    translate>Xác nhận
+            </button>
+            <button type="button"
+                    class="btn btn-qlk padding-search-right  confirmpopupApp"
+                    id ="approvepopupApp"
+                    ng-hide="{{caller.workItemSearch.abc === '3'  || (!!caller.workItemSearch.quantityByDate && caller.workItemSearch.quantityByDate == 1)}}"
+                    ng-click="caller.approveCompleteQuantity(caller.workItemSearch)"
+                    translate>Xác nhận
+            </button>
+        </div>
+
+    </div>
+</form>

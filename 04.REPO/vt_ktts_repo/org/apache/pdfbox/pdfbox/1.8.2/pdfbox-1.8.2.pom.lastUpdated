@@ -1,0 +1,10 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Fri Nov 18 09:01:56 ICT 2022
+http\://repo.unicodee.com/repository/maven-snapshots/.error=Could not transfer artifact org.apache.pdfbox\:pdfbox\:pom\:1.8.2 from/to maven-snapshots (http\://repo.unicodee.com/repository/maven-snapshots/)\: Transfer failed for http\://repo.unicodee.com/repository/maven-snapshots/org/apache/pdfbox/pdfbox/1.8.2/pdfbox-1.8.2.pom ProxyInfo{host\='10.61.11.39', userName\='null', port\=3128, type\='http', nonProxyHosts\='null'}
+@10.61.11.39\:3128>@default-http\://repo.maven.apache.org/maven2/.lastUpdated=1558147637300
+https\://repo.maven.apache.org/maven2/.error=Could not transfer artifact org.apache.pdfbox\:pdfbox\:pom\:1.8.2 from/to central (https\://repo.maven.apache.org/maven2)\: Transfer failed for https\://repo.maven.apache.org/maven2/org/apache/pdfbox/pdfbox/1.8.2/pdfbox-1.8.2.pom ProxyInfo{host\='10.61.11.39', userName\='null', port\=3128, type\='http', nonProxyHosts\='null'}
+http\://repo.maven.apache.org/maven2/.error=Could not transfer artifact org.apache.pdfbox\:pdfbox\:pom\:1.8.2 from/to central (http\://repo.maven.apache.org/maven2)\: connect timed out
+@10.61.11.39\:3128>@default-maven-snapshots-http\://repo.unicodee.com/repository/maven-snapshots/.lastUpdated=1668736873936
+http\://repo.unicodee.com/repository/maven-releases/.error=Could not transfer artifact org.apache.pdfbox\:pdfbox\:pom\:1.8.2 from/to maven-releases (http\://repo.unicodee.com/repository/maven-releases/)\: Transfer failed for http\://repo.unicodee.com/repository/maven-releases/org/apache/pdfbox/pdfbox/1.8.2/pdfbox-1.8.2.pom ProxyInfo{host\='10.61.11.39', userName\='null', port\=3128, type\='http', nonProxyHosts\='null'}
+@10.61.11.39\:3128>@default-central-https\://repo.maven.apache.org/maven2/.lastUpdated=1668736916412
+@10.61.11.39\:3128>@default-maven-releases-http\://repo.unicodee.com/repository/maven-releases/.lastUpdated=1668736895342

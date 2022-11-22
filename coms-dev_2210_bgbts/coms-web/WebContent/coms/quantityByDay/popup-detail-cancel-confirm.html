@@ -1,0 +1,154 @@
+<form class="form-horizontal row" role="form">
+    <div class="form-body" style="padding-bottom: 100px;">
+        <div class="portlet light">
+            <div class="portlet-title background-title">
+                <div class="caption">
+					<span class="caption-subject bold lowercase" translate>Thông
+						tin chung</span>
+                </div>
+                <div class="text-right margin-row-title">
+                    <i data-toggle="collapse" data-target="#part11"
+                       class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div id="part11" class="collapse in from-search">
+                <div class="padding-width18">
+                    <div class="border-gray">
+                        <div class="clearfix position-relative">
+                            <div class="clearfix form-group">
+                                <div class="clearfix position-relative">
+                                    <label class="col-md-2 control-label" translate>Mã tỉnh</label>
+                                    <label class="col-md-4 control-label"
+                                           ng-bind="caller.constructionTaskDaily.catProvinceCode"></label> <label
+                                        class="col-md-2 control-label" translate>Mã trạm</label> <label
+                                        class=" col-md-4 control-label"
+                                        ng-bind="caller.constructionTaskDaily.catStationCode"></label>
+                                </div>
+                                <div class="clearfix">
+                                    <label class="col-md-2 control-label" translate>Mã công
+                                        trình</label>
+                                    <label class="col-md-4 control-label"
+                                           ng-bind="caller.constructionTaskDaily.constructionCode"></label>
+                                    <label class="col-md-2 control-label" translate>Hợp
+                                        đồng đầu ra</label>
+                                    <label class="col-md-4 control-label"
+                                           ng-bind="caller.constructionTaskDaily.cntContractCode"></label>
+                                </div>
+                                <div class="clearfix">
+                                    <label class="col-md-2 control-label" translate>Hạng mục</label>
+                                    <label class="col-md-4 control-label"
+                                           ng-bind="caller.constructionTaskDaily.workItemName"></label>
+                                    <label class="col-md-2 control-label" translate>Công việc</label>
+                                    <label class="col-md-4 control-label"
+                                           ng-bind="caller.constructionTaskDaily.taskName"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="portlet light">
+            <div class="portlet-title background-title" style="">
+                <div class="caption">
+					<span class="caption-subject bold lowercase" translate>Thông
+						tin thực hiện, giám sát</span>
+                </div>
+                <div class="text-right margin-row-title">
+                    <i data-toggle="collapse" data-target="#part2"
+                       class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div id="part2" class="collapse in from-search">
+                <div class="padding-width18">
+                    <div class="border-gray">
+                        <div class="clearfix position-relative">
+                            <div class="clearfix form-group">
+
+                                <div class="clearfix row margin-top">
+                                    <label class="col-md-2 control-label " translate>Ngày thực hiện</label>
+                                    <label class="col-md-4 control-label"
+                                           ng-bind="caller.constructionTaskDaily.dateDo"></label>
+                                    <label class="col-md-2 control-label " translate>Người thực hiện</label>
+                                    <label class="col-md-4 control-label"
+                                           ng-bind="caller.constructionTaskDaily.userName"></label>
+                                </div>
+                                <div class="clearfix row margin-top">
+                                	<div id="taskDetailGrid" kendo-grid="caller.taskDetailGrid"
+					                 k-options="caller.taskDetailGridOptions"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="portlet light">
+            <div class="portlet-title background-title" style="">
+                <div class="caption">
+                    <span class="caption-subject bold lowercase" translate>Hình ảnh</span>
+                </div>
+                <div class="text-right margin-row-title">
+                    <i data-toggle="collapse" data-target="#part3"
+                       class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div id="part3" class="collapse in from-search" ng-if="caller.constructionTaskDaily.listImage.length > 0">
+            	<div class="padding-width18">
+					<div class="border-gray">
+						<div class="clearfix position-relative">
+							<div>
+								<div style="width: 500px; height: 500px; margin: auto;">
+									<img class="image-cus" ng-src="data:image/jpg;base64,{{caller.imageSelected.base64String}}">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="padding-width18">
+					<div class="border-gray">
+						<div class="clearfix position-relative">
+							<div ng-repeat="image in caller.constructionTaskDaily.listImage">
+								<div class="wrap-image" ng-click="caller.changeImage(image)">
+									<img class="image-cus" ng-src="data:image/jpg;base64,{{image.base64String}}">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <div class="row modal-footer">
+        <div class="col-md-12 text-right">
+            <button type="button"
+                    class="btn btn-qlk padding-search-right closeQLK" id="cancel"
+                    ng-click="caller.cancelConfirmPopup()" translate>Đóng
+            </button>
+			<button type="button"
+			 ng-show="{{caller.constructionTaskDaily.confirm==0 && caller.constructionTaskDaily.isMonth}}"  
+				class="btn btn-qlk padding-search-right btnStandard btnRejectTaskDaily ng-scope" ng-click="caller.rejectTaskDaily(caller.constructionTaskDaily)" translate="">
+				Từ chối
+			</button>
+             <button type="button"
+                     class="btn btn-qlk padding-search-right btnStandard btnCancelTaskDaily"
+                     ng-show="{{caller.constructionTaskDaily.confirm == 1 && caller.constructionTaskDaily.isMonth}}"
+                     ng-click="caller.cancelApproveTaskDaily(caller.constructionTaskDaily)" translate>
+                 Hủy xác nhận
+             </button>
+            <button type="button"
+                    class="btn btn-qlk padding-search-right  confirmpopupApp"
+                    id ="approvepopupApp"
+                    ng-show="{{caller.constructionTaskDaily.confirm == 0 && caller.constructionTaskDaily.isMonth}}"
+                    ng-click="caller.saveApproveQuantity(caller.constructionTaskDaily)"
+                    translate>Xác nhận
+            </button>
+        </div>
+
+    </div>
+</form>

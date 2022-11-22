@@ -1,0 +1,687 @@
+<style>
+.display-block {
+	display: block;
+	width: 100%;
+}
+
+.input-half {
+	width: 48%;
+	display: inline;
+}
+
+.grey {
+	color: #333;
+}
+
+.yellow {
+	color: #E0D014
+}
+
+.azure {
+	color: #011995;
+}
+
+.green {
+	color: lawngreen;
+}
+
+.mt5 {
+	margin-top: 5px;
+}
+
+.fs20 {
+	font-size: 20px;
+}
+
+.mb5 {
+	margin-bottom: 5px;
+}
+
+.cedtpl {
+	font-size: 25px;
+	text-align: center;
+}
+
+.timeline {
+	position: relative;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+/* The actual timeline (the vertical ruler) */
+.timeline::after {
+	content: '';
+	position: absolute;
+	width: 6px;
+	background-color: white;
+	top: 0;
+	bottom: 0;
+	margin-left: -40px;
+}
+
+/* Container around content */
+.timepoint {
+	padding: 10px 40px;
+	position: relative;
+	background-color: inherit;
+}
+
+/* The circles on the timeline */
+.timepoint::after {
+	content: '';
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	background-color: white;
+	border: 4px solid #FF9F55;
+	top: 15px;
+	border-radius: 50%;
+	z-index: 1;
+	left: 30px;
+}
+
+/* Add arrows to the right container (pointing left) */
+.right::before {
+	content: " ";
+	height: 0;
+	position: absolute;
+	top: 22px;
+	width: 0;
+	z-index: 1;
+	left: 30px;
+	border: medium solid white;
+	border-width: 10px 10px 10px 0;
+	border-color: transparent white transparent transparent;
+}
+
+/* The actual content */
+.timeline-content {
+	padding: 20px 30px;
+	background-color: white;
+	position: relative;
+	border-radius: 6px;
+	left: 30px;
+}
+
+.big-image-modal .modal-dialog {
+	width: 1000px;
+	text-align: center;
+}
+
+.big-image-modal .modal-dialog .modal-content {
+	background-color: transparent;
+	padding: 0;
+	border: 0;
+}
+
+.delete-image-btn {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	width: 20px;
+	height: 20px;
+	border: 1px solid red;
+	border-radius: 10px !important;
+	color: red;
+	font-size: 28px;
+	line-height: 13px;
+	cursor: pointer;
+}
+
+.k-widget.k-window.fix-footer {
+	z-index: 10103 !important;
+}
+
+.smaller-btn {
+	border-radius: 4px;
+	padding: 5px;
+}
+
+.h32 {
+	height: 32px;
+}
+
+.k-upload-files, .k-upload-status {
+	display: none;
+}
+
+.k-floatwrap .k-header .k-gantt-toolbar {
+	display: none !important;
+}
+
+.k-task-single {
+	background-color: #1A75CE !important;
+}
+
+.k-task-complete {
+	background: #5FA2DD 0 -257px none repeat-x !important;
+}
+
+.k-task-summary-complete {
+	background: #34D075 !important;
+}
+
+.k-task-summary {
+	background: #80EDC4 !important;
+}
+
+/*change icon*/
+.k-icon .k-i-collapse:before {
+	font-family: FontAwesome !important;
+	display: inline-block !important;
+	padding-right: 6px !important;
+	vertical-align: middle !important;
+}
+
+.k-icon .k-i-collapse:before {
+	content: "\f07c" !important;
+}
+
+#ganttTC .k-gantt-toolbar, .k-gantt-toolbar .k-button {
+	background: #3F51B5 !important;
+}
+
+.k-gantt>.k-header .k-link {
+	color: #fff !important;
+}
+
+.k-gantt-toolbar>ul>li:first-child+li {
+	border-left-width: 0px !important;
+}
+
+.k-grid-header th.k-header {
+	vertical-align: middle
+}
+
+.k-grid tr td {
+	border-width: 1px 0px 0px 1px !important;
+}
+
+.k-grid-content tr td {
+	border-left-width: 1px !important;
+}
+
+button.k-gantt-toggle {
+	display: none !important;
+	float: left !important;
+	margin-right: .5em !important;
+}
+
+.k-gantt-toolbar>.k-gantt-views>li.k-current-view {
+	display: none !important;
+}
+
+#ganttTC .k-gantt-toolbar .k-button {
+	background-color: #3f51b5 !important;
+	border-color: #3f51b5 !important;
+}
+
+.k-gantt-toolbar .k-button {
+	color: #fff !important;
+	box-shadow: none !important;
+}
+
+.k-icon {
+	margin-top: 0px !important;
+}
+
+/*button*/
+.k-gantt-toolbar .k-button {
+	color: #fff !important;
+}
+
+/*right*/
+/*.k-header{background-color: #3f51b5 !important;border-color: #e6e6e6 !important;font-weight: 500 !important;color: #fff !important;}*/
+.k-gantt>.k-header li {
+	color: #fff !important;
+	background-color: #3f51b5 !important;
+	border-color: #3f51b5 !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+.k-gantt-toolbar>.k-gantt-views>li.k-state-selected {
+	border-bottom-color: #fff !important;
+}
+
+.k-state-selected {
+	background-image: none !important;
+}
+
+.k-gantt-toolbar>.k-gantt-views>li.k-state-selected a:active {
+	text-decoration: none !important;
+}
+
+.k-gantt-toolbar li .k-link {
+	color: #fff !important;
+	background-color: #3f51b5 !important;
+	border-color: #3f51b5 !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+/*task*/
+.k-gantt .k-task-summary-complete:after, .k-gantt .k-task-summary-complete:before,
+	.k-gantt .k-task-summary:after, .k-gantt .k-task-summary:before {
+	border-width: 0 !important;
+}
+
+.k-task-summary-complete:before, .k-task-summary:before {
+	left: 0 !important;
+	border-left-color: inherit !important;
+}
+
+.k-task-summary-complete:after, .k-task-summary-complete:before,
+	.k-task-summary:after, .k-task-summary:before {
+	content: "" !important;
+	position: absolute !important;
+	top: 0 !important;
+	width: 0 !important;
+	height: 0 !important;
+	border-style: solid !important;
+	border-width: 8px !important;
+	border-color: transparent !important;
+}
+
+/*search*/
+/*.k-widget{position: inherit !important;}*/
+.grantt-search {
+	position: absolute;
+	margin: 0px auto 0px 13%;
+	left: 8%;
+	width: 77%;
+	top: 1.5%;
+	z-index: 9999 !important;
+}
+
+.input-grantt {
+	background: transparent !important;
+	color: #fff;
+}
+
+::placeholder {
+	color: #fff !important;
+	opacity: 1;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+	color: #fff !important;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+	color: #fff !important;
+}
+
+.grantt-statistic {
+	float: right;
+	margin-top: 7px
+}
+
+.badge {
+	font-weight: bold !important;
+}
+/*cusbutton*/
+.k-gantt-actions {
+	margin-top: 6px
+}
+
+/*search*/
+.view-grantt {
+	position: relative !important
+}
+/*style button*/
+.k-edit-buttons .k-state-default .k-primary {
+	color: #000 !important;
+	background: #ccc 1px solid !important;
+}
+
+.k-edit-form-container .k-button {
+	color: #000 !important;
+}
+
+#ganttTC .k-grid-content .k-auto-scrollable {
+	height: 300px !important;
+}
+
+/* dashboard */
+.mt-3{
+	margin-top: 10px;
+}
+
+.mt-5{
+	margin-top: 20px;
+}
+
+.bg-danger{
+	background-color: #e74c3c;
+	font-siz: 13px
+}
+.bg-warming{
+	background-color: #ffbb12;
+}
+.bg-brown{
+	background-color: #f2994a;
+}
+.bg-blue{
+	background-color: #2d9cdb;
+}
+
+.d-flex{
+	display: flex;
+	
+}
+.group{
+	height: 180px;
+    padding: 10px;
+    margin: 10px;
+    background-color: #c4c4c4;
+    border-radius: 5px !important;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.item{
+	margin: 0px 20px 15px;
+	padding: 15px;
+	display: flex;
+	font-size: 13px;
+	justify-content: center;
+	border-radius: 20px !important;
+	border: 1px black solid;
+	transition: 0.2s ease-in
+}
+.item:hover{
+	opacity: 0.6;
+}
+
+.group-small{
+	height: 140px;
+}
+
+.group-header{
+	margin: 0 5px;
+	font-size: 18px;
+	text-transform:uppercase;
+	color: white;
+}
+
+.group-cell{
+	border: 1px black solid;
+	text-transform:uppercase;
+	padding: 30px 20px;
+	margin: 5px;
+	display: flex;
+	justify-content: center;
+	border-radius: 10px !important;
+	transition: 0.2s ease-in
+}
+.group-cell:hover{
+	opacity: 0.6;
+}
+</style>
+
+<div data-ng-controller="stationDetailController as vm"
+	id="stationDetailController">
+	<div>
+		<p class="text-brecum">{{vm.String}}</p>
+		<form class="form-horizontal row" role="form">
+			<div class="form-body">
+				<div class="portlet light bordered">
+					<div class="portlet-title background-title">
+						<div class="caption">
+							<span class="caption-subject bold lowercase" translate>Thông
+								tin tìm kiếm </span>
+
+						</div>
+						<div class="text-right margin-row-title">
+							<i data-toggle="collapse" data-target="#demoapp"
+								class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+						</div>
+					</div>
+					<div id="demoapp" class="collapse in from-search"
+						style="position: relative">
+
+						<i data-toggle="dropdown"
+							class="tooltip1  tooltipshow_search_advance"
+							aria-expanded="false">
+							<button style="overflow: hidden;" class="search_advance"
+								ng-show="vm.iconDiss" ng-click="vm.iconDiss=!vm.iconDiss">
+								<span class="tooltiptext">Mở rộng</span>
+							</button>
+
+						</i> <i data-toggle="dropdown"
+							class="tooltip1 tooltiphide_search_advance" aria-expanded="false">
+							<button style="overflow: hidden;" class="search_advance"
+								ng-show="!vm.iconDiss" ng-click="vm.iconDiss=!vm.iconDiss">
+								<span class="tooltiptext">Rút gọn</span>
+							</button>
+						</i>
+
+
+
+						<div class="clearfix position-relative">
+							<div class="clearfix">
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label" translate>Mã trạm</label>
+									<div class="col-md-8">
+										<input id="keySearch" ng-enter="vm.doSearch()"
+											class=" form-control width100" type="text" autofocus="true"
+											ng-model="vm.MESearch.stationCode" placeholder="Mã trạm" />
+									</div>
+								</div>
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label" translate>Tỉnh</label>
+									<div class="col-md-8" ng-enter="vm.doSearch()">
+										<input kendo-auto-complete k-options="vm.provinceOptions"
+											ng-disabled="!vm.checkUserKCQTD"
+											class=" form-control width100" type="text"
+											ng-model="vm.MESearch.catProvince" id="province"
+											name="province" />
+										<div class="One_icon">
+											<i class="fa fa-times" aria-hidden="true"
+												ng-click="vm.cancelInput('province')"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="clearfix">
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label" translate>Nhân
+										viên FT</label>
+									<div class="col-md-8">
+										<input kendo-auto-complete k-options="vm.userOptions"
+											class=" form-control width100" type="text"
+											ng-model="vm.MESearch.manageUserCode" id="user"
+											name="user" />
+									</div>
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="vm.cancelInput('user')"></i>
+									</div>
+								</div>
+								
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label" translate>Khu vực</label>
+									<div class="col-md-8" ng-enter="vm.doSearch()">
+										<select kendo-drop-down-list style="width: 100%"
+											ng-model="vm.MESearch.areaCode" k-data-text-field="'name'"
+											k-data-value-field="'name'" k-data-source="vm.areaDataList">
+										</select>
+									</div>
+
+								</div>
+
+							</div>
+
+							<div class="clearfix form-actions margin-top">
+								<div class="row">
+									<div class="col-md-12 text-center">
+										<button type="button" id="findParam" ng-click="vm.doSearch()"
+											class="btn btn-qlk padding-search-right searchQLK" translate>Tìm
+											kiếm</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<div class="portlet light bordered">
+			<div class="portlet-title background-title">
+				<div class="caption">
+					<span class="caption-subject bold lowercase" translate>Kết quả tìm kiếm</span>
+
+				</div>
+				<div class="text-right margin-row-title">
+					<i data-toggle="collapse" data-target="#demoapp2"
+						class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+				</div>
+			</div>
+		<!-- hàng 1 -->
+		<div class="portlet light bordered">
+			<div class="row">
+				<div class="group col-md-2">
+					<p class="group-header">Thông tin WO</p>
+					<div class="row d-flex">
+							<button class="col-md-6 group-cell bg-danger" ng-click="vm.click(1)">
+								<span>{{vm.elictric.woQuaHan}} WO Quá hạn</span>
+							</button>
+							<button class="col-md-6 group-cell bg-warming" ng-click="vm.click(2)">
+								<span>{{vm.elictric.woDangThucHien}} WO đang thực hiện</span>
+							</button>
+						</div>
+				</div>
+
+				<div class="group col-md-9">
+					<p class="group-header">Thông tin trạm</p>
+					<div class="row mt-3">
+						<button class="col-md-2 item bg-brown" ng-click="vm.click(3)">
+							<span>{{vm.elictric.tramTrenMai}} trạm trên mái</span>
+						</button>
+						<button class="col-md-2 item bg-brown" ng-click="vm.click(4)">
+							<span>{{vm.elictric.khongDien}} trạm không điện</span>
+						</button>
+						<button class="col-md-2 item bg-brown" ng-click="vm.click(5)">
+							<span>{{vm.elictric.muaNgoaiEVN}} trạm mua điện ngoài EVN</span>
+						</button>
+						<button class="col-md-2 item bg-brown" ng-click="vm.click(6)">
+							<span>{{vm.elictric.tram1Rectifiter}} trạm chỉ có 1 Rectifier</span>
+						</button>
+						<button class="col-md-2 item bg-brown" ng-click="vm.click(7)">
+							<span>trạm quá công suất</span>
+						</button>
+						<button class="col-md-2 item bg-brown" ng-click="vm.click(8)">
+							<span>{{vm.elictric.tramDuoiDat}} trạm dưới đất</span>
+						</button>
+						<button class="col-md-2 item bg-brown" ng-click="vm.click(9)">
+							<span>trạm điện yếu</span>
+						</button>
+						<button class="col-md-2 item bg-brown" ng-click="vm.click(10)">
+							<span>{{vm.elictric.muaEVN}} trạm mua điện EVN</span>
+						</button>
+						<button class="col-md-2 item bg-brown" ng-click="vm.click(11)">
+							<span>{{vm.elictric.tramcoATS}} trạm có ATS</span>
+						</button>
+					</div>
+				</div>
+			</div>
+			
+			<!-- hàng 2  -->
+			<div class="row">
+				<div class="group col-md-2">
+					<p class="group-header">Cảnh báo</p>
+					<div class="row d-flex mt-5">
+							<button class="col-md-12 group-cell bg-danger" ng-click="vm.click(12)">
+								<span>Cảnh báo</span>
+							</button>
+						</div>
+				</div>
+
+				<div class="group col-md-9">
+					<p class="group-header">Thông tin thiết bị</p>
+					<div class="row mt-3">
+						<button class="col-md-2 item bg-brown" ng-click="vm.click(13)">
+							<span>{{vm.elictric.mayphatCoDinh}} máy phát điện cố định</span>
+						</button>
+						<button class="col-md-2 item bg-brown" ng-click="vm.click(14)">
+							<span> tủ nguồn GS tập trung</span>
+						</button>
+						<button class="col-md-2 item bg-brown" ng-click="vm.click(15)">
+							<span> bộ trao đổi nhiệt</span>
+						</button>
+						<button class="col-md-2 item bg-brown" ng-click="vm.click(16)">
+							<span> acquy < 1h</span>
+						</button>
+						<button class="col-md-2 item bg-brown" ng-click="vm.click(17)">
+							<span> điều hòa DC</span>
+						</button>
+						<button class="col-md-2 item bg-brown" ng-click="vm.click(18)">
+							<span>{{vm.elictric.mayPhatHong}} máy phát điện hỏng</span>
+						</button>
+						<button class="col-md-2 item bg-brown" ng-click="vm.click(19)">
+							<span> bộ cắt lọc sét</span>
+						</button>
+						<button class="col-md-2 item bg-brown" ng-click="vm.click(20)">
+							<span> hệ thống tiếp địa</span>
+						</button>
+						<button class="col-md-2 item bg-brown" ng-click="vm.click(21)">
+							<span> thiết bị thông gió</span>
+						</button>
+						<button class="col-md-2 item bg-brown" ng-click="vm.click(22)">
+							<span> điều hòa AC</span>
+						</button>
+					</div>
+				</div>
+			</div>
+			<!-- hàng 3  -->
+			<div class="row">
+				<div class="group col-md-2 group-small">
+					<p class="group-header">Phê duyệt</p>
+					<div class="row d-flex">
+							<button class="col-md-12 group-cell bg-blue" ng-click="vm.click(23)">
+								<span>Bạn có {{vm.elictric.pheDuyet}} mục cần phê duyệt</span>
+							</button>
+						</div>
+				</div>
+
+				<div class="group col-md-9 group-small">
+					<p class="group-header">Thông tin lưới điện</p>
+					<div class="row mt-3">
+						<button class="col-md-2 item bg-blue" ng-click="vm.click(24)">
+							<span>{{vm.elictric.motPha}} lưới điện 1 pha</span>
+						</button>
+						<button class="col-md-2 item bg-blue" ng-click="vm.click(25)">
+							<span>{{vm.elictric.baPha}} lưới điện 3 pha</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+<script type="text/javascript">
+	$('#appIdSearch')
+			.keypress(
+					function(event) {
+						$("input").change(function() {
+							$(this).val($.trim($(this).val()));
+						});
+						document.onkeydown = keyDown;
+						function keyDown(e) {
+							switch (e.keyCode) {
+							case 27:
+								$("#cancel").click();
+								break;
+							case 13:
+								if ($('.k-widget.k-window.fix-footer').css(
+										'display') !== 'block') {
+									$("#findParam").click();
+								}
+								break;
+							}
+						}
+					});
+</script>

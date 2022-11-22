@@ -1,0 +1,56 @@
+<style>
+    .modal-content{
+        padding: 0px!important;
+    }
+</style>
+
+<div class="modal-header" style="background-color: #33CCCC;">
+    <h5 class="modal-title">Hoàn thành công việc</h5>
+    <button type="button" class="close close-modal-x" data-dismiss="modal" aria-label="Close" ng-click="$dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal row" role="form">
+        <div class="form-body" >
+            <div class="col-md-12" ng-if="checklistOrder == 1">
+                <label class="display-block control-label" style="text-align: left !important;" translate>Ngày đề nghị quyết toán:</label>
+                <input class="form-control" ng-model="vm.checklistDate" kendo-date-picker k-format="'dd/MM/yyyy'" placeholder="Nhập ngày" date-time>
+                <label class="display-block control-label" style="text-align: left !important;" translate>Giá trị đề nghị (VND):</label>
+                <input class="form-control" ng-model="vm.dnqtValue" only-numbers>
+            </div>
+            <div class="col-md-12" ng-if="checklistOrder == 2">
+                <label class="display-block control-label" style="text-align: left !important;" translate>Ngày chuyển chủ đầu tư:</label>
+                <input class="form-control" ng-model="vm.checklistDate" kendo-date-picker k-format="'dd/MM/yyyy'" placeholder="Nhập ngày" date-time>
+            </div>
+            <div class="col-md-12" ng-if="checklistOrder == 3">
+                <label class="display-block control-label" style="text-align: left !important;" translate>Ngày chốt với chủ đầu tư:</label>
+                <input class="form-control" ng-model="vm.checklistDate" kendo-date-picker k-format="'dd/MM/yyyy'" placeholder="Nhập ngày" date-time>
+                <label class="display-block control-label" style="text-align: left !important;" translate>Giá trị chốt (VND):</label>
+                <input class="form-control" ng-model="vm.vtnetConfirmValue" only-numbers>
+                <label class="display-block control-label" style="text-align: left !important;" translate>Người thẩm:</label>
+                <input class="form-control" ng-model="vm.aprovedPerson">
+            </div>
+            <div class="col-md-12" ng-if="checklistOrder == 4">
+                <label class="display-block control-label" style="text-align: left !important;" translate>Ngày bảng thẩm định về:</label>
+                <input class="form-control" ng-model="vm.checklistDate" kendo-date-picker k-format="'dd/MM/yyyy'" placeholder="Nhập ngày" date-time>
+                <label class="display-block control-label" style="text-align: left !important;" translate>Chọn tài chính Tổng công ty duyệt</label><span style="color:red !important;">*</span>
+                <select class="display-block form-control" ng-model="vm.workingWO.emailTcTct"
+                        ng-options="item.code as (item.name + ' - ' + item.code) for item in tcTctEmails"
+                        ng-selected="vm.workingWO.emailTcTct == item.code">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="$dismiss()">
+        <i class="fa fa-ban"></i> Hủy bỏ
+    </button>
+    <button type="button" class="btn btn-secondary" ng-click="validateHcqtInput()?$close():return;">
+        <i class="fa fa-floppy-o azure"></i> Lưu
+    </button>
+</div>
+

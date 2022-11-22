@@ -1,0 +1,102 @@
+<div id="addNewDevicePopup">
+<form name="form" class="form-horizontal row " role="form"
+      style="">
+		<div class="form-body">
+				<div id="goodsPlanPopupAdd" class="collapse in from-search">
+						<div class="clearfix position-relative">
+								<div class="clearfix">
+										<div class="form-group col-md-6">
+												<div class="col-md-12">
+													<input style="float: left;" type="radio" id="xn1"
+																 name="status"
+																 ng-model="caller.addForm.failureStatus"
+																 ng-checked="caller.addForm.failureStatus == 2"
+																 value="2" /> <label for="xn1" class="padding_radio">Hoàn thành</label>
+												</div>
+										</div>
+										<div class="form-group col-md-6">
+
+												<div class="col-md-12">
+													<input style="float: left;" type="radio" id="xn1"
+																 name="status"
+																 ng-model="caller.addForm.failureStatus"
+																 ng-checked="caller.addForm.failureStatus == 3"
+																 value="3" /> <label for="xn1" class="padding_radio">Chưa hoàn thành</label>
+												</div>
+										</div>
+
+								</div>
+								<div class="clearfix mt-3">
+									<div class="col-md-12">
+										<div class = "clearfix">
+											<label class="col-md-12 control-label text-left" style = "text-align: left !important; padding-left: 5px; " translate>Nội dung </label>
+										</div>
+										<div class="clearfix">
+												<textarea disabled id="deviceCode" class="col-md-12  form-control width100" type="text"
+														ng-model="caller.addForm.descriptionFailure"  />
+										</div>
+										</div>
+								</div>
+
+							<div class="clearfix mt-3" ng-if = "caller.addForm.failureStatus == 2">
+								<div class="col-md-12">
+									<div class = "clearfix">
+										<label class="col-md-12 control-label req text-left" style = "text-align: left !important; padding-left: 5px; " translate>Định mức hoàn thành </label>
+									</div>
+									<div class="clearfix">
+										<input type = "number" id="type" class=" form-control width100"
+													 ng-model="caller.addForm.qoutaTime"/>
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<div class="clearfix mt-3" ng-if = "caller.addForm.failureStatus == 2">
+								<div class="col-md-12">
+									<div class = "clearfix">
+										<label class="col-md-12 control-label req text-left" style = "text-align: left !important; padding-left: 5px; " translate>Hạn hoàn thành </label>
+									</div>
+									<div class="clearfix">
+										<input kendo-date-picker k-format="'dd/MM/yyyy'"
+													 ng-model="caller.addForm.finishDate"
+													 style="width: 100%;"
+													 min-year="1000" date-time />
+									</div>
+								</div>
+							</div>
+
+<!--								<div class="clearfix mt-3">-->
+<!--									<div class="col-md-12">-->
+<!--										<div class = "clearfix">-->
+<!--											<label class="col-md-12 control-label req text-left" style = "text-align: left !important; padding-left: 5px; " translate>Mô tả hậu nghiệm </label>-->
+<!--										</div>-->
+<!--										<div class="clearfix">-->
+<!--											<textarea id="deviceCode" class=" col-md-12 form-control width100" type="text"-->
+<!--														 ng-model="caller.addForm.describeAfterMath"  />-->
+<!--										</div>-->
+<!--									</div>-->
+<!--								</div>-->
+						</div>
+				</div>
+		</div>
+		<div class="modal-footer" align="right">
+			<button type="button" id="saveData"
+				class="btn btn-qlk   padding-search-right btn pull-right  saveQLK"
+				ng-click="caller.approveBroken()" translate>Ghi lại</button>
+			<button type="button" id="cancel"
+				class="btn btn-qlk padding-search-right margin_right10 closeQLK btn pull-right"
+				ng-click="caller.cancelImport()" translate>Hủy bỏ</button>
+		</div>
+	</form>
+	</div>
+<style>
+	.text-left.req:after {
+		color: #f00;
+		position: absolute;
+		top: 0;
+		left: inherit !important;
+		right: inherit !important;
+		content: "*";
+		margin-top: 7px;
+	}
+</style>

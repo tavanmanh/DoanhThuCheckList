@@ -1,0 +1,3026 @@
+<style>
+.form-control[readonly]: {
+	background-color: #e5e5e5 !important;
+}
+
+#information61, #information621, #information631, #information641,
+	#information65, #information71, #information161, #information162,
+	#information41, #information51, #information52, #information81,
+	#information82, #information511 {
+	width: 50px;
+	border-style: dotted;
+	border-width: 1px;
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
+	text-align: center;
+}
+
+#information622, #information632, #information642 {
+	width: 150px;
+	border-style: dotted;
+	border-width: 1px;
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
+}
+
+#information821, #information831, #information841, #information851 {
+	width: 300px;
+	border-style: dotted;
+	border-width: 1px;
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
+}
+</style>
+
+<div id="assignHandoverPopupId">
+	<form class="form-horizontal row" role="form" name="viewForm"
+		id="viewFormId" k-options="validatorOptions">
+		<div class="form-body padding10">
+			<div class="portlet light bordered">
+				<div class="form-body padding10">
+					<div class="row caption" id="thongTinChungSpan">
+						<span class="caption-subject bold lowercase"
+							style="margin-left: 1px !important;" translate>Thông tin
+							chung</span>
+					</div>
+					<div class="portlet light bordered collapse in from-search"
+						id="thongTinChung">
+						<div class="clearfix row">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Họ tên
+									khách hàng</label>
+								<div class="col-md-8">
+									<label class="control-label">{{caller.viewForm.customerName}}</label>
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Thời
+									gian đề nghị tư vấn</label>
+								<div class="col-md-8">
+									<label class="control-label">{{caller.viewForm.suggestTime}}</label>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix row">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Năm sinh</label>
+								<div class="col-md-8">
+									<label class="control-label">{{caller.viewForm.birthYear}}</label>
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Tỉnh/thành
+									phố</label>
+								<div class="col-md-8">
+									<label class="control-label">{{caller.viewForm.provinceCode}}</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix row">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Quận/huyện</label>
+								<div class="col-md-8">
+									<label class="control-label">{{caller.viewForm.districtName}}</label>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Phường/xã</label>
+								<div class="col-md-8">
+									<label class="control-label">{{caller.viewForm.communeName}}</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix row">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Số nhà,
+									tên đường/phố</label>
+								<div class="col-md-8">
+									<label class="control-label">{{caller.viewForm.address}}</label>
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Giao
+									việc cho nhân viên tiếp xúc</label>
+								<div class="col-md-8">
+									<label class="control-label">{{caller.performerName}}</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix row">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Email</label>
+								<div class="col-md-8">
+									<label class="control-label">{{caller.viewForm.customerEmail}}</label>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Giao
+									việc cho nhân viên chuẩn bị giải pháp</label>
+								<div class="col-md-8">
+									<label class="control-label">{{caller.performerSolutionName}}</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix row">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Số điện
+									thoại</label>
+								<div class="col-md-8">
+									<label class="control-label">{{caller.viewForm.customerPhone}}</label>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Nhu cầu
+									khách hàng</label>
+								<div class="col-md-8">
+									<label class="control-label">{{caller.viewForm.contentCustomer}}</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix row">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Trạng
+									thái tiếp xúc</label>
+								<div class="col-md-8">
+									<label class="control-label">{{caller.statusName}}</label>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+
+					<div class="portlet light bordered collapse in from-search"
+						id="thongTinChung">
+						<ul class="nav nav-tabs" id="myTab">
+							<li class="active"><a data-toggle="tab" data-target="#tiepXuc">Tiếp
+									xúc</a></li>
+							<li><a data-toggle="tab" data-target="#giaiPhap" >Giải pháp</a></li>
+						</ul>
+						<div class="tab-content">
+							<div id="tiepXuc" class="tab-pane active">
+								<div class="portlet light bordered">
+									<!-- Thông tin tiếp xúc -->
+									<div class="row caption" id="thongTinChungSpan">
+										<span class="caption-subject bold lowercase"
+											style="margin-left: 1px !important;" translate>Thông
+											tin tiếp xúc</span>
+									</div>
+
+									<div class="portlet light collapse in from-search"
+										id="tiepXucForm">
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label req" translate>Ngày
+													hẹn tiếp xúc khách hàng</label>
+												<div class="col-md-8">
+													<input kendo-date-picker k-format="'dd/MM/yyyy'"
+														class=" form-control width100"
+														ng-disabled="!caller.checkPerform && caller.resultForm.resultTangentType"
+														ng-model="caller.resultForm.appointmentDate"
+														style="width: 100%;" id="appointmentDate" min-year="1000"
+														date-time />
+												</div>
+											</div>
+										</div>
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label" translate>Kết
+													quả tư vấn khách hàng</label>
+												<div class="col-md-8">
+													<div class="form-group col-md-6">
+														<label><input style="float: left;" type="radio"
+															id="resultTangentType" name="resultTangentType"
+															ng-model="caller.resultForm.resultTangentType"
+															ng-disabled="!caller.checkPerform"
+															ng-checked="caller.resultForm.resultTangentType == '1'"
+															value="1"> <span class="padding_radio">Có
+																nhu cầu</span></label>
+													</div>
+													<div class="form-group col-md-6">
+														<label> <input style="float: left;" type="radio"
+															id="resultTangentType" name="resultTangentType"
+															ng-model="caller.resultForm.resultTangentType"
+															ng-disabled="!caller.checkPerform"
+															ng-checked="caller.resultForm.resultTangentType == '0'"
+															value="0"> <span class="padding_radio">Không
+																có nhu cầu</span>
+														</label>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- end thông tin tiếp xúc -->
+									<!-- Thông tin nhu cầu khách hàng -->
+									<div class="row caption" id="thongTinChungNhuCauKhachHang"
+										ng-show="caller.resultForm.resultTangentType == '1'">
+										<span class="caption-subject bold lowercase"
+											style="margin-left: 1px !important;" translate>Thông
+											tin nhu cầu khách hàng</span>
+									</div>
+									<div class="portlet light collapse in from-search" id="nhuCau"
+										ng-show="caller.resultForm.resultTangentType == '1'">
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label" translate>Vị
+													trí xây dựng công trình:</label>
+												<div class="col-md-8">
+													<input class=" form-control width100" type="text"
+														id="buildingLocation"
+														ng-model="caller.resultForm.buildingLocation"
+														name="buildingLocation" />
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label" translate>File
+													đính kèm (phiếu thu thập thông tin khách hàng)</label>
+												<div class="col-md-8">
+													<!-- <input class="col-md-12" name="customerFile" id="customerFile"
+														k-select="caller.submitAttachFile" type="file"
+														list-file-type="jpeg,jpg,png,doc,docx,xls,xlsx,pdf" /> -->
+													<div class="col-md-8">
+														<input type="file" file-model="customerFile" name="customerFile" id="customerFile"
+														list-file-type="jpeg,jpg,png,doc,docx,xls,xlsx,pdf"/>
+													</div>
+													<div class="col-md-4">
+														<button ng-click="caller.submitAttachFile()" style="width:70px; border-width: 1px;">Tải lên</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row caption" id="thongTinChungDichVuViettel"
+										ng-show="caller.resultForm.resultTangentType == '1'">
+										<span class="caption-subject bold lowercase"
+											style="margin-left: 1px !important;" translate>Gói
+											dịch vụ của Viettel</span>
+									</div>
+									<div class="portlet light collapse in from-search" id="dichVu"
+										ng-show="caller.resultForm.resultTangentType == '1'">
+										<div class="clearfix col-md-12">
+											<div class="form-group col-md-6">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input"
+														id="package1" ng-model="caller.resultForm.package1">
+													<label class="custom-control-label" for="package1">1.
+														Cung cấp nhân công thi công xây dựng</label>
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input"
+														id="package7" ng-model="caller.resultForm.package7">
+													<label class="custom-control-label" for="package7">7.
+														Lắp đặt hoàn thiện nội thất</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix col-md-12">
+											<div class="form-group col-md-6">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input"
+														id="package2" ng-model="caller.resultForm.package2">
+													<label class="custom-control-label" for="package2">2.
+														Thi công xây dựng phần thô</label>
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input" ng-click="caller.checkAll8()"
+														id="package8" ng-model="caller.resultForm.package8">
+													<label class="custom-control-label" for="package8">8.
+														Sơn bả công trình:</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix col-md-12">
+											<div class="form-group col-md-6">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input"
+														id="package3" ng-model="caller.resultForm.package3">
+													<label class="custom-control-label" for="package3">3.
+														Thi công xây dựng hoàn thiện cơ bản</label>
+												</div>
+											</div>
+											<div class="form-group col-md-6" style="padding-left: 40px;">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input"
+														id="package81" ng-model="caller.resultForm.package81">
+													<label class="custom-control-label" for="package81">-
+														Cung cấp sơn</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix col-md-12">
+											<div class="form-group col-md-6">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input"
+														id="package4" ng-model="caller.resultForm.package4">
+													<label class="custom-control-label" for="package4">4.
+														Thi công xây dựng hoàn thiện trọn gói</label>
+												</div>
+											</div>
+											<div class="form-group col-md-6" style="padding-left: 40px;">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input"
+														id="package82" ng-model="caller.resultForm.package82">
+													<label class="custom-control-label" for="package82">-
+														Cung cấp bột bả</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix col-md-12">
+											<div class="form-group col-md-6">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input"
+														id="package5" ng-model="caller.resultForm.package5">
+													<label class="custom-control-label" for="package5">5.
+														Vẽ thiết kế bản vẽ thi công kết cấu, điện nước</label>
+												</div>
+											</div>
+											<div class="form-group col-md-6" style="padding-left: 40px;">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input"
+														id="package83" ng-model="caller.resultForm.package83">
+													<label class="custom-control-label" for="package83">-
+														Nhân công sơn</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix col-md-12">
+											<div class="form-group col-md-6">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input"
+														id="package6" ng-model="caller.resultForm.package6">
+													<label class="custom-control-label" for="package6">6.
+														Vẽ thiết kế kiến trúc nội thất, phong cảnh</label>
+												</div>
+											</div>
+											<div class="form-group col-md-6" style="padding-left: 40px;">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input"
+														id="package84" ng-model="caller.resultForm.package84">
+													<label class="custom-control-label" for="package84">-
+														Nhân công bả</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix col-md-12">
+											<div class="form-group col-md-6"></div>
+											<div class="form-group col-md-6">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input"
+														id="package9" ng-model="caller.resultForm.package9">
+													<label class="custom-control-label" for="package9">9.
+														Thuê Viettel làm dịch vụ xin giấy phép</label>
+												</div>
+											</div>
+										</div>
+										<div class="clearfix row"
+											ng-show="caller.resultForm.resultTangentType == '1'">
+											<div class="form-group col-md-6">
+												<label class="col-md-4" translate>Thời điểm khởi
+													công dự kiến</label>
+												<div class="col-md-8">
+													<input kendo-date-picker k-format="'dd/MM/yyyy'"
+														class=" form-control width100"
+														ng-disabled="!caller.checkPerform"
+														ng-model="caller.resultForm.startDate"
+														style="width: 100%;" id="startDate" min-year="1000"
+														date-time />
+												</div>
+											</div>
+										</div>
+										<div class="clearfix row"
+											ng-show="caller.resultForm.resultTangentType == '1'">
+											<div class="form-group col-md-6">
+												<label class="col-md-4" translate>Hồ sơ xây dựng
+													(Giấy phép xây dựng, giấy tờ đăng ký thửa đất)</label>
+												<div class="col-md-8">
+													<label><input style="float: left;" type="radio"
+														id="contructionRecords" name="contructionRecords"
+														ng-model="caller.resultForm.contructionRecords"
+														ng-checked="caller.resultForm.contructionRecords == 1"
+														value="1"> <span class="padding_radio">Có
+															hồ sơ</span></label> <label> <input style="float: left;"
+														type="radio" id="contructionRecords"
+														name="contructionRecords"
+														ng-model="caller.resultForm.contructionRecords"
+														ng-checked="caller.resultForm.contructionRecords == 0"
+														value="0"> <span class="padding_radio">Chưa
+															có hồ sơ</span>
+													</label>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<!-- end nhu cầu khách hàng -->
+
+									<!-- Thông tin về công trình -->
+									<div class="row caption" id="thongTinChungCongTrinh"
+										ng-show="caller.resultForm.resultTangentType == '1'">
+										<span class="caption-subject bold lowercase"
+											style="margin-left: 1px !important;" translate>Thông
+											tin về công trình</span>
+									</div>
+									<div class="portlet light collapse in from-search"
+										id="congTrinh"
+										ng-show="caller.resultForm.resultTangentType == '1'">
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 15px;">
+												<label class="col-md-4" translate>Công trình có
+													thiết kế chưa</label>
+												<div class="col-md-8">
+													<label> <input style="float: left;" type="radio"
+														id="contructionDesign" name="contructionDesign"
+														ng-model="caller.resultForm.contructionDesign"
+														ng-checked="caller.resultForm.contructionDesign == 1"
+														value="1"> <span class="padding_radio">Có
+															thiết kế</span>
+													</label> <label><input style="float: left;" type="radio"
+														id="contructionDesign" name="contructionDesign"
+														ng-model="caller.resultForm.contructionDesign"
+														ng-checked="caller.resultForm.contructionDesign == 0"
+														value="0"> <span class="padding_radio">Chưa
+															có thiết kế</span></label>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- Chưa có thiết kế -->
+									<div class="portlet light bordered collapse in from-search"
+										id="thongTinChuaThietKe"
+										ng-show="caller.resultForm.contructionDesign==0 && caller.resultForm.resultTangentType == 1">
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 " translate>1. Khu vực xây
+													dựng có cần xin phép xây dựng</label>
+												<div class="col-md-8">
+													<label><input style="float: left;" type="radio"
+														id="information1" name="information11"
+														ng-model="caller.resultNoForm.information1"
+														ng-checked="caller.resultNoForm.information1 == '1'"
+														value="1"> <span class="padding_radio">Khu
+															vực có cần xin phép xây dựng</span></label>
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+												<div class="col-md-8">
+													<label> <input style="float: left;" type="radio"
+														id="information11" name="information11"
+														ng-model="caller.resultNoForm.information1"
+														ng-checked="caller.resultNoForm.information1 == '0'"
+														value="0"> <span class="padding_radio">Khu
+															vực không cần xin phép xây dựng</span>
+													</label>
+												</div>
+											</div>
+										</div>
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<label class="col-md-12 " translate>2. Hình dạng
+													thửa đất và kích thước các cạnh của thửa đất xần xây dựng</label>
+											</div>
+											<div class="form-group col-md-6">
+												<label class="col-md-4 " translate>10. Độ dầy tường</label>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<!-- <label>- Hình chữ nhật: </span></label> -->
+												<div class="">
+													<label> <input style="float: left;" type="radio"
+														id="information21" name="information21" ng-click="caller.checkKoThietKe2('information21')"
+														ng-model="caller.resultNoForm.information21"
+														ng-checked="caller.resultNoForm.information21 == '1'"
+														value="1"> <span class="padding_radio">- Hình chữ nhật:</span>
+													</label>
+												</div>
+											</div>
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<label><input style="float: left;" type="radio"
+													id="information10" name="information10"
+													ng-model="caller.resultNoForm.information10"
+													ng-checked="caller.resultNoForm.information10 == 1"
+													value="1"> <span class="padding_radio">Tường
+														dầy 10 phân toàn bộ nhà</span></label>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" ng-show="caller.resultNoForm.information21 == '1'">
+												<label class="col-md-3 control-label" translate>Dài(m):</label>
+												<div class="col-md-7">
+													<input class=" form-control width100" type="number"
+														id="information211"
+														ng-model="caller.resultNoForm.information211"
+														name="information211" />
+												</div>
+											</div>
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<label><input style="float: left;" type="radio"
+													id="information10" name="information10"
+													ng-model="caller.resultNoForm.information10"
+													ng-checked="caller.resultNoForm.information10 == 2"
+													value="2"> <span class="padding_radio">Tường
+														20 phân toàn bộ nhà</span></label>
+											</div>
+										</div>
+										<div class="clearfix row">
+											<div class="form-group col-md-6" ng-show="caller.resultNoForm.information21 == '1'">
+												<label class="col-md-3 control-label" translate>Rộng(m):
+												</label>
+												<div class="col-md-7">
+													<input class=" form-control width100" type="number"
+														id="information212"
+														ng-model="caller.resultNoForm.information212"
+														name="information212" />
+												</div>
+											</div>
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<label><input style="float: left;" type="radio"
+													id="information10" name="information10"
+													ng-model="caller.resultNoForm.information10"
+													ng-checked="caller.resultNoForm.information10 == 3"
+													value="3"> <span class="padding_radio">Tường
+														ngoài dầy 20 phân, tường năn dầy 10 phân</span></label>
+											</div>
+										</div>
+										<div class="clearfix row">
+											<div class="form-group col-md-6" ng-show="caller.resultNoForm.information21 == '1'">
+												<label class="col-md-3 control-label" translate>Tổng
+													DT(m2):</label>
+												<div class="col-md-7">
+													<input class=" form-control width100" type="number"
+														id="information213"
+														ng-model="caller.resultNoForm.information213"
+														name="information213" />
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+												<label class="col-md-4 " translate>11. Sân vườn</label>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="">
+													<label> <input style="float: left;" type="radio"
+														id="information22" name="information22" ng-click="caller.checkKoThietKe2('information22')"
+														ng-model="caller.resultNoForm.information22"
+														ng-checked="caller.resultNoForm.information22 == '1'"
+														value="1"> <span class="padding_radio">- Hình vuông:</span>
+													</label>
+												</div>
+											</div>
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input"
+														id="information111"
+														ng-model="caller.resultNoForm.information111"> <label
+														class="custom-" for="information111">- Sân trước</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" ng-show="caller.resultNoForm.information22 == '1'">
+												<label class="col-md-3 control-label" translate>Một
+													cạnh(m): </label>
+												<div class="col-md-7">
+													<input class=" form-control width100" type="number"
+														id="information221"
+														ng-model="caller.resultNoForm.information221"
+														name="information221" />
+												</div>
+											</div>
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input"
+														id="information112"
+														ng-model="caller.resultNoForm.information112"> <label
+														class="custom-" for="information112">- Sân sau</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" ng-show="caller.resultNoForm.information22 == '1'">
+												<label class="col-md-3 control-label" translate>Tổng
+													DT(m2): </label>
+												<div class="col-md-7">
+													<input class=" form-control width100" type="number"
+														id="information222"
+														ng-model="caller.resultNoForm.information222"
+														name="information222" />
+												</div>
+											</div>
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input"
+														id="information113"
+														ng-model="caller.resultNoForm.information113"> <label
+														class="custom-" for="information113">- Hàng rào</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<!-- <label>- Hình tứ giác:</label> -->
+												<div class="">
+													<label> <input style="float: left;" type="radio"
+														id="information23" name="information23" ng-click="caller.checkKoThietKe2('information23')"
+														ng-model="caller.resultNoForm.information23"
+														ng-checked="caller.resultNoForm.information23 == '1'"
+														value="1"> <span class="padding_radio">- Hình tứ giác:</span>
+													</label>
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+												<label class="col-md-4 " translate>12. Cốt nền sân,
+													nhà</label>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" ng-show="caller.resultNoForm.information23 == '1'">
+												<label class="col-md-3 control-label" translate>Cạnh
+													A(m): </label>
+												<div class="col-md-7">
+													<input class=" form-control width100" type="number"
+														id="information231"
+														ng-model="caller.resultNoForm.information231"
+														name="information231" />
+												</div>
+											</div>
+											<!-- <div class="form-group col-md-6" style="padding-left: 50px;">
+											<div class="custom-control custom-checkbox">
+												<label class="custom-"
+													for="defaultUnchecked">- Sân cao hơn
+													đường <input type="number" id="information121" min="0" ng-model="caller.resultNoForm.information121"> m</label>
+											</div>
+										</div> -->
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label" translate>-
+													Sân cao hơn đường(m)</label>
+												<div class="col-md-7">
+													<input class=" form-control width100" type="number"
+														id="information121"
+														ng-model="caller.resultNoForm.information121"
+														name="information121" />
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" ng-show="caller.resultNoForm.information23 == '1'">
+												<label class="col-md-3 control-label" translate>Cạnh
+													B(m): </label>
+												<div class="col-md-7">
+													<input class=" form-control width100" type="number"
+														id="information232"
+														ng-model="caller.resultNoForm.information232"
+														name="information232" />
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label" translate>-
+													Nền nhà cao hơn sân(m)</label>
+												<div class="col-md-7">
+													<input class=" form-control width100" type="number"
+														id="information122"
+														ng-model="caller.resultNoForm.information122"
+														name="information122" />
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" ng-show="caller.resultNoForm.information23 == '1'">
+												<label class="col-md-3 control-label" translate>Cạnh
+													C(m): </label>
+												<div class="col-md-7">
+													<input class=" form-control width100" type="number"
+														id="information233"
+														ng-model="caller.resultNoForm.information233"
+														name="information233" />
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label" translate>-
+													Nền nhà cao hơn đường(m)</label>
+												<div class="col-md-7">
+													<input class=" form-control width100" type="number"
+														id="information123"
+														ng-model="caller.resultNoForm.information123"
+														name="information123" />
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" ng-show="caller.resultNoForm.information23 == '1'">
+												<label class="col-md-3 control-label" translate>Cạnh
+													D(m): </label>
+												<div class="col-md-7">
+													<input class=" form-control width100" type="number"
+														id="information234"
+														ng-model="caller.resultNoForm.information234"
+														name="information234" />
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+												<label class="col-md-12 " translate>13. Giao thông
+													đi vào thửa đất</label>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" ng-show="caller.resultNoForm.information23 == '1'">
+												<label class="col-md-3 control-label" translate>Tổng
+													DT(m2): </label>
+												<div class="col-md-7">
+													<input class=" form-control width100" type="number"
+														id="information235"
+														ng-model="caller.resultNoForm.information235"
+														name="information235" />
+												</div>
+											</div>
+
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label" translate>-
+													Đường vào đến thửa đất rộng(m)</label>
+												<div class="col-md-7">
+													<input class=" form-control width100" type="number"
+														id="information131"
+														ng-model="caller.resultNoForm.information131"
+														name="information131" />
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<label class="col-md-5 " translate>3. Xin hình ảnh
+													sổ đỏ thửa đất</label>
+												<div class="col-md-7">
+													<label><input style="float: left;" type="radio"
+														id="information31" name="information31"
+														ng-model="caller.resultNoForm.information3"
+														ng-checked="caller.resultNoForm.information3 == 1"
+														value="1"> <span class="padding_radio">Có
+															hình ảnh GCN thửa đất</span></label>
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label" translate>-
+													Phương tiện ô tô tải đi vào tận nơi(tấn)</label>
+												<div class="col-md-7">
+													<input class=" form-control width100" type="number"
+														id="information132"
+														ng-model="caller.resultNoForm.information132"
+														name="information132" />
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<label class="col-md-5 "></label>
+												<div class="col-md-7">
+													<label> <input style="float: left;" type="radio"
+														id="information31" name="information31"
+														ng-model="caller.resultNoForm.information3"
+														ng-checked="caller.resultNoForm.information3 == 0"
+														value="0"> <span class="padding_radio">Không
+															có hình ảnh GCN thửa đất</span>
+													</label>
+												</div>
+											</div>
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input"
+														ng-model="caller.resultNoForm.information133"
+														id="defaultUnchecked"> <label class="custom-"
+														for="defaultUnchecked"> Chỉ có phương tiện xe lam
+														đi vào được tận nơi</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;" ng-show="caller.resultNoForm.information3==1">
+												<label class="col-md-4 " translate>File hình ảnh sổ
+													đỏ</label>
+												<div class="col-md-7">
+													<!-- <input class="col-md-12" name="soDoFile" id="soDoFile"
+														k-select="caller.submitAttachFileSoDo" type="file"
+														list-file-type="jpeg,jpg,png" /> -->
+													<div class="col-md-8">
+														<input type="file" file-model="soDoFile"
+															name="soDoFile" id="soDoFile" list-file-type="jpeg,jpg,png"/>
+													</div>
+													<div class="col-md-4">
+														<button ng-click="caller.submitAttachFileSoDo()" style="width:70px;border-width: 1px;">Tải
+															lên</button>
+													</div>
+												</div>
+											</div>
+											<div class="form-group col-md-6" ng-show="!caller.resultNoForm.information3 || caller.resultNoForm.information3==0">
+											
+											</div>
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input"
+														ng-model="caller.resultNoForm.information134"
+														id="defaultUnchecked"> <label class="custom-"
+														for="defaultUnchecked"> Chỉ có phương tiện xe kéo
+														tay đi vào được tận nơi</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<label class="col-md-12 " translate>4. Phong cách
+													kiến trúc theo nhu cầu của khách</label>
+											</div>
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input"
+														ng-model="caller.resultNoForm.information135"
+														id="defaultUnchecked"> <label class="custom-"
+														for="defaultUnchecked">Khác</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<label><input style="float: left;" type="radio"
+													id="information4" name="information4"
+													ng-model="caller.resultNoForm.information4"
+													ng-checked="caller.resultNoForm.information4 == 1"
+													value="1"> <span class="padding_radio">Phong
+														cách cổ điển (nhiều phào chỉ cầu kỳ, mái ngói đỏ,...)</span></label>
+											</div>
+											<div class="form-group col-md-6">
+												<label class="col-md-12 " translate>14. Địa hình khu
+													vực có thể dựng lán trại tạm cho công nhân</label>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<label><input style="float: left;" type="radio"
+													id="information4" name="information4"
+													ng-model="caller.resultNoForm.information4"
+													ng-checked="caller.resultNoForm.information4 == 2"
+													value="2"> <span class="padding_radio">Tân
+														cổ điển (Mái vát, ngói phẳng, phào chỉ không cầu kỳ, hình
+														khối phẳng,...)</span></label>
+											</div>
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<label><input style="float: left;" type="radio"
+													id="information14" name="information14"
+													ng-model="caller.resultNoForm.information14"
+													ng-checked="caller.resultNoForm.information14 == 1"
+													value="1"> <span class="padding_radio">Địa
+														hình khu vực có thể dựng lán trại tạm cho công nhân</span></label>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<label><input style="float: left;" type="radio"
+													id="information4" name="information4"
+													ng-model="caller.resultNoForm.information4"
+													ng-checked="caller.resultNoForm.information4 == 3"
+													value="3"> <span class="padding_radio">Hiện
+														đại (kiến trúc trẻ trung, không sử dụng các vật liệu xu
+														hướng cổ điển)</span></label>
+											</div>
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<label><input style="float: left;" type="radio"
+													id="information14" name="information14"
+													ng-model="caller.resultNoForm.information14"
+													ng-checked="caller.resultNoForm.information14 == 0"
+													value="0"> <span class="padding_radio">Địa
+														hình khu vực không thể dựng lán trại tạm cho công nhân</span></label>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<label><input style="float: left;" type="radio"
+													id="information4" name="information4"
+													ng-model="caller.resultNoForm.information4"
+													ng-checked="caller.resultNoForm.information4 == 4"
+													value="4"> <span class="padding_radio">Phong
+														cách khác</span></label>
+											</div>
+											<div class="form-group col-md-6">
+												<label class="col-md-12 " translate>15. Những nội
+													dung đặc biệt khác của khách hàng yêu cầu ngoài</label>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<label class="col-md-4" translate>5. Địa hình thửa
+													đất: File địa hình thửa đất</label>
+												<!-- <div class="col-md-8">
+													<div class="form-group col-md-12">
+														<label class="col-md-5" style="padding-left:0px;" translate>File địa hình
+															thửa đất</label>
+														<div class="col-md-7" style="padding-left:0px;">
+															<input class="col-md-12" name="diaHinhFile"
+																id="diaHinhFile"
+																k-select="caller.submitAttachFileDiaHinh" type="file"
+																list-file-type="jpeg,jpg,png,doc,docx,xls,xlsx,pdf" />
+															<div class="col-md-8">
+																<input type="file" file-model="diaHinhFile" name="diaHinhFile"
+																	id="diaHinhFile" list-file-type="jpeg,jpg,png,doc,docx,xls,xlsx,pdf"/>
+															</div>
+															<div class="col-md-4">
+																<button ng-click="caller.submitAttachFileDiaHinh()" style="width:70px;">Tải
+																	lên</button>
+															</div>
+														</div>
+													</div>
+												</div> -->
+												<!-- <div class="col-md-4">
+													<label class="col-md-5" style="padding-left: 0px;"
+														translate>File địa hình thửa đất</label>
+												</div> -->
+												<div class="col-md-8">
+													<div class="col-md-8">
+														<input type="file" file-model="diaHinhFile"
+															name="diaHinhFile" id="diaHinhFile"
+															list-file-type="jpeg,jpg,png,doc,docx,xls,xlsx,pdf" />
+													</div>
+													<div class="col-md-4">
+														<button ng-click="caller.submitAttachFileDiaHinh()"
+															style="width: 70px; border-width: 1px;">Tải lên</button>
+													</div>
+												</div>
+											</div>
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input"
+														ng-model="caller.resultNoForm.information151"
+														id="defaultUnchecked"> <label class="custom-"
+														for="defaultUnchecked">Bể nước mưa trên mái</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 36px;">
+												<!-- <label class="col-md-4" translate>- Đường trước nhà rộng(m)</label>
+											<div class="col-md-7">
+												<input class=" form-control" type="number"
+													id="information511"
+													ng-model="caller.resultNoForm.information51"
+													name="information511" />
+											</div> -->
+
+												<div class="custom-control custom-checkbox">
+													<label class="custom-" for="defaultUnchecked">-
+														Đường trước nhà rộng <input type="number"
+														id="information511" min="0"
+														ng-model="caller.resultNoForm.information51"
+														name="information511"> m
+													</label>
+												</div>
+											</div>
+
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input"
+														ng-model="caller.resultNoForm.information152"
+														id="defaultUnchecked"> <label class="custom-"
+														for="defaultUnchecked">Bể nước mưa ngoài sân</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<label class="custom-" for="defaultUnchecked">-
+														Xung quanh có nhà hàng xóm đã xây dựng kiên cố:(tầng)</label>
+												</div>
+											</div>
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<label class="custom-" for="defaultUnchecked">Khu
+														tiểu cảnh</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<label class="col-md-3 control-label" translate>Bên
+													phải: </label>
+												<div class="col-md-7">
+													<input class=" form-control width100" type="text"
+														id="information521"
+														ng-model="caller.resultNoForm.information521"
+														name="information521" />
+												</div>
+											</div>
+											<div class="form-group col-md-6" style="padding-left: 70px;">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input"
+														ng-model="caller.resultNoForm.information1531"
+														id="defaultUnchecked"> <label class="custom-"
+														for="defaultUnchecked">- Trước</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<label class="col-md-3 control-label" translate>Bên
+													trái: </label>
+												<div class="col-md-7">
+													<input class=" form-control width100" type="text"
+														id="information522"
+														ng-model="caller.resultNoForm.information522"
+														name="information522" />
+												</div>
+											</div>
+											<div class="form-group col-md-6" style="padding-left: 70px;">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input"
+														ng-model="caller.resultNoForm.information1532"
+														id="defaultUnchecked"> <label class="custom-"
+														for="defaultUnchecked">- Sau</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<label class="col-md-3 control-label" translate>Đằng
+													sau: </label>
+												<div class="col-md-7">
+													<input class=" form-control width100" type="text"
+														id="information523"
+														ng-model="caller.resultNoForm.information523"
+														name="information523" />
+												</div>
+											</div>
+											<div class="form-group col-md-6" style="padding-left: 70px;">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input"
+														ng-model="caller.resultNoForm.information1533"
+														id="defaultUnchecked"> <label class="custom-"
+														for="defaultUnchecked">- Trái</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<label class="custom-" for="defaultUnchecked">- Nền
+														đất (địa chất):</label>
+												</div>
+											</div>
+											<div class="form-group col-md-6" style="padding-left: 70px;">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input"
+														ng-model="caller.resultNoForm.information1534"
+														id="defaultUnchecked"> <label class="custom-"
+														for="defaultUnchecked">- Phải</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 70px;">
+												<label><input style="float: left;" type="radio"
+													id="information53" name="information53"
+													ng-model="caller.resultNoForm.information53"
+													ng-checked="caller.resultNoForm.information53 == 1"
+													value="1"> <span class="padding_radio">Đất
+														cát</span></label>
+											</div>
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input"
+														ng-model="caller.resultNoForm.information154"
+														id="defaultUnchecked"> <label class="custom-"
+														for="defaultUnchecked">Khác</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 70px;">
+												<label><input style="float: left;" type="radio"
+													id="information53" name="information53"
+													ng-model="caller.resultNoForm.information53"
+													ng-checked="caller.resultNoForm.information53 == 2"
+													value="2"> <span class="padding_radio">Đất
+														thịt đã ổn định</span></label>
+											</div>
+											<div class="form-group col-md-6">
+												<label class="col-md-12 " translate>16. Tài chính
+													phục vụ xây</label>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 70px;">
+												<label><input style="float: left;" type="radio"
+													id="information53" name="information53"
+													ng-model="caller.resultNoForm.information53"
+													ng-checked="caller.resultNoForm.information53 == 3"
+													value="3"> <span class="padding_radio">Mới
+														san lấp</span></label>
+											</div>
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<label class="custom-" for=information161>- Số tiền
+														dự kiến xây nhà: <input type="number" id="information161"
+														min="0" ng-model="caller.resultNoForm.information161">
+														triệu đồng
+													</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<label class="col-md-12 " translate>6. Nhân khẩu
+													trong gia đình</label>
+											</div>
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<label class="custom-" for=information162>- Số tiền
+														hiện có: <input type="number" id="information162" min="0"
+														ng-model="caller.resultNoForm.information162">
+														triệu đồng
+													</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<label class="custom-" for=information61>Tổng số
+														nhân khẩu trong gia đình: <input type="number"
+														id="information61" min="0"
+														ng-model="caller.resultNoForm.information61"
+														style="width: 50px; border-style: dotted; border-width: 1px; border-top: 0; border-left: 0; border-right: 0px;">
+														người
+													</label>
+												</div>
+											</div>
+
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<label class="custom-" for=information621>- Người
+														già: <input type="number" id="information621" min="0"
+														ng-model="caller.resultNoForm.information621">
+														người sinh năm <input type="text" id="information622"
+														min="0" ng-model="caller.resultNoForm.information622">
+													</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<label class="custom-" for=information631>- Người
+														lớn: <input type="number" id="information631" min="0"
+														ng-model="caller.resultNoForm.information631">
+														người sinh năm <input type="text" id="information632"
+														min="0" ng-model="caller.resultNoForm.information632">
+													</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<label class="custom-" for=information641>- Trẻ em:
+														<input type="number" id="information641" min="0"
+														ng-model="caller.resultNoForm.information641">
+														người sinh năm <input type="text" id="information642"
+														min="0" ng-model="caller.resultNoForm.information642">
+													</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<label class="custom-" for=information65>- Số phòng
+														cần có: <input type="number" id="information65" min="0"
+														ng-model="caller.resultNoForm.information65">
+														phòng
+													</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<label class="col-md-12 " translate>7. Số tầng muốn
+													xây dựng và công năng từng tầng</label>
+											</div>
+
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<label class="custom-" for="defaultUnchecked">Số
+														tầng muốn xây dựng <input type="number" id="information71"
+														min="0" ng-model="caller.resultNoForm.information71">
+														tầng
+													</label>
+												</div>
+											</div>
+
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input"
+														ng-model="caller.resultNoForm.information72"
+														id="defaultUnchecked"> <label class="custom-"
+														for="defaultUnchecked">Có thang máy</label>
+												</div>
+											</div>
+
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<label class="col-md-12 " translate>8. Phong thuỷ
+													của ngôi nhà và các công trình</label>
+											</div>
+
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<label><input style="float: left;" type="radio"
+													id="information811" name="information811"
+													ng-model="caller.resultNoForm.information81"
+													ng-checked="caller.resultNoForm.information81 == 1"
+													value="1"> <span class="padding_radio">Đã
+														xem phong thuỷ của thửa đất</span></label>
+											</div>
+
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<label><input style="float: left;" type="radio"
+													id="information812" name="information812"
+													ng-model="caller.resultNoForm.information81"
+													ng-checked="caller.resultNoForm.information81 == 0"
+													value="0"> <span class="padding_radio">Chưa
+														xem phong thuỷ của thửa đất</span></label>
+											</div>
+
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<label class="custom-" for=information821>- Hướng
+														chính của ngôi nhà: <input type="text" id="information821"
+														min="0" ng-model="caller.resultNoForm.information82">
+													</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<label class="custom-" for=information831>- Hướng
+														bếp: <input type="text" id="information831" min="0"
+														ng-model="caller.resultNoForm.information83">
+													</label>
+												</div>
+											</div>
+
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<label class="custom-" for=information841>- Hướng
+														ban thờ: <input type="text" id="information841" min="0"
+														ng-model="caller.resultNoForm.information84">
+													</label>
+												</div>
+											</div>
+
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<label class="custom-" for=information851>- Hướng
+														nhà vệ sinh: <input type="text" id="information851"
+														min="0" ng-model="caller.resultNoForm.information85">
+													</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<label class="col-md-12 " translate>9. Đua ban công</label>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<label><input style="float: left;" type="radio"
+													id="information91" name="information91"
+													ng-model="caller.resultNoForm.information91"
+													ng-checked="caller.resultNoForm.information91 == 0"
+													value="0"> <span class="padding_radio">Không
+														đua ban công</span></label>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<label><input style="float: left;" type="radio"
+													id="information91" name="information91"
+													ng-model="caller.resultNoForm.information91"
+													ng-checked="caller.resultNoForm.information91 == 1"
+													value="1"> <span class="padding_radio">Có
+														đua ban công</span></label>
+											</div>
+
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<div class="form-group col-md-6" style="padding-left: 50px;">
+													<div class="custom-control custom-checkbox">
+														<input type="checkbox" class="custom-control-input"
+															ng-model="caller.resultNoForm.information921"
+															id="defaultUnchecked"> <label class="custom-"
+															for="defaultUnchecked">Đua đằng trước</label>
+													</div>
+												</div>
+												<div class="form-group col-md-6" style="padding-left: 50px;">
+													<div class="custom-control custom-checkbox">
+														<input type="checkbox" class="custom-control-input"
+															ng-model="caller.resultNoForm.information922"
+															id="defaultUnchecked"> <label class="custom-"
+															for="defaultUnchecked">Đua bên phải</label>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<div class="form-group col-md-6" style="padding-left: 50px;">
+													<div class="custom-control custom-checkbox">
+														<input type="checkbox" class="custom-control-input"
+															ng-model="caller.resultNoForm.information923"
+															id="defaultUnchecked"> <label class="custom-"
+															for="defaultUnchecked">Đua bên trái</label>
+													</div>
+												</div>
+												<div class="form-group col-md-6" style="padding-left: 50px;">
+													<div class="custom-control custom-checkbox">
+														<input type="checkbox" class="custom-control-input"
+															ng-model="caller.resultNoForm.information924"
+															id="defaultUnchecked"> <label class="custom-"
+															for="defaultUnchecked">Đua đằng sau</label>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- --------- -->
+									</div>
+									<!-- end chưa có thiết kế -->
+
+									<!-- Có thiết kế -->
+									<div class="portlet light bordered collapse in from-search"
+										id="thongTinCoThietKe"
+										ng-show="caller.resultForm.contructionDesign==1 && caller.resultForm.resultTangentType == 1">
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 " translate>1. Bản vẽ thiết
+													kế thi công</label>
+												<div class="col-md-8">
+													<label><input style="float: left;" type="radio"
+														id="information1" name="information1"
+														ng-model="caller.resultYesForm.information1"
+														ng-checked="caller.resultYesForm.information1 == 1"
+														value="1"> <span class="padding_radio">Có
+															bản vẽ</span></label>
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+												<div class="col-md-8">
+													<label> <input style="float: left;" type="radio"
+														id="information1" name="information1"
+														ng-model="caller.resultYesForm.information1"
+														ng-checked="caller.resultYesForm.information1 == 0"
+														value="0"> <span class="padding_radio">Chưa
+															có bản vẽ</span>
+													</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 " translate>2. Khu vực xây
+													dựng có cần xin phép xây dựng</label>
+												<div class="col-md-8">
+													<label><input style="float: left;" type="radio"
+														id="information2" name="information2"
+														ng-model="caller.resultYesForm.information2"
+														ng-checked="caller.resultYesForm.information2 == 1"
+														value="1"> <span class="padding_radio">Khu
+															vực có cần xin phép xây dựng</span></label>
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+												<div class="col-md-8">
+													<label> <input style="float: left;" type="radio"
+														id="information2" name="information2"
+														ng-model="caller.resultYesForm.information2"
+														ng-checked="caller.resultYesForm.information2 == 0"
+														value="0"> <span class="padding_radio">Khu
+															vực không cần xin phép xây dựng</span>
+													</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<label class="col-md-12 " translate>3. Phong cách
+													kiến trúc theo nhu cầu khách hàng</label>
+											</div>
+											<div class="form-group col-md-6">
+												<label class="col-md-12 " translate>6. Địa hình khu
+													vực có thể dựng lán trại tạm cho công nhân</label>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<label><input style="float: left;" type="radio"
+													id="information3" name="information3"
+													ng-model="caller.resultYesForm.information3"
+													ng-checked="caller.resultYesForm.information3 == 1"
+													value="1"> <span class="padding_radio">Phong
+														cách cổ điển (nhiều phào chỉ cầu kỳ, mái ngói đỏ,...)</span></label>
+											</div>
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<label><input style="float: left;" type="radio"
+													id="information6" name="information6"
+													ng-model="caller.resultYesForm.information6"
+													ng-checked="caller.resultYesForm.information6 == 1"
+													value="1"> <span class="padding_radio">Địa
+														hình khu vực có thể dựng lán trại tạm cho công nhân</span></label>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<label><input style="float: left;" type="radio"
+													id="information3" name="information3"
+													ng-model="caller.resultYesForm.information3"
+													ng-checked="caller.resultYesForm.information3 == 2"
+													value="2"> <span class="padding_radio">Tân
+														cổ điển (Mái vát, ngói phẳng, phào chỉ không cầu kỳ, hình
+														khối phẳng,...)</span></label>
+											</div>
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<label><input style="float: left;" type="radio"
+													id="information6" name="information6"
+													ng-model="caller.resultYesForm.information6"
+													ng-checked="caller.resultYesForm.information6 == 2"
+													value="2"> <span class="padding_radio">Địa
+														hình khu vực không thể dựng lán trại tạm cho công nhân</span></label>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<label><input style="float: left;" type="radio"
+													id="information3" name="information3"
+													ng-model="caller.resultYesForm.information3"
+													ng-checked="caller.resultYesForm.information3 == 3"
+													value="3"> <span class="padding_radio">Hiện
+														đại (kién trúc trẻ trung, không sử dụng các vật liệu xu
+														hướng cổ điển)</span></label>
+											</div>
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<label><input style="float: left;" type="radio"
+													id="information6" name="information6"
+													ng-model="caller.resultYesForm.information6"
+													ng-checked="caller.resultYesForm.information6 == 3"
+													value="3"> <span class="padding_radio">Khác...</span></label>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<label><input style="float: left;" type="radio"
+													id="information3" name="information3"
+													ng-model="caller.resultYesForm.information3"
+													ng-checked="caller.resultYesForm.information3 == 4"
+													value="4"> <span class="padding_radio">Phong
+														cách khác</span></label>
+											</div>
+
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<label class="col-md-12 " translate>4. Địa hình thửa
+													đất</label>
+											</div>
+											<div class="form-group col-md-6">
+												<label class="col-md-12 " translate>7. Những nội
+													dung đặc biệt khác của khách hàng yêu cầu ngoài bản vẽ</label>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<div class="clearfix row" style="padding-left: 35px;">
+													<div class="custom-control custom-checkbox">
+														<!-- <input type="checkbox" class="custom-control-input"
+														id="defaultUnchecked" ng-model="caller.package41">  -->
+														<label class="custom-" for="defaultUnchecked">-
+															Đường trước nhà rộng <input type="number"
+															id="information41" min="0"
+															ng-model="caller.resultYesForm.information41"> m
+														</label>
+													</div>
+												</div>
+												<div class="clearfix row" style="padding-left: 35px;">
+													<div class="custom-control custom-checkbox">
+														<!-- <input type="checkbox" class="custom-control-input"
+														id="defaultUnchecked">  -->
+														<label class="custom-" for="defaultUnchecked">-
+															Xung quanh có nhà hàng xóm đã xây dựng kiên cố: (tầng) </label>
+													</div>
+												</div>
+												<div class="clearfix row" style="padding-left: 25px;">
+													<div class="form-group col-md-8">
+														<label class="col-md-4 control-label" translate>Bên
+															phải</label>
+														<div class="col-md-8">
+															<input class=" form-control width100" type="text"
+																id="information421"
+																ng-model="caller.resultYesForm.information421"
+																name="information421" />
+														</div>
+													</div>
+												</div>
+												<div class="clearfix row" style="padding-left: 25px;">
+													<div class="form-group col-md-8">
+														<label class="col-md-4 control-label" translate>Bên
+															trái</label>
+														<div class="col-md-8">
+															<input class=" form-control width100" type="text"
+																id="information422"
+																ng-model="caller.resultYesForm.information422"
+																name="information422" />
+														</div>
+													</div>
+												</div>
+												<div class="clearfix row" style="padding-left: 25px;">
+													<div class="form-group col-md-8">
+														<label class="col-md-4 control-label" translate>Đằng
+															sau</label>
+														<div class="col-md-8">
+															<input class=" form-control width100" type="text"
+																id="information423"
+																ng-model="caller.resultYesForm.information423"
+																name="information423" />
+														</div>
+													</div>
+												</div>
+												<div class="clearfix row" style="padding-left: 35px;">
+													<div class="custom-control custom-checkbox">
+														<label class="custom-" for="defaultUnchecked">- Nền
+															đất (địa chất):</label>
+													</div>
+												</div>
+												<div class="clearfix row" style="padding-left: 50px;">
+													<div class="form-group col-md-6">
+														<label><input style="float: left;" type="radio"
+															id="information43" name="information43"
+															ng-model="caller.resultYesForm.information43"
+															ng-checked="caller.resultYesForm.information43 == 1"
+															value="1"> <span class="padding_radio">Đất
+																cát</span></label>
+													</div>
+												</div>
+												<div class="clearfix row" style="padding-left: 50px;">
+													<div class="form-group col-md-6">
+														<label><input style="float: left;" type="radio"
+															id="information43" name="information43"
+															ng-model="caller.resultYesForm.information43"
+															ng-checked="caller.resultYesForm.information43 == 2"
+															value="2"> <span class="padding_radio">Đất
+																thịt đã ổn định</span></label>
+													</div>
+												</div>
+												<div class="clearfix row" style="padding-left: 50px;">
+													<div class="form-group col-md-6">
+														<label><input style="float: left;" type="radio"
+															id="information43" name="information43"
+															ng-model="caller.resultYesForm.information43"
+															ng-checked="caller.resultYesForm.information43 == 3"
+															value="3"> <span class="padding_radio">Mới
+																san lấp</span></label>
+													</div>
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+												<textarea class="form-control" type="text" rows="10"
+													id="information7"
+													ng-model="caller.resultYesForm.information7"
+													name="information7"></textarea>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<label class="col-md-12 " translate>5. Giao thông đi
+													vào thửa đất</label>
+											</div>
+											<div class="form-group col-md-6">
+												<label class="col-md-12 " translate>8. Tài chính
+													phục vụ xây</label>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<!-- <input type="checkbox" class="custom-control-input"
+													id="defaultUnchecked">  -->
+													<label class="custom-" for="defaultUnchecked">-
+														Đường vào đến thửa đất rộng<input type="number"
+														id="information51" min="0"
+														ng-model="caller.resultYesForm.information51">m
+													</label>
+												</div>
+											</div>
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<label class="custom-" for="defaultUnchecked">- Số
+														tiền dự kiến xây nhà <input type="number"
+														id="information81" min="0"
+														ng-model="caller.resultYesForm.information81">
+														triệu đồng
+													</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<!-- <input type="checkbox" class="custom-control-input"
+													id="defaultUnchecked"> -->
+													<label class="custom-">- Phương tiện ô tô tải <input
+														id="information52" type="number" min="0"
+														ng-model="caller.resultYesForm.information52"> tấn
+														đi vào được tận nơi
+													</label>
+												</div>
+											</div>
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<label class="custom-" for="defaultUnchecked">- Số
+														tiền hiện có <input type="number" id="information82"
+														min="0" ng-model="caller.resultYesForm.information82">
+														triệu đồng
+													</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input"
+														id="information531"
+														ng-model="caller.resultYesForm.information53"> <label
+														class="custom-" for="information531">Chỉ có phương
+														tiện xe lam đi vào được tận nơi</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input"
+														id="information54"
+														ng-model="caller.resultYesForm.information54"> <label
+														class="custom-" for="information54">Chỉ có phương
+														tiện xe kéo tay đi vào được tận nơi</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6" style="padding-left: 50px;">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input"
+														id="information55"
+														ng-model="caller.resultYesForm.information55"> <label
+														class="custom-" for="information55">Khác</label>
+												</div>
+											</div>
+										</div>
+										<!-- ----------- -->
+									</div>
+									<!-- end có thiết kế -->
+									<!-- end thông tin công trình -->
+
+									<!-- Lịch sử tiếp xúc -->
+									<div class="row caption" id="thongTinChungSpan">
+										<span class="caption-subject bold lowercase"
+											style="margin-left: 1px !important;" translate>Lịch sử
+											tiếp xúc</span>
+									</div>
+
+									<div class="portlet light collapse in from-search"
+										id="lichSuTiepXucForm">
+										<div class="clearfix row" ng-show="caller.countHistoryResultTagent>2">
+											<div class="text-left margin-row-title">
+												<a data-toggle="collapse" data-target="#collapseLan1"
+													aria-hidden="true" aria-expanded="false"
+													aria-controls="collapseLan1" style="padding-left: 20px;"
+													onclick="$('#collapsed-chevron').toggleClass('fa-rotate-180')">
+													<i id="collapsed-chevron" class="fa fa-chevron-circle-up"></i>
+													Lần 1
+												</a>
+											</div>
+										</div>
+										
+										<div class="clearfix row" ng-show="caller.countHistoryResultTagent==2">
+											<div class="text-left margin-row-title">
+												<a data-toggle="collapse" data-target="#collapseLan21"
+													aria-hidden="true" aria-expanded="false"
+													aria-controls="collapseLan21" style="padding-left: 20px;"
+													onclick="$('#collapsed-chevron').toggleClass('fa-rotate-180')">
+													<i id="collapsed-chevron" class="fa fa-chevron-circle-up"></i>
+													Lần 1
+												</a>
+											</div>
+										</div>
+										
+										<div class="portlet light collapse" aria-expanded="false"
+											id="collapseLan21">
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>File
+														thông tin tiếp xúc</label>
+													<div class="col-md-8" style="padding-top: 6px;">
+														<a href='' ng-click='caller.downloadFileHis2(caller.resultHisForm2.fileReceipts)'>{{caller.resultHisForm2.fileReceipts.name}}</a>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<div class="col-md-8" style="padding-top: 6px;">
+														<a href='' ng-click='caller.viewDetailHis(caller.resultHisForm2)'>Chi tiết thông tin tiếp xúc</a>
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ngày
+														hẹn tiếp xúc</label>
+													<div class="col-md-8">
+														<label class="control-label">{{caller.resultHisForm2.appointmentDate}}</label>
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Kết
+														quả tư vấn</label>
+													<div class="col-md-8">
+														<label class="control-label">{{caller.resultHisForm2.resultTangentType}}</label>
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ngày
+														tiếp xúc thực tế</label>
+													<div class="col-md-8">
+														<label class="control-label">{{caller.resultHisForm2.appointmentDate}}</label>
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Nhân
+														viên thực hiện</label>
+													<div class="col-md-8">
+														<label class="control-label">{{caller.resultHisForm2.performerName}}</label>
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Trạng
+														thái phê duyệt</label>
+													<div class="col-md-8">
+														<label class="control-label">{{caller.resultHisForm2.approvedStatus}}</label>
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ghi
+														chú phê duyệt</label>
+													<div class="col-md-8">
+														<label class="control-label">{{caller.resultHisForm2.approvedDescription}}</label>
+													</div>
+												</div>
+											</div>
+										</div>
+										
+										<div class="clearfix row" ng-show="caller.countHistoryResultTagent==1">
+											<div class="text-left margin-row-title">
+												<a data-toggle="collapse" data-target="#collapseLan3"
+													aria-hidden="true" aria-expanded="false"
+													aria-controls="collapseLan3" style="padding-left: 20px;"
+													onclick="$('#collapsed-chevron').toggleClass('fa-rotate-180')">
+													<i id="collapsed-chevron" class="fa fa-chevron-circle-up"></i>
+													Lần 1
+												</a>
+											</div>
+										</div>
+										
+										<div class="portlet light collapse" aria-expanded="false"
+											id="collapseLan1">
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>File
+														thông tin tiếp xúc</label>
+													<div class="col-md-8" style="padding-top: 6px;">
+														<a href='' ng-click='caller.downloadFileHis1(caller.resultHisForm1.fileReceipts)'>{{caller.resultHisForm1.fileReceipts.name}}</a>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<div class="col-md-8" style="padding-top: 6px;">
+														<a href=''
+															ng-click='caller.viewDetailHis(caller.resultHisForm1)'>Chi
+															tiết thông tin tiếp xúc</a>
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ngày
+														hẹn tiếp xúc</label>
+													<div class="col-md-8">
+														<label class="control-label">{{caller.resultHisForm1.appointmentDate}}</label>
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Kết
+														quả tư vấn</label>
+													<div class="col-md-8">
+														<label class="control-label">{{caller.resultHisForm1.resultTangentType}}</label>
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ngày
+														tiếp xúc thực tế</label>
+													<div class="col-md-8">
+														<label class="control-label">{{caller.resultHisForm1.appointmentDate}}</label>
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Nhân
+														viên thực hiện</label>
+													<div class="col-md-8">
+														<label class="control-label">{{caller.resultHisForm1.performerName}}</label>
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Trạng
+														thái phê duyệt</label>
+													<div class="col-md-8">
+														<label class="control-label">{{caller.resultHisForm1.approvedStatus}}</label>
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ghi
+														chú phê duyệt</label>
+													<div class="col-md-8">
+														<label class="control-label">{{caller.resultHisForm1.approvedDescription}}</label>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row" ng-show="caller.countHistoryResultTagent>3">
+											<div class="text-left margin-row-title">
+												<a data-toggle="collapse" data-target="#collapseLan2"
+													aria-hidden="true" aria-expanded="false"
+													aria-controls="collapseLan2" style="padding-left: 20px;"
+													onclick="$('#collapsed-chevron').toggleClass('fa-rotate-180')">
+													<i id="collapsed-chevron" class="fa fa-chevron-circle-up"></i>
+													Lần 2
+												</a>
+											</div>
+										</div>
+										
+										<div class="clearfix row" ng-show="caller.countHistoryResultTagent==2">
+											<div class="text-left margin-row-title">
+												<a data-toggle="collapse" data-target="#collapseLan3"
+													aria-hidden="true" aria-expanded="false"
+													aria-controls="collapseLan3" style="padding-left: 20px;"
+													onclick="$('#collapsed-chevron').toggleClass('fa-rotate-180')">
+													<i id="collapsed-chevron" class="fa fa-chevron-circle-up"></i>
+													Lần 2
+												</a>
+											</div>
+										</div>
+
+										<div class="portlet light collapse" aria-expanded="false"
+											id="collapseLan2">
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>File
+														thông tin tiếp xúc</label>
+													<div class="col-md-8" style="padding-top: 6px;">
+														<a href='' ng-click='caller.downloadFileHis2(caller.resultHisForm2.fileReceipts)'>{{caller.resultHisForm2.fileReceipts.name}}</a>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<div class="col-md-8" style="padding-top: 6px;">
+														<a href=''
+															ng-click='caller.viewDetailHis(caller.resultHisForm2)'>Chi
+															tiết thông tin tiếp xúc</a>
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ngày
+														hẹn tiếp xúc</label>
+													<div class="col-md-8">
+														<label class="control-label">{{caller.resultHisForm2.appointmentDate}}</label>
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Kết
+														quả tư vấn</label>
+													<div class="col-md-8">
+														<label class="control-label">{{caller.resultHisForm2.resultTangentType}}</label>
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ngày
+														tiếp xúc thực tế</label>
+													<div class="col-md-8">
+														<label class="control-label">{{caller.resultHisForm2.appointmentDate}}</label>
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Nhân
+														viên thực hiện</label>
+													<div class="col-md-8">
+														<label class="control-label">{{caller.resultHisForm2.performerName}}</label>
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Trạng
+														thái phê duyệt</label>
+													<div class="col-md-8">
+														<label class="control-label">{{caller.resultHisForm2.approvedStatus}}</label>
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ghi
+														chú phê duyệt</label>
+													<div class="col-md-8">
+														<label class="control-label">{{caller.resultHisForm2.approvedDescription}}</label>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row" ng-show="caller.countHistoryResultTagent==3">
+											<div class="text-left margin-row-title">
+												<a data-toggle="collapse" data-target="#collapseLan3"
+													aria-hidden="true" aria-expanded="false"
+													aria-controls="collapseLan3" style="padding-left: 20px;"
+													onclick="$('#collapsed-chevron').toggleClass('fa-rotate-180')">
+													<i id="collapsed-chevron" class="fa fa-chevron-circle-up"></i>
+													Lần 3
+												</a>
+											</div>
+										</div>
+
+										<div class="portlet light collapse" aria-expanded="false"
+											id="collapseLan3">
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>File
+														thông tin tiếp xúc</label>
+													<div class="col-md-8" style="padding-top: 6px;">
+														<a href='' ng-click='caller.downloadFileHis3(caller.resultHisForm3.fileReceipts)'>{{caller.resultHisForm3.fileReceipts.name}}</a>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<div class="col-md-8" style="padding-top: 6px;">
+														<a href=''
+															ng-click='caller.viewDetailHis(caller.resultHisForm3)'>Chi
+															tiết thông tin tiếp xúc</a>
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ngày
+														hẹn tiếp xúc</label>
+													<div class="col-md-8">
+														<label class="control-label">{{caller.resultHisForm3.appointmentDate}}</label>
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Kết
+														quả tư vấn</label>
+													<div class="col-md-8">
+														<label class="control-label">{{caller.resultHisForm3.resultTangentType}}</label>
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ngày
+														tiếp xúc thực tế</label>
+													<div class="col-md-8">
+														<label class="control-label">{{caller.resultHisForm3.customerName}}</label>
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Nhân
+														viên thực hiện</label>
+													<div class="col-md-8">
+														<label class="control-label">{{caller.resultHisForm3.performerId}}</label>
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Trạng
+														thái phê duyệt</label>
+													<div class="col-md-8">
+														<label class="control-label">{{caller.resultHisForm3.approvedStatus}}</label>
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ghi
+														chú phê duyệt</label>
+													<div class="col-md-8">
+														<label class="control-label">{{caller.resultHisForm3.approvedDescription}}</label>
+													</div>
+												</div>
+											</div>
+										</div>
+
+
+									</div>
+									<!-- end lịch sử tiếp xúc -->
+								</div>
+								<div class="clearfix form-actions" align="right">
+									<button type="button" id="saveData" ng-show="caller.checkPerform"
+										class="btn btn-qlk padding-search-right btn pull-right  saveQLK"
+										ng-click="caller.savePopupTiepXuc()" translate>Ghi
+										lại</button>
+									<button type="button" id="cancel"
+										class="btn btn-qlk padding-search-right margin_right10 closeQLK btn pull-right"
+										ng-click="caller.cancel()" translate>Hủy bỏ</button>
+								</div>
+							</div>
+							<!-- end tiếp xúc -->
+							<!-- Phần giải pháp -->
+							<div id="giaiPhap" class="tab-pane">
+								<div class="portlet light bordered">
+									<div class="portlet light collapse in from-search"
+										id="giaiPhapForm">
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label" translate>File
+													trình bày giải pháp với khách hàng</label>
+												<div class="col-md-8">
+													<!-- <input class="col-md-12" name="giaiPhapFile"
+														id="giaiPhapFile" k-select="caller.submitAttachFileGiaiPhap"
+														type="file"
+														list-file-type="jpeg,jpg,png,doc,docx,xls,xlsx,pdf" /> -->
+													<div class="col-md-8">
+														<input type="file" file-model="giaiPhapFile"
+															name="giaiPhapFile" id="giaiPhapFile"
+															list-file-type="jpeg,jpg,png,doc,docx,xls,xlsx,pdf" />
+													</div>
+													<div class="col-md-4">
+														<button ng-click="caller.submitAttachFileGiaiPhap()"
+															style="width: 70px;border-width: 1px;">Tải lên</button>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label req" translate>Ngày
+													hẹn trình bày giải pháp</label>
+												<div class="col-md-8">
+													<input kendo-date-picker k-format="'dd/MM/yyyy'"
+														class=" form-control width100"
+														ng-model="caller.solutionForm.presentSolutionDate"
+														style="width: 100%;" id="presentSolutionDate" min-year="1000"
+														date-time />
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label" translate>Kết quả trình bày giải pháp</label>
+												<div class="col-md-8">
+													<select kendo-drop-down-list style="width: 100%"
+														name="resultSolutionType" id="resultSolutionType" ng-model="caller.solutionForm.resultSolutionType"
+														k-data-text-field="'name'" k-data-value-field="'code'"
+														k-data-source="caller.resultSolutionTypeList">
+													</select>
+												</div>
+											</div>
+										</div>
+
+										<div class="row caption" id="thongTinChungCongTrinh"
+											ng-show="caller.solutionForm.resultSolutionType == 1">
+											<span class="caption-subject bold lowercase"
+												style="margin-left: 1px !important;" translate>Thông
+												tin về hợp đồng</span>
+										</div>
+										<div class="portlet light bordered collapse in from-search"
+											id="congTrinh"
+											ng-show="caller.solutionForm.resultSolutionType == 1">
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 form-horizontal control-label "
+														translate>Số hợp đồng</label>
+													<div class="col-md-8">
+														<div class="input-icon right ">
+															<i class="fa fa-search directive"
+																ng-click="caller.openContract()"></i>
+														</div>
+														<input kendo-auto-complete
+															k-options="caller.patternContractOptions"
+															class=" form-control width100" type="text"
+															id="contractCode"
+															ng-model="caller.solutionForm.contractCode"
+															name="contractCode" />
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ngày
+														ký</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionForm.signDate}}</label>
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Thời gian bảo hành(tháng): </label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionForm.guaranteeTime}}</label>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Hoa hồng môi giới</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionForm.contractRose}}</label>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Thời gian thi công(tháng): </label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionForm.constructTime}}</label>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row" ng-show="caller.solutionForm.resultSolutionType == 2">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label req" translate>Lý do khách hàng từ chối giải pháp </label>
+												<div class="col-md-8">
+													<textarea class="form-control" type="text" rows="4"
+													id="contentResultSolution"
+													ng-model="caller.solutionForm.contentResultSolution"
+													name="contentResultSolution"></textarea>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row"
+											ng-show="caller.solutionForm.resultSolutionType == 3">
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label req" translate>Nội dung cần chỉnh sửa </label>
+												<div class="col-md-8">
+													<textarea class="form-control" type="text" rows="4"
+														id="contentResultSolution"
+														ng-model="caller.solutionForm.contentResultSolution"
+														name="contentResultSolution"></textarea>
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+												<label class="col-md-4 control-label" translate>Ngày
+													hẹn trình bày giải pháp tiếp theo</label>
+												<div class="col-md-8">
+													<input kendo-date-picker k-format="'dd/MM/yyyy'"
+														class=" form-control width100"
+														ng-model="caller.solutionForm.presentSolutionDateNext"
+														style="width: 100%;" id="presentSolutionDateNext" min-year="1000"
+														date-time />
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									<!-- Lịch sử giải pháp -->
+									<div class="row caption" id="thongTinChungSpan">
+										<span class="caption-subject bold lowercase"
+											style="margin-left: 1px !important;" translate>Lịch sử
+											giải pháp</span>
+									</div>
+
+									<div class="portlet light collapse in from-search"
+										id="lichSuGiaiPhapForm">
+										<div class="clearfix row" ng-show="caller.countHistoryResultSolution>2">
+											<div class="text-left margin-row-title">
+												<a data-toggle="collapse" data-target="#collapseGpLan1"
+													aria-hidden="true" aria-expanded="false"
+													aria-controls="collapseGpLan1" style="padding-left: 20px;"
+													onclick="$('#collapsed-chevron').toggleClass('fa-rotate-180')">
+													<i id="collapsed-chevron" class="fa fa-chevron-circle-up"></i>
+													Lần 1
+												</a>
+											</div>
+										</div>
+
+										<div class="clearfix row" ng-show="caller.countHistoryResultSolution==2">
+											<div class="text-left margin-row-title">
+												<a data-toggle="collapse" data-target="#collapseGpLan21"
+													aria-hidden="true" aria-expanded="false"
+													aria-controls="collapseGpLan21" style="padding-left: 20px;"
+													onclick="$('#collapsed-chevron').toggleClass('fa-rotate-180')">
+													<i id="collapsed-chevron" class="fa fa-chevron-circle-up"></i>
+													Lần 1
+												</a>
+											</div>
+										</div>
+
+										<div class="portlet light collapse" aria-expanded="false"
+											id="collapseGpLan21">
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>File
+														trình bày giải pháp với khách hàng</label>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Số hợp đồng</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm2.contractCode}}</label>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ngày hẹn trình bày giải pháp</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm2.presentSolutionDate}}</label>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Thời gian bảo hành(tháng)</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm2.guaranteeTime}}</label>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Kết quả trình bày giải pháp</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm2.resultSolutionType}}</label>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Thời gian thi công(tháng)</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm2.constructTime}}</label>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ngày trình bày thực tế</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm2.constructTime}}</label>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ngày ký</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm2.signDate}}</label>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Nhân viên thực hiện</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm2.performerName}}</label>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Hoa hồng môi giới(VNĐ)</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm2.contractRose}}</label>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Trạng thái phê duyệt</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm2.presentSolutionDate}}</label>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Nội dung cần chỉnh sửa</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm2.contentResultSolution}}</label>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ghi chú phê duyệt</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm2.approvedDescription}}</label>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ngày hẹn trình bày giải pháp tiếp theo</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm2.presentSolutionDateNext}}</label>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Lý do khách hàng từ chối</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm2.contentResultSolution}}</label>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row" ng-show="caller.countHistoryResultSolution==1">
+											<div class="text-left margin-row-title">
+												<a data-toggle="collapse" data-target="#collapseGpLan3"
+													aria-hidden="true" aria-expanded="false"
+													aria-controls="collapseGpLan3" style="padding-left: 20px;"
+													onclick="$('#collapsed-chevron').toggleClass('fa-rotate-180')">
+													<i id="collapsed-chevron" class="fa fa-chevron-circle-up"></i>
+													Lần 1
+												</a>
+											</div>
+										</div>
+
+										<div class="portlet light collapse" aria-expanded="false"
+											id="collapseGpLan1">
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>File
+														trình bày giải pháp với khách hàng</label>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Số hợp đồng</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm1.contractCode}}</label>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ngày hẹn trình bày giải pháp</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm1.presentSolutionDate}}</label>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Thời gian bảo hành(tháng)</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm1.guaranteeTime}}</label>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Kết quả trình bày giải pháp</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm1.resultSolutionType}}</label>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Thời gian thi công(tháng)</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm1.constructTime}}</label>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ngày trình bày thực tế</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm1.constructTime}}</label>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ngày ký</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm1.signDate}}</label>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Nhân viên thực hiện</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm1.performerName}}</label>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Hoa hồng môi giới(VNĐ)</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm1.contractRose}}</label>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Trạng thái phê duyệt</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm1.presentSolutionDate}}</label>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Nội dung cần chỉnh sửa</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm1.contentResultSolution}}</label>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ghi chú phê duyệt</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm1.approvedDescription}}</label>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ngày hẹn trình bày giải pháp tiếp theo</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm1.presentSolutionDateNext}}</label>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Lý do khách hàng từ chối</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm1.contentResultSolution}}</label>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row" ng-show="caller.countHistoryResultSolution>3">
+											<div class="text-left margin-row-title">
+												<a data-toggle="collapse" data-target="#collapseGpLan2"
+													aria-hidden="true" aria-expanded="false"
+													aria-controls="collapseGpLan2" style="padding-left: 20px;"
+													onclick="$('#collapsed-chevron').toggleClass('fa-rotate-180')">
+													<i id="collapsed-chevron" class="fa fa-chevron-circle-up"></i>
+													Lần 2
+												</a>
+											</div>
+										</div>
+										
+										<div class="clearfix row" ng-show="caller.countHistoryResultSolution==2">
+											<div class="text-left margin-row-title">
+												<a data-toggle="collapse" data-target="#collapseGpLan3"
+													aria-hidden="true" aria-expanded="false"
+													aria-controls="collapseGpLan3" style="padding-left: 20px;"
+													onclick="$('#collapsed-chevron').toggleClass('fa-rotate-180')">
+													<i id="collapsed-chevron" class="fa fa-chevron-circle-up"></i>
+													Lần 2
+												</a>
+											</div>
+										</div>
+
+										<div class="portlet light collapse" aria-expanded="false"
+											id="collapseGpLan2">
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>File
+														trình bày giải pháp với khách hàng</label>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Số hợp đồng</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm2.contractCode}}</label>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ngày hẹn trình bày giải pháp</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm2.presentSolutionDate}}</label>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Thời gian bảo hành(tháng)</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm2.guaranteeTime}}</label>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Kết quả trình bày giải pháp</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm2.resultSolutionType}}</label>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Thời gian thi công(tháng)</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm2.constructTime}}</label>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ngày trình bày thực tế</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm2.constructTime}}</label>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ngày ký</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm2.signDate}}</label>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Nhân viên thực hiện</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm2.performerName}}</label>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Hoa hồng môi giới(VNĐ)</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm2.contractRose}}</label>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Trạng thái phê duyệt</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm2.presentSolutionDate}}</label>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Nội dung cần chỉnh sửa</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm2.contentResultSolution}}</label>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ghi chú phê duyệt</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm2.approvedDescription}}</label>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ngày hẹn trình bày giải pháp tiếp theo</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm2.presentSolutionDateNext}}</label>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Lý do khách hàng từ chối</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm2.contentResultSolution}}</label>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix row" ng-show="caller.countHistoryResultSolution==3">
+											<div class="text-left margin-row-title">
+												<a data-toggle="collapse" data-target="#collapseGpLan3"
+													aria-hidden="true" aria-expanded="false"
+													aria-controls="collapseGpLan3" style="padding-left: 20px;"
+													onclick="$('#collapsed-chevron').toggleClass('fa-rotate-180')">
+													<i id="collapsed-chevron" class="fa fa-chevron-circle-up"></i>
+													Lần 3
+												</a>
+											</div>
+										</div>
+
+										<div class="portlet light collapse" aria-expanded="false"
+											id="collapseGpLan3">
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>File
+														trình bày giải pháp với khách hàng</label>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Số hợp đồng</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm3.contractCode}}</label>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ngày hẹn trình bày giải pháp</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm3.presentSolutionDate}}</label>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Thời gian bảo hành(tháng)</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm3.guaranteeTime}}</label>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Kết quả trình bày giải pháp</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm3.resultSolutionType}}</label>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Thời gian thi công(tháng)</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm3.constructTime}}</label>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ngày trình bày thực tế</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm3.constructTime}}</label>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ngày ký</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm3.signDate}}</label>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Nhân viên thực hiện</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm3.performerName}}</label>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Hoa hồng môi giới(VNĐ)</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm3.contractRose}}</label>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Trạng thái phê duyệt</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm3.presentSolutionDate}}</label>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Nội dung cần chỉnh sửa</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm3.contentResultSolution}}</label>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ghi chú phê duyệt</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm3.approvedDescription}}</label>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Ngày hẹn trình bày giải pháp tiếp theo</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm3.presentSolutionDateNext}}</label>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix row">
+												<div class="form-group col-md-6">
+													<label class="col-md-4 control-label" translate>Lý do khách hàng từ chối</label>
+													<div class="col-md-8">
+														<label class="control-label" translate>{{caller.solutionHisForm3.contentResultSolution}}</label>
+													</div>
+												</div>
+											</div>
+										</div>
+
+
+									</div>
+									<!-- end lịch sử giải pháp -->
+								</div>
+								<div class="clearfix form-actions" align="right">
+									<button type="button" id="saveData" ng-show="caller.viewForm.status==3 || caller.viewForm.status==5 || caller.viewForm.status==6 || caller.viewForm.status==7"
+										class="btn btn-qlk padding-search-right btn pull-right  saveQLK"
+										ng-click="caller.savePopupGiaiPhap()" translate>Ghi
+										lại</button>
+									<button type="button" id="cancel"
+										class="btn btn-qlk padding-search-right margin_right10 closeQLK btn pull-right"
+										ng-click="caller.cancel()" translate>Hủy bỏ</button>
+								</div>
+							</div>
+							<!-- end giải pháp -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<script>
+	$('#myTab a').click(function (e) {
+	    e.preventDefault();
+	    $(this).tab('show');
+	});
+	
+	$(document).ready(
+			function() {
+				var caller = angular.element(
+						document.getElementById('viewFormId')).scope().caller;
+				if(caller.resultYesForm!=null){
+					$("#information52").val(caller.resultYesForm.information52);
+					/* $("#information431").val(caller.resultYesForm.information431);
+					$("#information432").val(caller.resultYesForm.information432);
+					$("#information433").val(caller.resultYesForm.information433); */
+				}
+				
+				if(caller.resultNoForm!=null){
+					$("#information211").val(caller.resultNoForm.information211);
+					$("#information212").val(caller.resultNoForm.information212);
+					$("#information213").val(caller.resultNoForm.information213);
+					
+					$("#information221").val(caller.resultNoForm.information221);
+					$("#information222").val(caller.resultNoForm.information222);
+					
+					$("#information231").val(caller.resultNoForm.information231);
+					$("#information232").val(caller.resultNoForm.information232);
+					$("#information233").val(caller.resultNoForm.information233);
+					$("#information234").val(caller.resultNoForm.information234);
+					$("#information235").val(caller.resultNoForm.information235);
+					
+					$("#information521").val(caller.resultNoForm.information521);
+					$("#information522").val(caller.resultNoForm.information522);
+					$("#information523").val(caller.resultNoForm.information523);
+					
+					$("#information621").val(caller.resultNoForm.information621);
+					$("#information631").val(caller.resultNoForm.information631);
+					$("#information641").val(caller.resultNoForm.information641);
+				}
+				
+				
+					/* var urlUpload = window.location.protocol + '//'
+								+ window.location.hostname + ':'
+								+ window.location.port;
+
+						function onSuccess(data) {
+							caller.callback(data);
+						}
+
+						
+							$("#customerFile")
+								.kendoUpload(
+										{
+											async : {
+												removeUrl : urlUpload
+														+ API_URL
+														+ "fileservice/removeFileUpload",
+											},
+											select : caller.submitAttachFile,
+											validation : {
+												allowedExtensions : [ ".jpeg",
+														".jpg", ".png", ".doc",
+														".docx", ".xls",
+														".xlsx", ".pdf" ]
+											},
+											success : onSuccess,
+											localization : {
+												uploadSelectedFiles : "Chọn tệp"
+											},
+											multiple : false
+										});
+							$("#soDoFile")
+							.kendoUpload(
+									{
+										async : {
+											removeUrl : urlUpload
+													+ API_URL
+													+ "fileservice/removeFileUpload",
+										},
+										select : caller.submitAttachFileSoDo,
+										validation : {
+											allowedExtensions : [ ".jpeg",
+													".jpg", ".png"]
+										},
+										success : onSuccess,
+										localization : {
+											uploadSelectedFiles : "Chọn tệp"
+										},
+										multiple : false
+									});
+							$("#diaHinhFile")
+							.kendoUpload(
+									{
+										async : {
+											removeUrl : urlUpload
+													+ API_URL
+													+ "fileservice/removeFileUpload",
+										},
+										select : caller.submitAttachFileDiaHinh,
+										validation : {
+											allowedExtensions : [ ".jpeg",
+													".jpg", ".png", ".doc",
+													".docx", ".xls",
+													".xlsx", ".pdf" ]
+										},
+										success : onSuccess,
+										localization : {
+											uploadSelectedFiles : "Chọn tệp"
+										},
+										multiple : false
+									});
+							
+							$("#giaiPhapFile")
+							.kendoUpload(
+									{
+										async : {
+											removeUrl : urlUpload
+													+ API_URL
+													+ "fileservice/removeFileUpload",
+										},
+										select : caller.submitAttachFileGiaiPhap,
+										validation : {
+											allowedExtensions : [ ".jpeg",
+													".jpg", ".png", ".doc",
+													".docx", ".xls",
+													".xlsx", ".pdf" ]
+										},
+										success : onSuccess,
+										localization : {
+											uploadSelectedFiles : "Chọn tệp"
+										},
+										multiple : false
+									}); */
+
+					});
+</script>

@@ -1,0 +1,325 @@
+<style>
+.form-control[readonly]: {
+	background-color: #e5e5e5 !important;
+}
+</style>
+
+<div id="assignHandoverPopupId">
+	<form class="form-horizontal row" role="form" name="addForm"
+		id="addFormId" k-options="validatorOptions">
+		<div class="form-body padding10">
+			<div class="portlet light bordered">
+				<div class="form-body padding10">
+					<div class="row caption" id="thongTinChungSpan">
+						<span class="caption-subject bold lowercase"
+							style="margin-left: 1px !important;" translate>Thông tin
+							chung</span>
+					</div>
+					<div class="portlet light bordered collapse in from-search"
+						id="thongTinChung">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Họ
+									tên khách hàng</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										ng-disabled="!caller.isCreateNew&&!caller.isEdit"
+										ng-model="caller.addForm.customerName" name="customerName"
+										id="customerName" />
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Thời
+									gian đề nghị tư vấn</label>
+								<div class="col-md-8">
+									<input kendo-date-picker k-format="'dd/MM/yyyy'"
+										class=" form-control width100"
+										ng-model="caller.addForm.suggestTime" style="width: 100%;"
+										ng-disabled="!caller.isCreateNew && caller.createdUser!=caller.userLoginId && !caller.isEdit"
+										id="suggestTime" min-year="1000" date-time />
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Số
+									điện thoại</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text" spellcheck="false" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+										ng-disabled="!caller.isCreateNew&&!caller.isEdit" id="customerPhone" ng-change="caller.checkPhoneNumber(caller.addForm.customerPhone)"
+										ng-model="caller.addForm.customerPhone" name="customerPhone"/>
+										<span style="color: red" id="errImpReqMess2">{{caller.validatePhoneMsg}}</span>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Email</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text" ng-disabled="!caller.isCreateNew&&!caller.isEdit"
+										id="customerEmail" ng-model="caller.addForm.customerEmail"
+										name="customerEmail" />
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Năm
+									sinh</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text" ng-disabled="!caller.isCreateNew && caller.createdUser!=caller.userLoginId && !caller.isEdit"
+										ng-model="caller.addForm.birthYear" name="birthYear"
+										id="birthYear" />
+								</div>
+								<script type="text/javascript">
+								$("#birthYear").kendoDatePicker({
+									dateInput : true,
+									format : "yyyy",
+									start : "decade",
+									depth : "decade",
+									date : true
+								});
+							</script>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Tỉnh/thành
+									phố</label>
+								<div class="col-md-8">
+									<input kendo-auto-complete
+										k-options="caller.provinceCodeOptions"
+										class=" form-control width100" type="text" id="provinceCode"
+										ng-disabled="!caller.isCreateNew&&!caller.isEdit"
+										ng-model="caller.addForm.provinceCode" name="provinceCode" ng-blur="caller.changeBlur('provinceCode')"/>
+								</div>
+							</div>
+							
+						</div>
+
+						<div class="clearfix" ng-show="caller.addForm.provinceCode && caller.addForm.provinceCode!=''">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Quận/huyện</label>
+								<div class="col-md-8">
+									<input kendo-auto-complete
+										k-options="caller.districtNameOptions"
+										class=" form-control width100" type="text" id="districtName"
+										ng-disabled="!caller.isCreateNew&&!caller.isEdit"
+										ng-model="caller.addForm.districtName" name="districtName" ng-blur="caller.changeBlur('districtName')"/>
+								</div>
+							</div>
+							<div class="form-group col-md-6" ng-show="caller.addForm.provinceCode">
+								<label class="col-md-4 control-label req" translate>Phường/xã</label>
+								<div class="col-md-8">
+									<input kendo-auto-complete
+										k-options="caller.communeNameOptions"
+										class=" form-control width100" type="text" id="communeName"
+										ng-disabled="!caller.isCreateNew&&!caller.isEdit"
+										ng-model="caller.addForm.communeName" name="communeName" ng-blur="caller.changeBlur('communeName')"/>
+								</div>
+							</div>
+							
+						</div>
+						
+
+						<div class="clearfix">
+							<div class="form-group col-md-6" ng-show="caller.addForm.provinceCode">
+								<label class="col-md-4 control-label" translate>Số nhà,
+									tên đường/phố</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										id="apartmentNumber" ng-disabled="!caller.isCreateNew&&!caller.isEdit"
+										ng-model="caller.addForm.apartmentNumber"
+										name="apartmentNumber" />
+								</div>
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Bộ phận tạo đơn</label>
+								<div class="col-md-8">
+									<select kendo-drop-down-list="applySelect" class="form-control" k-option-label="'CSKH'" ng-blur="focusOut($index)" ng-disabled="!caller.isCreateNew&&!caller.isEdit"
+									 tabindex="2" id="groupOrder" style="width: 100%" name="groupOrder" ng-show="caller.addForm.groupOrder==1" 
+									 ng-model="caller.addForm.groupOrder" readonly></select>
+									<select kendo-drop-down-list="applySelect" class="form-control" k-option-label="'Trung tâm/CNKT'" ng-blur="focusOut($index)" ng-disabled="!caller.isCreateNew&&!caller.isEdit"
+									 tabindex="2" id="groupOrder" style="width: 100%" name="groupOrder" ng-show="caller.addForm.groupOrder==2"
+									 ng-model="caller.addForm.groupOrder" readonly></select>
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix">
+								<div class="form-group col-md-6" ng-disabled="!caller.isCreateNew">
+									<label class="col-md-4 control-label margin_top" translate>Loại
+										khách hàng</label>
+									<div class="col-md-8 margin_top">
+										<input style="float: left;" type="radio" id="b2cId"
+											name="b2cId" ng-model="caller.addForm.partnerType" ng-disabled="caller.addForm.status>3"
+											ng-checked="caller.addForm.partnerType == '1'" value="1" ng-change="caller.checkPhoneNumber(caller.addForm.customerPhone)">
+										<label style="font-weight: 400" for="b2cId"
+											class="padding_radio">Cá nhân</label> <input
+											style="float: left;" type="radio" id="b2bId" name="b2bId"
+											ng-model="caller.addForm.partnerType" ng-disabled="caller.addForm.status>3"
+											ng-checked="caller.addForm.partnerType == '2'" value="2" ng-change="caller.checkPhoneNumber(caller.addForm.customerPhone)">
+										<label style="font-weight: 400" for="b2bId"
+											class="padding_radio">Doanh nghiệp</label>
+									</div>
+								</div>
+						   
+							
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label" translate>Nhu cầu
+										khách hàng</label>
+									<div class="col-md-8">
+										<textarea class=" form-control width100" type="text" rows="4"
+											ng-disabled="!caller.isCreateNew && caller.createdUser!=caller.userLoginId && !caller.isEdit"
+											id="contentCustomer" ng-model="caller.addForm.contentCustomer"
+											name="contentCustomer"></textarea>
+									</div>
+								</div>
+						</div>
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Giao
+									việc cho nhân viên tiếp xúc</label>
+								<div class="col-md-8">
+									<div class="input-icon right ">
+										<i class="fa fa-search directive"
+											ng-click="caller.openStaffPopup('performerName')"></i>
+									</div>
+									<input kendo-auto-complete
+										k-options="caller.performerNameOptions"
+										class=" form-control width100" type="text" id="performerName"
+										ng-disabled="!caller.checkRoleUpdate && !caller.isEdit && !caller.checkRoleUserAssignYctx"
+										ng-model="caller.addForm.performerName" name="performerName" />
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label req" translate>Giao
+									việc cho nhân viên chuẩn bị giải pháp</label>
+								<div class="col-md-8">
+									<div class="input-icon right ">
+										<i class="fa fa-search directive"
+											ng-click="caller.openStaffPopup('solution')"></i>
+									</div>
+									<input kendo-auto-complete
+										k-options="caller.performerSolutionNameOptions"
+										class=" form-control width100" type="text"
+										id="performerSolutionName"
+										ng-disabled="!caller.checkRoleUpdate && !caller.isEdit && !caller.checkRoleUserAssignYctx"
+										ng-model="caller.addForm.performerSolutionName"
+										name="performerSolutionName" />
+								</div>
+							</div>
+							
+						</div>
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Thời gian dự kiến xây dựng</label>
+								<div class="col-md-8">
+									<input kendo-date-picker k-format="'dd/MM/yyyy'"
+										class=" form-control width100"
+										ng-model="caller.addForm.estimatedConstructionTime" style="width: 100%;"
+										ng-disabled="!caller.isCreateNew && !caller.isEdit"
+										id="estimatedConstructionTime" min-year="1000" date-time />
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Ngân sách dự kiến</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										id="estimatedBudget" ng-disabled="!caller.isCreateNew&&!caller.isEdit"
+										ng-model="caller.addForm.estimatedBudget"
+										name="estimatedBudget" />
+								</div>
+							</div>
+						</div>
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Dịch vụ
+									KH đăng ký</label>
+								<div class="col-md-8">
+									<select kendo-drop-down-list style="width: 100%" k-option-label="'~Chọn~'"
+										ng-disabled="!caller.isCreateNew&&!caller.isEdit"
+										ng-model="caller.addForm.registeredCustomerService"
+										k-data-text-field="'name'" k-data-value-field="'name'"
+										k-data-source="caller.registeredCustomerServiceList">
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Mẫu nhà
+									xây dựng</label>
+								<div class="col-md-8">
+									<select kendo-drop-down-list style="width: 100%" k-option-label="'~Chọn~'"
+										ng-disabled="!caller.isCreateNew&&!caller.isEdit"
+										ng-model="caller.addForm.modelOfTheBuilder"
+										k-data-text-field="'name'" k-data-value-field="'name'"
+										k-data-source="caller.modelOfTheBuilderList">
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix">
+							<div class="form-group col-md-6"  ng-show="caller.checkCreatedYCTX==true">
+								<label class="col-md-4 control-label req" translate>Kênh tiếp nhận</label>
+								<div class="col-md-8">
+	                                <select kendo-drop-down-list style="width: 100%"  k-option-label="'~Chọn~'" ng-disabled="!caller.isCreateNew&&!caller.isEdit"
+	                                            ng-model="caller.addForm.receptionChannel" ng-change="caller.changeChannelReception(caller.addForm.receptionChannel)"
+	                                            k-data-text-field="'name'" k-data-value-field="'name'"
+	                                            k-data-source="caller.channelReceptionList">
+	                                </select>
+								</div>
+							</div>
+							<div class="form-group col-md-6" ng-show="((caller.addForm.receptionChannel=='Khác')==true)">
+								<label class="col-md-4 control-label" translate>Nguồn KH biết đến</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text" 
+										id="customerResources" ng-disabled="!caller.isCreateNew&&!caller.isEdit"
+										ng-model="caller.addForm.customerResources"
+										name="customerResources" />
+								</div>
+							</div>
+							
+							<div class="form-group col-md-6" ng-show="!(caller.addForm.receptionChannel=='Khác')">
+								<label class="col-md-4 control-label" translate>Nguồn KH biết đến</label>
+								<div class="col-md-8">
+									<select kendo-drop-down-list style="width: 100%" 
+										ng-disabled="!caller.isCreateNew&&!caller.isEdit"
+	                                            ng-model="caller.addForm.customerResources" 
+	                                            k-data-text-field="'name'" k-data-value-field="'name'"
+	                                            k-data-source="caller.channelCustomerList">
+	                                </select>
+								</div>
+							</div>
+						</div>
+					
+					</div>
+
+					
+					
+					<br>
+					<div class="clearfix form-actions" align="right">
+						<button type="button" id="saveData"
+							class="btn btn-qlk   padding-search-right btn pull-right  saveQLK" ng-disabled="(!caller.isCreateNew && !caller.isEdit && !caller.checkRoleUserAssignYctx) || !caller.validatePhone"
+							ng-click="caller.save()" translate>Ghi lại</button>
+						<button type="button" id="cancel"
+							class="btn btn-qlk padding-search-right margin_right10 closeQLK btn pull-right"
+							ng-click="caller.cancel()" translate>Hủy bỏ</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<script>
+	$(document).ready(
+			function() {
+				var caller = angular.element(
+						document.getElementById('addFormId')).scope().caller;
+				$("#birthYear").val(caller.addForm.birthYear);
+				$("#contentCustomer").val(caller.addForm.contentCustomer);
+			});
+</script>

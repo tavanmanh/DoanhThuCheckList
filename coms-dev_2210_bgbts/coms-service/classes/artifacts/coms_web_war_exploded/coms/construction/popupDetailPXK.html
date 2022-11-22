@@ -1,0 +1,309 @@
+<div ng-init="caller.checkBoxAutoLoad()">
+<div class="portlet light">
+	<button type="button"
+		class="btn green btn-outline button-header-popup"
+		ng-click="caller.gotoTabOnePopUp()" translate>Thông tin chung</button>
+	<button type="button"
+		class="btn green btn-outline button-header-popup"
+		ng-click="caller.gotoTabTwoPopUp()" translate>Thông tin hàng
+		hóa</button>
+	<button type="button"
+		class="btn green btn-outline button-header-popup" ng-hide="caller.synStockTransView"
+		ng-click="caller.gotoTabTherePopUp()" translate>Thông tin trình ký</button>
+<!-- vietnt_24012019_start -->
+	<!-- <button type="button" class="btn blue btn-outline padding-search-right pull-right borderBtn" ng-click="caller.exportNoSerial()" >	
+		<div class="docQLK"></div>
+		<div class="text-button ng-scope" translate="" >Xuất 
+			yêu cầu không Serial</div>
+	</button>
+	<button type="button" class="btn blue btn-outline padding-search-right pull-right borderBtn"
+		ng-click="caller.exportSerial()" >
+		<div class="docQLK" ></div>
+		<div class="text-button ng-scope" translate="">Xuất yêu cầu có
+		Serial</div>
+	</button> -->
+	<button type="button" class="btn blue btn-outline padding-search-right pull-right borderBtn"
+		ng-click="caller.exportNoSerial()" ng-hide="caller.synStockTransView">	
+		<div class="docQLK"></div>
+		<div class="text-button ng-scope" translate="" >Xuất 
+			yêu cầu không Serial</div>
+	</button>
+	<button type="button" class="btn blue btn-outline padding-search-right pull-right borderBtn"
+		ng-hide="caller.synStockTransView" ng-click="caller.exportSerial()" >
+		<div class="docQLK" ></div>
+		<div class="text-button ng-scope" translate="">Xuất yêu cầu có
+		Serial</div>
+	</button>
+<!-- vietnt_24012019_end -->
+</div>
+<div ng-show="caller.tab1">
+	<div class="row border-popup-management">
+		<form class="form-horizontal border-left padding-height-20"
+			role="form">
+			<div class="form-body">
+				<div class="caption clearfix">
+					<span class="caption-subject bold lowercase  pull-left" translate>Thông
+						tin chung</span>
+					<div class="margin-row-title pull-right">
+						<i data-toggle="collapse" data-target="#TTC"
+							class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+					</div>
+				</div>
+				<div id="TTC" class="padding-width18 clearfix">
+					<div class="border-gray">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Mã yêu
+									cầu</label>
+								<div class="col-md-8">
+									<label class="control-label" style="text-decoration: underline;" ng-bind="caller.dataItemPhieuXK.orderCode"></label>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Kho xuất</label>
+								<div class="col-md-8">
+									<label class="control-label" ng-bind="caller.dataItemPhieuXK.stockName"></label>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Mã phiếu</label>
+								<div class="col-md-8">
+									<label class="control-label" ng-bind="caller.dataItemPhieuXK.code"></label>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Người nhận hàng</label>
+								<div class="col-md-8">
+									<label class="control-label" ng-bind="caller.dataItemPhieuXK.shipperName"></label>
+								</div>
+							</div>
+							<div class="form-group col-md-12">
+								<div class="form-group col-md-12">
+									<label class="col-md-2 control-label " translate>Ghi
+										chú</label>
+									<div class="col-md-10">
+									<label class="control-label" ng-bind="caller.dataItemPhieuXK.description"></label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label"  translate>Tình
+									trạng ký CA</label>
+								<div class="col-md-8">
+									<label class="control-label" style="color : #0101DF;">
+										{{caller.dataItemPhieuXK.signState==1?'Chưa trình ký' : caller.dataItemPhieuXK.signState==2?'Đang trình ký' : caller.dataItemPhieuXK.signState==3?'Đã ký duyệt' : caller.dataItemPhieuXK.signState==4?'Từ  chối ký duyệt' : ''}}
+									</label>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label"  translate>Trạng thái phiếu</label>
+								<div class="col-md-8">
+									<label class="control-label" style="color : #0101DF;">
+										{{caller.dataItemPhieuXK.status==1?'Chưa nhập/xuất' : caller.dataItemPhieuXK.status==2?'Đã nhập/xuất' : caller.dataItemPhieuXK.status==3?'Đã hủy' : ''}}
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="">
+					<div class="caption margin-top10 clearfix">
+						<span class="caption-subject bold lowercase" translate>Thông
+							tin bổ sung</span>
+						<div class=" margin-row-title pull-right">
+							<i data-toggle="collapse" data-target="#TTBS"
+								class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+						</div>
+					</div>
+					<div id="TTBS" class="padding-width18 clearfix">
+						<div class="border-gray row">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Người tạo</label>
+								<div class="col-md-8">
+								<label class="control-label" ng-bind="caller.dataItemPhieuXK.createdByName"></label>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Ngày tạo</label>
+								<div class="col-md-8">
+								<label class="control-label" ng-bind="caller.dataItemPhieuXK.createdDate"></label>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Đơn vị tạo</label>
+								<div class="col-md-8">
+								<label class="control-label" ng-bind="caller.dataItemPhieuXK.createdDeptName"></label>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Ngày thực nhập</label>
+								<div class="col-md-8">
+								<label class="control-label" ng-bind="caller.dataItemPhieuXK.realIeTransDate"></label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="caption margin-top10 clearfix">
+					<span class="caption-subject bold lowercase " translate>Thông
+						tin tích hợp</span>
+					<div class=" margin-row-title pull-right">
+						<i data-toggle="collapse" data-target="#TTTH"
+							class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+					</div>
+				</div>
+				<div id="TTTH" class="padding-width18 clearfix">
+					<div class="border-gray">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Tình trạng PM Tài chính</label>
+								<div class="col-md-8">
+									<label class="control-label"
+										ng-bind="caller.dataItemPhieuXK.isSyn"></label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="caption margin-top10 clearfix">
+					<span class="caption-subject bold lowercase " translate>Thông
+						tin hủy phiếu</span>
+					<div class=" margin-row-title pull-right">
+						<i data-toggle="collapse" data-target="#TTHP"
+							class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+					</div>
+				</div>
+				<div id="TTHP" class="padding-width18 clearfix">
+					<div class="border-gray">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Người
+									thực hiện</label>
+								<div class="col-md-8">
+								<label class="control-label"
+										ng-bind="caller.dataItemPhieuXK.cancelByName"></label>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Lý do</label>
+								<div class="col-md-8">
+								<label class="control-label"
+										ng-bind="caller.dataItemPhieuXK.cancelReasonName"></label>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Ngày
+									thực hiện</label>
+								<div class="col-md-8">
+								<label class="control-label"
+										ng-bind="caller.dataItemPhieuXK.cancelDate"></label>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Ghi chú</label>
+								<div class="col-md-8">
+									<label class="control-label"
+										ng-bind="caller.dataItemPhieuXK.cancelDescription"></label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<div ng-show="caller.tab2">
+	<div class="wrap">
+		<div class="fleftdetail col-md-8">
+			<div class="portlet light">
+				<div class="portlet-title">
+					<div class="caption">
+						<span class="caption-subject bold lowercase" translate>Danh
+							sách hàng hóa</span>
+					</div>
+				</div>
+				<div id="goodsListGrid" kendo-grid="caller.goodsListGrid"
+					k-editable="false" k-options="caller.goodsListGridOptions"></div>
+			</div>
+
+		</div>
+		<div class="frightdetail col-md-8">
+			<div class="portlet light">
+				<div class="portlet-title">
+					<div class="caption">
+						<span class="caption-subject bold lowercase" translate>Thông
+							tin chi tiết hàng hóa</span>
+					</div>
+				</div>
+				<div class="clearfix" style="margin-top: 20px;">
+					<div class="form-group">
+						<label class="col-md-3 control-label" translate>Hàng hóa</label>
+						<div class="col-md-9">
+							<label id="nameHangHoa" class="control-label">
+								<!-- {{vm.orderGoodsSearch.goodsState==1?'Bình thường' : vm.orderGoodsSearch.goodsState==2?'Hỏng'}} -->
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="form-group">
+						<label class="col-md-3 control-label" translate>Tình trạng</label>
+						<div class="col-md-9">
+							<label id="trangThai" class="control-label" ></label>
+						</div>
+					</div>
+				</div>
+				<div id="goodsDetailGrid" kendo-grid="caller.goodsDetailGrid"
+					k-editable="false" k-options="caller.goodsDetailGridOptions"></div>
+			</div>
+		</div>
+	</div>
+
+</div>
+<div ng-show="caller.tab3">
+	<div class="row border-popup-management">
+		<form class="form-horizontal border-left padding-height-20"
+			role="form">
+			<div class="form-body">
+				<div class="caption">
+					<span class="caption-subject bold lowercase" translate>Danh sách người ký</span>
+				</div>
+				<div class="padding-width18">
+
+						<div class="clearfix">
+						<div ng-repeat="item in caller.dataItemPhieuXK.dataSign">
+						<div class="form-group">
+							
+								<label class="col-md-3 control-label  text-ter"> {{$index+1}}.{{item.orderName}} 
+							
+								</label>
+								<div class="col-md-9">
+									<label class="control-data">
+									{{item.fullName}}
+									{{item.email==null?'' : ' - '+ item.email}}
+									{{item.phoneNumber==null?' ': ' - '+ item.phoneNumber}}
+									{{item.roleName==null?'' : ' - '+ item.roleName}}
+									</label>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+			</div>
+			</div>
+		</form>
+	</div>
+</div>
+<div class="modal-footer" align="right">
+	<!-- <button type="button" class="btn red btn-outline padding-search-right"
+		ng-click="cancel()" translate>Đóng</button> -->
+	<button type="button" class="btn btn-qlk padding-search-right margin_right10 closeQLK btn pull-right"
+        ng-click="cancel()" translate>Đóng
+    </button>
+</div>
+</div>

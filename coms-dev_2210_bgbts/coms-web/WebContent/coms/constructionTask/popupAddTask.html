@@ -1,0 +1,279 @@
+<form style="padding:25px;" name="form">
+    <div class="form-horizontal form-body">
+        <div class="clearfix ">
+			<div class="form-group col-md-12">
+				<label class="col-md-3 control-label text-right req" translate>Loại
+					công việc</label>
+
+				<div class="col-md-8">
+					<!--<select kendo-drop-down-list style="width: 100%" ng-model="caller.obj.type"-->
+					<!--k-data-text-field="'name'" k-data-value-field="'id'" ng-change="vm.changeType()"-->
+					<!--k-data-source="caller.constrTaskTypeData">-->
+					<!--</select>-->
+					<select kendo-drop-down-list id="typeCons" style="width: 100%"
+						name="typeCons" ng-model="caller.obj.type"
+						k-options="caller.typeConstruction" required>
+					</select>
+				</div>
+			</div>
+		</div>
+		
+        <!-- chinhpxn20180622 -->
+		<div class="clearfix" ng-show="caller.obj.type==3">
+			<div class="form-group col-md-12">
+				<label class="col-md-3 control-label text-right req" translate>Loại</label>
+
+				<div class="col-md-8">
+					<input style="float: left;" type="radio" id="taskOrder1"
+						ng-click="caller.genTaskName()" name="taskOrder1"
+						ng-model="caller.obj.taskOrder"
+						ng-checked="caller.obj.taskOrder == 1" value="1"> <label
+						style="font-weight: 400" for="taskOrder1" class="padding_radio">Tạo
+						đề nghị quyết toán</label> <input style="float: left;" type="radio"
+						id="taskOrder2" ng-click="caller.genTaskName()" name="taskOrder2"
+						ng-model="caller.obj.taskOrder"
+						ng-checked="caller.obj.taskOrder == 2" value="2"> <label
+						style="font-weight: 400" for="taskOrder2" class="padding_radio">Lên
+						doanh thu</label>
+				</div>
+			</div>
+		</div>
+		
+		<div class="clearfix" ng-show="caller.obj.type==1">
+			<div class="form-group col-md-12">
+				<label class="col-md-3 control-label text-right" translate>Tỉnh	</label>
+
+				<div class="col-md-8">
+					<div class="input-icon right ">
+						<i class="fa fa-search directive"
+							ng-click="caller.openCatProvincePopup('6')"></i>
+					</div>
+					<input class=" form-control width100" type="text"
+						ng-model="caller.obj.provinceName" kendo-auto-complete
+						k-options="caller.provinceOptions" />
+					<div class="One_icon">
+						<i class="fa fa-times" aria-hidden="true"
+							ng-click="caller.clearInput('10')"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row " ng-show="caller.obj.type==3 || caller.obj.type==2">
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-label text-right req" ng-show="caller.obj.type==3" translate>Giá trị</label>
+                <label class="col-md-3 control-label text-right req" ng-show="caller.obj.type==2" translate>Sản lượng (Triệu VND)</label>
+                <div class="col-md-8">
+                    <input  ng-disabled="caller.disableInputSL" class=" form-control width100" type="number"
+                            ng-model="caller.obj.quantity" id="quantity"/>
+                    <div class="One_icon">
+                        <i class="fa fa-times" aria-hidden="true"
+                           ng-click="caller.clearInput('6')"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- chinhpxn20180622 -->
+
+
+		<div class="row ">
+			<div class="form-group col-md-12">
+				<label class="col-md-3 control-label text-right req " translate
+					ng-hide="caller.obj.type==6">Công trình</label> <label
+					class="col-md-3 control-label text-right " translate
+					ng-show="caller.obj.type==6">Công trình</label>
+				<div class="col-md-8">
+					<div class="input-icon right ">
+						<i class="fa fa-search directive"
+							ng-click="caller.openTaskPopup('0')"></i>
+					</div>
+					<!-- <input class=" form-control width100" type="text"
+						ng-change="caller.genTaskName()"
+						ng-model="caller.obj.constructionCode" kendo-auto-complete
+						k-options="caller.constructionOptions" /> -->
+					<input class=" form-control width100" type="text"
+						ng-model="caller.obj.constructionCode" kendo-auto-complete
+						k-options="caller.constructionOptions" />
+					<div class="One_icon">
+						<i class="fa fa-times" aria-hidden="true"
+							ng-click="caller.clearInput('0')"></i>
+					</div>
+				</div>
+				<div class="col-md-1" style="padding-left: 0px !important" ng-show = "caller.obj.type==1">
+					<button class="btn btn-infor btn-sm" style="margin-top: -10%"
+						ng-click='caller.addWorkItem()'
+						ng-disabled='!caller.isDisableAssign'>Gán hạng mục</button>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Huypq-20200430-start -->
+		<div class="clearfix " ng-show="caller.obj.type==1 || caller.obj.type==3">
+			<div class="form-group col-md-12">
+				<label class="col-md-3 control-label text-right req" translate>Nguồn việc</label>
+				<div class="col-md-8">
+					<select kendo-drop-down-list id="sourceWork" style="width: 100%"
+						name="sourceWork" ng-model="caller.obj.sourceWork"
+						k-options="caller.sourceWorkLst" required>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix " ng-show="caller.obj.type==1 || caller.obj.type==3">
+			<div class="form-group col-md-12">
+				<label class="col-md-3 control-label text-right req" translate>Loại
+					công trình</label>
+				<div class="col-md-8">
+					<select kendo-drop-down-list id="constructionTypeNew" style="width: 100%"
+						name="constructionTypeNew" ng-model="caller.obj.constructionTypeNew"
+						k-options="caller.constructionTypeLst" required>
+					</select>
+				</div>
+			</div>
+		</div>
+		<!-- Huy-end -->
+		
+		<!-- <div class="row " ng-show="caller.obj.type==1">
+         <div class="form-group col-md-12">
+            <label class="col-md-3 control-label text-right req" translate>Hạng mục</label>
+            <div class="col-md-8">
+                <div class="input-icon right ">
+                    <i class="fa fa-search directive"
+                       ng-click="caller.openTaskPopup('1')"></i>
+                </div>
+                <input class=" form-control width100" type="text" 
+                       ng-model="caller.obj.workItemName" kendo-auto-complete k-options="caller.workItemOptions"/>
+                <div class="One_icon">
+                    <i class="fa fa-times" aria-hidden="true"
+                       ng-click="caller.clearInput('1')"></i>
+                </div>
+            </div>
+         </div>
+        </div> -->
+        
+        <div class="row " ng-hide="caller.obj.type==1 || caller.obj.type==2 || caller.obj.type==3 || caller.obj.type==6">
+        <div class="form-group col-md-12">
+            <label class="col-md-3 control-label text-right req" ng-hide="caller.obj.type==1" translate>Công việc</label>
+            <!-- <label class="col-md-3 control-label text-right" ng-show="caller.obj.type==1" translate>Công việc</label> -->
+            <div class="col-md-8">
+                <div class="input-icon right ">
+                    <i class="fa fa-search directive"
+                       ng-click="caller.openTaskPopup('2')"></i>
+                </div>
+                <input  class=" form-control width100" type="text"
+                       ng-model="caller.obj.taskName" kendo-auto-complete k-options="caller.catTaskOptions"/>
+                <div class="One_icon">
+                    <i class="fa fa-times" aria-hidden="true"
+                       ng-click="caller.clearInput('2')"></i>
+                </div>
+            </div>
+            </div>
+        </div>
+
+		<div class="row " ng-show="caller.obj.type==2 || caller.obj.type==3 || caller.obj.type==6">
+        <div class="form-group col-md-12">
+            <label class="col-md-3 control-label text-right req" >Công việc</label>
+            <div class="col-md-8">
+                <textarea class=" form-control width100" rows="4" ng-model="caller.obj.taskName"></textarea>
+            </div>
+        </div>
+        </div>
+        <div class="row " >
+        <div class="form-group col-md-12">
+            <label class="col-md-3 control-label text-right req" translate>Người thực hiện</label>
+            <div class="col-md-8">
+                <div class="input-icon right ">
+                    <i class="fa fa-search directive"
+                       ng-click="caller.openTaskPopup('3')"></i>
+                </div>
+                <input 
+                       class=" form-control width100" type="text"
+                       ng-model="caller.obj.performerName" kendo-auto-complete k-options="caller.catTaskOptions1" />
+
+                <div class="One_icon">
+                    <i class="fa fa-times" aria-hidden="true"
+                       ng-click="caller.clearInput('3')"></i>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="row" align="center"><div id="fuckThisShit" style="height:30px; display:block"></div></div>
+        
+		<div class="row " ng-show="caller.obj.type==1">
+			<div class="form-group col-md-12 " style="margin-bottom: 50px;">
+				<label class="col-md-3 control-label text-right req" translate>Hạng
+					mục</label>
+				<div class="col-md-8" style="padding: 0px 8px">
+					<div id="workItemAddingGrid" kendo-grid="caller.workItemAddingGrid"  
+					k-options="caller.gridOptions" k-rebind = "caller.gridOptions"
+						k-on-change="caller.onGridChange(kendoEvent, { selected: selected }, data)"></div>
+
+				</div>
+			</div>
+		</div>
+        <div class="clearfix " ng-show="caller.obj.type !=1">
+            <div class="col-md-12 form-group">
+                <label class="col-md-3 control-label text-right req" translate>Thời gian từ ngày</label>
+                <div class="col-md-8" style="padding: 0px;">
+                    <div class="col-md-5" >
+                    <!-- chinhpxn_20180714_start -->
+                        <input  kendo-date-picker  k-format="'dd/MM/yyyy'"date-time id="startDate" name="startDate"
+                                ng-model="caller.obj.startDate" style="width: 100%;" ng-blur="validateDate(caller.obj.startDate, null, caller.obj.endDate, form.startDate, form.endDate)" placeholder="DD/MM/YYYY"/>
+                    <!-- chinhpxn_20180714_end -->
+                        <div class="One_icon" >
+                            <i class="fa fa-times" aria-hidden="true"
+                               ng-click="caller.clearInput('4',form.startDate)"></i>
+                        </div>
+                        <div class="error" ng-messages="form.startDate.$error">
+                            <label ng-message="date" class="control-data" translate>Thời gian từ ngày không hợp lệ</label>
+                            <label ng-message="max" class="control-data" translate>Thời gian từ ngày không được lớn hơn Thời gian đến ngày</label>
+                        </div>
+                    </div>
+                <label class="col-md-2 control-label text-center req" >Đến </label>
+
+                    <div class="col-md-5" >
+                    <!-- chinhpxn_20180714_start -->
+                        <input  kendo-date-picker  k-format="'dd/MM/yyyy'"date-time id="endDate" name="endDate"
+                                ng-model="caller.obj.endDate" style="width: 100%;" ng-blur="validateDate(caller.obj.endDate, caller.obj.startDate, null, form.endDate, form.startDate)" placeholder="DD/MM/YYYY"/>
+                    <!-- chinhpxn_20180714_end -->
+                        <div class="One_icon" >
+                            <i class="fa fa-times" aria-hidden="true"
+                               ng-click="caller.clearInput('5',form.endDate)"></i>
+                        </div>
+                        <div class="error" ng-messages="form.endDate.$error">
+                            <label ng-message="date" class="control-data" translate>Thời gian đến ngày không hợp lệ</label>
+                            <label ng-message="min" class="control-data" translate>Thời gian đến ngày không được nhỏ hơn Thời gian từ ngày</label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row modal-footer">
+            <div class="col-md-12 ">
+                <button type="button"
+                        class="btn btn-qlk padding-search-right closeQLK" id="cancel"
+                        ng-click="caller.closePopup()" translate>Hủy bỏ
+                </button>
+                <button type="button" id="savepopupApp"
+                        class="btn btn-qlk padding-search-right saveQLK" ng-disabled = "caller.isDisable"
+                        ng-click="caller.saveConstructionTask(caller.obj)"
+                        translate>Ghi lại
+                </button>
+            </div>
+        </div>
+    </div>
+</form> 
+
+<style>
+.loadersmall {
+  border: 5px solid #f3f3f3 !important;
+  -webkit-animation: spin 0.4s linear infinite !important;
+  animation: spin 0.4s linear infinite !important;
+  border-top: 2px solid #555 !important;
+  border-radius: 50% !important;
+  width: 60px !important;
+  height: 60px !important;
+}
+</style>

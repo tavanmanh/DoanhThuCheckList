@@ -1,0 +1,237 @@
+<form name="form" class="form-horizontal row " role="form"
+       kendo-validator="validator"
+      k-options="validatorOptions" style="">
+    <div class="form-body ">
+        <div class="portlet-title">
+            <div class="caption">
+                <span class="caption-subject bold lowercase" translate>Thông tin chung</span>
+            </div>
+        </div>
+
+        <div class="padding-width18">
+            <div class="border-gray">
+                <div class="clearfix">
+                    <div class="form-group col-md-6">
+                        <label class="col-md-4 control-label" translate>Mã tỉnh</label>
+                        <div class="col-md-8">
+                            <label id="provinceCode"class=" control-data width100"
+                                    >{{caller.constrObj.catProvinceCode}}</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="col-md-4 control-label" translate>Mã trạm</label>
+
+                        <div class="col-md-8">
+                            <label  class=" control-data width100"
+                                    >{{caller.constrObj.catStationCode}}</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <div class="form-group col-md-6">
+                        <label class="col-md-4 control-label" translate>Mã công trình</label>
+
+                        <div class="col-md-8">
+                            <label  class=" control-data width100">{{caller.constrObj.constructionCode}}</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="col-md-4 control-label" translate>Hợp đồng đầu ra</label>
+
+                        <div class="col-md-8">
+
+                            <label  class=" control-data width100"
+                                    >{{caller.constrObj.cntContract}}</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <div class="form-group col-md-6">
+                        <label class="col-md-4 control-label" translate>Người thực hiện</label>
+
+                        <div class="col-md-8">
+                            <label  class=" control-data width100"
+                                    >{{caller.constrObj.performerName}}</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="col-md-4 control-label" translate>Tỉnh trưởng phụ trách</label>
+
+                        <div class="col-md-8">
+                            <label  class=" control-data width100"
+                                    >{{caller.constrObj.supervisorName}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="form-group col-md-6">
+                        <label class="col-md-4 control-label" translate>Ngày thực hiện</label>
+
+                        <div class="col-md-8">
+                            <label  class=" control-data width100"
+                                    >{{caller.constrObj.startDate | date:'d/M/yyyy'}} - {{caller.constrObj.endDate | date:'d/M/yyyy'}}</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="col-md-4 control-label" translate>Phó giám đốc chuyên trách</label>
+
+                        <div class="col-md-8">
+                            <label  class=" control-data width100"
+                                    >{{caller.constrObj.directorName}}</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <div class="form-group col-md-6">
+                        <label class="col-md-4 control-label" translate>Ghi chú</label>
+
+                        <div class="col-md-8">
+                            <label  class=" control-data width100"
+                                    >{{caller.constrObj.description}}</label>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="portlet-title">
+            <div class="caption">
+                <span class="caption-subject bold lowercase" translate>Thông tin thực hiện hạng mục</span>
+            </div>
+        </div>
+        <div class="col-md-12 text-right " style="margin-top: 5px;">
+            <label class="caption-subject lowercase"  translate style="margin-right: 20px;">Tổng giá trị doanh thu: {{caller.sumHSHC}}</label>
+        </div>
+        <div class="padding-width18">
+            <div class="border-gray">
+                <div class="collapse in from-search " style="margin-top: 20px;">
+                    <div class="clearfix position-relative">
+                        <div id="constructionDTGrid" kendo-grid="caller.constructionDTGrid" k-editable="false"
+                             k-options="caller.constructionDTGridOptions"
+                                ></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="portlet-title">
+            <div class="caption">
+                <span class="caption-subject bold lowercase" translate>Danh sách file đính kèm</span>
+            </div>
+        </div>
+        <div class="padding-width18">
+            <div class="border-gray">
+            <div class="row file-inport">
+                <div class="wrapper-input">
+                    <center><span style="color:gray; margin: auto;">Dung lượng &#60;&#61; 100MB, định dạng xls, xlsx, docx, doc, pdf</span>
+                    </center>
+                    <div class="k-button k-upload-button">
+                        <input class="file-input k-valid" name="fileBGMB" type="file"
+                               kendo-upload="" id="fileBGMB" tabindex="10" onchange="angular.element(this).scope().onSelectBGMBFile()"
+                               data-role="upload" multiple="multiple" autocomplete="off">
+                        <span id="fileNameBGMB">Kéo thả các file vào đây hoặc click để chọn file</span>
+                    </div>
+                </div>
+                <div class="clearfix position-relative">
+                    <div id="BGMBgrid"
+                         kendo-grid="caller.BGMBgrid" k-editable="false"
+                         k-options="caller.BGMBgridOptions">
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+            <div class="portlet-title">
+                <div class="caption">
+                    <span class="caption-subject bold lowercase" translate>Thông tin phê duyệt</span>
+                </div>
+            </div>
+            <div class="padding-width18">
+                <div class="border-gray">
+                    <div class="clearfix">
+                        <div class="form-group col-md-6">
+                            <label class="col-md-4 control-label" translate>Người phê duyệt</label>
+                            <div class="col-md-8">
+                                <label id="provinceCode"class=" control-data width100"
+                                        >{{caller.constrObj.approveUserName}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-md-4 control-label" translate>Trạng thái</label>
+
+                            <div class="col-md-8">
+                                <label  class=" control-data width100"
+                                        >{{caller.consAppRevenueStatetoString}}</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix">
+                        <div class="form-group col-md-6">
+                            <label class="col-md-4 control-label" translate>Ngày phê duyệt</label>
+
+                            <div class="col-md-8">
+                                <label  class=" control-data width100">{{caller.constrObj.dateComplete}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-md-4 control-label" translate>Ghi chú</label>
+
+                            <div class="col-md-8">
+
+                                <label  class=" control-data width100"
+                                        >{{caller.constrObj.approveRevenueDescription}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <button type="button"
+                        class="btn btn-qlk padding-search-right closeQLK" id="cancel"
+                        ng-click="caller.cancelPopup()" translate>Đóng
+                </button>
+                <button type="button" ng-show="data.consAppRevenueState == 1"
+                        id="savepopupAppQuantity"
+                        class="btn btn-qlk padding-search-right  "
+                        ng-click="caller.cancelDT2(data)"
+                        translate>Từ chối</button>
+                <button type="button" ng-show="data.consAppRevenueState == 2 || data.consAppRevenueState == 3"
+                        class="btn btn-qlk padding-search-right  cancel_confirm_quantity"
+                        id="cancelAppQuantity"
+                        ng-click="caller.callback(data)" translate>Undo
+                </button>
+                <button type="button" ng-show="data.consAppRevenueState == 1"
+                        class="btn btn-qlk padding-search-right  confirmpopupApp"
+                        id ="confirmpopupApp"
+                        ng-click="caller.approveDT(data)"
+                        translate>Phê duyệt</button>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $("input").change(function() {
+                $(this).val($.trim($(this).val()));
+            });
+            document.onkeydown = keyDown;
+            function keyDown(e) {
+                switch (e.keyCode) {
+                    case 27:
+                        $("#cancel").click();
+                        break;
+                    case 13:
+                        if (e.keyCode === 13 && !$('#cancel:focus').length
+                                && !$('#savepopupApp:focus').length) {
+                            $("#savepopupApp").click();
+                            break;
+                        }
+                }
+            }
+        </script>
+
+        </div>
+    </div>
+</form>

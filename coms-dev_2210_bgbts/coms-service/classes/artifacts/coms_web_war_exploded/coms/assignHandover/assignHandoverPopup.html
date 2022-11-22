@@ -1,0 +1,284 @@
+<!--VietNT_20181206_created-->
+<style>
+    .portlet-title {
+        font-size: 120%;
+        padding: 10px;
+    }
+
+    .k-link {
+        margin-top: -3px;
+    }
+
+    .k-upload-files, .k-upload-status {
+        display: none;
+    }
+    #assignHandoverPopup {
+    	min-width: 200px;
+		min-height: 200px;
+    }
+</style>
+<div id="assignHandoverPopup">
+    <form class="form-horizontal row" role="form" name="addForm" id="addForm" kendo-validator="validator"
+          k-options="validatorOptions">
+<!--         <div class="form-horizontal  padding-height-20  col-md-12 col-lg-10" role="form"> -->
+			<div class="form-body padding10">
+			<div class="portlet light bordered">
+			<div class="portlet-title background-title">
+				<div class="caption">
+					<span class="caption-subject bold lowercase" translate>Thông tin giao việc</span>
+				</div>
+			</div>
+
+            <div class="form-body padding10">
+            <div class="portlet light bordered collapse in from-search">
+                <div class="clearfix">
+                    <div class="form-group col-md-6">
+                        <label class="col-md-4 control-label req" translate>Đơn vị</label>
+                        <div class="col-md-8">
+                            <div class="input-icon right ">
+                                <i class="fa fa-search directive"
+                                   ng-click="caller.openDepartmentTo('add')"></i>
+                            </div>
+                            <input kendo-auto-complete k-options="caller.deptAddOptions"
+                                   class=" form-control width100" type="text" 
+                                   ng-model="caller.assignHandover.sysGroupText" name="deptAdd" id="deptAdd"
+                                   ng-blur="caller.validateAddDept()"
+                                   ng-change="caller.validateAddDept()"/>
+                                   <!--ng-blur="caller.validateAddDept()"/>-->
+                                   <!--required data-required-msg="Đơn vị không để trống"/>-->
+                            <!--<span data-for="deptAdd" class="k-invalid-msg"></span>-->
+                            <span style="color: red">{{caller.errDeptAddMsg}}</span>
+                            <div class="One_icon">
+                                <i class="fa fa-times" aria-hidden="true"
+                                   ng-click="caller.resetFormAdd('sysGroup')"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="col-md-4 control-label" translate>Mã nhà trạm</label>
+                        <div class="col-md-8">
+                            <div class="input-icon right ">
+                                <i class="fa fa-search directive" 
+                                   ng-hide="caller.isSelectConstruction"
+                                   ng-click="caller.openCatStationHouseTo()"></i>
+                            </div>
+                            <input kendo-auto-complete k-options="caller.catStationHouseOptions"
+                                   class=" form-control width100" type="text"
+                                   ng-readonly="caller.isSelectConstruction"
+                                   ng-model="caller.assignHandover.catStationHouseCode" name="stationHouse"
+                                   id="stationHouse"/>
+                                   <!--required data-required-msg="Mã nhà trạm không được để trống"/>-->
+                            <!--<span data-for="stationHouse" class="k-invalid-msg"></span>-->
+                            <!--<span style="color: red">{{caller.errStationHouseMsg}}</span>-->
+                            <div class="One_icon">
+                                <i class="fa fa-times" aria-hidden="true"
+                                   ng-click="caller.resetFormAdd('catStationHouse')"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="clearfix">
+                    <div class="form-group col-md-6">
+                        <label class="col-md-4 control-label" translate>Có Thiết kế</label>
+                        <div class="col-md-8">
+                            <input style="float: left;" type="checkbox" name="isDesign" id="cbDesign"
+                                   ng-true-value="1" ng-false-value="0" ng-model="caller.assignHandover.isDesign"
+                                   value="1" class="ng-pristine ng-untouched ng-valid"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="col-md-4 control-label" translate>Mã trạm</label>
+                        <div class="col-md-8">
+                            <div class="input-icon right ">
+                                <i class="fa fa-search directive"
+                                   ng-hide="caller.isSelectConstruction"
+                                   ng-click="caller.openPopupCatStation()"></i>
+                            </div>
+                            <input kendo-auto-complete k-options="caller.catStationOptions"
+                                   class=" form-control width100" type="text"
+                                   ng-readonly="caller.isSelectConstruction"
+                                   ng-model="caller.assignHandover.catStationCode" name="station"/>
+                            <!--<span style="color: red">{{caller.errStationMsg}}</span>-->
+                                   <!--required data-required-msg="Mã trạm không được để trống"/>-->
+                            <!--<span data-for="station" class="k-invalid-msg"></span>-->
+                            <div class="One_icon">
+                                <i class="fa fa-times" aria-hidden="true"
+                                   ng-click="caller.resetFormAdd('catStation')"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <div class="form-group col-md-6"></div>
+                    <div class="form-group col-md-6">
+                        <label class="col-md-4 control-label req" translate>Mã công trình</label>
+                        <div class="col-md-8">
+                            <div class="input-icon right ">
+                                <i class="fa fa-search directive"
+                                   ng-click="caller.openPopupConstruction()"></i>
+                            </div>
+                            <input kendo-auto-complete k-options="caller.constructionPopupOptions"
+                                   class=" form-control width100" type="text"
+                                   ng-model="caller.assignHandover.constructionCode" name="construction"
+                                   ng-blur="caller.validateAddConstruction()"
+                                   ng-change="caller.validateAddConstruction()"/>
+                                   <!--ng-blur="caller.validateAddConstruction()"/>-->
+                                   <!--required data-required-msg="Mã công trình không được để trống"/>-->
+                            <!--<span data-for="construction" class="k-invalid-msg"></span>-->
+                            <span style="color: red">{{caller.errConstructionMsg}}</span>
+                            <div class="One_icon">
+                                <i class="fa fa-times" aria-hidden="true"
+                                   ng-click="caller.resetFormAdd('construction')"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                
+
+                <!--<div class="clearfix form-actions margin-top">-->
+                <!--<div class="row">-->
+                <!--<div class="col-md-12 text-right">-->
+                <!--<button type="button" class="btn btn-qlk padding-search-right closeQLK" id="cancel"-->
+                <!--ng-click="caller.cancel()" translate>Hủy bỏ-->
+                <!--</button>-->
+                <!--<button type="button" id="savepopupUnit" class="btn btn-qlk padding-search-right saveQLK"-->
+                <!--ng-click="save()" translate>Ghi lại-->
+                <!--</button>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <div class="portlet light">
+                    <div class="portlet-title background-title">
+                        <div class="caption">
+							<span class="caption-subject bold lowercase ng-scope" translate="">Danh sách file đính kèm</span>
+                        </div>
+                        <div class="text-right margin-row-title">
+                            <i data-toggle="collapse" data-target="#upload"
+                               class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div id="upload" class="portlet light bordered collapse in from-search">
+                        <div>
+                            <div id="upload2" class="portlet light  collapse in from-search">
+                                <div>
+                                    <div>
+                                        <center>Kéo thả các file vào đây hoặc click để chọn file
+                                        </center>
+                                    </div>
+                                    <div class="clearfix">
+                                        <div class="form-group col-md-12">
+                                            <div class="col-md-12 k-content">
+                                                <input class="col-md-12" name="attachfile" id="attachfile"
+                                                       k-select="caller.submitAttachFile" type="file"
+                                                       list-file-type="doc,docx,pdf"/>
+
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <center>
+								<span style="color: gray">Dung lượng &#60;&#61; 100MB,
+									định dạng doc,docx,pdf</span>
+                                        </center>
+                                        <div class="clearfix">
+                                            <div id="attachFileGrid" kendo-grid="caller.attachFileGrid"
+                                                 k-options="caller.attachFileGridOptions" k-editable="false"
+                                                 k-on-change="onGridChange(kendoEvent, { selected: selected }, data)"></div>
+                                        </div>
+                                        <script>
+                                            $(document).ready(
+                                                function () {
+                                                    var caller = angular
+                                                        .element(document.getElementById('assignHandoverPopup'))
+                                                        .scope().caller;
+                                                    var urlUpload = window.location.protocol
+                                                        + '//'
+                                                        + window.location.hostname
+                                                        + ':'
+                                                        + window.location.port;
+
+                                                    function onSuccess(data) {
+                                                        caller.callback(data);
+                                                    }
+
+                                                    //	setTimeout(function(){
+                                                    $("#attachfile").kendoUpload(
+                                                        {
+                                                            async: {
+                                                                /* saveUrl : urlUpload
+                                                                        + API_URL
+                                                                        + "fileservice/uploadATTT", */
+                                                                removeUrl: urlUpload
+                                                                    + API_URL
+                                                                    + "fileservice/removeFileUpload",
+                                                                /* autoUpload : true */
+
+                                                            },
+                                                            select: caller.submitAttachFile,
+                                                            validation: {
+                                                                allowedExtensions: [".doc", ".docx", ".pdf"]
+                                                            },
+                                                            success: onSuccess,
+                                                            localization: {
+                                                                uploadSelectedFiles: "Chọn tệp"
+                                                            },
+                                                            multiple: false
+                                                        });
+                                                });
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer" align="right">
+                    <button type="button" id="saveData" 
+                            class="btn btn-qlk   padding-search-right btn pull-right  saveQLK"
+                            ng-click="caller.save()" translate>Ghi lại
+                            <!-- ng-disabled="caller.disableAdd" -->
+                    </button>
+                    <button type="button" id="cancel"
+                            class="btn btn-qlk padding-search-right margin_right10 closeQLK btn pull-right"
+                            ng-click="caller.cancel()" translate>Hủy bỏ
+                    </button>
+                </div>
+            </div>
+<!--         </div> -->
+<!--upload-->
+                
+
+        <!--<script type="text/javascript">-->
+        <!--$("input").change(function () {-->
+        <!--$(this).val($.trim($(this).val()));-->
+        <!--});-->
+        <!--document.onkeydown = keyDown;-->
+
+        <!--function keyDown(e) {-->
+        <!--switch (e.keyCode) {-->
+        <!--case 27:-->
+        <!--$("#cancel").click();-->
+        <!--break;-->
+        <!--case 13:-->
+        <!--if (e.keyCode == 13 && !$('#cancel:focus').length && !$('#savepopupUnit:focus').length) {-->
+
+        <!--$("#savepopupUnit").click();-->
+
+        <!--break;-->
+        <!--}-->
+        <!--}-->
+        <!--}-->
+
+        <!--</script>-->
+        </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,297 @@
+<!--VietNT_20181205_start-->
+<style>
+    html {
+        overflow-y: scroll;
+    }
+
+    .no-padding {
+        padding: 0;
+    }
+    .btnHandover {
+        background-size: 22px 22px;
+        background: url('../../coms-web/assets/layouts/layout/img/input/accept.png') no-repeat 7px 5px;
+        width: 100px;
+        height: 30px;
+    }
+</style>
+<div data-ng-controller="assignHandoverNVController as vm">
+    <p class="text-brecum">{{vm.String}}</p>
+    <form class="form-horizontal row" role="form" id="assignHandoverSearch">
+
+        <div class="form-body">
+            <div class="portlet light bordered">
+                <div class="portlet-title background-title">
+                    <div class="caption">
+                        <span class="caption-subject bold lowercase" translate>Thông tin tìm kiếm </span>
+                    </div>
+                    <div class="text-right margin-row-title">
+                        <i data-toggle="collapse" data-target="#assignHandover"
+                           class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div id="assignHandover" class="collapse in from-search">
+                    <div class="clearfix position-relative">
+                        <!--row 1-->
+                        <div class="clearfix">
+                            <!--keysearch-->
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label" translate>Nội dung tìm kiếm</label>
+                                <div class="col-md-8">
+                                    <input id="keySearch" class=" form-control width100" type="text"
+                                           ng-model="vm.searchForm.keySearch"
+                                           placeholder="Mã trạm/ Công trình/ Hợp đồng"/>
+                                </div>
+                            </div>
+
+                            <!--receive_status-->
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 form-horizontal control-label " translate>Trạng thái nhận
+                                    BGMB</label>
+                                <div class="col-md-8" ng-enter="vm.doSearch()">
+                                    <select kendo-multi-select style="width: 100%"
+                                            ng-model="vm.searchForm.receivedStatusList"
+                                            k-data-text-field="'name'" k-data-value-field="'id'"
+                                            k-data-source="vm.receivedStatusDataList">
+                                    </select>
+                                    <div class="One_icon">
+                                        <i class="fa fa-times" aria-hidden="true"
+                                           ng-click="vm.resetFormFieldReceiveStatus()"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--row 2-->
+                        <div class="clearfix">
+                            <!--performent_id-->
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label" translate>Nhân viên nhận</label>
+                                <div class="col-md-8">
+                                    <div class="input-icon right ">
+                                        <i class="fa fa-search directive"
+                                           ng-click="vm.openSysUserPopup()"></i>
+                                    </div>
+                                    <input kendo-auto-complete k-options="vm.sysUserOptions"
+                                           class=" form-control width100" type="text"
+                                           ng-model="vm.searchForm.fullName" name="performent"/>
+                                    <span id="msg"
+                                          data-for='dvn1'
+                                          class='k-invalid-msg'></span>
+                                    <div class="One_icon">
+                                        <i class="fa fa-times" aria-hidden="true"
+                                           ng-click="vm.resetFormFieldPerforment()"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--out_of_date_construction-->
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label" translate>Trạng thái quá hạn thì công</label>
+                                <div class="col-md-8" ng-enter="vm.doSearch()">
+                                    <select kendo-drop-down-list style="width: 100%"
+                                            ng-model="vm.searchForm.outOfDateConstruction"
+                                            k-data-text-field="'name'" k-data-value-field="'id'"
+                                            k-data-source="vm.outOfDateConstructionDataList">
+                                    </select>
+                                    <div class="One_icon">
+                                        <i class="fa fa-times" aria-hidden="true"
+                                           ng-click="vm.resetFormFieldOutOfDateConstruction()"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--row 3-->
+                        <div class="clearfix">
+                            <!--construction_code-->
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label" translate>Mã công trình</label>
+                                <div class="col-md-8" ng-enter="vm.doSearch()">
+                                    <input type="file" id="fileSearchStation" accept=".xls, .xlsx">
+                                    <div style="position: absolute;top: 3px;right: 20px;font-size: 11px">
+                                        <a href="" ng-click="vm.getStationCodeTemplate()"><u>Tải biểu mẫu</u></a>
+                                    </div>
+                                    <div class="One_icon">
+                                        <i class="fa fa-times" aria-hidden="true" ng-click="vm.resetFormFile()"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--construction_status-->
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 form-horizontal control-label " translate>Trạng thái thi công</label>
+                                <div class="col-md-8" ng-enter="vm.doSearch()">
+                                    <select kendo-multi-select style="width: 100%"
+                                            ng-model="vm.searchForm.constructionStatusList"
+                                            k-data-text-field="'name'" k-data-value-field="'id'"
+                                            k-data-source="vm.constructionStatusDataList">
+                                    </select>
+                                    <div class="One_icon">
+                                        <i class="fa fa-times" aria-hidden="true"
+                                           ng-click="vm.resetFormFieldConstructionStatus()"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--row 4-->
+                        <div class="clearfix">
+                            <!--company_assign_date-->
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label" translate>Ngày HT giao việc từ ngày</label>
+                                <div class="col-md-8">
+                                    <div class="col-md-5 no-padding position-relative">
+                                        <input kendo-date-picker k-format="'dd/MM/yyyy'"
+                                               ng-model="vm.searchForm.dateFrom"
+                                               style="width: 100%;" id="dateFrom"
+                                               ng-change="vm.validateDateField('dateFrom')"
+                                               min-year="1000" date-time/>
+                                        <span style="color: red">{{vm.dateFromErr}}</span>
+                                    </div>
+                                    <div class="col-md-2" style="text-align: center;">
+                                        <label class="control-label"
+                                               translate>đến</label></div>
+                                    <div class="col-md-5 no-padding position-relative">
+                                        <input kendo-date-picker k-format="'dd/MM/yyyy'"
+                                               ng-model="vm.searchForm.dateTo"
+                                               style="width: 100%;" id="dateTo"
+                                               ng-change="vm.validateDateField('dateTo')"
+                                               min-year="1000" date-time/>
+                                        <span style="color: red">{{vm.dateToErr}}</span>
+                                    </div>
+                                    <div class="One_icon">
+                                        <i class="fa fa-times" aria-hidden="true"
+                                           ng-click="vm.resetFormFieldDate()"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--department_assign_date-->
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label" translate>Ngày CN giao việc từ ngày</label>
+                                <div class="col-md-8">
+                                    <div class="col-md-5 no-padding position-relative">
+                                        <input kendo-date-picker k-format="'dd/MM/yyyy'"
+                                               ng-model="vm.searchForm.dateDeptFrom"
+                                               style="width: 100%;" id="dateDeptFrom"
+                                               ng-change="vm.validateDateField('dateDeptFrom')"
+                                               min-year="1000" date-time/>
+                                        <span style="color: red">{{vm.dateDeptFromErr}}</span>
+                                    </div>
+                                    <div class="col-md-2" style="text-align: center;">
+                                        <label class="control-label"
+                                               translate>đến</label></div>
+                                    <div class="col-md-5 no-padding position-relative">
+                                        <input kendo-date-picker k-format="'dd/MM/yyyy'"
+                                               ng-model="vm.searchForm.dateDeptTo"
+                                               style="width: 100%;" id="dateDeptTo"
+                                               ng-change="vm.validateDateField('dateDeptTo')"
+                                               min-year="1000" date-time/>
+                                        <span style="color: red">{{vm.dateDeptToErr}}</span>
+                                    </div>
+                                    <div class="One_icon">
+                                        <i class="fa fa-times" aria-hidden="true"
+                                           ng-click="vm.resetFormFieldDeptDate()"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--row 5-->
+                        <div class="clearfix">
+                        
+                            <!--received_obstruct_content-->
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label" translate>Có vướng</label>
+                                <div class="col-md-1">
+                                    <input style="float: left;" type="checkbox" name="cbObstructContent"
+                                           id="cbObstructContent" ng-true-value="true" ng-false-value="false"
+                                           ng-model="vm.searchForm.isReceivedObstruct"
+                                           class="ng-pristine ng-untouched ng-valid"/>
+                                </div>
+                                
+                            <!--received_goods_content-->
+                                <label class="col-md-4 control-label" translate>Có vật tư may đo</label>
+                                <div class="col-md-1">
+                                    <input style="float: left;" type="checkbox" name="cbGoodsContent"
+                                           id="cbGoodsContent" ng-true-value="true" ng-false-value="false"
+                                           ng-model="vm.searchForm.isReceivedGoods"
+                                           class="ng-pristine ng-untouched ng-valid"/>
+                                </div>
+                            </div>
+                            
+                            <!-- outOfDateStartDate -->
+							<div class="form-group col-md-6">
+                                <label class="col-md-4 control-label" translate>Trạng thái quá hạn khởi công</label>
+                                <div class="col-md-8" ng-enter="vm.doSearch()">
+                                    <select kendo-drop-down-list style="width: 100%"
+                                            ng-model="vm.searchForm.outOfDateStartDate"
+                                            k-data-text-field="'name'" k-data-value-field="'id'"
+                                            k-data-source="vm.outOfDateConstructionDataList">
+                                    </select>
+                                    <div class="One_icon">
+                                        <i class="fa fa-times" aria-hidden="true"
+                                           ng-click="vm.resetFormFieldOutOfDateStartDate()"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix form-actions margin-top">
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <!-- <button type="button" id="find"
+                                    class="btn green btn-outline padding-search-right"
+                                    ng-click="vm.doSearch()" translate>Tìm kiếm</button> -->
+                                <button type="button" id="doSearchAssign" ng-click="vm.doSearch()"
+                                        class="btn btn-qlk padding-search-right searchQLK" translate>Tìm kiếm
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+    <div class="portlet light bordered">
+        <div class="portlet-title background-title">
+            <div class="caption">
+			<span class="caption-subject bold lowercase" translate>Kết
+					quả tìm kiếm:  </span>&nbsp;<label class="control-label bold lowercase"
+                                                       id="appCount">{{vm.count}}</label><label
+                    class="control-label bold lowercase">&nbsp;bản ghi</label>
+
+            </div>
+        </div>
+        <div id="grid" class="collapse in from-search">
+            <div class="clearfix position-relative">
+                <div id="assignHandoverGridNV" kendo-grid="vm.assignHandoverGridNV"
+                     k-options="vm.assignHandoverGridOptions"
+                ></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#assignHandoverSearch').keypress(function (event) {
+        $("input").change(function () {
+            $(this).val($.trim($(this).val()));
+        });
+        document.onkeydown = keyDown;
+
+        function keyDown(e) {
+            switch (e.keyCode) {
+                case 27:
+                    $("#cancel").click();
+                    break;
+                case 13:
+                    if ($('.k-widget.k-window.fix-footer').css('display') !== 'block') {
+                        $("#doSearchAssign").click();
+                    }
+                    break;
+
+            }
+        }
+    });
+</script>
+<!--VietNT_end-->

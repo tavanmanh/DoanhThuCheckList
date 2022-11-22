@@ -1,0 +1,791 @@
+<style>
+html {
+	overflow-y: scroll;
+}
+</style>
+
+<form name="formWork" novalidate="">
+	<div class="clearfix">
+		<div class="form-group col-md-12">
+			<label class="col-md-4 control-label text-left req" translate>Thực
+				hiện</label>
+
+			<div class="col-md-8 margin_top">
+				<label><input style="float: left;" type="radio"
+					id="isInternal1" name="status"
+					ng-model="caller.workItemRecord.isInternal"
+					ng-checked="caller.workItemRecord.isInternal == 1" value="1">
+					<span class="padding_radio">Nội bộ</span></label> <label> <input
+					style="float: left;" type="radio" id="isInternal2" name="status"
+					ng-model="caller.workItemRecord.isInternal"
+					ng-checked="caller.workItemRecord.isInternal == 2" value="2">
+					<span class="padding_radio">Đối tác</span></label>
+			</div>
+		</div>
+	</div>
+	<div class="clearfix">
+		<div class="form-group col-md-12"
+			ng-show="caller.workItemRecord.isInternal==1">
+			<label class="col-md-4 control-label text-left req" translate>Đơn
+				vị thực hiện</label>
+
+			<div class="col-md-8">
+				<div class="input-icon right ">
+					<i class="fa fa-search directive"
+						ng-click="caller.openDepartmentChoose('deptWork')"></i>
+				</div>
+				<input kendo-auto-complete k-options="caller.deptWorkOptions"
+					ng-blur="caller.changeDataDept('deptWork')"
+					class=" form-control width100" type="text"
+					ng-model="caller.workItemRecord.constructorName1" name="dept"
+					onclick="reset_msg();" required
+					data-required-msg="Đơn vị không để trống" /> <span id="msg"
+					data-for='dvn1' class='k-invalid-msg'></span>
+
+				<div class="One_icon">
+					<i class="fa fa-times" aria-hidden="true"
+						ng-click="caller.cancelInput('deptWork')"></i>
+				</div>
+				<script>
+					function reset_msg() {
+						document.getElementById('msg').innerHTML = '';
+					}
+				</script>
+			</div>
+		</div>
+
+		<div class="form-group col-md-12"
+			ng-show="caller.workItemRecord.isInternal==2">
+			<label class="col-md-4 control-label text-left req" translate>Đối
+				tác thực hiện</label>
+			<div class="col-md-8">
+				<div class="input-icon right ">
+					<i class="fa fa-search directive"
+						ng-click="caller.openPartnerChoose('deptWork')"></i>
+				</div>
+				<input kendo-auto-complete k-options="caller.partOptions"
+					ng-blur="caller.changeDataDept('part')"
+					class=" form-control width100" type="text"
+					ng-model="caller.workItemRecord.constructorName2" name="dept"
+					onclick="reset_msg();" required
+					data-required-msg="Đối tác không để trống" /> <span id="msgp"
+					data-for='dvn1' class='k-invalid-msg'></span>
+
+				<div class="One_icon">
+					<i class="fa fa-times" aria-hidden="true"
+						ng-click="caller.cancelInput('part')"></i>
+				</div>
+				<script>
+					function reset_msg() {
+						document.getElementById('msgp').innerHTML = '';
+					}
+				</script>
+			</div>
+		</div>
+	</div>
+	
+	<div class="clearfix">
+		<div class="form-group col-md-12">
+			<label class="col-md-4 control-label text-left req" translate>Đơn
+				vị giám sát</label>
+
+			<div class="col-md-8">
+				<div class="input-icon right ">
+					<i class="fa fa-search directive"
+						ng-click="caller.openDepartmentChoose('sup')"></i>
+				</div>
+				<input kendo-auto-complete k-options="caller.supOptions"
+					ng-blur="caller.changeDataDept('sup')"
+					class=" form-control width100" type="text"
+					ng-model="caller.workItemRecord.supervisorName" name="dept"
+					onclick="reset_msg();" required
+					data-required-msg="Đơn vị không để trống" /> <span id="msg2"
+					data-for='dvn1' class='k-invalid-msg'></span>
+
+				<div class="One_icon">
+					<i class="fa fa-times" aria-hidden="true"
+						ng-click="caller.cancelInput('sup')"></i>
+				</div>
+				<script>
+					function reset_msg() {
+						document.getElementById('msg2').innerHTML = '';
+					}
+				</script>
+			</div>
+		</div>
+	</div>
+	<!-- Huypq-30112021-start -->
+	<div class="clearfix">
+		<div class="form-group col-md-12">
+			<label class="col-md-4 control-label text-left" translate>Trụ</label>
+
+			<div class="col-md-8">
+				<select kendo-drop-down-list style="width: 100%"
+					ng-model="caller.workItemRecord.branch" k-data-text-field="'name'"
+					k-data-value-field="'code'" k-option-label="'---Chọn---'"
+					k-data-source="caller.branchList">
+				</select>
+			</div>
+		</div>
+	</div>
+	<!-- Huy-end -->
+	<div class="clearfix">
+		<div class="form-group col-md-12">
+			<div style="padding-bottom: 0;" class="col-md-4 text-left">
+				<label ng-show="caller.showHm" class="control-label text-left req">Tên
+					hạng mục</label> <label ng-show="caller.showHm1"
+					class="control-label text-left">Tên hạng mục</label>
+			</div>
+			<div class="col-md-8 " ng-show="caller.showHm">
+				<label ng-repeat="workItem in caller.catWorkItemTypeList"
+					ng-model="caller.workItemRecord.selected" style="width: 100%">
+					<input type="checkbox"
+					data-checklist-model="caller.workItemRecord.workItemTypeList"
+					data-checklist-value="workItem"> {{workItem.name}}
+				</label>
+			</div>
+			<div class="col-md-8" ng-show="caller.showHm1">
+				<label class="control-data" style="width: 100%">
+					{{caller.workItemRecord.catWorkItemType}} </label>
+			</div>
+		</div>
+
+		<!-- <div class="form-group col-md-6">
+			<label class="col-md-4 control-label text-left req" translate>Tên
+				Node</label>
+			<div class="col-md-8">
+				<input id="nodeCode" ng-disabled="!caller.checkNode"
+					class=" form-control width100" type="text" maxlength="19"
+					ng-model="caller.workItemRecord.nodeCode"
+					ng-keydown="caller.checkNumGPon()" />
+			</div>
+		</div> -->
+	</div>
+
+	<!-- <div class="clearfix">
+			<div class="form-group col-md-6">
+				<label class="col-md-4 control-label text-left req" translate>Tổng khối lượng cáp toàn tuyến</label>
+				<div class="col-md-8">
+					<input id="totalAmount" class=" form-control width100" type="text"
+						maxlength="19" ng-model="caller.workItemRecord.amount"
+						ng-keydown="caller.checkNumGPon()" />
+				</div>
+			</div>
+			<div class="form-group col-md-6">
+				<label class="col-md-4 control-label text-left req" translate>Đơn giá thi công cáp</label>
+				<div class="col-md-6">
+					<input id="priceGPon" class="form-control style-number" name="price"
+						maxlength="19" ng-keydown="caller.checkNumGPon()"
+						ng-model="caller.workItemRecord.price"
+						ng-change="caller.addComma('workItemRecord','price')" />
+				</div>
+				hoanm1_20191019_start 
+				<div class="col-md-2" style="padding-left: 0;">
+					<select ng-init="caller.workItemRecord.moneyType='1'" class="form-control"
+						id="moneyType" name="moneyType" ng-model="caller.workItemRecord.moneyType">
+						<option ng-repeat="x in caller.moneyType" value="{{x.code}}">{{x.name}}</option>
+					</select>
+				</div>
+				 hoanm1_20191019_end
+				<div class="col-md-2" style="padding: 5px 0px 0px 8px;">
+				(Triệu đồng)
+				</div>
+			</div>
+		</div>  -->
+	<div>
+		<!--  <div class="col-md-1"></div>  -->
+		<!-- <div class="col-md-11" style="margin-left: 50px;">
+			<div class="portlet-title margin-top15">
+				<div class="caption">
+					<span class="caption-subject bold lowercase" translate>Khối
+						lượng cáp tuyến</span>
+				</div>
+			</div>
+			<div class="padding-width18">
+				<div class="border-gray">
+					<div class="clearfix" style="margin-top: 10px;">
+						<div class="col-md-6">
+							<label class="col-md-4 control-label " translate> Khối lượng kéo cáp 96 mét</label>
+							<div class="col-md-8">
+								<input class="form-control"  name="keoCap96" step="any"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									id="keoCap96" maxlength="100"
+									ng-model="caller.workItemRecord.keoCap96" />
+							</div>
+						</div>
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label text-left " translate>Đơn
+								giá thi công kéo cáp 96</label>
+							<div class="col-md-6">
+							<input class="form-control"  name="donGiaKeoCap96" step="any"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									id="donGiaKeoCap96" maxlength="100"
+									ng-model="caller.workItemRecord.donGiaKeoCap96" />
+								<input id="donGiaKeoCap96" class="form-control" style-number"
+								type="number" min="0" oninput="validity.valid||(value='');"  step="any"
+									name="donGiaKeoCap96" maxlength="19" " 
+									ng-model="caller.workItemRecord.donGiaKeoCap96"
+									 />
+							</div>
+							hoanm1_20191019_start 
+
+							 hoanm1_20191019_end
+							<div class="col-md-2" style="padding: 5px 0px 0px 8px;">
+								(Triệu đồng)</div>
+						</div>
+					</div>
+
+					<div class="clearfix" style="margin-top: 10px;">
+						<div class="col-md-6">
+							<label class="col-md-4 control-label " translate>Khối lượng kéo cáp 48 mét</label>
+							<div class="col-md-8">
+								<input class="form-control"  name="keoCap48" step="any"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									id="keoCap48" maxlength="100"
+									ng-model="caller.workItemRecord.keoCap48" />
+							</div>
+						</div>
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label text-left " translate>Đơn
+								giá thi công kéo cáp 48</label>
+							<div class="col-md-6">
+							<input class="form-control"  name="donGiaKeoCap48" step="any"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									id="donGiaKeoCap48" maxlength="100"
+									ng-model="caller.workItemRecord.donGiaKeoCap48" />
+								<input id="donGiaKeoCap48" class="form-control style-number"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									name="donGiaKeoCap48" maxlength="19" 
+									ng-model="caller.workItemRecord.donGiaKeoCap48"
+									 />
+							</div>
+							hoanm1_20191019_start 
+
+							 hoanm1_20191019_end
+							<div class="col-md-2" style="padding: 5px 0px 0px 8px;">
+								(Triệu đồng)</div>
+						</div>
+					</div>
+
+					<div class="clearfix" style="margin-top: 10px;">
+						<div class="col-md-6">
+							<label class="col-md-4 control-label " translate>Khối lượng kéo cáp 24 mét</label>
+							<div class="col-md-8">
+								<input class="form-control"  name="keoCap24" step="any"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									id="keoCap24" maxlength="100"
+									ng-model="caller.workItemRecord.keoCap24" />
+							</div>
+						</div>
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label text-left " translate>Đơn
+								giá thi công kéo cáp 24</label>
+							<div class="col-md-6">
+							<input class="form-control"  name="donGiaKeoCap24" step="any"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									id="donGiaKeoCap24" maxlength="100"
+									ng-model="caller.workItemRecord.donGiaKeoCap24" />
+								<input id="donGiaKeoCap24" class="form-control style-number"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									name="donGiaKeoCap24" maxlength="19" 
+									ng-model="caller.workItemRecord.donGiaKeoCap24"
+								 />
+							</div>
+							hoanm1_20191019_start 
+
+							 hoanm1_20191019_end
+							<div class="col-md-2" style="padding: 5px 0px 0px 8px;">
+								(Triệu đồng)</div>
+						</div>
+					</div>
+
+					<div class="clearfix" style="margin-top: 10px;">
+						<div class="col-md-6">
+							<label class="col-md-4 control-label " translate>Khối lượng kéo cáp 12 mét</label>
+							<div class="col-md-8">
+								<input class="form-control"  name="keoCap12" step="any"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									id="keoCap12" maxlength="100"
+									ng-model="caller.workItemRecord.keoCap12" />
+							</div>
+						</div>
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label text-left " translate>Đơn
+								giá thi công kéo cáp 12</label>
+							<div class="col-md-6">
+								<input class="form-control"  name="donGiaKeoCap12" step="any"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									id="donGiaKeoCap12" maxlength="100"
+									ng-model="caller.workItemRecord.donGiaKeoCap12" />
+								<input id="donGiaKeoCap12" class="form-control style-number"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									name="donGiaKeoCap12" maxlength="19" 
+									ng-model="caller.workItemRecord.donGiaKeoCap12"
+									 />
+							</div>
+							hoanm1_20191019_start 
+
+							 hoanm1_20191019_end
+							<div class="col-md-2" style="padding: 5px 0px 0px 8px;">
+								(Triệu đồng)</div>
+						</div>
+					</div>
+
+					<div class="clearfix" style="margin-top: 10px;">
+						<div class="col-md-6">
+							<label class="col-md-4 control-label " translate>Khối lượng kéo cáp 8 mét</label>
+							<div class="col-md-8">
+								<input class="form-control"  name="keoCap8"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									id="keoCap8" maxlength="100" step="any"
+									ng-model="caller.workItemRecord.keoCap8" />
+							</div>
+						</div>
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label text-left " translate>Đơn
+								giá thi công kéo cáp 8</label>
+							<div class="col-md-6">
+							<input class="form-control"  name="donGiaKeoCap8"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									id="donGiaKeoCap8" maxlength="100" step="any"
+									ng-model="caller.workItemRecord.donGiaKeoCap8" />
+								<input id="donGiaKeoCap8" class="form-control style-number"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									name="donGiaKeoCap8" maxlength="19" 
+									ng-model="caller.workItemRecord.donGiaKeoCap8"
+									 />
+							</div>
+							hoanm1_20191019_start 
+
+							 hoanm1_20191019_end
+							<div class="col-md-2" style="padding: 5px 0px 0px 8px;">
+								(Triệu đồng)</div>
+						</div>
+					</div>
+
+					<div class="clearfix" style="margin-top: 10px;">
+						<div class="col-md-6">
+							<label class="col-md-4 control-label " translate>Khối lượng kéo cáp 4 mét</label>
+							<div class="col-md-8">
+								<input class="form-control"  name="keoCap4" step="any"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									id="keoCap4" maxlength="100"
+									ng-model="caller.workItemRecord.keoCap4" />
+							</div>
+						</div>
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label text-left " translate>Đơn
+								giá thi công kéo cáp 4</label>
+							<div class="col-md-6">
+							<input class="form-control"  name="donGiaKeoCap4" step="any"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									id="donGiaKeoCap4" maxlength="100"
+									ng-model="caller.workItemRecord.donGiaKeoCap4" />
+								<input id="donGiaKeoCap4" class="form-control style-number"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									name="donGiaKeoCap4" maxlength="19" 
+									ng-model="caller.workItemRecord.donGiaKeoCap4"
+									 />
+							</div>
+							hoanm1_20191019_start 
+
+							 hoanm1_20191019_end
+							<div class="col-md-2" style="padding: 5px 0px 0px 8px;">
+								(Triệu đồng)</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			Số lượng tủ
+			<div class="portlet-title margin-top15">
+				<div class="caption">
+					<span class="caption-subject bold lowercase" translate>Tủ hộp</span>
+				</div>
+			</div>
+			<div class="padding-width18">
+				<div class="border-gray">
+					<div class="clearfix" style="margin-top: 10px;">
+						<div class="col-md-6">
+							<label class="col-md-4 control-label " translate>Khối
+								lượng lắp đặt tủ hộp</label>
+							<div class="col-md-8">
+								<input class="form-control"  name="tuHop" step="any"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									id="tuHop" maxlength="100"
+									ng-model="caller.workItemRecord.tuHop" />
+							</div>
+						</div>
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label text-left " translate>Đơn
+								giá thi công tủ hộp</label>
+							<div class="col-md-6">
+								<input id="donGiaTuHop" class=" form-control width100" step="any"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									maxlength="19"
+									ng-model="caller.workItemRecord.donGiaTuHop"
+									 />
+							</div>
+							hoanm1_20191019_start 
+
+							 hoanm1_20191019_end
+							<div class="col-md-2" style="padding: 5px 0px 0px 8px;">
+								(Triệu đồng)</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			Số lượng tủ
+				Số lượng hàn nối
+			<div class="portlet-title margin-top15">
+				<div class="caption">
+					<span class="caption-subject bold lowercase" translate>Hàn
+						nối</span>
+				</div>
+			</div>
+			<div class="padding-width18">
+				<div class="border-gray">
+					<div class="clearfix" style="margin-top: 10px;">
+						<div class="col-md-6">
+							<label class="col-md-4 control-label " translate>Khối lượng hàn nối bộ chia</label>
+							<div class="col-md-8">
+								<input class="form-control"  name="boChia" step="any"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									id="boChia" maxlength="100"
+									ng-model="caller.workItemRecord.boChia" />
+							</div>
+						</div>
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label text-left " translate>Đơn
+								giá hàn nối bộ chia</label>
+							<div class="col-md-6">
+								<input id="donGiaBoChia" class=" form-control width100" step="any"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									 maxlength="19"
+									ng-model="caller.workItemRecord.donGiaBoChia"
+									 />
+							</div>
+							hoanm1_20191019_start 
+
+							 hoanm1_20191019_end
+							<div class="col-md-2" style="padding: 5px 0px 0px 8px;">
+								(Triệu đồng)</div>
+						</div>
+					</div>
+
+					<div class="clearfix" style="margin-top: 10px;">
+						<div class="col-md-6">
+							<label class="col-md-4 control-label " translate>Khối lượng hàn nối măng
+								xông</label>
+							<div class="col-md-8">
+								<input class="form-control"  name="mangXong" step="any"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									id="mangXong" maxlength="100"
+									ng-model="caller.workItemRecord.mangXong" />
+							</div>
+						</div>
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label text-left " translate>Đơn
+								giá hàn nỗi măng xông</label>
+							<div class="col-md-6">
+								<input id="donGiaMangXong" class=" form-control width100" step="any"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									type="text" maxlength="19"
+									ng-model="caller.workItemRecord.donGiaMangXong"
+									 />
+							</div>
+							hoanm1_20191019_start 
+
+							 hoanm1_20191019_end
+							<div class="col-md-2" style="padding: 5px 0px 0px 8px;">
+								(Triệu đồng)</div>
+						</div>
+					</div>
+
+					<div class="clearfix" style="margin-top: 10px;">
+						<div class="col-md-6">
+							<label class="col-md-4 control-label " translate>Khối lượng hàn nối Odf</label>
+							<div class="col-md-8">
+								<input class="form-control"  name="odf" step="any"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									id="odf" maxlength="100"
+									ng-model="caller.workItemRecord.odf" />
+							</div>
+						</div>
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label text-left " translate>Đơn
+								giá hàn nối Odf</label>
+							<div class="col-md-6">
+								<input id="donGiaOdf" class=" form-control width100" step="any"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									 maxlength="19"
+									ng-model="caller.workItemRecord.donGiaOdf"
+									 />
+							</div>
+							hoanm1_20191019_start 
+
+							 hoanm1_20191019_end
+							<div class="col-md-2" style="padding: 5px 0px 0px 8px;">
+								(Triệu đồng)</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			Số lượng hàn nối
+			Số lượng cổng
+			<div class="portlet-title margin-top15">
+				<div class="caption">
+					<span class="caption-subject bold lowercase" translate>Trồng
+						cột</span>
+				</div>
+			</div>
+			<div class="padding-width18">
+				<div class="border-gray">
+					<div class="clearfix" style="margin-top: 10px;">
+						<div class="col-md-6">
+							<label class="col-md-4 control-label " translate>Khối lượng cột 7m</label>
+							<div class="col-md-8">
+								<input class="form-control"  name="cot7m" step="any"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									id="cot7m" maxlength="100"
+									ng-model="caller.workItemRecord.cot7m" />
+							</div>
+						</div>
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label text-left " translate>Đơn
+								giá cột 7m</label>
+							<div class="col-md-6">
+								<input id="totalAmountChest" class=" form-control width100"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									 maxlength="19" step="any"
+									ng-model="caller.workItemRecord.donGiaCot7m"
+									 />
+							</div>
+							hoanm1_20191019_start 
+
+							 hoanm1_20191019_end
+							<div class="col-md-2" style="padding: 5px 0px 0px 8px;">
+								(Triệu đồng)</div>
+						</div>
+					</div>
+
+					<div class="clearfix" style="margin-top: 10px;">
+						<div class="col-md-6">
+							<label class="col-md-4 control-label " translate>Khối lượng cột 8m</label>
+							<div class="col-md-8">
+								<input class="form-control"  name="cot8m" step="any"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									id="cot8m" maxlength="100"
+									ng-model="caller.workItemRecord.cot8m" />
+							</div>
+						</div>
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label text-left " translate>Đơn
+								giá cột 8m</label>
+							<div class="col-md-6">
+								<input id="donGiaCot8m" class=" form-control width100" step="any"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+								 maxlength="19"
+									ng-model="caller.workItemRecord.donGiaCot8m"
+									 />
+							</div>
+							hoanm1_20191019_start 
+
+							 hoanm1_20191019_end
+							<div class="col-md-2" style="padding: 5px 0px 0px 8px;">
+								(Triệu đồng)</div>
+						</div>
+					</div>
+
+					<div class="clearfix" style="margin-top: 10px;">
+						<div class="col-md-6">
+							<label class="col-md-4 control-label " translate>Khối lượng cột 10m</label>
+							<div class="col-md-8">
+								<input class="form-control" name="cot10m" step="any"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									id="cot10m" maxlength="100"
+									ng-model="caller.workItemRecord.cot10m" />
+							</div>
+						</div>
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label text-left " translate>Đơn
+								giá cột 10m</label>
+							<div class="col-md-6">
+								<input id="donGiaCot10m" class=" form-control width100" step="any"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									maxlength="19"
+									ng-model="caller.workItemRecord.donGiaCot10m"
+									 />
+							</div>
+							hoanm1_20191019_start 
+
+							 hoanm1_20191019_end
+							<div class="col-md-2" style="padding: 5px 0px 0px 8px;">
+								(Triệu đồng)</div>
+						</div>
+					</div>
+
+					<div class="clearfix" style="margin-top: 10px;">
+						<div class="col-md-6">
+							<label class="col-md-4 control-label " translate>Khối lượng cột 12m</label>
+							<div class="col-md-8">
+								<input class="form-control"  name="cot12m" step="any"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									id="cot12m" maxlength="100"
+									ng-model="caller.workItemRecord.cot12m" />
+							</div>
+						</div>
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label text-left " translate>Đơn
+								giá cột 12m</label>
+							<div class="col-md-6">
+								<input id="donGiaCot12m" class=" form-control width100" step="any"
+								type="number" min="0" oninput="validity.valid||(value='');" 
+									 maxlength="19"
+									ng-model="caller.workItemRecord.donGiaCot12m"
+									 />
+							</div>
+							hoanm1_20191019_start 
+
+							 hoanm1_20191019_end
+							<div class="col-md-2" style="padding: 5px 0px 0px 8px;">
+								(Triệu đồng)</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			Số lượng cổng
+		</div> -->
+		<!-- <div class="col-md-1"></div> -->
+	</div>
+
+
+
+
+
+
+
+	<!-- 	<div class="clearfix">
+		<div class="form-group col-md-6">
+			<label class="col-md-4 control-label text-left req" translate>Tổng
+				số tủ</label>
+			<div class="col-md-8">
+				<input id="totalAmountChest" class=" form-control width100"
+					type="text" maxlength="19"
+					ng-model="caller.workItemRecord.totalAmountChest"
+					ng-keydown="caller.checkNumGPon()" />
+			</div>
+		</div>
+		<div class="form-group col-md-6">
+			<label class="col-md-4 control-label text-left req" translate>Đơn
+				giá thi công tủ</label>
+			<div class="col-md-6">
+				<input id="priceChest" class="form-control style-number"
+					name="price" maxlength="19" ng-keydown="caller.checkNumGPon()"
+					ng-model="caller.workItemRecord.priceChest"
+					ng-change="caller.addComma('workItemRecord','priceChest')" />
+			</div>
+			hoanm1_20191019_start 
+				<div class="col-md-2" style="padding-left: 0;">
+					<select ng-init="caller.workItemRecord.moneyType='1'" class="form-control"
+						id="moneyType" name="moneyType" ng-model="caller.workItemRecord.moneyType">
+						<option ng-repeat="x in caller.moneyType" value="{{x.code}}">{{x.name}}</option>
+					</select>
+				</div>
+				hoanm1_20191019_end
+			<div class="col-md-2" style="padding: 5px 0px 0px 8px;">(Triệu
+				Triệu đồng)</div>
+		</div>
+	</div> -->
+
+
+
+
+
+
+
+	<!-- 	<div class="clearfix">
+		<div class="form-group col-md-6">
+			<label class="col-md-4 control-label text-left req" translate>Tổng
+				số cổng</label>
+			<div class="col-md-8">
+				<input id="totalAmountGate" class=" form-control width100"
+					type="text" maxlength="19"
+					ng-model="caller.workItemRecord.totalAmountGate"
+					ng-keydown="caller.checkNumGPon()" />
+			</div>
+		</div>
+		<div class="form-group col-md-6">
+			<label class="col-md-4 control-label text-left req" translate>Đơn
+				giá thi công cổng</label>
+			<div class="col-md-6">
+				<input id="priceGate" class="form-control style-number" name="price"
+					maxlength="19" ng-keydown="caller.checkNumGPon()"
+					ng-model="caller.workItemRecord.priceGate"
+					ng-change="caller.addComma('workItemRecord','priceGate')" />
+			</div>
+			hoanm1_20191019_start 
+				<div class="col-md-2" style="padding-left: 0;">
+					<select ng-init="caller.workItemRecord.moneyType='1'" class="form-control"
+						id="moneyType" name="moneyType" ng-model="caller.workItemRecord.moneyType">
+						<option ng-repeat="x in caller.moneyType" value="{{x.code}}">{{x.name}}</option>
+					</select>
+				</div>
+				hoanm1_20191019_end
+			<div class="col-md-2" style="padding: 5px 0px 0px 8px;">(Triệu
+				đồng)</div>
+		</div>
+	</div> -->
+<!-- <div class="clearfix form-actions margin-top">
+		<div class="row" style="margin-bottom: 5px">
+			<div class="col-md-12 text-center">
+				<label style="padding-top: 10px;">(Khi thêm mới phải nhập cả khối lượng công việc và đơn giá công việc)</label>
+			</div>
+		</div>
+	</div> -->
+	<!-- <div class="clearfix form-actions margin-top">
+		<div class="row" style="margin-bottom: 5px">
+			<div class="col-md-12 text-center">
+				<button type="button" ng-show="!caller.checkEditGPon"
+					ng-click="caller.addWorkItemGPon()"
+					class="btn btn-qlk padding-search-right bosung" translate>Bổ
+					sung</button>
+				<button type="button" ng-show="caller.checkEditGPon"
+					ng-click="caller.editorkItemGPon()"
+					class="btn btn-qlk padding-search-right bosung" translate>Cập
+					nhật</button>
+			</div>
+		</div>
+	</div> -->
+
+	<!-- <div class="row form-group">
+		<div class="col-md-12">
+			<div id="workItemGPon" kendo-grid="caller.workItemGPonGrid"
+				k-editable="false" k-options="caller.workItemGPonGridOptions"></div>
+		</div>
+		<div class="row" style="margin-bottom: 5px"></div>
+
+	</div> -->
+
+	<div class="row modal-footer">
+		<div class="col-md-12 ">
+			<button type="button"
+				class="btn btn-qlk padding-search-right closeQLK" id="cancel"
+				ng-click="caller.cancelWorkItemPopup()" translate>Hủy bỏ</button>
+			<!-- <button type="button" id="savepopupApp" class="btn btn-qlk padding-search-right saveQLK" ng-show="!caller.checkEditGPon"
+					ng-disabled="caller.disabledHangMuc ||caller.Categories" ng-click="caller.saveWorkItemGPon()" translate>Ghi lại</button> -->
+			<button type="button" id="savepopupApp"
+				class="btn btn-qlk padding-search-right saveQLK"
+				ng-show="!caller.checkEditGPon" ng-click="caller.saveWorkItemGPon()"
+				translate>Ghi lại</button>
+
+			<button type="button" id="savepopupApp"
+				class="btn btn-qlk padding-search-right saveQLK"
+				ng-show="caller.checkEditGPon" ng-click="caller.editWorkItemGPon()"
+				translate>Ghi lại</button>
+		</div>
+	</div>
+	<!-- </div> -->
+</form>

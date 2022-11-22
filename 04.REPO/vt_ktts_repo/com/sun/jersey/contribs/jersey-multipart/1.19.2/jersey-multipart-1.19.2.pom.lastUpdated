@@ -1,0 +1,4 @@
+#NOTE: This is an Aether internal implementation file, its format can be changed without prior notice.
+#Mon Jan 07 15:02:54 ICT 2019
+http\://repo.maven.apache.org/maven2/.error=Could not transfer artifact com.sun.jersey.contribs\:jersey-multipart\:pom\:1.19.2 from/to central (http\://repo.maven.apache.org/maven2)\: The operation was cancelled.
+@10.61.11.39\:3128>@default-http\://repo.maven.apache.org/maven2/.lastUpdated=1546848174196

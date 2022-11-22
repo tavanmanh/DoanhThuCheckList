@@ -1,0 +1,1229 @@
+<style>
+
+    .display-block {
+        display: block;
+        width: 100%;
+    }
+
+    .input-half {
+        width: 48%;
+        display: inline;
+    }
+
+    .grey {
+        color: #333;
+    }
+
+    .yellow {
+        color: #E0D014
+    }
+
+    .azure {
+        color: #011995;
+    }
+
+    .green {
+        color: lawngreen;
+    }
+
+    .mt5 {
+        margin-top: 5px;
+    }
+
+    .fs20 {
+        font-size: 20px;
+    }
+
+    .mb5 {
+        margin-bottom: 5px;
+    }
+
+    .cedtpl {
+        font-size: 25px;
+        text-align: center;
+    }
+
+    .timeline {
+        position: relative;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* The actual timeline (the vertical ruler) */
+    .timeline::after {
+        content: '';
+        position: absolute;
+        width: 6px;
+        background-color: white;
+        top: 0;
+        bottom: 0;
+        margin-left: -40px;
+    }
+
+    /* Container around content */
+    .timepoint {
+        padding: 10px 40px;
+        position: relative;
+        background-color: inherit;
+    }
+
+    /* The circles on the timeline */
+    .timepoint::after {
+        content: '';
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        background-color: white;
+        border: 4px solid #FF9F55;
+        top: 15px;
+        border-radius: 50%;
+        z-index: 1;
+        left: 30px;
+    }
+
+    /* Add arrows to the right container (pointing left) */
+    .right::before {
+        content: " ";
+        height: 0;
+        position: absolute;
+        top: 22px;
+        width: 0;
+        z-index: 1;
+        left: 30px;
+        border: medium solid white;
+        border-width: 10px 10px 10px 0;
+        border-color: transparent white transparent transparent;
+    }
+
+    /* The actual content */
+    .timeline-content {
+        padding: 20px 30px;
+        background-color: white;
+        position: relative;
+        border-radius: 6px;
+        left: 30px;
+    }
+
+    .big-image-modal .modal-dialog {
+        width: 1000px;
+        text-align: center;
+    }
+
+    .big-image-modal .modal-dialog .modal-content {
+        background-color: transparent;
+        padding: 0;
+        border: 0;
+    }
+
+    .delete-image-btn {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        width: 20px;
+        height: 20px;
+        border: 1px solid red;
+        border-radius: 10px !important;
+        color: red;
+        font-size: 28px;
+        line-height: 13px;
+        cursor: pointer;
+    }
+
+    .k-widget.k-window.fix-footer {
+        z-index: 10103 !important;
+    }
+
+    .smaller-btn {
+        border-radius: 4px;
+        padding: 5px;
+    }
+
+    .h32 {
+        height: 32px;
+    }
+
+	html {
+		overflow-y: scroll;
+	}
+</style>
+<div data-ng-controller="woDetailsController as vm">
+    <p class="text-brecum">{{vm.String}}</p>
+    <form class="form-horizontal row" role="form" id="chartReportSearch">
+
+        <div class="form-body">
+
+            <div class="portlet light bordered">
+                <div class="portlet-title background-title">
+                    <div class="caption">
+                        <span class="caption-subject bold lowercase" translate>Trạng thái hiện tại</span>
+                    </div>
+                </div>
+
+                <div class="row mt5">
+                    <div class="col-md-11">
+                        Trạng thái WO: <span style="font-weight: bold" ng-bind-html="vm.label.stateText"></span>
+                        <div ng-if="vm.workingWO.state.startsWith('OPINION') && vm.workingWO.opinionResult != null">Kết
+                            quả xin ý kiến: <span ng-bind-html="getTextOpResult(vm.workingWO.opinionResult)"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-1" style="padding-top: 10px;"
+                         ng-if="!vm.checkViewHcqt && (permissions.createWO && vm.workingWO.woTypeCode != 'AIO' && vm.workingWO.woTypeCode != 'THDT')">
+                        <i class="fa fa-clone azure" style="font-size: 25px;" title="Clone this WO"
+                           ng-click=vm.cloneThisWO()></i>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="portlet light bordered">
+                <div class="portlet-title background-title">
+                    <div class="caption">
+                        <span class="caption-subject bold lowercase" translate>Thông tin chung</span>
+                    </div>
+                </div>
+                <div class="collapse in from-search">
+                    <div class="clearfix position-relative">
+                        <div class="clearfix">
+
+                            <div class="form-group row">
+                                <div class="col-md-4">
+                                    <label class="display-block control-label" style="text-align: left !important;"
+                                           translate>Tên WO*</label>
+                                    <input disabled class="form-control display-block" ng-model="vm.workingWO.woName"/>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="display-block control-label" style="text-align: left !important;"
+                                           translate>Mã WO*</label>
+                                    <input disabled class="form-control display-block" ng-model="vm.workingWO.woCode"/>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="display-block control-label" style="text-align: left !important;"
+                                           translate>Nguồn việc*</label>
+                                    <!-- <input ng-disabled="!vm.checkSysAdminTTHT || !vm.checkStateForRoleTTHTEdit" class="form-control display-block"
+                                           ng-model="vm.label.apWorkSrcShortName"/> -->
+                                    <!-- <div class="col-md-8" ng-disabled="!vm.checkSysAdminTTHT || !vm.checkStateForRoleTTHTEdit"> -->
+                                    <select ng-show="vm.workingWO.woNameId != 21"
+                                    		ng-disabled="vm.checkDisabledWoValue" class="form-control display-block" ng-model="vm.workingWO.apWorkSrc"
+                                            ng-options="apWorkSrc.code as apWorkSrcShortName(apWorkSrc.name) for apWorkSrc in apWorkSrcs">
+                                        <option></option>
+                                    </select>
+                                    <select ng-show="vm.workingWO.woNameId == 21"
+                                    		class="form-control display-block" ng-model="vm.workingWO.apWorkSrc"
+                                            ng-options="apWorkSrc.code as apWorkSrcShortName(apWorkSrc.name) for apWorkSrc in apWorkSrcs1">
+                                        <option></option>
+                                    </select>
+                               <!--  </div> -->
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-4">
+                                    <label class="display-block control-label" style="text-align: left !important;"
+                                           translate>Loại WO</label>
+                                    <input disabled class="form-control display-block"
+                                           ng-model="vm.workingWO.woTypeName"/>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="display-block control-label" style="text-align: left !important;"
+                                           translate>Mã TR</label>
+                                    <input disabled class="form-control display-block" ng-model="vm.workingWO.trCode"/>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="display-block control-label" style="text-align: left !important;"
+                                           translate>Loại TR</label>
+                                    <input disabled class="form-control display-block"
+                                           ng-model="vm.workingWO.trTypeName"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-4">
+                                    <label class="display-block control-label" style="text-align: left !important;"
+                                           translate>Loại công trình</label>
+                                    <!-- <input ng-disabled="!vm.checkSysAdminTTHT || !vm.checkStateForRoleTTHTEdit" class="form-control display-block"
+                                           ng-model="vm.workingWO.apConstructionTypeName"/> -->
+									<!-- HienLT56 start 31052021 -->
+									<select ng-disabled="vm.checkDisabledWoValue" class="form-control display-block"
+                                            ng-model="vm.workingWO.apConstructionType"
+                                            ng-options="cType.code as cType.name for cType in cTypes">
+                                        <option></option>
+                                    </select>
+									<!-- HienLT56 end 31052021 -->
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="display-block control-label" style="text-align: left !important;"
+                                           translate>Mã CT</label>
+                                    <input disabled class="form-control display-block"
+                                           ng-model="vm.workingWO.constructionCode"/>
+                                </div>
+                                <div class="col-md-4" ng-if="vm.workingWO.contractCode">
+                                    <label class="display-block control-label" style="text-align: left !important;"
+                                           translate>Mã hợp đồng</label>
+                                    <input disabled class="form-control display-block"
+                                           ng-model="vm.workingWO.contractCode"/>
+                                </div>
+                                <div class="col-md-4" ng-if="vm.workingWO.projectCode">
+                                    <label class="display-block control-label" style="text-align: left !important;"
+                                           translate>Mã dự án</label>
+                                    <input disabled class="form-control display-block"
+                                           ng-model="vm.workingWO.projectCode"/>
+                                </div>
+                                <div class="col-md-4" ng-if="vm.workingWO.hcqtContractCode">
+                                    <label class="display-block control-label" style="text-align: left !important;"
+                                           translate>Hợp đồng HCQT</label>
+                                    <input disabled class="form-control display-block"
+                                           ng-model="vm.workingWO.hcqtContractCode"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-4">
+                                    <label class="display-block control-label" style="text-align: left !important;"
+                                           translate>Mã Trạm</label>
+                                    <input disabled class="form-control display-block"
+                                           ng-model="vm.workingWO.stationCode"/>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="display-block control-label" style="text-align: left !important;"
+                                           translate>Nhà Trạm</label>
+                                    <input disabled class="form-control display-block"
+                                           ng-model="vm.workingWO.catStationHouseTxt"/>
+                                </div>
+                                <div class="col-md-4">
+                                    <div ng-if="'HCQT' != vm.workingWO.woTypeCode && vm.workingWO.woTypeCode!='THDT'">
+                                        <label class="display-block control-label" style="text-align: left !important;"
+                                             translate>Giá trị sản lượng (triệu VND)</label>
+                                    </div>
+									<!-- HienLT56 start 31052021 -->
+									<div ng-if="'HCQT' != vm.workingWO.woTypeCode && vm.workingWO.woTypeCode=='THDT'">
+                                        <label class="display-block control-label" style="text-align: left !important;"
+                                             translate>Giá trị sản lượng (triệu VND)</label>
+                                    </div>
+									<!-- HienLT56 end 31052021 -->
+                                    <div ng-if="'HCQT' == vm.workingWO.woTypeCode">
+                                        <label class="display-block control-label" style="text-align: left !important;"
+                                               translate>Giá trị sản lượng (VND)</label>
+                                    </div>
+
+                                    <div ng-if="'HCQT' != vm.workingWO.woTypeCode && vm.workingWO.woTypeCode=='THDT'">
+                                        <input class="form-control display-block" ng-model="vm.label.moneyValueMil"
+                                               ng-disabled="true"/>
+                                    </div>
+                                    <!-- HienLT56 start 31052021 -->
+                                    <div ng-if="'HCQT' != vm.workingWO.woTypeCode && vm.workingWO.woTypeCode=='HSHC'">
+                                        <input class="form-control display-block" ng-model="vm.label.moneyValueMil"
+                                               ng-disabled="((vm.workingWO.woTypeCode=='HSHC' && (!vm.isCdOk || !permissions.cdWO))) 
+                                               || vm.checkDisabledWoValue"/>
+                                    </div>
+                                     <div ng-if="'HCQT' != vm.workingWO.woTypeCode && vm.workingWO.woTypeCode!='THDT' && vm.workingWO.woTypeCode!='HSHC'">
+                                        <input class="form-control display-block" ng-model="vm.label.moneyValueMil"
+                                               ng-disabled="vm.checkDisabledWoValue"/>
+                                         	   <!-- ng-disabled="vm.workingWO.woTypeCode!='HSHC' || (vm.workingWO.woTypeCode=='HSHC' && (!vm.isCdOk || !permissions.cdWO))" -->
+                                    </div>
+                                    <!-- HienLT56 end 31052021 -->
+                                    <div ng-if="'HCQT' == vm.workingWO.woTypeCode">
+                                        <input class="form-control display-block" ng-model="vm.workingWO.moneyValue"
+                                               disabled/>
+                                    </div>
+                                </div>
+                            </div>
+							<div class="col-md-4" ng-if="vm.workingWO.apWorkSrc==4 || vm.workingWO.woTypeCode=='TMBT'">
+                                <div>
+                                    <label class="form-horizontal control-label" translate>Mã trạm VTNet</label>
+                                </div>
+                                <input disabled class="form-control display-block"
+                                       ng-model="vm.workingWO.vtNetStationCode"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Ngày tạo</label>
+                                <input disabled class="form-control display-block"
+                                       ng-model="vm.workingWO.createdDateStr"/>
+                            </div>
+							<div class="col-md-4" ng-if="vm.workingWO.woTypeCode=='HSHC' && vm.workingWO.apWorkSrc==4 && vm.workingWO.trId && vm.workingWO.state!='WAIT_PQT' && vm.workingWO.state!='CD_OK'">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Giá trị sản lượng được duyệt (triệu VND)</label>
+                                <input disabled class="form-control display-block"
+                                       ng-model="vm.label.moneyValueHtctMil"/>
+                            </div>
+                            <div class="col-md-4" ng-show ="vm.workingWO.woTypeId == 301">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Mã trạm VTNET</label>
+                                <input disabled class="form-control display-block"
+                                       ng-model="vm.workingWO.stationVtnet"/>
+                            </div>
+
+
+                        </div>
+
+                        <div class="form-group row">
+
+                            <div class="col-md-4">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Kế hoạch tháng</label>
+                                <input disabled class="form-control display-block"
+                                       ng-model="vm.workingWO.totalMonthPlanId"/>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row" ng-if="'XLSC' == vm.workingWO.woTypeCode">
+       							<div class="col-md-12">
+	                                <div>
+	                                    <label class="display-block control-label" style="text-align: left !important;" translate>Chi tiết </label>
+	                                </div>
+                                	<textarea type="text" disabled class="form-control display-block" ng-model="vm.workingWO.description" style=" min-height: 100px;" ></textarea>
+                            	</div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="portlet light bordered" ng-if="vm.workingWO.woTypeCode=='UCTT'">
+            <div class="portlet-title background-title">
+                <div class="caption">
+                    <span class="caption-subject bold lowercase" translate>Thông tin ứng cứu trạm, tuyến cáp</span>
+                </div>
+            </div>
+            <div class="collapse in from-search">
+                <div class="clearfix position-relative">
+                    <div class="clearfix">
+                        <div class="form-group row">
+                            <div class="col-md-4">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Đối tác</label>
+                                <input disabled class="form-control display-block"
+                                       ng-model="vm.workingWO.partner"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Mã WO GNOC</label>
+                                <input disabled class="form-control display-block"
+                                       ng-model="vm.workingWO.vtnetWoCode"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Chi tiết</label>
+                                <div class="display-block"
+                                     style="padding: 5px; border: 1px solid #ccc; border-radius: 4px"
+                                     ng-bind-html="vm.workingWO.description"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="portlet light bordered" ng-if="vm.workingWO.woTypeCode=='THDT'">
+            <div class="portlet-title background-title">
+                <div class="caption">
+                    <span class="caption-subject bold lowercase" translate>Thông tin hóa đơn</span>
+                </div>
+            </div>
+            <div id="thdt_container" class="collapse in from-search">
+                <div class="clearfix position-relative">
+                    <div class="clearfix">
+                        <div class="form-group row">
+                            <div class="col-md-4">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Số hóa đơn</label>
+                                <input class="form-control display-block"
+                                	   ng-disabled="vm.checkDisabledWoValue"
+                                       ng-model="vm.workingWO.moneyFlowBill"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Ngày hóa đơn</label>
+                                <input class="form-control display-block" kendo-date-picker
+                                	   ng-disabled="vm.checkDisabledWoValue"
+                                       k-format="'dd/MM/yyyy'"
+                                       ng-model="vm.workingWO.moneyFlowDate" min-year="1000" date-time/>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Giá trị hóa đơn(triệu VND)</label>
+                                <input class="form-control display-block"
+                                	   ng-disabled="vm.checkDisabledWoValue"
+                                       ng-model="vm.label.moneyFlowValueMil"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-4">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Giá trị phải thu(triệu VND)</label>
+                                <input class="form-control display-block"
+                                	   ng-disabled="vm.checkDisabledWoValue"
+                                       ng-model="vm.label.moneyFlowRequiredMil"/>
+                            </div>
+                            <div class="col-md-8">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Nội dung</label>
+                                <textarea disabled rows="3" class="form-control display-block"
+                                          ng-model="vm.workingWO.moneyFlowContent"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="portlet light bordered" ng-if="vm.workingWO.woTypeCode=='HCQT'">
+            <div class="portlet-title background-title">
+                <div class="caption">
+                    <span class="caption-subject bold lowercase" translate>Thông tin hoàn công quyết toán </span>
+                </div>
+            </div>
+            <div id="hcqt_container" class="collapse in from-search">
+                <div class="clearfix position-relative">
+                    <div class="clearfix">
+                        <div class="form-group row">
+                            <div class="col-md-4">
+                                <div>
+                                    <label class="form-horizontal control-label" translate>Dự án HCQT</label>
+                                </div>
+                                <input disabled class="form-control display-block"
+                                       ng-model="vm.workingWO.hcqtProjectName"/>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div>
+                                    <label class="form-horizontal control-label" translate>Mã hợp đồng HCQT</label>
+                                </div>
+                                <input disabled class="form-control display-block"
+                                       ng-model="vm.workingWO.hcqtContractCode"/>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div>
+                                    <label class="form-horizontal control-label" translate>Ngày nhận HSHC</label>
+                                </div>
+                                <input disabled class="form-control display-block"
+                                       ng-model="vm.workingWO.hshcReceiveDate"/>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div>
+                                    <label class="form-horizontal control-label" translate>Chi nhánh khu vực</label>
+                                </div>
+                                <input disabled class="form-control display-block" ng-model="vm.workingWO.cnkv"/>
+                            </div>
+                            <div class="col-md-4">
+                                <div>
+                                    <label class="form-horizontal control-label" translate>Mã tỉnh</label>
+                                </div>
+                                <input disabled class="form-control display-block"
+                                       ng-model="vm.workingWO.catProvinceCode"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--AVF-->
+        <div class="portlet light bordered" ng-if="vm.workingWO.woTypeCode=='AVG'">
+            <div class="portlet-title background-title">
+                <div class="caption">
+                    <span class="caption-subject bold lowercase" translate>Thông tin wo AVG</span>
+                </div>
+            </div>
+            <div class="collapse in from-search">
+                <div class="clearfix position-relative">
+                    <div class="clearfix">
+                        <div class="form-group row">
+                            <div class="col-md-4">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Mã HĐ TGDĐ</label>
+                                <input disabled class="form-control display-block"
+                                       ng-model="vm.workingWO.orderCodeTgdd"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Mã HĐ AVG</label>
+                                <input disabled class="form-control display-block"
+                                       ng-model="vm.workingWO.orderCodeAvg"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Họ tên KH</label>
+                                <input disabled class="form-control display-block"
+                                       ng-model="vm.workingWO.customerName"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>SĐT</label>
+                                <input disabled class="form-control display-block"
+                                       ng-model="vm.workingWO.phoneNumber"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>CMND</label>
+                                <input disabled class="form-control display-block"
+                                       ng-model="vm.workingWO.personalId"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Mã sản phẩm</label>
+                                <input disabled class="form-control display-block"
+                                       ng-model="vm.workingWO.productCode"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Trạng thái đơn hàng</label>
+                                <input disabled class="form-control display-block"
+                                       ng-model="vm.workingWO.paymentStatus"/>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Địa chỉ</label>
+                                <input disabled class="form-control display-block"
+                                       ng-model="vm.workingWO.address"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="portlet light bordered">
+            <div class="portlet-title background-title">
+                <div class="caption">
+                    <span class="caption-subject bold lowercase" translate>Thông tin thực hiện giám sát</span>
+                </div>
+            </div>
+            <div class="collapse in from-search">
+                <div class="clearfix position-relative">
+                    <div class="clearfix">
+
+                        <div class="form-group row">
+                            <div class="col-md-4">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Đơn vị điều phối cấp 1</label>
+                                <input disabled class="form-control display-block"
+                                       ng-model="vm.workingWO.cdLevel1Name"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Đơn vị điều phối cấp 2</label>
+                                <input disabled class="form-control display-block"
+                                       ng-model="vm.workingWO.cdLevel2Name"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Đơn vị điều phối cấp 3</label>
+                                <input disabled class="form-control display-block"
+                                       ng-model="vm.workingWO.cdLevel3Name"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Đơn vị điều phối cấp 4</label>
+                                <input disabled class="form-control display-block"
+                                       ng-model="vm.workingWO.cdLevel4Name"/>
+                            </div>
+                            <div class="col-md-4" ng-if="vm.workingWO.cdLevel5">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Đơn vị điều phối cấp 5</label>
+                                <input disabled class="form-control display-block"
+                                       ng-model="vm.workingWO.cdLevel5Name"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Người thực hiện</label>
+                                <input disabled class="form-control display-block" ng-model="vm.workingWO.ftName"/>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Hạn hoàn thành</label>
+                                <input disabled class="form-control display-block" ng-model="vm.workingWO.finishDate"
+                                       date-time/>
+                            </div>
+
+                            <div class="col-md-4" ng-if="hcqtHasProblem">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Hạn hoàn thành có vướng (HCQT)</label>
+                                <input disabled class="form-control display-block" ng-model="vm.label.maxDueDate"
+                                       date-time/>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Vị trí thực hiện yêu cầu (Long - Lat)</label>
+                                <input disabled class="form-control input-half" ng-model="vm.workingWO.trExecuteLong"/>
+                                <input disabled class="form-control input-half" ng-model="vm.workingWO.trExecuteLat"/>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Vị trí thực hiện thực tế (Long - Lat)</label>
+                                <input disabled class="form-control input-half" ng-model="vm.workingWO.executeLong"/>
+                                <input disabled class="form-control input-half" ng-model="vm.workingWO.executeLat"/>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Ngày tiếp nhận</label>
+                                <input disabled class="form-control display-block"
+                                       ng-model="vm.workingWO.acceptTimeStr"/>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Ngày bắt đầu thực hiện</label>
+                                <input disabled class="form-control display-block"
+                                       ng-model="vm.workingWO.startTimeStr"/>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Ngày kết thúc</label>
+                                <input disabled class="form-control display-block" ng-model="vm.workingWO.endTimeStr"/>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Định mức hoàn thành (Số giờ)</label>
+                                <input disabled class="form-control display-block" ng-model="vm.workingWO.qoutaTime"/>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       translate>Thời gian hoàn thành thực tế (số giờ)</label>
+                                <input disabled class="form-control display-block" ng-model="vm.label.actualWorkTime"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="portlet light bordered">
+            <div class="portlet-title background-title">
+                <div class="caption">
+                    <span class="caption-subject bold lowercase" translate>Checklist đầu việc</span>
+                </div>
+            </div>
+            <div id="tr_details_container" class="collapse in from-search">
+                <div class="clearfix position-relative">
+                    <div class="clearfix">
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label class="control-label" style="text-align: left !important;"
+                                       ng-if="vm.label.catWorkName && vm.workingWO.woTypeCode == 'THICONG'" translate>Tên
+                                    hạng mục: </label><span ng-bind-html="vm.label.catWorkName"></span>
+                                <label class="display-block control-label" style="text-align: left !important;"
+                                       ng-bind-html="vm.label.executeChecklist" translate>Trình tự thực hiện công
+                                    việc</label>
+                            </div>
+                            <div class="col-md-6" style="text-align:right;"
+                                 ng-if="((vm.workingWO.woTypeCode == 'THICONG' && vm.workingWO.apWorkSrc == 6) || (permissions.update5S && vm.workingWO.woTypeCode == '5S')) && vm.workingWO.state != 'DONE' && vm.workingWO.state != 'CD_OK' && vm.workingWO.state != 'OK'">
+                                <button type="button" class="btn btn-qlk padding-search-right ng-scope"
+                                        ng-click="vm.openModalAddCheckList()" ng-disabled="vm.modalOpened">
+                                    <icon class="icon-plus"></icon>
+                                    Thêm đầu việc
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="collapse in from-search">
+                                <div class="clearfix position-relative">
+                                    <div id="woCheckList" kendo-grid="vm.woCheckList" k-options="vm.woCheckListOptions"
+                                         ng-if="vm.workingWO.woTypeCode != 'HCQT' && vm.workingWO.woTypeCode != 'TKDT'  && vm.workingWO.woTypeCode != 'AVG' "></div>
+                                    <div id="woHCQTCheckList" kendo-grid="vm.woHCQTCheckList"
+                                         k-options="vm.woHCQTCheckListOptions"
+                                         ng-if="vm.workingWO.woTypeCode == 'HCQT' "></div>
+                                    <div id="woTKDTCheckList" kendo-grid="vm.woTKDTCheckList"
+                                         k-options="vm.woTKDTCheckListOptions"
+                                         ng-if="vm.workingWO.woTypeCode == 'TKDT' "></div>
+                                    <div id="woAvgCheckList" kendo-grid="vm.woAvgCheckList"
+                                         k-options="vm.woAvgCheckListOptions"
+                                         ng-if="vm.workingWO.woTypeCode == 'AVG' "></div>
+                                    <input ng-show="vm.sysGroupId == vm.workingWO.cdLevel2"
+                                    	class="file-input" #file name="files" type="file" id="imgUpload"
+                                           tabindex="10" style="display: none"
+                                           accept="image/x-png,image/gif,image/jpeg"/>
+                                    <input ng-show="vm.sysGroupId == vm.workingWO.cdLevel3"
+                                    	class="file-input" #file name="files" type="file" id="imgUpload1"
+                                           tabindex="10" style="display: none"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="borderCount"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="portlet light bordered" ng-if="(vm.workingWO.woTypeCode == 'UCTT' || vm.workingWO.woTypeCode == 'AVG') && (vm.workingWO.state == 'DONE'
+                        || vm.workingWO.state == 'OK' || vm.workingWO.state == 'NG' || vm.workingWO.state == 'CD_OK' || vm.workingWO.state == 'CD_NG')">
+            <div class="portlet-title background-title">
+                <div class="caption">
+                    <span class="caption-subject bold lowercase" translate>Danh sách vật tư</span>
+                </div>
+            </div>
+
+            <div class="row mt5">
+                <div class="collapse in from-search">
+                    <div class="clearfix position-relative">
+                        <div kendo-grid="vm.goodsOfWo" k-options="vm.woGooodsOptions"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="portlet light bordered">
+            <div class="portlet-title background-title">
+                <div class="caption">
+                    <span class="caption-subject bold lowercase" translate>Lịch sử tác động</span>
+                </div>
+            </div>
+
+            <div class="row mt5">
+                <div class="collapse in from-search">
+                    <div class="clearfix position-relative">
+                        <div kendo-grid="vm.woHistory" k-options="vm.woHistoryOptions"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="portlet light bordered"
+             ng-if="'TMBT' == vm.workingWO.woTypeCode">
+            <div class="portlet-title background-title">
+                <div class="caption">
+                    <span class="caption-subject bold lowercase" translate>Danh sách trạm</span>
+                </div>
+            </div>
+
+            <div class="row mt5">
+                <div class="collapse in from-search">
+                    <div class="clearfix position-relative">
+                        <div kendo-grid="vm.tmbtStationDataTbl"
+                             k-options="vm.tmbtStationDataTblOptions"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="portlet light bordered" ng-hide="vm.workingWO.woTypeCode=='TTHQ' && vm.workingWO.state=='PROCESSING'">
+            <div class="portlet-title background-title">
+                <div class="caption">
+                    <span class="caption-subject bold lowercase" translate>Danh sách File đính kèm</span>
+                </div>
+            </div>
+
+            <div class="row mt5" ng-if="'TMBT' != vm.workingWO.woTypeCode">
+                <div class="col-md-1">
+                    <button type="button" class="btn btn-qlk padding-search-right ng-scope"
+                            ng-click="vm.addAttachment(0)">
+                        <icon class="icon-plus"></icon>
+                        Thêm File
+                    </button>
+                    <input id="woAttachmentFileId" type="file" ng-model="vm.attachFile.woAttachmentFile"
+                           style="display: none">
+                </div>
+            </div>
+
+            <div class="row mt5" ng-if="'TMBT' == vm.workingWO.woTypeCode">
+                <div class="col-md-1">
+                    <button type="button" class="btn btn-qlk padding-search-right ng-scope"
+                            ng-click="vm.addAttachment(1)">
+                        <icon class="icon-plus"></icon>
+                        Thêm file hợp đồng (*)
+                    </button>
+                    <input id="woAttachmentFileHd" type="file" ng-model="vm.attachFile.woAttachmentFileHd"
+                           style="display: none">
+                </div>
+            </div>
+
+            <div class="row mt5" ng-if="'TMBT' == vm.workingWO.woTypeCode">
+                <div class="col-md-1">
+                    <button type="button" class="btn btn-qlk padding-search-right ng-scope"
+                            ng-click="vm.addAttachment(2)">
+                        <icon class="icon-plus"></icon>
+                        Thêm file biên bản khảo sát (*)
+                    </button>
+                    <input id="woAttachmentFileBbks" type="file" ng-model="vm.attachFile.woAttachmentFileBbks"
+                           style="display: none">
+                </div>
+            </div>
+
+            <div class="row mt5">
+                <div class="collapse in from-search">
+                    <div class="clearfix position-relative">
+                        <div kendo-grid="vm.fileAttachDataTbl" if="fileAttachDataTblId"
+                             k-options="vm.fileAttachDataTblOptions"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Huypq-19072021-start -->
+        <div class="portlet light bordered" ng-if="vm.workingWO.woTypeCode=='TTHQ' && vm.workingWO.state=='PROCESSING'">
+            <div class="portlet-title background-title">
+                <div class="caption">
+                    <span class="caption-subject bold lowercase" translate>Import dữ liệu tính toán hiệu quả</span>
+                </div>
+            </div>
+
+            <div class="row mt5">
+                <div class="col-md-1" >
+                    <button type="button" class="btn btn-qlk padding-search-right ng-scope"
+                            ng-click="vm.importFileTthq()">
+                        <icon class="icon-plus"></icon>
+                        Import File TTHQ
+                    </button>
+                    <input id="importFileTthqId" type="file" ng-model="vm.attachFile.woAttachmentFile"
+                           style="display: none">
+                </div>
+            </div>
+
+            <div class="row mt5">
+                <div class="collapse in from-search">
+                    <div class="clearfix position-relative">
+                        <div kendo-grid="vm.fileAttachDataTbl"
+                             k-options="vm.fileAttachDataTblOptions"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<!-- Huypq-30102021-start -->
+		<!-- <div class="portlet light bordered"
+             ng-show="vm.workingWO.woTypeCode=='TTHQ' && vm.workingWO.state=='PROCESSING'">
+            <div class="portlet-title background-title">
+                <div class="caption">
+                    <span class="caption-subject bold lowercase" translate>Dữ liệu tính toán hiệu quả theo hợp đồng</span>
+                </div>
+            </div>
+
+            <div class="row mt5">
+                <div class="collapse in from-search">
+                    <div class="clearfix position-relative">
+                        <div kendo-grid="vm.tthqDataContractTbl" id="tthqDataContractTblId"
+                             k-options="vm.tthqDataContractTblOptions"></div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+		<!-- Huypq-19072021-end -->
+		<div class="portlet light bordered"
+             ng-show="vm.workingWO.woTypeCode=='TTHQ' && (vm.workingWO.state=='PROCESSING' || vm.workingWO.state=='OK')">
+            <div class="portlet-title background-title">
+                <div class="caption">
+                    <span class="caption-subject bold lowercase" translate>Dữ liệu tính toán hiệu quả </span>
+                </div>
+            </div>
+
+            <div class="row mt5">
+                <div class="collapse in from-search">
+                    <div class="clearfix position-relative">
+                        <div kendo-grid="vm.tthqDataTbl" id="tthqDataTblId"
+                             k-options="vm.tthqDataTblOptions"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<!-- Huypq-19072021-end -->
+        <div class="portlet light bordered"
+             ng-if="'HSHC' == vm.workingWO.woTypeCode && vm.workingWO.catConstructionTypeId != 8">
+            <div class="portlet-title background-title">
+                <div class="caption">
+                    <span class="caption-subject bold lowercase" translate>Danh sách hạng mục đã hoàn thành của công trình </span>
+                    <span ng-bind-html="vm.workingWO.constructionCode"></span>
+                </div>
+            </div>
+
+            <div class="row mt5">
+                <div class="collapse in from-search">
+                    <div class="clearfix position-relative">
+                        <div kendo-grid="vm.workItemDataTbl"
+                             k-options="vm.workItemDataTblOptions"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Huypq-25102021-start -->
+		<div class="portlet light bordered"
+             ng-if="'TKDT' == vm.workingWO.woTypeCode && vm.workingWO.state=='OK'">
+            <div class="portlet-title background-title">
+                <div class="caption">
+                    <span class="caption-subject bold lowercase" translate>Danh sách hạng mục của công trình </span>
+                    <span ng-bind-html="vm.workingWO.constructionCode"></span>
+                </div>
+            </div>
+
+            <div class="row mt5">
+                <div class="collapse in from-search">
+                    <div class="clearfix position-relative">
+                        <div kendo-grid="vm.workItemDataTbl"
+                             k-options="vm.workItemDataTblOptions"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<!-- Huy-end -->
+
+		<!-- Huypq-23112021-start -->
+		<div class="portlet light bordered"
+             ng-if="'DBHT' == vm.workingWO.woTypeCode && vm.workingWO.state=='CD_OK'">
+            <div class="portlet-title background-title">
+                <div class="caption">
+                    <span class="caption-subject bold lowercase" translate>Danh sách WO hoàn thành của công trình </span>
+                    <span ng-bind-html="vm.workingWO.constructionCode"></span>
+                </div>
+            </div>
+
+            <div class="row mt5">
+                <div class="collapse in from-search">
+                    <div class="clearfix position-relative">
+                        <div kendo-grid="vm.woCompleteDataTbl"
+                             k-options="vm.woCompleteDataTblOptions"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<!-- Huy-end -->
+
+        <div class="portlet light bordered"
+             ng-if="'HSHC' == vm.workingWO.woTypeCode && vm.workingWO.catConstructionTypeId == 8">
+            <div class="portlet-title background-title">
+                <div class="caption">
+                    <span class="caption-subject bold lowercase" translate>Công trình XDDD: </span> <span
+                        ng-bind-html="vm.workingWO.constructionCode"></span>
+                </div>
+            </div>
+
+            <div class="row mt5">
+                <div class="collapse in from-search">
+                    <div class="clearfix position-relative">
+                        <span>Đầu việc đã chọn làm HSHC</span>
+                        <div id="xdddChecklistDataTbl" kendo-grid="vm.xdddChecklistDataTbl"
+                             k-options="vm.xdddChecklistDataTblOptions"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="portlet light bordered"
+             ng-if="'HSHC' == vm.workingWO.woTypeCode && vm.workingWO.catConstructionTypeId != 8">
+            <div class="portlet-title background-title">
+                <div class="caption">
+                    <span class="caption-subject bold lowercase" translate>Danh sách WO thi công</span>
+                </div>
+            </div>
+
+            <div class="row mt5">
+                <div class="collapse in from-search">
+                    <div class="clearfix position-relative">
+                        <div kendo-grid="vm.constructionWoDataTbl"
+                             k-options="vm.constructionWoDataTblOptions"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="portlet light bordered" ng-if="vm.isOverdue">
+            <div class="portlet-title background-title">
+                <div class="caption">
+                    <span class="caption-subject bold lowercase" translate>Giải trình thực hiện quá hạn</span>
+                </div>
+            </div>
+
+            <div class="row mt5">
+                <div class="col-md-12">
+                    <div class="collapse in from-search">
+                        <div class="clearfix position-relative">
+                            Hạn hoàn thành: <span style="font-weight: bold"
+                                                  ng-bind-html="vm.workingWO.finishDate"></span> &nbsp;&nbsp;&nbsp;&nbsp;
+                            Thời gian hoàn thành thực tế: <span style="font-weight: bold"
+                                                                ng-bind-html="vm.workingWO.endTime"></span><br>
+                            Lý do quá hạn: <span ng-bind-html="vm.overdueReasonText"></span><br>
+                            Người giải trình:<span ng-bind-html="vm.overdueReasonPerson"></span><br>
+                            Thời gian giải trình: <span ng-bind-html="vm.overdueReasonDate"></span><br>
+                            Trạng thái duyệt: <span ng-bind-html="vm.overdueApproveState"></span><br>
+                            Người duyệt: <span ng-bind-html="vm.overdueApprovePerson"></span><br>
+                            Thời gian duyệt: <span ng-bind-html="vm.overdueApproveDate"></span><br>
+                            <button ng-if="vm.workingWO.overdueApproveState == 'WAIT' && permissions.approveOverdue"
+                                    class="btn btn-primary smaller-btn" ng-click="vm.acceptRejectOverdueReason(1)">Chấp
+                                thuận
+                            </button>&nbsp;
+                            <button ng-if="vm.workingWO.overdueApproveState == 'WAIT' && permissions.approveOverdue"
+                                    class="btn btn-danger smaller-btn" ng-click="vm.acceptRejectOverdueReason(0)">Từ
+                                chối
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ThanhPT - Danh sach vat tu KTTS - start-->
+        <div class="portlet light bordered" ng-if="'BGBTS_DTHT' == vm.workingWO.woTypeCode || 'BGBTS_VHKT' == vm.workingWO.woTypeCode">
+            <div class="portlet-title background-title">
+                <div class="caption">
+                    <span class="caption-subject bold lowercase" translate>Danh sách tài sản bàn giao</span>
+                </div>
+            </div>
+
+            <div class="row mt5">
+                <div class="collapse in from-search">
+                    <div class="clearfix position-relative">
+                        <div kendo-grid="vm.woGoodsTbl"
+                             k-options="vm.woGoodsTblOptions"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ThanhPT - Danh sach vat tu KTTS - end-->
+
+        <div class="portlet light bordered">
+            <div class="portlet-title background-title">
+                <div class="caption">
+                    <span class="caption-subject bold lowercase"
+                          translate>Tiếp nhận - giao việc - phê duyệt ý kiến</span>
+                </div>
+            </div>
+
+            <div class="row mt5">
+                <div class="col-md-12" style="text-align: center">
+                    <button class="btn padding-search-right btn-primary" ng-if="vm.isAssignable"
+                            ng-click="vm.openAssignmentModal(vm.workingWO.woId, 'ASSIGN')">Giao việc
+                    </button>
+                    <button class="btn padding-search-right btn-primary" ng-if="vm.isReAssignable"
+                            ng-click="vm.openAssignmentModal(vm.workingWO.woId, 'REASSIGN')">Giao việc lại
+                    </button>
+                    <button class="btn padding-search-right btn-primary" ng-if="vm.checkAsignAdminWo && (vm.workingWO.state == 'ASSIGN_FT' || vm.workingWO.state == 'ACCEPT_FT' || vm.workingWO.state == 'PROCESSING')"
+                            ng-click="vm.openAssignmentModal(vm.workingWO.woId, 'REASSIGN_ADMIN_WO')">Giao lại FT
+                    </button>
+                    <button class="btn padding-search-right btn-warning" ng-if="vm.isAcceptable"
+                            ng-click="vm.acceptWO(vm.workingWO.woId)">Nhận việc
+                    </button>
+                    <button class="btn padding-search-right btn-danger" ng-if="vm.isRejectable && permissions.cdWO"
+                            ng-click="openRejectModal()">Từ chối
+                    </button>
+                    <button class="btn padding-search-right btn-primary" ng-if="vm.isOpinionAsking && permissions.cdWO"
+                            ng-click="vm.openOpinionProcessModal(vm.workingWO.woId, 'ACCEPT')">Chấp thuận ý kiến đã xin
+                    </button>
+                    <button class="btn padding-search-right btn-warning" ng-if="vm.isOpinionAsking && permissions.cdWO"
+                            ng-click="vm.openOpinionProcessModal(vm.workingWO.woId, 'REJECT')">Từ chối ý kiến đã xin
+                    </button>
+                    <button class="btn padding-search-right btn-danger"
+                            ng-if="vm.isOpinionAsking  && permissions.cdWO && vm.workingWO.state != 'OPINION_RQ_1'"
+                            ng-click="vm.openOpinionProcessModal(vm.workingWO.woId, 'PASS_UP')">Chuyển ý kiến lên trên
+                    </button>
+
+                    <button class="btn padding-search-right btn-primary"
+                            ng-click="openCdOkOrNgModal()"
+                            ng-if="(vm.isDone && permissions.cdWO && vm.canApproveCdOk) || vm.isPause">
+                        Đánh giá kết quả cv
+                    </button>
+                    <button class="btn padding-search-right btn-primary"
+                            ng-if="vm.workingWO.woTypeCode == 'DOANHTHU_DTHT' && (vm.workingWO.state == 'PROCESSING' || (vm.workingWO.state == 'NG' && sysUserId == vm.workingWO.ftId) )" ng-click="openCdOkOrNgModal()">
+                        Hoàn thành WO
+                    </button>
+                    <button class="btn padding-search-right btn-primary" ng-if="(vm.checkCDLV5Approve && vm.workingWO.state =='DONE' && vm.workingWO.apConstructionType == 8) || (vm.isCdOk && permissions.cdWO)
+						        || vm.workingWO.state == 'TC_BRANCH_REJECTED' || vm.workingWO.state == 'CD_PAUSE' || vm.workingWO.state == 'TTHT_PAUSE'
+                                || (vm.workingWO.woTypeCode == 'DOANHTHU' && vm.workingWO.state == 'TC_TCT_REJECTED')
+                                || (vm.workingWO.woTypeCode == 'HSHC' 
+	                                && (vm.workingWO.state == 'CD_OK' || vm.workingWO.state == 'RECEIVED_PQT' || vm.workingWO.state == 'RECEIVED_TTDTHT' || (vm.workingWO.state == 'PQT_NG' && permissions.approveHtctHshc) || (vm.workingWO.state == 'TTDTHT_NG' && permissions.permissions.approveRevenueSalary)) 
+	                                && vm.workingWO.apWorkSrc==4 && vm.workingWO.trId!=null) "
+                            ng-click="acceptRejectQuantityValue()">Ghi nhận sản lượng
+                    </button>
+                    <!-- HienLT56 - ghi lại những thay đổi đối với quyền EDIT ADMIN_WO của TTHT-->
+                    <button class="btn padding-search-right btn-primary" ng-show="vm.checkSysAdminTTHT && vm.checkStateForRoleTTHTEdit"
+                            ng-click="acceptChangeForTTHT()">Ghi nhận thay đổi
+                    </button>
+                    <!-- HienLT56 -->
+                    <button class="btn padding-search-right btn-primary"
+                            ng-if="(vm.workingWO.state == 'WAIT_TC_BRANCH' || vm.workingWO.state == 'TC_TCT_REJECTED') && permissions.approveTcBranch"
+                            ng-click="vm.tcApprove('',2)">TC trụ duyệt
+                    </button>
+                    <button class="btn padding-search-right btn-primary"
+                            ng-if="vm.workingWO.state == 'WAIT_TC_TCT' && permissions.approveTcTct"
+                            ng-click="vm.tcApprove('',1)">TC TCT duyệt
+                    </button>
+                    <button class="btn padding-search-right btn-primary" ng-if="vm.canExtendDueDate"
+                            ng-click="vm.extendDueDate()">Gia hạn
+                    </button>
+                    <button class="btn padding-search-right btn-primary"
+                            ng-if="vm.isOverdue && vm.canPostOverdueReason && vm.workingWO.overdueApproveState != 'APPROVED'"
+                            ng-click="vm.openOverdueReasonModal()">Giải trình lý do thực hiện quá hạn
+                    </button>
+                    <button class="btn padding-search-right btn-primary" ng-if="vm.canApprovedOkWoTkdt"
+                            ng-click="vm.approvedOkWoTkdt()">Đóng WO
+                    </button>
+                    <!--Huypq-05072021- Btn đóng WO TTHQ -->
+                    <button class="btn padding-search-right btn-primary" ng-if="vm.canApprovedOkWoTthq"
+                            ng-click="vm.approvedOkWoTthq()">Đóng WO
+                    </button>
+                    <!-- Huy-end -->
+                    <button class="btn padding-search-right btn-primary" ng-if="vm.canApprovedOkWoVuong"
+                            ng-click="vm.approvedOkWoVuong()">Đóng WO
+                    </button>
+                    <!-- Huypq-06122021-start -->
+                    <button class="btn padding-search-right btn-warning" ng-if="vm.workingWO.woTypeCode == 'HSHC' 
+	                                && ((permissions.approveRevenueSalary && vm.workingWO.state == 'WAIT_PQT') || (permissions.approveDthtHtctHshc && vm.workingWO.state == 'WAIT_TTDTHT')) 
+	                                && vm.workingWO.apWorkSrc==4 && vm.workingWO.trId!=null"
+                            ng-click="vm.acceptHardFile()">Nhận hồ sơ bản cứng
+                    </button>
+                    <!-- Huy-end -->
+                    <!-- Huypq-06012022-start -->
+                    <button class="btn padding-search-right btn-primary" ng-if="vm.workingWO.woTypeCode == 'DOANHTHU_DTHT' && vm.workingWO.state == 'NG' && permissions.cdWO"
+                            ng-click="vm.reProcessWo()">Thực hiện lại
+                    </button>
+                    <!-- Huy-end -->
+
+                    <a id="okNgModalOpenBtn" style="display: none" data-toggle="modal"
+                       data-target="#quickCreateWoModalId"></a>
+                </div>
+            </div>
+        </div>
+</div>
+
+</form>
+
+</div>
+
+<!-- Check OK NG Modal -->
+<div class="modal fade" id="quickCreateWoModalId" tabindex="-1" role="dialog" aria-hidden="true"
+     data-ng-controller="woDetailsController as vm">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="padding: 0;">
+            <div class="modal-header" style="background-color: #33CCCC;">
+                <h5 class="modal-title">Đánh giá kết quả công việc</h5>
+                <button type="button" class="close close-modal-x" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="collapse in from-search">
+                    <div class="clearfix position-relative">
+                        <div class="clearfix">
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label class="display-block control-label" style="text-align: left !important;"
+                                           translate>Nội dung</label>
+                                    <textarea style="max-width: 100%; width: 100%"></textarea>
+                                </div>
+							</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="vm.changeStateOk()" data-dismiss="modal">Ok
+                </button>
+                <button type="button" class="btn btn-info" ng-click="vm.changeStateNotGood()" data-dismiss="modal">Not
+                    good
+                </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Quick create WO Modal -->

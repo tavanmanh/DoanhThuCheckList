@@ -1,0 +1,83 @@
+<style>
+	.modal-content{
+		width: 100%;
+		padding: 0;
+	}
+
+	.close-modal-x{
+		position: absolute;
+		top: 6px;
+		right: 6px;
+	}
+	.gpxd{
+		display: block;
+		width: 100%;
+		padding: 0;
+	}
+	.gpxd-row{
+		margin-top: 10px;
+	}
+	label {
+		font-weight: normal;
+	}
+	.clearfix{
+		margin-top: 10px;
+	}
+	.displayui{
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		margin-bottom: 5px;
+	}
+	/*label.required::after {*/
+	/*	content: '*';*/
+	/*	margin-left: 3px;*/
+	/*	color: red;*/
+	/*}*/
+</style>
+<!--<div class="modal-header" style="background-color: #33CCCC;">-->
+<!--	<h5 class="modal-title">Phê duyệt thông tin khách hàng</h5>-->
+<!--</div>-->
+
+<div class="modal-body">
+	<div class="collapse in from-search">
+		<div class="clearfix position-relative">
+			<div class="clearfix">
+				<div class="form-group col-md-12">
+					<div class="col-md-12  displayui">
+						<input style="float: left;" type="radio" id="ok"
+							   name="approve"
+							   ng-model="caller.approveCustomer.approve"
+							   ng-value="true" value="true">
+						<label style="font-weight: 400" for="ok"
+							   class="padding_radio">Phê duyệt</label>
+						<input
+								style="float: left;" type="radio" id="no" name="approve"
+								ng-model="caller.approveCustomer.approve"
+								ng-value="false" value="false">
+						<label style="font-weight: 400" for="no"
+							   class="padding_radio">Từ chối phê duyệt</label>
+					</div>
+					<div class="clearfix" ng-show="caller.approveCustomer.approve == false">
+						<label class="display-block control-label" style="padding-left: 15px">
+							Lý do từ chối<label class="required">*</label>
+						</label>
+						<div class="col-md-12">
+								<textarea class=" form-control width100" type="text" rows="4" maxlength="255"
+										  id="reasonRejection" ng-model="caller.approveCustomer.reason"
+										  name="reasonRejection"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="clearfix form-actions modal-footer" align="right">
+	<button type="button" id="saveData"
+			class="btn btn-qlk   padding-search-right btn pull-right  saveQLK"
+			ng-click="caller.saveApproveInfoCustomer()" translate>Ghi lại</button>
+	<button type="button" id="cancel"
+			class="btn btn-qlk padding-search-right margin_right10 closeQLK btn pull-right"
+			ng-click="$close()" translate>Huỷ bỏ</button>
+</div>

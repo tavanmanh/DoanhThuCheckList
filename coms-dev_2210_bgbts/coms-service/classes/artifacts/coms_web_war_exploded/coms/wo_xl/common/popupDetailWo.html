@@ -1,0 +1,526 @@
+<style>
+.display-block {
+	display: block;
+	width: 100%;
+}
+
+.input-half {
+	width: 48%;
+	display: inline;
+}
+
+.grey {
+	color: #333;
+}
+
+.yellow {
+	color: #E0D014
+}
+
+.azure {
+	color: #011995;
+}
+
+.green {
+	color: lawngreen;
+}
+
+.mt5 {
+	margin-top: 5px;
+}
+
+.fs20 {
+	font-size: 20px;
+}
+
+.mb5 {
+	margin-bottom: 5px;
+}
+
+.cedtpl {
+	font-size: 25px;
+	text-align: center;
+}
+
+.timeline {
+	position: relative;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+/* The actual timeline (the vertical ruler) */
+.timeline::after {
+	content: '';
+	position: absolute;
+	width: 6px;
+	background-color: white;
+	top: 0;
+	bottom: 0;
+	margin-left: -40px;
+}
+
+/* Container around content */
+.timepoint {
+	padding: 10px 40px;
+	position: relative;
+	background-color: inherit;
+}
+
+/* The circles on the timeline */
+.timepoint::after {
+	content: '';
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	background-color: white;
+	border: 4px solid #FF9F55;
+	top: 15px;
+	border-radius: 50%;
+	z-index: 1;
+	left: 30px;
+}
+
+/* Add arrows to the right container (pointing left) */
+.right::before {
+	content: " ";
+	height: 0;
+	position: absolute;
+	top: 22px;
+	width: 0;
+	z-index: 1;
+	left: 30px;
+	border: medium solid white;
+	border-width: 10px 10px 10px 0;
+	border-color: transparent white transparent transparent;
+}
+
+/* The actual content */
+.timeline-content {
+	padding: 20px 30px;
+	background-color: white;
+	position: relative;
+	border-radius: 6px;
+	left: 30px;
+}
+
+.big-image-modal .modal-dialog {
+	width: 1000px;
+	text-align: center;
+}
+
+.big-image-modal .modal-dialog .modal-content {
+	background-color: transparent;
+	padding: 0;
+	border: 0;
+}
+
+.delete-image-btn {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	width: 20px;
+	height: 20px;
+	border: 1px solid red;
+	border-radius: 10px !important;
+	color: red;
+	font-size: 28px;
+	line-height: 13px;
+	cursor: pointer;
+}
+
+.k-widget.k-window.fix-footer {
+	z-index: 10103 !important;
+}
+
+.smaller-btn {
+	border-radius: 4px;
+	padding: 5px;
+}
+
+.h32 {
+	height: 32px;
+}
+</style>
+<div>
+	<form class="form-horizontal row" role="form" id="chartReportSearch">
+		<div class="form-body">
+			<div class="portlet light bordered">
+				<div class="portlet-title background-title">
+					<div class="caption">
+						<span class="caption-subject bold lowercase" translate>Thông
+							tin chung</span>
+					</div>
+				</div>
+				<div class="collapse in from-search">
+					<div class="clearfix position-relative">
+						<div class="clearfix">
+							<div class="form-group row">
+								<div class="col-md-4">
+									<label class="display-block control-label"
+										style="text-align: left !important;" translate>Tên WO*</label>
+									<input disabled class="form-control display-block"
+										ng-model="caller.workingWODetail.woName" />
+								</div>
+								<div class="col-md-4">
+									<label class="display-block control-label"
+										style="text-align: left !important;" translate>Mã WO*</label>
+									<input disabled class="form-control display-block"
+										ng-model="caller.workingWODetail.woCode" />
+								</div>
+								<div class="col-md-4">
+									<label class="display-block control-label"
+										style="text-align: left !important;" translate>Nguồn
+										việc*</label> <select ng-show="caller.workingWODetail.woNameId != 21"
+										ng-disabled="caller.checkDisabledWoValue"
+										class="form-control display-block"
+										ng-model="caller.workingWODetail.apWorkSrc"
+										ng-options="apWorkSrc.code as apWorkSrcShortName(apWorkSrc.name) for apWorkSrc in apWorkSrcs">
+										<option></option>
+									</select> <select ng-show="caller.workingWODetail.woNameId == 21"
+										class="form-control display-block"
+										ng-model="caller.workingWODetail.apWorkSrc"
+										ng-options="apWorkSrc.code as apWorkSrcShortName(apWorkSrc.name) for apWorkSrc in apWorkSrcs1">
+										<option></option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<div class="col-md-4">
+									<label class="display-block control-label"
+										style="text-align: left !important;" translate>Loại WO</label>
+									<input disabled class="form-control display-block"
+										ng-model="caller.workingWODetail.woTypeName" />
+								</div>
+								<div class="col-md-4">
+									<label class="display-block control-label"
+										style="text-align: left !important;" translate>Mã TR</label> <input
+										disabled class="form-control display-block"
+										ng-model="caller.workingWODetail.trCode" />
+								</div>
+								<div class="col-md-4">
+									<label class="display-block control-label"
+										style="text-align: left !important;" translate>Loại TR</label>
+									<input disabled class="form-control display-block"
+										ng-model="caller.workingWODetail.trTypeName" />
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<div class="col-md-4">
+									<label class="display-block control-label"
+										style="text-align: left !important;" translate>Loại
+										công trình</label> <select ng-disabled="caller.checkDisabledWoValue"
+										class="form-control display-block"
+										ng-model="caller.workingWODetail.apConstructionType"
+										ng-options="cType.code as cType.name for cType in cTypes">
+										<option></option>
+									</select>
+								</div>
+								<div class="col-md-4">
+									<label class="display-block control-label"
+										style="text-align: left !important;" translate>Mã CT</label> <input
+										disabled class="form-control display-block"
+										ng-model="caller.workingWODetail.constructionCode" />
+								</div>
+								<div class="col-md-4"
+									ng-if="caller.workingWODetail.contractCode">
+									<label class="display-block control-label"
+										style="text-align: left !important;" translate>Mã hợp
+										đồng</label> <input disabled class="form-control display-block"
+										ng-model="caller.workingWODetail.contractCode" />
+								</div>
+								<div class="col-md-4" ng-if="caller.workingWODetail.projectCode">
+									<label class="display-block control-label"
+										style="text-align: left !important;" translate>Mã dự
+										án</label> <input disabled class="form-control display-block"
+										ng-model="caller.workingWODetail.projectCode" />
+								</div>
+								<div class="col-md-4"
+									ng-if="caller.workingWODetail.hcqtContractCode">
+									<label class="display-block control-label"
+										style="text-align: left !important;" translate>Hợp
+										đồng HCQT</label> <input disabled class="form-control display-block"
+										ng-model="caller.workingWODetail.hcqtContractCode" />
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<div class="col-md-4">
+									<label class="display-block control-label"
+										style="text-align: left !important;" translate>Mã Trạm</label>
+									<input disabled class="form-control display-block"
+										ng-model="caller.workingWODetail.stationCode" />
+								</div>
+								<div class="col-md-4">
+									<label class="display-block control-label"
+										style="text-align: left !important;" translate>Nhà
+										Trạm</label> <input disabled class="form-control display-block"
+										ng-model="caller.workingWODetail.catStationHouseTxt" />
+								</div>
+								<div class="col-md-4">
+									<div>
+										<label class="display-block control-label"
+											style="text-align: left !important;" translate>Giá
+											trị sản lượng (triệu VND)</label>
+									</div>
+									<div>
+										<input class="form-control display-block"
+											ng-model="caller.workingWODetail.moneyValue" disabled />
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-4">
+								<label class="display-block control-label"
+									style="text-align: left !important;" translate>Ngày tạo</label>
+								<input disabled class="form-control display-block"
+									ng-model="caller.workingWODetail.createdDateStr" />
+							</div>
+
+						</div>
+
+						<div class="form-group row">
+
+							<div class="col-md-4">
+								<label class="display-block control-label"
+									style="text-align: left !important;" translate>Kế hoạch
+									tháng</label> <input disabled class="form-control display-block"
+									ng-model="caller.workingWODetail.totalMonthPlanId" />
+							</div>
+
+						</div>
+
+						<div class="form-group row"
+							ng-if="'XLSC' == caller.workingWODetail.woTypeCode">
+							<div class="col-md-12">
+								<div>
+									<label class="display-block control-label"
+										style="text-align: left !important;" translate>Chi
+										tiết </label>
+								</div>
+								<textarea type="text" disabled
+									class="form-control display-block"
+									ng-model="caller.workingWODetail.description"
+									style="min-height: 100px;"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="portlet light bordered">
+			<div class="portlet-title background-title">
+				<div class="caption">
+					<span class="caption-subject bold lowercase" translate>Thông
+						tin thực hiện giám sát</span>
+				</div>
+			</div>
+			<div class="collapse in from-search">
+				<div class="clearfix position-relative">
+					<div class="clearfix">
+
+						<div class="form-group row">
+							<div class="col-md-4">
+								<label class="display-block control-label"
+									style="text-align: left !important;" translate>Đơn vị
+									điều phối cấp 1</label> <input disabled
+									class="form-control display-block"
+									ng-model="caller.workingWODetail.cdLevel1Name" />
+							</div>
+							<div class="col-md-4">
+								<label class="display-block control-label"
+									style="text-align: left !important;" translate>Đơn vị
+									điều phối cấp 2</label> <input disabled
+									class="form-control display-block"
+									ng-model="caller.workingWODetail.cdLevel2Name" />
+							</div>
+							<div class="col-md-4">
+								<label class="display-block control-label"
+									style="text-align: left !important;" translate>Đơn vị
+									điều phối cấp 3</label> <input disabled
+									class="form-control display-block"
+									ng-model="caller.workingWODetail.cdLevel3Name" />
+							</div>
+							<div class="col-md-4">
+								<label class="display-block control-label"
+									style="text-align: left !important;" translate>Đơn vị
+									điều phối cấp 4</label> <input disabled
+									class="form-control display-block"
+									ng-model="caller.workingWODetail.cdLevel4Name" />
+							</div>
+							<div class="col-md-4" ng-if="caller.workingWODetail.cdLevel5">
+								<label class="display-block control-label"
+									style="text-align: left !important;" translate>Đơn vị
+									điều phối cấp 5</label> <input disabled
+									class="form-control display-block"
+									ng-model="caller.workingWODetail.cdLevel5Name" />
+							</div>
+							<div class="col-md-4">
+								<label class="display-block control-label"
+									style="text-align: left !important;" translate>Người
+									thực hiện</label> <input disabled class="form-control display-block"
+									ng-model="caller.workingWODetail.ftName" />
+							</div>
+
+							<div class="col-md-4">
+								<label class="display-block control-label"
+									style="text-align: left !important;" translate>Hạn hoàn
+									thành</label> <input disabled class="form-control display-block"
+									ng-model="caller.workingWODetail.finishDate" date-time />
+							</div>
+
+							<div class="col-md-4" ng-if="hcqtHasProblem">
+								<label class="display-block control-label"
+									style="text-align: left !important;" translate>Hạn hoàn
+									thành có vướng (HCQT)</label> <input disabled
+									class="form-control display-block"
+									ng-model="caller.workingWODetail.maxDueDate" date-time />
+							</div>
+
+							<div class="col-md-4">
+								<label class="display-block control-label"
+									style="text-align: left !important;" translate>Vị trí
+									thực hiện yêu cầu (Long - Lat)</label> <input disabled
+									class="form-control input-half"
+									ng-model="caller.workingWODetail.trExecuteLong" /> <input
+									disabled class="form-control input-half"
+									ng-model="caller.workingWODetail.trExecuteLat" />
+							</div>
+
+							<div class="col-md-4">
+								<label class="display-block control-label"
+									style="text-align: left !important;" translate>Vị trí
+									thực hiện thực tế (Long - Lat)</label> <input disabled
+									class="form-control input-half"
+									ng-model="caller.workingWODetail.executeLong" /> <input
+									disabled class="form-control input-half"
+									ng-model="caller.workingWODetail.executeLat" />
+							</div>
+
+							<div class="col-md-4">
+								<label class="display-block control-label"
+									style="text-align: left !important;" translate>Ngày
+									tiếp nhận</label> <input disabled class="form-control display-block"
+									ng-model="caller.workingWODetail.acceptTimeStr" />
+							</div>
+
+							<div class="col-md-4">
+								<label class="display-block control-label"
+									style="text-align: left !important;" translate>Ngày bắt
+									đầu thực hiện</label> <input disabled
+									class="form-control display-block"
+									ng-model="caller.workingWODetail.startTimeStr" />
+							</div>
+
+							<div class="col-md-4">
+								<label class="display-block control-label"
+									style="text-align: left !important;" translate>Ngày kết
+									thúc</label> <input disabled class="form-control display-block"
+									ng-model="caller.workingWODetail.endTimeStr" />
+							</div>
+
+							<div class="col-md-4">
+								<label class="display-block control-label"
+									style="text-align: left !important;" translate>Định mức
+									hoàn thành (Số giờ)</label> <input disabled
+									class="form-control display-block"
+									ng-model="caller.workingWODetail.qoutaTime" />
+							</div>
+
+							<div class="col-md-4">
+								<label class="display-block control-label"
+									style="text-align: left !important;" translate>Thời
+									gian hoàn thành thực tế (số giờ)</label> <input disabled
+									class="form-control display-block"
+									ng-model="caller.workingWODetail.actualWorkTime" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- <div class="portlet light bordered">
+			<div class="portlet-title background-title">
+				<div class="caption">
+					<span class="caption-subject bold lowercase" translate>Checklist
+						đầu việc</span>
+				</div>
+			</div>
+			<div id="tr_details_container" class="collapse in from-search">
+				<div class="clearfix position-relative">
+					<div class="clearfix">
+
+						<div class="form-group row">
+							<div class="col-md-6">
+								<label class="control-label"
+									style="text-align: left !important;"
+									ng-if="caller.workingWODetail.catWorkName && caller.workingWODetail.woTypeCode == 'THICONG'"
+									translate>Tên hạng mục: </label><span
+									ng-bind-html="caller.workingWODetail.catWorkName"></span> <label
+									class="display-block control-label"
+									style="text-align: left !important;"
+									ng-bind-html="caller.workingWODetail.executeChecklist" translate>Trình
+									tự thực hiện công việc</label>
+							</div>
+							<div class="col-md-6" style="text-align: right;"
+								ng-if="((caller.workingWODetail.woTypeCode == 'THICONG' && caller.workingWODetail.apWorkSrc == 6) || (permissions.update5S && caller.workingWODetail.woTypeCode == '5S')) && caller.workingWODetail.state != 'DONE' && caller.workingWODetail.state != 'CD_OK' && caller.workingWODetail.state != 'OK'">
+								<button type="button"
+									class="btn btn-qlk padding-search-right ng-scope"
+									ng-click="caller.openModalAddCheckList()"
+									ng-disabled="caller.modalOpened">
+									<icon class="icon-plus"></icon>
+									Thêm đầu việc
+								</button>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="collapse in from-search">
+								<div class="clearfix position-relative">
+									<div id="woCheckList" kendo-grid="caller.woCheckList"
+										k-options="caller.woCheckListOptions"
+										ng-if="caller.workingWODetail.woTypeCode != 'HCQT' && caller.workingWODetail.woTypeCode != 'TKDT' "></div>
+									<div id="woHCQTCheckList" kendo-grid="caller.woHCQTCheckList"
+										k-options="caller.woHCQTCheckListOptions"
+										ng-if="caller.workingWODetail.woTypeCode == 'HCQT' "></div>
+									<div id="woTKDTCheckList" kendo-grid="caller.woTKDTCheckList"
+										k-options="caller.woTKDTCheckListOptions"
+										ng-if="caller.workingWODetail.woTypeCode == 'TKDT' "></div>
+									<input class="file-input" #file name="files" type="file"
+										id="imgUpload" tabindex="10" style="display: none"
+										accept="image/x-png,image/gif,image/jpeg" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="borderCount"></div>
+				</div>
+			</div>
+		</div> -->
+
+		<!-- <div class="portlet light bordered">
+			<div class="portlet-title background-title">
+				<div class="caption">
+					<span class="caption-subject bold lowercase" translate>Lịch
+						sử tác động</span>
+				</div>
+			</div>
+
+			<div class="row mt5">
+				<div class="collapse in from-search">
+					<div class="clearfix position-relative">
+						<div kendo-grid="caller.woHistory"
+							k-options="caller.woHistoryOptions"></div>
+					</div>
+				</div>
+			</div>
+		</div> -->
+</div>
+
+</form>
+
+</div>
+

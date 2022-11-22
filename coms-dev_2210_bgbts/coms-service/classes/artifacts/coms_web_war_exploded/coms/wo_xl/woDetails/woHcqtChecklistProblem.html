@@ -1,0 +1,36 @@
+<style>
+    .modal-content{
+        padding: 0px!important;
+    }
+</style>
+
+<div class="modal-header" style="background-color: #33CCCC;">
+    <h5 class="modal-title">Báo vướng</h5>
+    <button type="button" class="close close-modal-x" data-dismiss="modal" aria-label="Close" ng-click="$dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal row" role="form">
+        <div class="form-body" >
+            <div class="col-md-12">
+                <label class="display-block control-label" style="text-align: left !important;" translate>Loại vướng:</label>
+                <select class="form-control" ng-model="vm.problem" ng-options="problem as problem.name for problem in problems">
+                    <option></option>
+                </select>
+                <label class="display-block control-label" style="text-align: left !important;" translate>Nội dung:</label>
+                <textarea class="form-control" ng-model="vm.problemContent"></textarea>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="$dismiss()">
+        <i class="fa fa-ban"></i> Hủy bỏ
+    </button>
+    <button type="button" class="btn btn-secondary" ng-click="validateHcqtProblem()?$close():return;">
+        <i class="fa fa-floppy-o azure"></i> Lưu
+    </button>
+</div>

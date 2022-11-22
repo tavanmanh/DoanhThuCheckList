@@ -1,0 +1,112 @@
+<style>
+	.padding-left-0{
+		padding-left: 0px !important;
+	}
+</style>
+<form style="padding:25px;" name="form">
+    <div class="form-horizontal form-body">
+        <div class="clearfix ">
+			<div class="form-group col-md-12">
+				<label class="col-md-2 control-label text-right req" translate>Ưu tiên tìm theo</label>
+
+				<div class="col-md-5">
+					<div class="col-md-6 padding-left-0">
+						<input type = "radio" ng-model = "caller.changePerformer.priority" name = 'priority'  class="form-input" ng-checked = 'true' value = '1'/> 
+						Công trình
+					</div>
+					<div class="col-md-6 padding-left-0">
+						<input type = "radio" ng-model = "caller.changePerformer.priority" name = 'priority' class="form-input" value = '2'/> 
+						Người thực hiện
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="clearfix ">
+			<div class="form-group col-md-12">
+				<label class="col-md-2 control-label text-right req" translate>Công trình</label>
+
+				<div class="col-md-4">
+					<div class="input-icon right ">
+						<i class="fa fa-search directive"
+							ng-click="caller.openTaskPopup('4')"></i>
+					</div>
+					<input class=" form-control width100" type="text"
+						ng-change="caller.genTaskName()"
+						ng-model="caller.changePerformer.constructionCode" kendo-auto-complete
+						k-options="caller.changePer.constructionOptions" />
+					<div class="One_icon">
+						<i class="fa fa-times" aria-hidden="true"
+							ng-click="caller.clearInput('9')"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="clearfix ">
+			<div class="form-group col-md-12">
+				<label class="col-md-2 control-label text-right req" translate>Người thực hiện</label>
+
+				<div class="col-md-4">
+					<div class="input-icon right ">
+						<i class="fa fa-search directive"
+							ng-click="caller.openTaskPopup('5')"></i>
+					</div>
+					<input class=" form-control width100" type="text"
+						ng-change="caller.genTaskName()"
+						ng-model="caller.changePerformer.performerName" kendo-auto-complete
+						k-options="caller.performerOption" />
+					<div class="One_icon">
+						<i class="fa fa-times" aria-hidden="true"
+							ng-click="caller.clearInput('7')"></i>
+					</div>
+				</div>
+				
+				<label class="col-md-2 control-label text-right req" translate>Người được chuyển</label>
+
+				<div class="col-md-4">
+					<div class="input-icon right ">
+						<i class="fa fa-search directive"
+							ng-click="caller.openTaskPopup('3')"></i>
+					</div>
+					<input class=" form-control width100" type="text"
+						ng-change="caller.genTaskName()"
+						ng-model="caller.changePerformer.altPerformerName" kendo-auto-complete
+						k-options="caller.altPerformerOption" />
+					<div class="One_icon">
+						<i class="fa fa-times" aria-hidden="true"
+							ng-click="caller.clearInput('8')"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="clearfix">
+			<div class="form-group col-md-12 ">
+				<label class="col-md-2 control-label text-right req" translate>Hạng
+					mục</label>
+				<div class="col-md-10" style="padding: 0px 8px">
+					<div id="workItemTaskGrid" kendo-grid="caller.workItemTaskGrid"  
+					k-options="caller.workItemTaskGridOptions" k-rebind = "caller.workItemTaskGridOptions"
+						k-on-change="caller.onGridChange(kendoEvent, { selected: selected }, data)"></div>
+
+				</div>
+			</div>
+		</div>
+		
+
+        <div class="row modal-footer">
+            <div class="col-md-12 ">
+                <button type="button"
+                        class="btn btn-qlk padding-search-right closeQLK" id="cancel"
+                        ng-click="caller.closeChangePerformerPopup()" translate>Hủy bỏ
+                </button>
+                <button type="button" id="savepopupApp"ng-disabled="form.$invalid"
+                        class="btn btn-qlk padding-search-right saveQLK" 
+                        ng-click="caller.updateConstructionTask()"
+                        translate>Ghi lại
+                </button>
+            </div>
+        </div>
+    </div>
+</form> 

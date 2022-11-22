@@ -1,0 +1,171 @@
+<p class="text-brecum">{{vm.String}}</p>
+<div data-ng-controller="recommendContactUnitController as vm"
+	id="manageDataOSSearch">
+	<div>
+		<p class="text-brecum">{{vm.String}}</p>
+		<form class="form-horizontal row" role="form">
+			<div class="form-body">
+				<div class="portlet light bordered">
+					<div class="portlet-title background-title">
+						<div class="caption">
+							<span class="caption-subject bold lowercase" translate>Thông
+								tin tìm kiếm </span>
+
+						</div>
+						<div class="text-right margin-row-title">
+							<i data-toggle="collapse" data-target="#structureQuantity"
+								class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+						</div>
+					</div>
+					<div id="structureQuantity" class="collapse in from-search">
+						<div class="clearfix position-relative">
+						
+							<div class="clearfix">
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label" translate>Thông
+										tin tìm kiếm</label>
+									<div class="col-md-8">
+										<div class="input-icon right ">
+											<input class=" form-control width100" type="text"
+												k-options="vm.patternProvinceOptions"
+												kendo-auto-complete name="provinceCode" id="provinceCode"
+												ng-model="vm.searchForm.provinceCode" maxlength="200" />
+										</div>
+										<!-- <input class=" form-control width100" type="text"
+											ng-model="vm.searchForm.keySearch" name="keySearch"
+											id="keySearch" placeholder="Nhập Mã tỉnh" /> -->
+										<div class="One_icon">
+											<i class="fa fa-times" aria-hidden="true"
+												ng-click="vm.cancelInput('provinceCode')"></i>
+										</div>
+									</div>
+								</div>
+
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label" translate>Ngày
+										hoàn thành từ ngày</label>
+									<div class="col-md-8">
+										<div class="col-md-5 position-relative" style="padding: 0px;">
+										<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+											id="startDate" name="startDate"  ng-change="vm.validateDate()"
+											style="width: 100%;" ng-model="vm.searchForm.startDate" />
+											<span data-for='startDate' ></span>
+											<span style="color:red">{{vm.errMessage1}}</span>
+										</div>
+										<div class="col-md-2" style="text-align: center;"><label class="col-md-1 control-label " translate>đến </label></div>
+										<div class="col-md-5 position-relative" style="padding: 0px;">
+										<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+											id="endDate" name="endDate" ng-change="vm.validateDate()"
+											style="width: 100%;" ng-model="vm.searchForm.endDate" />
+											<span data-for='endDate' class='k-invalid-msg' ></span>
+											<span style="color:red; width: 100%;">{{vm.errMessage}}</span>
+										</div>
+										<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="vm.cancelInput('date')"></i>
+									</div>
+									</div>
+									
+									</div>
+									
+								</div>
+							<div class="clearfix">
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label " translate>Thuộc
+										loại</label>
+									<div class="col-md-8">
+										<select kendo-drop-down-list style="width: 100%" name="type"
+											id="type" ng-model="vm.searchForm.type"
+											k-data-text-field="'name'" k-data-value-field="'code'"
+											k-data-source="vm.typeList">
+										</select>
+											<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="vm.cancelInput('type')"></i>
+									</div>
+									</div>
+								</div>
+								
+								<div class="form-group col-md-6">
+									<label class="col-md-4 control-label" translate>Có thông báo</label>
+									<div class="col-md-8">
+										<select kendo-drop-down-list style="width: 100%" name="type"
+											id="mess" ng-model="vm.searchForm.isMess"
+											k-data-text-field="'name'" k-data-value-field="'code'"
+											k-data-source="vm.isMessList">
+										</select>
+											<div class="One_icon">
+											<i class="fa fa-times" aria-hidden="true"
+											ng-click="vm.cancelInput('mess')"></i>
+											</div>
+									</div>
+								</div>
+							</div>	
+							<div class="clearfix form-actions margin-top">
+								<div class="row">
+									<div class="col-md-12 text-center">
+										<button type="button" id="findManageDataOS"
+											ng-click="vm.doSearch()"
+											class="btn btn-qlk padding-search-right searchQLK" translate>Tìm
+											kiếm</button>
+									</div>
+								</div>
+							</div>	
+								
+								
+							</div>
+							
+							
+						</div>
+					</div>
+				</div>
+		</form>
+	</div>
+	<div class="portlet light bordered">
+		<div class="portlet-title background-title">
+			<div class="caption">
+				<span class="caption-subject bold lowercase" translate> Kết
+					quả tìm kiếm: </span>&nbsp;<label class="control-label bold lowercase"
+					id="countContactUnit">{{vm.count}}</label> <label
+					class="control-label bold lowercase">&nbsp;bản ghi</label>
+
+			</div>
+			<div class="text-right margin-row-title">
+				<i data-toggle="collapse" data-target="#rpQuantity"
+					class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+			</div>
+		</div>
+		<div id="rpQuantity" class="collapse in from-search">
+			<div class="clearfix position-relative">
+				<div id="recommendContactUnitGridId"
+					kendo-grid="vm.recommendContactUnitGrid" k-editable="false"
+					k-options="vm.recommendContactUnitGridOptions"
+					k-on-change="vm.onGridChange(kendoEvent, { selected: selected }, data)"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$('#manageDataOSSearch')
+			.keypress(
+					function(event) {
+						 $("input").change(function() {
+							$(this).val($.trim($(this).val()));
+						}); 
+						document.onkeydown = keyDown;
+						function keyDown(e) {
+							switch (e.keyCode) {
+							case 27:
+								$("#cancel").click();
+								break;
+							case 13:
+								if ($('.k-widget.k-window.fix-footer').css(
+										'display') !== 'block') {
+									$("#findManageDataOS").click();
+								}
+								break;
+
+							}
+						}
+					});
+</script>

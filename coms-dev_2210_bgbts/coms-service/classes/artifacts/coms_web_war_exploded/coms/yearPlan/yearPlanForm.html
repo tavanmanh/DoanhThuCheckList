@@ -1,0 +1,167 @@
+
+<p class="text-brecum">{{vm.String}}</p>
+<form class="form-horizontal row" role="form" name="form" id="form" kendo-validator="validator" k-options="validatorOptions"  novalidate>
+		<div class="portlet light bordered">
+			<div class="portlet-title background-title">
+				<div class="caption">
+					<span class="caption-subject bold lowercase" translate>Thông
+						tin chung </span>
+
+				</div>
+				<div class="text-right margin-row-title">
+					<i data-toggle="collapse" data-target="#demoapp"
+						class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+				</div>
+			</div>
+			<div id="demoapp" class="collapse in from-search">
+				<div class="clearfix form-group position-relative">
+					<div class="clearfix ">
+							<label class="col-md-1 control-label req" translate>Năm</label>
+							<div class="col-md-1">
+								<select kendo-drop-down-list id="year" style="width: 100%"
+									name="year" ng-model="vm.yearPlan.year"
+                                    k-options="vm.yearDownListOptions" required
+									data-required-msg="Năm không được để trống" ng-change="vm.yearName()">
+								</select> <span data-for="type" class="k-invalid-msg"></span>
+							</div>
+
+							<label class="col-md-2 control-label req" translate>Mã kế
+								hoạch</label>
+							<div class="col-md-3">
+								<input id="code" name="code" class=" form-control width100" type="text"
+									maxlength="50" ng-model="vm.yearPlan.code"
+									placeholder="Nhập mã kế hoạch" required
+									data-required-msg="Mã không được để trống" />
+                                <span style=" color: red;"
+                                      ng-if="form.code.$invalid && !form.code.$pristine">Mã kế hoạch không được để trống</span>
+							</div>
+							<label class="col-md-2 control-label req" translate>Tên
+								kế hoạch</label>
+							<div class="col-md-3">
+								<input id="name"  name="name" class=" form-control width100" type="text"
+									maxlength="300" ng-model="vm.yearPlan.name"
+									placeholder="Nhập tên kế hoạch" required
+									data-required-msg="Tên không được để trống" />
+                                 <span style=" color: red;"
+                                       ng-if="form.name.$invalid && !form.name.$pristine">Tên kế hoạch không được để trống</span>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<div class="portlet light bordered">
+		<div class="portlet-title background-title">
+			<div class="caption">
+				<span class="caption-subject bold lowercase" translate>Chi
+					tiết kế hoạch </span>&nbsp;
+			</div>
+			<div class="text-right margin-row-title">
+				<i data-toggle="collapse" data-target="#demoapp2"
+					class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+			</div>
+		</div>
+		<div id="demoapp2" class="collapse in from-search">
+			<div class="clearfix form-group position-relative">
+				<div class="clearfix">
+					<label class="col-md-1 form-horizontal control-label req" translate>Đơn vị</label>
+					<div class="col-md-3">
+						<div class="input-icon right ">
+							<i class="fa fa-search directive"
+								ng-click="vm.openDepartmentTo('dept')"></i>
+						</div>
+						<input kendo-auto-complete k-options="vm.deprtOptions1"
+							ng-blur="vm.changeDataAuto('dept')"
+							class=" form-control width100" type="text"
+							ng-model="vm.yearPlanDetailTemp.sysGroupName" name="dept"
+							onclick="reset_msg();" required
+							data-required-msg="Đơn vị không để trống" /> <span id="msg"
+							data-for='dvn1' class='k-invalid-msg'></span>
+						<div class="One_icon">
+							<i class="fa fa-times" aria-hidden="true"
+								ng-click="vm.cancelInput('dept')"></i>
+						</div>
+						<script>
+							function reset_msg() {
+								document.getElementById('msg').innerHTML = '';
+							}
+						</script>
+					</div>
+
+					<label class="col-md-1 control-label req" translate>Tháng</label>
+					<div class="col-md-3">
+						<select kendo-drop-down-list id="month" style="width: 100%"
+							name="month" ng-model="vm.yearPlanDetailTemp.month"
+                            k-options="vm.monthDownListOptions" required
+							data-required-msg="Tháng không được để trống">
+						</select> <span data-for="type" class="k-invalid-msg"></span>
+					</div>
+					<label class="col-md-1 control-label req" translate>Nguồn
+						việc</label>
+					<div class="col-md-3">
+						<input   class="text-right form-control width100" type="text"
+							maxlength="25" vt-currency fraction-size="3"  parsecurrency3 value-model="vm.yearPlanDetailTemp.source" ng-model="vm.yearPlanDetailTemp.source1"
+							required data-required-msg="Nguồn việc không được để trống" />
+					</div>
+                    </div>
+                </div>
+            <div class="clearfix position-relative">
+                <div class="clearfix form-group position-relative">
+					<label class="col-md-1 control-label req" translate>Sản
+						lượng</label>
+					<div class="col-md-3 ">
+						<input  class=" text-right form-control width100" type="text"
+							maxlength="25" vt-currency fraction-size="3"
+                            parsecurrency3 value-model="vm.yearPlanDetailTemp.quantity"ng-model="vm.yearPlanDetailTemp.quantity1" required
+							data-required-msg="Sản lượng không được để trống" />
+					</div>
+					<label class="col-md-1 control-label req" translate>HSHC</label>
+					<div class="col-md-3 text-right">
+						<input  class="text-right form-control width100" type="text" vt-currency fraction-size="3"
+							maxlength="25"parsecurrency3 value-model="vm.yearPlanDetailTemp.complete" ng-model="vm.yearPlanDetailTemp.complete1"required
+							data-required-msg="HSHC không được để trống" />
+					</div>
+					<label class="col-md-1 control-label req" translate>Doanh
+						thu</label>
+					<div class="col-md-3 text-right">
+						<input class="text-right form-control width100" type="text" vt-currency fraction-size="3"
+							maxlength="25" parsecurrency3 value-model="vm.yearPlanDetailTemp.revenue"ng-model="vm.yearPlanDetailTemp.revenue1"
+							required data-required-msg="Doanh thu không được để trống" />
+					</div>
+				</div>
+			</div>
+			<div class="clearfix form-actions margin-top">
+				<div class="row" style="margin-bottom: 5px">
+					<div class="col-md-12 text-center">
+						<button type="button"  ng-click="vm.import()"ng-disabled="vm.isDisabled"
+							class="btn btn-qlk padding-search-right excelQLK" translate>Import</button>
+						<button type="button"
+							ng-click="vm.addYearPlanDetailTemp()"ng-disabled="vm.isDisabled"
+							class="btn btn-qlk padding-search-right bosung" translate>Bổ
+							sung</button>
+					</div>
+				</div>
+			</div>
+			<div class="clearfix form-actions margin-top">
+				<div class="row">
+					<div class="col-md-12 text-right" style="padding-bottom: 0px">
+                        <span>Đơn vị tính: Triệu (VNĐ)</span>
+					</div>
+				</div>
+			</div>
+			<div class="clearfix position-relative">
+				<div id="yearPlanDetail" kendo-grid="vm.yearPlanDetailGrid"
+					k-options="vm.yearPlanDetailGridOptions"
+					k-on-change="vm.onGridChange(kendoEvent, { selected: selected }, data)"></div>
+			</div>
+		</div>
+	</div>
+    <div class="clearfix form-actions margin-top">
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <button type="button" class="btn btn-qlk padding-search-right closeQLK" id="cancel" ng-click="vm.cancel()" translate>Hủy bỏ</button>
+                <button type="button" id="savepopupApp" ng-disabled="vm.isDisabled || vm.loadingSave" class="btn btn-qlk padding-search-right saveQLK" ng-click="vm.save()" translate>Ghi lại</button>
+            </div>
+        </div>
+    </div>
+</form>

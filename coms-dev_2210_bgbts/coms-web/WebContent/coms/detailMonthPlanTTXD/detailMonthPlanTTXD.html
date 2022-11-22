@@ -1,0 +1,8 @@
+<div data-ng-controller="detailMonthPlanTTXDController as vm">
+    <div ng-show="!vm.showDetail" style="clear: both;">
+        <div data-ng-include="'coms/detailMonthPlanTTXD/detailMonthPlanTTXDList.html'"></div>
+    </div>
+    <div ng-show="vm.showDetail" style="clear: both;">
+        <div data-ng-include="'coms/detailMonthPlanTTXD/detailMonthPlanTTXDForm.html'"></div>
+    </div>
+</div>

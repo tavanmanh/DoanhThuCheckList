@@ -1,0 +1,283 @@
+<style>
+#approvepopupApp:before {
+	content: "";
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+	text-decoration: inherit;
+	font-size: 18px;
+	padding-right: 0.5em;
+	position: absolute;
+	top: 1px;
+	left: 7px;
+	color: #0F0;
+}
+
+#approvepopupApp {
+	padding: 4px 17px 4px 30px;
+	width: initial;
+	position: relative;
+}
+
+.no-padding {
+	padding: 0;
+}
+
+html {
+	overflow-y: scroll;
+}
+</style>
+<div data-ng-controller="manageTangentCustomerGPTHController  as vm">
+	<p class="text-brecum">{{vm.String}}</p>
+	<form class="form-horizontal row" role="form"
+		id="manageTangentCustomerSearchList">
+		<div class="form-body">
+			<div class="portlet light bordered">
+				<div class="portlet-title background-title">
+					<div class="caption">
+						<span class="caption-subject bold lowercase" translate>Thông
+							tin tìm kiếm </span>
+
+					</div>
+					<div class="text-right margin-row-title">
+						<i data-toggle="collapse" data-target="#projectForm"
+							class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+					</div>
+				</div>
+				<div id="projectForm" class="collapse in from-search">
+					<div class="clearfix position-relative">
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 form-horizontal control-label " translate>Nội
+									dung tìm kiếm</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										id="keySearch" ng-model="vm.searchForm.keySearch"
+										name="keySearch" placeholder="Nhập tên/địa chỉ/điện thoại khách hàng"/>
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="vm.clearInput('keySearch')"></i>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Trạng
+									thái tiếp xúc</label>
+								<div class="col-md-8 margin_top">
+									<select kendo-multi-select  style="width: 100%"
+                                            ng-model="vm.searchForm.lstStatus"
+                                            k-data-text-field="'name'" k-data-value-field="'code'"
+                                            k-data-source="vm.statusListSearch">
+                                    </select>
+                                    <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="vm.clearInput('status')"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Thời
+									gian tạo từ ngày</label>
+								<div class="col-md-8" id="realIeDateSynStockTrans">
+									<div class="col-md-5 no-padding position-relative">
+										<!-- <input kendo-date-picker k-format="'dd/MM/yyyy'"
+											ng-model="vm.searchForm.createdDateFrom" style="width: 100%;"
+											id="createdDateFrom" min-year="1000" date-time /> -->
+										<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+											   min-year="1000" id="createdDateFrom" name="createdDateFrom"
+											   style="width: 100%;" ng-model="vm.searchForm.createdDateFrom"/>
+										<span class="k-invalid-msg" data-for="createdDateFrom" id="errorDateFrom" style="display:none;"></span>
+									</div>
+									<div class="col-md-2" style="text-align: center;">
+										<label class="control-label" translate>đến</label>
+									</div>
+									<div class="col-md-5 no-padding position-relative">
+										<!-- <input kendo-date-picker k-format="'dd/MM/yyyy'"
+											ng-model="vm.searchForm.createdDateTo" style="width: 100%;"
+											id="createdDateTo" min-year="1000" date-time /> -->
+										<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+											   min-year="1000" id="createdDateTo" name="createdDateTo"
+											   style="width: 100%;" ng-model="vm.searchForm.createdDateTo"/>
+										<span class="k-invalid-msg" data-for="createdDateTo" id="errorDateTo" style="display:none;"></span>
+									</div>
+									<div class="One_icon">
+									<i class="fa fa-times" aria-hidden="true"
+										ng-click="vm.clearInput('createdDate')"></i>
+								</div>
+								</div>
+							</div>
+
+							<!-- <div class="form-group col-md-6">
+								<label class="col-md-4 form-horizontal control-label " translate>Nhân
+									viên thực hiện</label>
+								<div class="col-md-8">
+									<div class="input-icon right ">
+										<i class="fa fa-search directive"
+											ng-click="vm.openStaffPopup('searchForm')"></i>
+									</div>
+									<input kendo-auto-complete k-options="vm.staffOptions"
+										class=" form-control width100" type="text" id="performerName"
+										ng-model="vm.searchForm.performerName" name="performerName" />
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="vm.clearInput('performerName')"></i>
+									</div>
+								</div>
+							</div> -->
+							
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Hạn hoàn thành</label>
+								<div class="col-md-8 margin_top">
+									<select kendo-multi-select  style="width: 100%"
+                                            ng-model="vm.searchForm.lstOverdueStatus"
+                                            k-data-text-field="'name'" k-data-value-field="'code'"
+                                            k-data-source="vm.overdueStatusList">
+                                    </select>
+                                    <div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="vm.clearInput('status')"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Thời
+									gian đề nghị tiếp xúc từ ngày</label>
+								<div class="col-md-8" id="suggestTimeFormId">
+									<div class="col-md-5 no-padding position-relative">
+										<!-- <input kendo-date-picker k-format="'dd/MM/yyyy'"
+											ng-model="vm.searchForm.suggestTimeFrom" style="width: 100%;"
+											id="suggestTimeFrom" min-year="1000" date-time /> -->
+										<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+											   min-year="1000" id="suggestTimeFrom" name="suggestTimeFrom"
+											   style="width: 100%;" ng-model="vm.searchForm.suggestTimeFrom"/>
+										<span class="k-invalid-msg" data-for="suggestTimeFrom" id="errorTimeFrom" style="display:none;"></span>
+									</div>
+									<div class="col-md-2" style="text-align: center;">
+										<label class="control-label" translate>đến</label>
+									</div>
+									<div class="col-md-5 no-padding position-relative">
+										<!-- <input kendo-date-picker k-format="'dd/MM/yyyy'"
+											ng-model="vm.searchForm.suggestTimeTo" style="width: 100%;"
+											id="suggestTimeTo" min-year="1000" date-time /> -->
+										<input kendo-date-picker date-time k-format="'dd/MM/yyyy'"
+											   min-year="1000" id="suggestTimeTo" name="suggestTimeTo"
+											   style="width: 100%;" ng-model="vm.searchForm.suggestTimeTo"/>
+										<span class="k-invalid-msg" data-for="suggestTimeTo" id="errorTimeTo" style="display:none;"></span>
+									</div>
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="vm.clearInput('suggestTime')"></i>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label class="col-md-4 form-horizontal control-label " translate>Tỉnh</label>
+								<div class="col-md-8">
+									<input kendo-auto-complete k-options="vm.provinceOptions"
+										class=" form-control width100" type="text" id="provinceCode"
+										ng-model="vm.searchForm.provinceCode" name="provinceCode" />
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="vm.clearInput('provinceCode')"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 form-horizontal control-label " translate>Quận/Huyện</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										id="districtName" ng-model="vm.searchForm.districtName"
+										name="districtName" placeholder="Nhập thông tin quận/huyện"/>
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="vm.clearInput('districtName')"></i>
+									</div>
+								</div>
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Xã/Phường/Thị trấn,..</label>
+								<div class="col-md-8">
+									<input class=" form-control width100" type="text"
+										id="communeName" ng-model="vm.searchForm.communeName"
+										name="communeName" placeholder="Nhập thông tin xã/phường/thị trấn,.. "/>
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="vm.clearInput('communeName')"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix form-actions margin-top">
+							<div class="row">
+								<div class="col-md-12 text-center">
+									<button type="button" id="doSearch" ng-click="vm.doSearch()"
+										class="btn btn-qlk padding-search-right searchQLK" translate>Tìm
+										kiếm</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<div class="portlet light bordered">
+		<div class="portlet-title background-title">
+			<div class="caption">
+				<span class="caption-subject bold lowercase" translate>Kết
+					quả tìm kiếm: </span>&nbsp;<label class="control-label bold lowercase"
+					id="appCountConfig">{{vm.countConfig}}</label><label
+					class="control-label bold lowercase">&nbsp;bản ghi</label>
+
+			</div>
+			<div class="text-right margin-row-title">
+				<i data-toggle="collapse" data-target="#projectTable"
+					class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+			</div>
+		</div>
+		<div id="projectTable" class="collapse in from-search">
+			<div class="clearfix position-relative">
+				<div id="tangentCustomerGrid" kendo-grid="vm.tangentCustomerGrid"
+					k-options="vm.tangentCustomerGridOptions"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$('#manageTangentCustomerSearchList')
+			.keypress(
+					function(event) {
+						$("input").change(function() {
+							$(this).val($.trim($(this).val()));
+						});
+						document.onkeydown = keyDown;
+						function keyDown(e) {
+							switch (e.keyCode) {
+							case 27:
+								$("#cancel").click();
+								break;
+							case 13:
+								if ($('.k-widget.k-window.fix-footer').css(
+										'display') !== 'block') {
+									$("#doSearch").click();
+								}
+								break;
+
+							}
+						}
+					});
+</script>

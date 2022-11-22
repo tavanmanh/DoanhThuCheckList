@@ -1,0 +1,51 @@
+<style>
+    .app-modal-window .modal-dialog {
+        min-width: 1000px;
+    }
+
+    .modal-content{
+        padding: 0px !important;
+    }
+</style>
+
+<div class="modal-header" style="background-color: #33CCCC;">
+    <h5 class="modal-title">Sửa WO</h5>
+    <button type="button" class="close close-modal-x" data-dismiss="modal" aria-label="Close" ng-click="$dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal row" role="form">
+        <div class="form-body">
+            <div class="portlet light bordered">
+                <div id="tr_details_container" class="collapse in from-search">
+                    <div class="clearfix position-relative">
+                        <div class="clearfix">
+                            <div class="col-md-6">
+                                <label class="display-block control-label" style="text-align: left !important;" translate>Loại WO<span class="crimson">*</span></label>
+                                <select class="form-control display-block" ng-model="workingWOName.woTypeId"
+                                        ng-options="type.woTypeId as type.woTypeName for type in woTypes"
+                                        ng-selected="workingWOName.woTypeId == type.woTypeId">
+                                    <option></option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="display-block control-label" style="text-align: left !important;" translate>Tên WO<span class="crimson">*</span></label>
+                                <input class="form-control display-block" ng-model="workingWOName.name" placeholder="Tên WO"/>
+                            </div>
+                        </div>
+                        <div id="borderCount"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="$dismiss()">
+        <i class="fa fa-ban"></i> Hủy bỏ
+    </button>
+    <button type="button" class="btn btn-secondary" ng-click="validateCreateNew()?$close():return;">
+        <i class="fa fa-floppy-o azure"></i> Ghi lại
+    </button>
+</div>

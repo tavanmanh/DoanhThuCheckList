@@ -1,0 +1,130 @@
+<div data-ng-controller="rpWo5sController as vm"
+     id="stock_transId">
+    <div>
+        <p class="text-brecum">{{vm.String}}</p>
+        <form class="form-horizontal row" role="form" id="rpMonthOSSearchId"
+              kendo-validator="vm.validator" k-options="vm.validatorOptions">
+            <div class="form-body">
+                <div class="portlet light bordered">
+                    <div class="portlet-title background-title">
+                        <div class="caption">
+                            <span class="caption-subject bold lowercase " translate>Thôngtin tìm kiếm</span>
+                        </div>
+                        <div class="text-right margin-row-title">
+                            <i data-toggle="collapse" data-target="#demo11"
+                               class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                        </div>
+                    </div>
+
+                    <div id="demo11" class="collapse in from-search">
+                        <div class="clearfix">
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <div class="col-md-4">
+                                        <label class="form-horizontal control-label-custom " translate>Từ
+                                            ngày</label><span style="color: #ff0000">*</span>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input class="form-control display-block" kendo-date-picker style="width: 100%"
+                                               k-format="'dd/MM/yyyy'" ng-model="vm.searchForm.startTimeStr"
+                                               min-year="1000"
+                                               date-time/>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <div class="col-md-4">
+                                        <label class="form-horizontal control-label-custom" translate>Đến
+                                            ngày</label><span style="color: red">*</span>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input class="form-control display-block" kendo-date-picker style="width: 100%"
+                                               k-format="'dd/MM/yyyy'" ng-model="vm.searchForm.endTimeStr"
+                                               min-year="1000"
+                                               date-time/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-4 form-horizontal control-label-custom" translate>Chi nhánh kĩ
+                                        thuật</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control display-block" type="text" style="width: 100%"
+                                               k-options="autoCompleteCdLevel2Options" kendo-auto-complete
+                                               ng-model="vm.searchForm.cdLevel2Name"
+                                               maxlength="200"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label class="col-md-4 form-horizontal control-label-custom" translate>Loại báo
+                                        cáo</label>
+                                    <div class="col-md-8">
+                                        <input style="float: left;" type="radio" id="wo5s"
+                                               name="status" ng-model="vm.searchForm.type"
+                                               ng-checked="vm.searchForm.type == 1" value="1">
+                                        <span class="padding_radio">5S</span>
+                                        <input style="float: left;" type="radio" id="wo5sApprovd"
+                                               name="status" ng-model="vm.searchForm.type"
+                                               ng-checked="vm.searchForm.type == 2" value="2">
+                                        <span class="padding_radio">Phê duyệt tổng hợp</span>
+                                        <input style="float: left;" type="radio" id="wo5sDetail"
+                                               name="status" ng-model="vm.searchForm.type"
+                                               ng-checked="vm.searchForm.type == 3" value="3">
+                                        <span class="padding_radio">Phê duyệt chi tiết</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="clearfix form-actions margin-top">
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <button type="button" id="doSearch"
+                                            class="btn btn-qlk padding-search-right  noteQLK"
+                                            ng-click="vm.doSearch()" translate>Báo cáo
+                                    </button>
+                                    <button type="button" id="excel"
+                                            class="btn btn-qlk padding-search-right  excelQLK"
+                                            ng-click="vm.exportexcel()" translate>Xuất excel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="portlet light bordered">
+        <div class="portlet-title background-title">
+            <div class="caption">
+				<span class="caption-subject bold lowercase" translate>Kết
+					quả tìm kiếm </span>&nbsp;
+            </div>
+            <div class="btn-group pull-right margin-row-title">
+                <i data-toggle="collapse" data-target="#rpMonthPlanPro"
+                   class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+            </div>
+        </div>
+
+        <div id="rpMonthPlanPro" class="collapse in from-search">
+            <div class="clearfix position-relative" ng-if="vm.searchForm.type == 1">
+                <div kendo-grid="vm.gridWo5s" k-editable="false"
+                     k-options="vm.gridWo5sOptions">
+                </div>
+            </div>
+
+            <div class="clearfix position-relative" ng-if="vm.searchForm.type == 2">
+                <div kendo-grid="vm.gridWo5sApproved" k-editable="false"
+                     k-options="vm.gridWo5sOptionsApproved"></div>
+            </div>
+
+            <div class="clearfix position-relative" ng-if="vm.searchForm.type == 3">
+                <div kendo-grid="vm.gridWo5sDetail" k-editable="false"
+                     k-options="vm.gridWo5sOptionsDetail"></div>
+            </div>
+        </div>
+    </div>
+</div>
+

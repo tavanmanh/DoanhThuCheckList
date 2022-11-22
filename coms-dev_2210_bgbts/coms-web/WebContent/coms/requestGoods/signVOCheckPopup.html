@@ -1,0 +1,148 @@
+	<div class="">
+		<div class="wrap">
+			<div class="fleftdetail col-md-7">
+				<div class="portlet light">
+					<div class="portlet-title">
+						<div class="caption col-sm-12">
+							<span class="caption-subject bold " style="margin-left: 0px" 
+								translate>{{caller.nameToSign}}  </span>
+						</div>
+					</div>
+					<div id="gridVoffice" kendo-grid="gridVoffice" k-on-change="onRowChange(dataItem)"
+						k-editable="false" k-options="gridVofficeOptions"></div>
+				</div>
+
+			</div>
+			<div class="frightdetail col-md-10">
+				<div class="portlet light">
+					<div class="portlet-title">
+						<div class="caption col-sm-12">
+							<span class="caption-subject bold " style="margin-left: 0px"
+								translate>Thông tin người ký cho yêu cầu: </span>
+							<span class="caption-subject bold " id="storeNameSign" ng-model="caller.inputSign.codeSign">{{caller.inputSign.codeSign}}</span>
+							<span class="pull-right caption-subject ">
+								<a ng-click="caller.preview()" ng-show="caller.showView" translate>Xem trước</a>
+							</span>
+						</div>
+					</div>
+				</div>
+	        <div class="clearfix position-relative">
+	            <h5></h5>
+	            <div class="col-md-6 col-xs-12">
+	                <label class="control-label text-left ng-scope normal" translate="" >1. Trưởng ban điều hành thi công</label>
+	                <div class="input-icon right">
+	                	<div class="col-md-4 margintop5" id="trinhkyReqGroupId1" ng-model="caller.inputSign.reqGroupId1" hidden></div>
+               			<div class="col-md-4 margintop5" id="trinhkyReqGroupName1" ng-model="caller.inputSign.reqGroupName1" hidden></div>
+               			<div class="col-md-4 margintop5" id="trinhkyEmail1" ng-model="caller.inputSign.email1" hidden></div>
+	                    <i class="ngthsearch" ng-click="caller.partnerNameGroup.search();" style="cursor: pointer"><img src="style/img/icon/search.png"></i> 
+	                    <span tabindex="-1" role="presentation" style=""
+								class="k-widget k-autocomplete k-header form-control width100 ng-pristine ng-untouched ng-valid k-state-default">
+						<input kendo-auto-complete="caller.trinhkyGroup"
+								k-options="caller.trinhkyReqGroupNameOptions1"
+								ng-model="caller.trinhkyReqGroupName1"
+								class="form-control width100 ng-pristine ng-untouched ng-valid k-input trinhky-approveGroup1 req"
+								name="trinhkyReqGroupName2" data-role="autocomplete"
+								style="width: 100%;" autocomplete="off" role="textbox"
+								aria-haspopup="true" aria-disabled="false" maxlength="200"
+								aria-readonly="false" aria-autocomplete="list" aria-owns=""
+								type="text">
+						<span class="k-icon k-loading" style="display: none"></span>
+						</span> <span data-for="trinhkyReqGroupName2" class="k-invalid-msg"></span>
+					</div>
+	            </div>
+	            
+	             <div class="col-md-6 col-xs-12">
+	                <label class="control-label text-left ng-scope normal" translate="">Vai trò</label>
+	                	<input kendo-auto-complete="caller.trinhkyGroup"
+								k-options="caller.ashesNameOptions1"
+								ng-model="caller.ashesName1"
+								class="form-control width100 ng-pristine ng-untouched ng-valid k-input ashes-approveGroup1 req"
+								name="ashesName1" data-role="autocomplete"
+								style="width: 100%;" autocomplete="off" role="textbox"
+								aria-haspopup="true" aria-disabled="false" maxlength="200"
+								aria-readonly="false" aria-autocomplete="list" aria-owns=""
+								type="text">
+	                <script type="text/javascript">
+	                    $("#tt_nk_2").kendoDropDownList();
+	                </script>
+	            </div>
+	            <!-- <div class="col-md-6 col-xs-12">
+	                <label class="control-label text-left ng-scope normal" translate="">Vai trò</label>
+	                	<select id="tt_nk_2" style="width: 100%;" placeholder="- Lựa chọn -" ng-model="caller.inputSign.ashesName2">
+	                        <option value="1" selected>Ban giám đốc</option>
+	                        <option value="2">Trưởng phòng tài chính</option>
+						</select>
+	                <script type="text/javascript">
+	                    $("#tt_nk_2").kendoDropDownList();
+	                </script>
+	            </div> --> 
+	        </div>
+	        
+	        <div class="clearfix position-relative">
+	            <h5></h5>
+	            <div class="col-md-6 col-xs-12">
+	                <label class="control-label text-left ng-scope normal" translate="" >2. Giám đốc chi nhánh</label>
+	                <div class="input-icon right">
+	                	<div class="col-md-4 margintop5" id="trinhkyReqGroupId2" ng-model="caller.inputSign.reqGroupId2" hidden></div>
+               			<div class="col-md-4 margintop5" id="trinhkyReqGroupName2" ng-model="caller.inputSign.reqGroupName2" hidden></div>
+               			<div class="col-md-4 margintop5" id="trinhkyEmail2" ng-model="caller.inputSign.email2" hidden></div>
+	                    <i class="ngthsearch" ng-click="caller.partnerNameGroup.search();" style="cursor: pointer"><img src="style/img/icon/search.png"></i> 
+	                    <span tabindex="-1" role="presentation" style=""
+								class="k-widget k-autocomplete k-header form-control width100 ng-pristine ng-untouched ng-valid k-state-default">
+						<input kendo-auto-complete="caller.trinhkyGroup"
+								k-options="caller.trinhkyReqGroupNameOptions2"
+								ng-model="caller.trinhkyReqGroupName2"
+								class="form-control width100 ng-pristine ng-untouched ng-valid k-input trinhky-approveGroup2 req"
+								name="trinhkyReqGroupName2" data-role="autocomplete"
+								style="width: 100%;" autocomplete="off" role="textbox"
+								aria-haspopup="true" aria-disabled="false" maxlength="200"
+								aria-readonly="false" aria-autocomplete="list" aria-owns=""
+								type="text">
+						<span class="k-icon k-loading" style="display: none"></span>
+						</span> <span data-for="trinhkyReqGroupName3" class="k-invalid-msg"></span>
+					</div>
+	            </div>
+	            
+	           <div class="col-md-6 col-xs-12">
+	                <label class="control-label text-left ng-scope normal" translate="">Vai trò</label>
+	                	<input kendo-auto-complete="caller.trinhkyGroup"
+								k-options="caller.ashesNameOptions2"
+								ng-model="caller.ashesName2"
+								class="form-control width100 ng-pristine ng-untouched ng-valid k-input ashes-approveGroup2 req"
+								name="ashesName2" data-role="autocomplete"
+								style="width: 100%;" autocomplete="off" role="textbox"
+								aria-haspopup="true" aria-disabled="false" maxlength="200"
+								aria-readonly="false" aria-autocomplete="list" aria-owns=""
+								type="text">
+	                <script type="text/javascript">
+	                    $("#tt_nk_2").kendoDropDownList();
+	                </script>
+	            </div>
+	            <!-- <div class="col-md-6 col-xs-12">
+	                <label class="control-label text-left ng-scope normal" translate="">Vai trò</label>
+	                	<select id="tt_nk_2" style="width: 100%;" placeholder="- Lựa chọn -" ng-model="caller.inputSign.ashesName3">
+	                        <option value="1" selected>Ban giám đốc</option>
+	                        <option value="2">Trưởng phòng tài chính</option>
+						</select>
+	                <script type="text/javascript">
+	                    $("#tt_nk_2").kendoDropDownList();
+	                </script>
+	            </div> --> 
+	        </div>
+	        
+	        		
+				
+		</div>
+	</div>
+	<div class="portlet light ">
+		<div class="portlet-title" align="right">
+			<button type="button"  style="margin-right:10px"
+				class="btn btn-qlk padding-search-right  closeQLK"
+				id="cancel" ng-click="cancel()" translate>Hủy bỏ</button>	
+			<!-- <button type="button" style="margin-right:10px"  class="btn btn-qlk padding-search-right pdfQLK "
+				ng-click="preview()" translate>Xem trước</button> -->
+			<button type="button" id="checkout"  class="btn btn-qlk padding-search-right saveQLK "
+				ng-click="caller.signSave()" ng-disabled="isProcessing" translate>Trình ký</button>
+
+		</div>
+	</div>

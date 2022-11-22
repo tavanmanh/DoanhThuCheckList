@@ -1,0 +1,99 @@
+<style>
+html {
+	overflow-y: scroll;
+}
+</style>
+<div data-ng-controller="reportMassSearchConstructionController as vm">
+	<p class="text-brecum">{{vm.String}}</p>
+	<form class="form-horizontal row" role="form" id="searchForm"
+		name="searchForm">
+		<div class="form-body">
+			<div class="portlet light bordered">
+				<div class="portlet-title background-title">
+					<div class="caption">
+						<span class="caption-subject bold lowercase" translate>Thông
+							tin tìm kiếm </span>
+					</div>
+					<div class="text-right margin-row-title">
+						<i data-toggle="collapse" data-target="#dataSearch"
+							class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+					</div>
+				</div>
+				<div id="dataSearch" class="collapse in from-search">
+					<div class="clearfix position-relative" ng-enter="vm.doSearch()">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Tỉnh</label>
+								<div class="col-md-8">
+									<input kendo-auto-complete k-options="vm.proviceOptions"
+										id="aio_rpgt_province" name="aio_rpgt_province"
+										class="form-control width100"
+										data-ng-model="vm.searchForm.provinceName" />
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Tháng/Năm</label>
+
+								<div class="col-md-8">
+									<input id="dateGeneral" class=" form-control width100"
+										type="text" ng-model="vm.searchForm.thang"
+										k-model="vm.searchForm.thang"/>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<script type="text/javascript">
+						$("#dateGeneral").kendoDatePicker({
+							dateInput : true,
+							format : "MM/yyyy",
+							start : "year",
+							depth : "year",
+							date : true
+						});
+						var todayDate = kendo.toString(kendo
+								.parseDate(new Date()), 'MM/yyyy');
+						$("#dateGeneral").data("kendoDatePicker").value(
+								todayDate);
+					</script>
+
+					<div class="clearfix form-actions margin-top">
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<button type="button" ng-click="vm.doSearch()"
+									class="btn btn-qlk padding-search-right searchQLK" translate>Tìm
+									kiếm</button>
+								<button type="button" id="excel"
+									class="btn btn-qlk padding-search-right  excelQLK"
+									ng-click="vm.exportFile()" translate>Xuất excel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<div class="portlet light bordered">
+		<div class="portlet-title background-title">
+			<div class="caption">
+				<span class="caption-subject bold lowercase" translate>Kết
+					quả tìm kiếm: </span>&nbsp;<label class="control-label bold lowercase"
+					id="appCountMassSearchConstruction">{{vm.reportMassSearchConstructionCount}}</label><label
+					class="control-label bold lowercase">&nbsp;bản ghi</label>
+
+			</div>
+			<div class="text-right margin-row-title">
+				<i data-toggle="collapse" data-target="#grid"
+					class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+			</div>
+		</div>
+		<div id="grid" class="collapse in from-search">
+			<div class="clearfix position-relative">
+				<div id="reportMassSearchConstructionGrid" kendo-grid="vm.reportMassSearchConstructionGrid"
+					k-options="vm.reportMassSearchConstructionGridOptions"></div>
+			</div>
+		</div>
+	</div>
+	
+</div>

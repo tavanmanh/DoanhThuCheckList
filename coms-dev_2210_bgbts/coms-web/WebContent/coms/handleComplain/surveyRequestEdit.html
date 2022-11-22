@@ -1,0 +1,366 @@
+<form class="form-horizontal" style="padding-top: 20px" role="form">
+	<div class="form-body">
+		<!-- row 1-->
+		<div class="clearfix" id="aio_gp_add_body">
+			<div class="panel panel-group " style="height: 100px">
+				<div class="panel-heading "
+					style="background: #26c2bf; font-weight: bold">Thông tin trạng thái</div>
+				<div class="panel-body">
+                    <div class="row mt5">
+						<div class="col-md-11">
+							Trạng thái ticket: <span style="font-weight: bold"
+								ng-bind-html="caller.ticketDetail.complainOrderRequestDTO.htmlStatus"></span>
+						</div>
+					</div>
+					
+					<div class="row mt5" >
+						<div class="col-md-11" ng-show="caller.ticketDetail.complainOrderRequestDTO.process=='1'">
+							Tiến độ : <span  style="font-weight: bold;color:green;"
+								ng-bind-html="caller.ticketDetail.complainOrderRequestDTO.htmlProcess"></span>
+						</div>
+						<div class="col-md-11" ng-show="caller.ticketDetail.complainOrderRequestDTO.process=='2'">
+							Tiến độ : <span  style="font-weight: bold;color:orange;"
+								ng-bind-html="caller.ticketDetail.complainOrderRequestDTO.htmlProcess"></span>
+						</div>
+						<div class="col-md-11" ng-show="caller.ticketDetail.complainOrderRequestDTO.process=='3'">
+							Tiến độ : <span  style="font-weight: bold;color:red;"
+								ng-bind-html="caller.ticketDetail.complainOrderRequestDTO.htmlProcess"></span>
+						</div>
+					</div>
+
+					<div class="row mt5" >
+						<div class="col-md-11">
+							Thời gian kết thúc dự kiến: <span style="font-weight: bold;color:red;"
+								ng-bind-html="caller.ticketDetail.complainOrderRequestDTO.completedTimeExpected"></span>
+						</div>
+					</div>
+					
+					<div class="row mt5">
+						<div class="col-md-11">
+							Thời gian hoàn thành thực tế: <span style="font-weight: bold;color:blue;"
+								ng-bind-html="caller.ticketDetail.complainOrderRequestDTO.completedTimeReal"></span>
+						</div>
+					</div>
+                </div>
+			</div>
+			<div class="panel panel-group " style="height: 350px;">
+				<div class="panel-heading"
+					style="background: #26c2bf; font-weight: bold">Thông tin
+					ticket</div>
+				<div class="panel-body" style="height: 350px;">
+					<div class="clearfix">
+						<div class="form-group col-md-6">
+							<label class="col-md-4 form-horizontal control-label " translate>
+								Tên Khách hàng</label>
+							<div class="col-md-8">
+
+								<input class=" form-control width100" type="text"
+									readonly="readonly"
+									ng-model="caller.ticketDetail.complainOrderRequestDTO.customerName"
+									placeholder="Nhập tên khách hàng" />
+							</div>
+						</div>
+
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label req" translate>Số
+								điện thoại khách hàng</label>
+							<div class="clearfix position-relative col-md-8">
+								<div class="col-md-6 no-padding position-relative">
+									<input class=" form-control width100" type="text" style="text-align: right;"
+										placeholder="Nhập số điện thoại" readonly="readonly"
+										ng-model="caller.ticketDetail.complainOrderRequestDTO.customerPhone" />
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+					
+					<div class="clearfix">
+						<div class="form-group col-md-6">
+							<label class="col-md-4 form-horizontal control-label " translate>
+								Tỉnh/ Thành phố</label>
+							<div class="col-md-8">
+
+								<input class=" form-control width100" type="text"
+									readonly="readonly"
+									ng-model="caller.ticketDetail.complainOrderRequestDTO.provinceName"/>
+							</div>
+						</div>
+
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label req" translate>Quận/ Huyện</label>
+							<div class="clearfix position-relative col-md-8">
+								<div class="col-md-6 no-padding position-relative">
+									<input class=" form-control width100" type="text" style="text-align: right;"
+										readonly="readonly"
+										ng-model="caller.ticketDetail.complainOrderRequestDTO.districtName" />
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="clearfix">
+						<div class="form-group col-md-6">
+							<label class="col-md-4 form-horizontal control-label req"
+								translate>Xã/ Phường</label>
+							<div class="col-md-8">
+								<!--ng-disabled="caller.editMode === 1 || caller.editMode === 0"-->
+								<textarea class=" form-control width100" 
+									type="text" readonly="readonly"
+									ng-model="caller.ticketDetail.complainOrderRequestDTO.wardsName"
+									placeholder="Nhập nội dung"></textarea>
+							</div>
+						</div>
+						<div class="form-group col-md-6">
+							<label class="col-md-4 form-horizontal control-label req"
+								translate>Địa chỉ chi tiết</label>
+							<div class="clearfix position-relative col-md-8">
+								<div class="col-md-6 no-padding position-relative">
+									<input class=" form-control width100" type="text"
+										placeholder="Nhập địa chỉ khách hàng"
+										readonly="readonly"
+										ng-model="caller.ticketDetail.complainOrderRequestDTO.customerAddress" />
+								</div>
+							</div>
+						</div>
+					</div>
+					
+
+					<div class="clearfix">
+
+						<div class="form-group col-md-6">
+							<label class="col-md-4 form-horizontal control-label" translate>
+								Nội dung yêu cầu của khách hàng </label>
+							<div class="col-md-8">
+								<!--ng-disabled="caller.editMode === 1 || caller.editMode === 0"-->
+								<textarea class=" form-control width100" 
+									type="text" readonly="readonly"
+									ng-model="caller.ticketDetail.complainOrderRequestDTO.title"
+									placeholder="Nhập nội dung"></textarea>
+							</div>
+						</div>
+
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label" translate>Thời gian
+								tạo</label>
+							<div class="clearfix position-relative col-md-8" id="aio_cm_date">
+								<div class="col-md-6 no-padding position-relative">
+									<input kendo-date-time-picker k-format="'dd/MM/yyyy HH:mm:ss'"
+										min-year="1000" id="aio_cm_createDate" name="aio_cm_createDate"
+										style="width: 100%;text-align: center;" readonly="readonly"
+										ng-model="caller.ticketDetail.complainOrderRequestDTO.createDateString" /> <span
+										class="k-invalid-msg" data-for="aio_cm_createDate"></span>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+					<div class="clearfix">
+						<div class="form-group col-md-6">
+							<label class="col-md-4 form-horizontal control-label req"
+								translate>Người tạo yêu cầu</label>
+							<div class="col-md-8">
+								<!--ng-disabled="caller.editMode === 1 || caller.editMode === 0"-->
+								<input class=" form-control width100" type="text"
+									
+									readonly="readonly"
+									ng-model="caller.ticketDetail.complainOrderRequestDTO.createUserName" />
+							</div>
+						</div>
+
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label" translate>Thời gian NV
+								tiếp nhận</label>
+							<div class="clearfix position-relative col-md-8" id="aio_cm_date">
+								<div class="col-md-6 no-padding position-relative">
+									<input kendo-date-time-picker k-format="'dd/MM/yyyy HH:mm:ss'"
+										min-year="1000" id="aio_cm_receiveDate" name="aio_cm_receiveDate"
+										style="width: 100%;text-align: center;" readonly="readonly"
+										ng-model="caller.ticketDetail.complainOrderRequestDTO.receivedDateString" /> <span
+										class="k-invalid-msg" data-for="aio_cm_receiveDate"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="clearfix">
+						<div class="form-group col-md-6">
+							<label class="col-md-4 form-horizontal control-label req"
+								translate>Người thực hiện</label>
+							<div class="col-md-8">
+								<!--ng-disabled="caller.editMode === 1 || caller.editMode === 0"-->
+								<input class=" form-control width100" type="text"
+									
+									readonly="readonly"
+									ng-model="caller.ticketDetail.complainOrderRequestDTO.performerShow" />
+							</div>
+						</div>
+
+						<div class="form-group col-md-6">
+							<label class="col-md-4 control-label" translate>Thời gian
+								kết thúc dự kiến</label>
+							<div class="clearfix position-relative col-md-8"
+								id="aio_cl_scheduleTime">
+								<div class="col-md-6 no-padding position-relative">
+									<input kendo-date-time-picker k-format="'dd/MM/yyyy HH:mm:ss'"
+										min-year="1000" id="aio_completedTimeExpected" name="aio_completedTimeExpected"
+										style="width: 100%;text-align: center;" readonly="readonly"
+										ng-model="caller.ticketDetail.complainOrderRequestDTO.completedTimeExpectedString" /> <span
+										class="k-invalid-msg" data-for="aio_completedTimeExpected"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="clearfix">
+						<div class="form-group col-md-6">
+							<label class="col-md-4 form-horizontal control-label req"
+								translate>Thông tin dịch vụ</label>
+							<div class="col-md-8">
+								<!--ng-disabled="caller.editMode === 1 || caller.editMode === 0"-->
+								<input class=" form-control width100" type="text"
+									
+									readonly="readonly"
+									ng-model="caller.ticketDetail.complainOrderRequestDTO.service" />
+							</div>
+						</div>
+
+						<div class="form-group col-md-6" ng-show="caller.ticketDetail.complainOrderRequestDTO.status==3">
+							<label class="col-md-4 control-label" translate>Thời gian
+								hoàn thành thực tế</label>
+							<div class="clearfix position-relative col-md-8"
+								id="aio_cl_scheduleTime">
+								<div class="col-md-6 no-padding position-relative">
+									<input kendo-date-time-picker k-format="'dd/MM/yyyy HH:mm:ss'"
+										min-year="1000" id="aio_completedTimeReal" name="aio_completedTimeReal"
+										style="width: 100%;text-align: center;" readonly="readonly"
+										ng-model="caller.ticketDetail.complainOrderRequestDTO.completedTimeRealString" />
+									 <span
+										class="k-invalid-msg" data-for="aio_completedTimeReal"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="clearfix" ng-show="caller.ticketDetail.complainOrderRequestDTO.status==2||caller.ticketDetail.complainOrderRequestDTO.status==3" ng-disabled="!caller.editMode">
+
+						
+						<div class="form-group col-md-6">
+	                        <div class="col-md-4 control-label">
+	                            <label class="radio-inline">
+	                                <input type="radio" name="optradio" ng-model="caller.ticketDetail.complainOrderRequestDTO.result" ng-click="caller.chooseResult()"
+	                                       ng-value="1">
+	                                Đã hoàn thành
+	                            </label>
+	                        </div>
+                   		 </div>
+	                    <div class="form-group col-md-6" ng-hide="caller.ticketDetail.complainOrderRequestDTO.process=='3'">
+	                        <div class="col-md-4 control-label">
+	                            <label class="radio-inline">
+	                                <input type="radio" name="optradio" ng-model="caller.ticketDetail.complainOrderRequestDTO.result" ng-click="caller.chooseResult()" 
+	                                     ng-value="2"> Xin gia hạn thêm 
+	                            </label>
+	                        </div>
+	                    </div>
+					</div>
+					
+					<div class="clearfix">
+						
+	                    <div class="form-group col-md-6" ng-show="caller.ticketDetail.complainOrderRequestDTO.status==2 && !!caller.ticketDetail.complainOrderRequestDTO.result">
+	                            <label class="col-md-4 control-label" translate>Xuất phát từ</label>
+	                            <div class="col-md-8">
+	                                <select kendo-drop-down-list style="width: 100%"
+	                                            ng-model="caller.ticketDetail.source" ng-change="caller.changeSource(caller.ticketDetail.source)"
+	                                            k-data-text-field="'name'" k-data-value-field="'code'"
+	                                            k-data-source="caller.ticketDetail.complainOrderRequestDTO.result==2 ? caller.ticketSourceExtend : caller.ticketSourceClose">
+	                                </select>
+	                            </div>
+	                    </div>
+					
+						<div class="form-group col-md-6" ng-show="caller.isChooseSource==true && !!caller.ticketDetail.source">
+							<label class="col-md-4 control-label req"
+								translate>Nguyên nhân/Lí do cụ thể</label>
+							<div class="clearfix position-relative col-md-8"
+								id="aio_cl_reason">
+								<div class="col-md-6 no-padding position-relative">
+									<select kendo-drop-down-list style="width: 100%"
+	                                            ng-model="caller.ticketDetail.reason"
+	                                            k-data-text-field="'name'" k-data-value-field="'name'"
+	                                            k-data-source="caller.ticketReasonList">
+	                                </select>
+								</div>
+							</div>	
+						</div>
+
+						<div class="form-group col-md-6" ng-show="caller.ticketDetail.complainOrderRequestDTO.result==2">
+							<label class="col-md-4 control-label" translate>Thời gian
+								xin gia hạn</label>
+							<div class="clearfix position-relative col-md-8">
+	                            <div class="col-md-5 no-padding position-relative">
+									<input kendo-date-time-picker k-format="'dd/MM/yyyy HH:mm:ss'"
+	                                       min-year="1000"
+	                                       id="aio_edit_delayDate" name="aio_edit_delayDate" 
+	                                       style="width: 100%;" k-ng-model="caller.ticketDetail.extendDate"/>
+								 	<span class="k-invalid-msg" data-for="aio_edit_delayDate"></span>
+								 	
+								</div>         
+							</div>
+							
+							
+						</div>
+						
+					</div>
+					
+					<div class="clearfix" ng-show="caller.ticketDetail.complainOrderRequestDTO.status==2 && !!caller.ticketDetail.complainOrderRequestDTO.result">
+						<div class="form-group col-md-12">
+							<label class="col-md-2 form-horizontal control-label req" translate>
+								Chi tiết lí do </label>
+							<div class="col-md-8">
+								<!--ng-disabled="caller.editMode === 1 || caller.editMode === 0"-->
+								<textarea ng-model="caller.ticketDetail.note" id="aio_note_ticket"
+	                                       name="aio_note_ticket" style="width: 100%; height: 30px;"> 
+	                            </textarea>
+	                            <span class="k-invalid-msg" data-for="aio_note_ticket"></span>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			<div class="panel panel-group " style="height: 65px">
+				<div class="panel-heading "
+					style="background: #26c2bf; font-weight: bold">Lịch sử chi
+					tiết</div>
+				
+				<div class="portlet-title background-title">
+		            <div class="caption">
+		                <span class="caption-subject bold lowercase" translate>Kết quả tìm kiếm: </span>&nbsp;
+		                <label class="control-label bold lowercase" id="appCount">{{caller.countDetail}}</label>
+		                <label class="control-label bold lowercase">&nbsp;bản ghi</label>
+		            </div>
+       			 </div>
+		        <div id="grid" class="collapse in from-search">
+		            <div class="clearfix position-relative">
+		                <div id="complainOrderDetailGrid" kendo-grid="caller.complainOrderDetailGrid" k-options="caller.ComplainDetailGridOptions"></div>
+		            </div>
+		        </div>
+			</div>
+			
+		</div>
+	</div>
+	<div class="modal-footer" style="z-index: 1" align="right">
+		<button type="button" id="saveData" style="width: 160px;"
+			ng-show="caller.editMode==true&&(caller.ticketDetail.complainOrderRequestDTO.status<3)==true&&caller.isShowSave==true"
+			class="btn btn-qlk padding-search-right btn pull-right  saveQLK"
+			ng-click="caller.saveComplainOrder()" translate>{{caller.buttonSaveLabel}}
+		</button>
+		<button type="button" id="cancel"
+			class="btn btn-qlk padding-search-right margin_right10 closeQLK btn pull-right"
+			ng-click="caller.closeAll()" translate>Đóng
+		</button>
+		
+	</div>
+</form>
+

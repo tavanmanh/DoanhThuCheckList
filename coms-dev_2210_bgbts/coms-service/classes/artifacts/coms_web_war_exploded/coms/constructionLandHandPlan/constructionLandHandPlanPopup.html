@@ -1,0 +1,147 @@
+
+<form name="form" class="form-horizontal row padding10" role="form"
+	name="constructionLandHandPlan" id="constructionLandHandPlan"
+	kendo-validator="validator" k-options="validatorOptions" style="">
+	<div class="clearfix ">
+		<div class="form-group col-md-6">
+			<label class="col-md-4 control-label req" translate>Kế hoạch:
+				Tháng</label>
+			<div class="col-md-3">
+				<select kendo-drop-down-list id="month" style="width: 100%"
+					name="month" ng-model="caller.constructionLandHandPlan.month"
+					k-options="caller.monthDownListOptions">
+				</select>
+				<div class="One_icon">
+					<i class="fa fa-times" aria-hidden="true"
+						ng-click="caller.cancelHandover('month')"></i>
+				</div>
+			</div>
+			<label class="col-md-2 control-label text-center" translate>Năm</label>
+			<div class="col-md-3">
+				<select kendo-drop-down-list id="year" style="width: 100%"
+					name="year" ng-model="caller.constructionLandHandPlan.year"
+					k-options="caller.yearDownListOptions">
+				</select> <span data-for="type" class="k-invalid-msg"></span>
+				<div class="One_icon">
+					<i class="fa fa-times" aria-hidden="true"
+						ng-click="caller.cancelHandover('year')"></i>
+				</div>
+			</div>
+		</div>
+		<div class="form-group col-md-6">
+			<label class="col-md-4 control-label req" translate>Mã trạm</label>
+			<div class="col-md-8">
+				<input kendo-auto-complete k-options="caller.catStationOptions" ng-blur="caller.changeDataAuto('dept2')"
+					class=" form-control width100" type="text"
+					ng-model="caller.constructionLandHandPlan.catStationCode"
+					name="catStationCode"
+					ng-change="caller.clearConstructionIdwhenCatStationCodechange()" />
+				<span id="msg" data-for='dvn1' class='k-invalid-msg'></span>
+				<div class="One_icon">
+					<i class="fa fa-times" aria-hidden="true"
+						ng-click="caller.cancelStationInput('catStationCode')"></i>
+				</div>
+
+            </div>
+        </div>
+    </div>
+    <div class="clearfix">
+        <div class="form-group col-md-6">
+            <label class="col-md-4 control-label req" translate>Đơn vị nhận bàn giao</label>
+            <div class="col-md-8">
+                <div class="input-icon right ">
+                    <i class="fa fa-search directive"
+                       ng-click="caller.openDepartmentTo('dept1')"></i>
+                </div>
+                <input kendo-auto-complete k-options="caller.deprtOptions1"
+                       ng-blur="caller.changeDataAuto('dept1')"
+                       class=" form-control width100" type="text"
+                       ng-model="caller.constructionLandHandPlan.sysGroupName" name="dept1"
+                       /><span data-for="type" class="k-invalid-msg"></span>
+                <div class="One_icon">
+                    <i class="fa fa-times" aria-hidden="true"
+                       ng-click="caller.cancelInput('dept1')"></i>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="col-md-4 control-label req" translate>Mã công trình</label>
+            <div class="col-md-8">
+                <select kendo-drop-down-list style="width: 100%"
+                        ng-model="caller.constructionLandHandPlan.constructionId"
+                        k-data-text-field="'code'" k-data-value-field="'constructionId'"
+                        k-option-label="'---Chọn---'"
+                        k-data-source="caller.workCode">
+                </select>
+                <span data-for="type" class="k-invalid-msg"></span>
+
+                <!--<select kendo-drop-down-list style="width: 100%"-->
+                        <!--ng-model="caller.constructionLandHandPlan.constructionId"   k-data-text-field="'constructionId'"-->
+                        <!--k-data-value-field="'constructionCode'" k-option-label="'---Chọn---'"-->
+                        <!--k-data-source="caller.workCode" >-->
+
+                <!--</select>-->
+                <div class="One_icon">
+                    <i class="fa fa-times" aria-hidden="true"
+                       ng-click="caller.cancelStationInput('constructionId')"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix">
+        <div class="form-group col-md-6">
+            <label class="col-md-4 control-label req" translate>Ngày bàn giao dự kiến</label>
+            <div id="groundPlanDate2" class="col-md-8">
+                <input kendo-date-picker k-format="'dd/MM/yyyy'" date-time class="form-control width100"
+                       id="date1" name="groundPlanDate1" ng-model="caller.constructionLandHandPlan.groundPlanDate"
+                       style="width: 100%;" ng-blur="validateDate(caller.constructionLandHandPlan.groundPlanDate,null,null,form.groundPlanDate1)"/>
+                <div class="One_icon">
+                    <i class="fa fa-times" aria-hidden="true"
+                       ng-click="caller.cancelStationInput('groundPlanDate' ,form.groundPlanDate1)"></i>
+                </div>
+                <div class="error"
+                     ng-messages="form.groundPlanDate1.$error">
+                    <label ng-message="date" class="control-data" translate>Ngày bàn giao dự kiến dự kiến không hợp lệ</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="col-md-4 control-label req" translate>Đơn vị bàn giao</label>
+            <div class="col-md-8">
+                <div class="input-icon right ">
+                    <i class="fa fa-search directive"
+                       ng-click="caller.deliveryUnit('dept2')"></i>
+                </div>
+                <input kendo-auto-complete k-options="caller.catPartnerOptions"
+                       class=" form-control width100" type="text"
+                       ng-model="caller.constructionLandHandPlan.catPartnerCode" name="name"
+                       />
+                <span  data-for='type' class='k-invalid-msg'></span>
+                <div class="One_icon">
+                    <i class="fa fa-times" aria-hidden="true"
+                       ng-click="caller.cancelStationInput('catPartnerId')"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix">
+        <div class="form-group col-md-12">
+            <div class="form-group col-md-12">
+                <label class="col-md-2 control-label" translate>Ghi chú</label>
+                <div class="col-md-10">
+                    <textarea class="form-control" maxlength="1000" ng-model="caller.constructionLandHandPlan.description"
+                            ></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix form-actions margin-top">
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <button type="button" class="btn btn-qlk padding-search-right closeQLK" id="cancel" ng-click="caller.cancelPopup()" translate>Hủy bỏ</button>
+                <button type="button" id="savepopupApp" ng-disabled="vm.isDisabled" class="btn btn-qlk padding-search-right saveQLK" ng-click="caller.saveHanPlan(caller.constructionLandHandPlan)" translate>Ghi lại</button>
+            </div>
+        </div>
+    </div>
+</form>

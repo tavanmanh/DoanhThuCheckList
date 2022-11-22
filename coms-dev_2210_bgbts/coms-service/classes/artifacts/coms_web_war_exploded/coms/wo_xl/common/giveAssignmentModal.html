@@ -1,0 +1,178 @@
+<style>
+    .modal-content{
+        width: 100%;
+        padding: 0;
+    }
+
+    .close-modal-x{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    .light-border{
+        border: 1px solid #333;
+    }
+</style>
+
+<div class="modal-header" style="background-color: #33CCCC;">
+    <h5 class="modal-title">Giao việc</h5>
+    <button type="button" class="close close-modal-x" data-dismiss="modal" aria-label="Close" ng-click="$dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body" data-ng-controller="giveAssignmentModalController" ng-if="!checkAsignAdminWo">
+    <div class="row" ng-if="!isHCQT && workingWO.cdLevel1!= '9006003'">
+        <div class="col-md-4">  Giao cho CD level 2: </div>
+        <div class="col-md-8">
+            <input ng-if="disable.cdLevel2" class="form-control display-block" disabled ng-model="label.cdLevel2Name">
+            <select ng-if="!disable.cdLevel2" class="form-control display-block"
+                    ng-options="cdLv2 as cdLv2.groupName for cdLv2 in cdLv2List" ng-model="selectedUnit.cdLv2" ng-change="getCdLv3List()">
+                <option></option>
+            </select>
+        </div>
+    </div>
+    <div class="row" ng-if="!isHCQT && workingWO.cdLevel1 == '9006003' && workingWO.cdLevel5 != null ">
+        <div class="col-md-4">  Giao cho CD level 5: </div>
+        <div class="col-md-8">
+            <input ng-if="disable.cdLevel5" class="form-control display-block" disabled ng-model="label.cdLevel5Name">
+            <select ng-if="!disable.cdLevel5" class="form-control display-block"
+                    ng-options="cdLv5 as cdLv5.userName for cdLv5 in cdLv5List" ng-model="selectedUnit.cdLv5">
+                <option></option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row" ng-if="!isHCQT && workingWO.cdLevel1 == '9006003' && workingWO.cdLevel2 != null ">
+        <div class="col-md-4">  Giao cho CD level 2: </div>
+        <div class="col-md-8">
+            <input ng-if="disable.cdLevel2" class="form-control display-block" disabled ng-model="label.cdLevel2Name">
+            <select ng-if="!disable.cdLevel2" class="form-control display-block"
+                    ng-options="cdLv2 as cdLv2.groupName for cdLv2 in cdLv2List" ng-model="selectedUnit.cdLv2" ng-change="getCdLv3List()">
+                <option></option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row mt5" ng-if="sysUserGroup.isCdLevel2 && !isHCQT && workingWO.woTypeCode != 'BGBTS_DTHT'">
+        <div class="col-md-4">
+            <input type="radio" name="ft2OrCd3" ng-model="isFt2" ng-value="false" ng-click="chooseCd3()">
+            Giao CD Level 3:
+        </div>
+        <div class="col-md-8">
+            <select class="form-control display-block" ng-model="selectedUnit.cdLv3"
+                    ng-options="cdLv3 as cdLv3.groupName for cdLv3 in cdLv3List" ng-change="chooseCd3()">
+                <option></option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row mt5" ng-if="sysUserGroup.isCdLevel2 && !isHCQT">
+        <div class="col-md-4">
+            <input type="radio" name="ft2OrCd3" ng-model="isFt2" ng-value="true" ng-click="chooseFt2()">
+            Giao cho FT2:
+        </div>
+        <div class="col-md-8">
+            <input class="form-control display-block" type="text"
+                   k-options="autoCompleteFt2Options" kendo-auto-complete
+                   ng-model="selectedFt.ftName"
+                   maxlength="200" id="autoCompleteFt2" />
+        </div>
+    </div>
+
+    <div class="row mt5" ng-if="(sysUserGroup.isCdLevel3 || sysUserGroup.isCdLevel4) && !isHCQT && workingWO.woTypeCode != 'BGBTS_DTHT'">
+        <div class="col-md-4">  Giao cho CD level 3: </div>
+        <div class="col-md-8">
+            <input class="form-control display-block" disabled ng-model="label.cdLevel3Name">
+        </div>
+    </div>
+
+
+
+    <div class="row mt5" ng-if="sysUserGroup.isCdLevel3 && !isHCQT && vm.checkCD_PKTCNKT == true && workingWO.woTypeCode == 'XLSC'">
+        <div class="col-md-4"> 
+        <input type="radio" name="ftOrCd4" ng-model="isFt" ng-value="false" ng-click="chooseCd4()">
+        	Giao cho Cụm/Đội : 
+        </div>
+        <div class="col-md-8">
+            <select class="form-control display-block" ng-options="cdLv4 as cdLv4.groupName for cdLv4 in cdLv4List" id ="cdLv4"
+                    ng-model="selectedUnit.cdLv4" ng-change="chooseCd4()">
+                <option></option>
+            </select>
+            
+        </div>
+    </div>
+    
+    <div class="row mt5" ng-if="sysUserGroup.isCdLevel3 && !isHCQT && ( vm.checkCD_PKTCNKT != true||workingWO.woTypeCode != 'XLSC' )">
+        <div class="col-md-4"> 
+        	Giao cho Cụm/Đội: 
+        </div>
+        <div class="col-md-8">
+            <select class="form-control display-block" ng-options="cdLv4 as cdLv4.groupName for cdLv4 in cdLv4List" id ="cdLv4"
+                    ng-model="selectedUnit.cdLv4" ng-change="chooseCd4()">
+                <option></option>
+            </select>
+            
+        </div>
+    </div>
+
+    <div class="row mt5" ng-if="sysUserGroup.isCdLevel4 && !isHCQT">
+        <div class="col-md-4">  Giao cho Cụm/Đội: </div>
+        <div class="col-md-8">
+            <input class="form-control display-block" disabled ng-model="label.cdLevel4Name">
+        </div>
+    </div>
+    
+     <div class="row mt5" ng-if="checkAsignAdminWo || (sysUserGroup.isCdLevel3 && !isHCQT && vm.checkCD_PKTCNKT == true && workingWO.woTypeCode == 'XLSC') " >
+        <div class="col-md-4">
+        	<input type="radio" name="ftOrCd4" ng-model="isFt" ng-value="true" ng-click="chooseFt()">
+                 Giao cho FT: 
+         </div>
+        <div class="col-md-8">
+           <input class="form-control display-block" type="text"
+                   k-options="autoCompleteFt1Options" kendo-auto-complete
+                   ng-model="selectedFt.ftName"
+                   maxlength="200" id="autoCompleteFt1" >
+           
+        </div>
+    </div>
+
+    
+    <div class="row mt5" ng-if="(sysUserGroup.isCdLevel4 || sysUserGroup.isFtLevel5) && !isHCQT">
+        <div class="col-md-4"> Giao cho FT: </div>
+        <div class="col-md-8">
+            <select class="form-control display-block" id = "ftName" ng-model="selectedUnit.ft" ng-options="ft as ft.fullName for ft in ftList">
+                <option></option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row mt5" ng-if="isHCQT">
+        <div class="col-md-4"> Giao WO HCQT cho FT: </div>
+        <div class="col-md-8">
+            <input class="form-control display-block" type="text"
+                   k-options="autoCompleteHcqtFtOptions" kendo-auto-complete
+                   ng-model="selectedFt.ftName" maxlength="200" />
+        </div>
+    </div>
+</div>
+<div class="modal-body" data-ng-controller="giveAssignmentModalController" ng-if="checkAsignAdminWo">
+<div class="row mt5">
+        <div class="col-md-4">Giao cho FT: </div>
+        <div class="col-md-8">
+           <input class="form-control display-block" type="text"
+                   k-options="autoCompleteFt1Options" kendo-auto-complete
+                   ng-model="selectedFt.ftName"
+                   maxlength="200" id="autoCompleteFt1" >
+
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="$dismiss()">
+        <i class="fa fa-ban"></i> Hủy bỏ
+    </button>
+    <button type="button" class="btn btn-secondary" ng-click="$close()">
+        <i class="fa fa-floppy-o azure"></i> Ghi lại
+    </button>
+</div>

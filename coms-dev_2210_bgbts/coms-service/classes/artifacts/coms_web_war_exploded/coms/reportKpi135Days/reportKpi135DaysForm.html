@@ -1,0 +1,138 @@
+<style>
+#chartReport135 {
+	width: 100%;
+	height: 400px;
+}
+
+/* #lineBorder {
+	border: 2px dotted #f39c12;
+} */
+#dashReport {
+	font-family: time new roman;
+	font-size: 15px;
+	margin: 3px;
+	background: #ecf0f1;
+	font-weight: bold;
+	color: #1abc9c;
+	font-style: italic;
+	text-align: center;
+}
+
+.amcharts-chart-div a {
+	display: none !important;
+}
+</style>
+<div data-ng-controller="reportKpi135DaysController  as vm">
+	<p class="text-brecum">{{vm.String}}</p>
+	<form class="form-horizontal row" role="form" id="chartReportSearch">
+		<div class="form-body">
+			<div class="portlet light bordered">
+				<div class="portlet-title background-title">
+					<div class="caption">
+						<span class="caption-subject bold lowercase" translate>Thông
+							tin tìm kiếm </span>
+
+					</div>
+				</div>
+				<div id="workItem1" class="collapse in from-search">
+					<div class="clearfix position-relative">
+						<div class="clearfix">
+							<div class="form-group col-md-6">
+								<label class="col-md-4 form-horizontal control-label " translate>Đơn
+									vị thực hiện</label>
+								<div class="col-md-8">
+									<div class="input-icon right ">
+										<i class="fa fa-search directive"
+											ng-click="vm.openDepartmentTo('dept')"></i>
+									</div>
+									<input kendo-auto-complete k-options="vm.deprtOptions2"
+										ng-blur="vm.changeDataAuto('dept')"
+										class=" form-control width100" type="text"
+										ng-model="vm.searchForm.sysGroupName" name="dept"
+										onclick="reset_msg();" required
+										data-required-msg="Đơn vị không để trống" /> <span id="msg"
+										data-for='dvn1' class='k-invalid-msg'></span>
+									<div class="One_icon">
+										<i class="fa fa-times" aria-hidden="true"
+											ng-click="vm.cancelInput('dept')"></i>
+									</div>
+									<script>
+									function reset_msg() {
+										document.getElementById('msg').innerHTML = '';
+									}
+								</script>
+								</div>
+							</div>
+
+							<!-- <div class="form-group col-md-6">
+								<label class="col-md-4 control-label" translate>Từ ngày</label>
+								<div class="col-md-8">
+									<div class="col-md-5 no-padding position-relative">
+										<input kendo-date-picker k-format="'dd/MM/yyyy'"
+											ng-model="vm.searchForm.dateFrom" style="width: 100%;"
+											min-year="1000" date-time />
+									</div>
+									<div class="col-md-2" style="text-align: center;">
+										<label class="control-label" translate>đến</label>
+									</div>
+									<div class="col-md-5 no-padding position-relative">
+										<input kendo-date-picker k-format="'dd/MM/yyyy'"
+											ng-model="vm.searchForm.dateTo" style="width: 100%;"
+											min-year="1000" date-time />
+									</div>
+								</div>
+								<div class="One_icon">
+									<i class="fa fa-times" aria-hidden="true"
+										ng-click="vm.cancelInput('date')"></i>
+								</div>
+							</div> -->
+						</div>
+						<div id="borderCount"></div>
+						<div class="clearfix form-actions margin-top">
+							<div class="row">
+								<div class="col-md-12 text-center">
+									<button type="button" id="doSearchQuantity"
+										ng-click="vm.doSearch()"
+										class="btn btn-qlk padding-search-right searchQLK" translate>Tìm
+										kiếm</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<div class="portlet light bordered">
+		<div class="portlet-title background-title">
+			<div class="caption">
+				<span class="caption-subject bold lowercase" translate>Kết
+					quả tìm kiếm</span>
+			</div>
+		</div>
+		<!-- <div id=dashA>Biểu đồ sản lượng, hoàn công theo ngày</div>
+    <div id="chartdiv">
+    </div>
+    <div id ="lineBorder"></div> -->
+		<div id=dashReport>Biểu đồ tồn KPI quá hạn 135 ngày</div>
+		<div id="chartReport135"></div>
+	</div>
+	<div id="lineBorder"></div>
+	<div class="portlet light bordered">
+		<div class="portlet-title background-title">
+			<div class="caption">
+				<span class="caption-subject bold lowercase" translate>Kết
+					quả tìm kiếm: </span>&nbsp;<label class="control-label bold lowercase"
+					id="appCount">{{vm.count}}</label><label
+					class="control-label bold lowercase">&nbsp;bản ghi</label>
+
+			</div>
+		</div>
+		<div id="grid" class="collapse in from-search">
+			<div class="clearfix position-relative">
+				<div id="reportKpi45DaysId" kendo-grid="vm.reportKpi45DaysGrid"
+					k-options="vm.reportKpi45DaysGridOptions"></div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,261 @@
+<form class="form-horizontal row" novalidate="" name="form">
+    <div class="form-body">
+        <div class="portlet light">
+            <div class="portlet-title background-title">
+                <div class="caption">
+					<span class="caption-subject bold lowercase" translate>Thông
+						tin chung</span>
+                </div>
+                <div class="text-right margin-row-title">
+                    <i data-toggle="collapse" data-target="#part1"
+                       class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div id="part1" class="collapse in from-search">
+                <div class="padding-width18">
+                    <div class="border-gray">
+                        <div class="clearfix position-relative">
+                            <div class="clearfix form-group">
+                                <div class="clearfix position-relative">
+                                    <label class="col-md-2 control-label" translate>Mã tỉnh</label>
+                                    <label class="col-md-4 control-data"
+                                           > {{caller.thiCongItem.catProvinceCode}}</label><label
+                                        class="col-md-2 control-label" translate>Mã trạm</label>
+                                    <label class=" col-md-4 control-data">{{caller.thiCongItem.catStationCode}}</label>
+                                </div>
+                                <div class="clearfix">
+                                    <label class="col-md-2 control-label" translate>Mã công
+                                        trình</label>
+
+                                    <div class="col-md-4">
+                                        <label class=" control-data"
+                                               >{{caller.thiCongItem.constructionCode}}</label>
+                                    </div>
+                                    <label class="col-md-2 control-label" translate>Hợp
+                                        đồng đầu ra</label>
+
+                                    <div class="col-md-4 position-relative">
+                                        <label class="control-data "
+                                               >{{caller.thiCongItem.cntContract}}</label>
+                                    </div>
+                                </div>
+                                <div class="clearfix">
+                                    <label class="col-md-2 control-label" translate>Hạng
+                                        mục</label>
+
+                                    <div class="col-md-4">
+                                        <label class=" control-data"
+                                               >{{caller.thiCongItem.workItemName}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="portlet light">
+            <div class="portlet-title background-title" style="">
+                <div class="caption">
+					<span class="caption-subject bold lowercase" translate>Thông
+						tin thực hiện, giám sát</span>
+                </div>
+                <div class="text-right margin-row-title">
+                    <i data-toggle="collapse" data-target="#part2"
+                       class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div id="part2" class="collapse in from-search">
+                <div class="padding-width18">
+                    <div class="border-gray" style="padding: 18px;">
+                        <div class="clearfix position-relative">
+                            <div class="clearfix form-group">
+                                <div class="clearfix row margin-top">
+                                    <label class="col-md-2 control-label req" translate>Giá
+                                        trị tính sản lượng (Triệu VNĐ)</label>
+
+                                    <div class="col-md-4 text-right">
+                                      <input maxlength="25"
+                                                class=" form-control text-right width100" type="text" id="quantity" name="quantity" data-required-msg="Giá trị sản lượng không được để trống"
+                                               vt-currency parsecurrency3 fraction-size="3" ng-value="caller.thiCongItem.quantity1" ng-model="caller.thiCongItem.quantity"
+                                              /> 
+                                           <!--    <input class="form-control" ng-blur="focusOut()" name="quantity" maxlength="25"
+                                              data-required-msg="Giá trị sản lượng không được để trống" ng-value="caller.thiCongItem.quantity1"
+						   type="number" min="0" oninput="validity.valid||(value='');" step="0.01"
+							id="quantity" 
+							ng-model="caller.thiCongItem.quantity" /> -->
+                                        <span style=" color: red;"
+                                              ng-if="form.quantity.$invalid && !form.quantity.$pristine">Giá trị sản lượng không được để trống</span>
+                                    </div>
+                                    <label class="col-md-2 control-label " translate>Nguồn
+                                        việc</label>
+
+                                    <div class="col-md-4 margin_top">
+                                        <input style="float: left;" type="radio" id="status1"
+                                               name="status"
+                                               ng-model="caller.thiCongItem.sourceType"
+                                               ng-checked="caller.thiCongItem.sourceType == 1"
+                                               value="1"> <span class="padding_radio">Công ty</span>
+                                        <input style="float: left;" type="radio" id="status2"
+                                               name="status"
+                                               ng-model="caller.thiCongItem.sourceType"
+                                               ng-checked="caller.thiCongItem.sourceType == 2"
+                                               value="2"> <span class="padding_radio">Chi
+											nhánh</span>
+                                    </div>
+                                </div>
+                                <div class="clearfix row margin-top">
+                                    <label class="col-md-2 control-label req" translate>Người thi công</label>
+
+                                    <div class="col-md-4 margin_top">
+                                        <auto-search model-label="" caller="caller" req="req"
+                                                     template-url="views/popup/gridViewCreateUser.html"
+                                                     header-template="caller.userHeaderTemplate"
+                                                     template-auto="caller.userTemplate"
+                                                     page="1" page-size="10" popup-id="ar_deposit_browser_adOrgId"
+                                                     popup-type="gridplusUser"
+                                                     combo-id="performerId"
+                                                     combo-source-link="sysUserCOMSRsService/getForAutoComplete"
+                                                     combo-name="fullName" combo-value="sysUserId"
+                                                     combo-code="employeeCode"
+                                                     combo-search="caller.commonSearch" combo-grid="caller.gridCreator"
+                                                     model-id="caller.thiCongItem.performerId"
+                                                     model-name="caller.thiCongItem.performerName"
+                                                     ng-model="caller.thiCongItem.performerName"></auto-search>
+                                        <span style=" color: red;"
+                                              ng-if="form.performerId.$invalid && !form.performerId.$pristine">Người thi công không được để trống</span>
+                                    </div>
+                                    <label class="col-md-2 control-label " translate>Hình
+                                        thức thi công</label>
+
+                                    <div class="col-md-4 margin_top">
+                                        <input style="float: left;" type="radio" id="deployType1"
+                                               name="deployType"
+                                               ng-model="caller.thiCongItem.deployType"
+                                               ng-checked="caller.thiCongItem.deployType == 1"
+                                               value="1"> <span class="padding_radio">Nội bộ</span>
+                                        <input style="float: left;" type="radio" id="deployType2"
+                                               name="deployType"
+                                               ng-model="caller.thiCongItem.deployType"
+                                               ng-checked="caller.thiCongItem.deployType == 2"
+                                               value="2"> <span class="padding_radio">Thuê
+											ngoài</span>
+                                    </div>
+                                </div>
+                                <div class="clearfix row margin-top">
+                                    <label class="col-md-2 control-label req" translate>Ngày
+                                        thực hiện</label>
+
+                                    <div class="col-md-2">
+                                        <input kendo-date-picker date-time k-format="'dd/MM/yyyy'" name="createFrom" id="createFrom"
+                                               ng-model="caller.thiCongItem.startDate" style="width: 100%;"
+                                                data-required-msg="Ngày tạo từ không được để trống"
+                                               ng-blur="validateDate(caller.thiCongItem.startDate,null,null,form.createFrom)"
+                                               min-year="1000" data-minyear-msg="Ngày tạo từ không hợp lệ"
+                                               data-date-msg="Ngày tạo từ không hợp lệ" ng-change="caller.checkDateFrom()" date-time/>
+                                        <span style=" color: red;"
+                                              ng-if="form.createFrom.$invalid && !form.createFrom.$pristine"></span>
+                                        <span style="color:red">{{caller.errMessageDateFrom}}</span>
+                                        <div class="error" ng-messages="form.createFrom.$error" ng-if="form.createFrom.$invalid && !form.createFrom.$pristine">
+                                            <label ng-message="date" class="control-data" translate>Ngày
+                                                thực hiện từ không hợp lệ</label>
+                                            <label ng-message="required" class="control-data" translate>Ngày tạo từ không được để trống</label>
+                                        </div>
+                                        <div class="One_icon  One_icon1">
+                                            <label class="control-label" translate>Đến</label>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 ">
+                                        <input kendo-date-picker date-time k-format="'dd/MM/yyyy'" name="createTo" id="createTo"
+                                               ng-model="caller.thiCongItem.endDate" style="width: 100%;"
+                                                data-required-msg="Ngày tạo đến không được để trống"
+                                               ng-blur="validateDate(caller.thiCongItem.endDate,null,null,form.createTo)"
+                                               min-year="1000" data-minyear-msg="Ngày tạo đến không hợp lệ"
+                                               data-date-msg="Ngày tạo đến không hợp lệ" ng-change="caller.checkDateTo()" date-time/>
+                                        <span style="color:red">{{caller.errMessageDateTo}}</span>
+                                        <div class="error" ng-messages="form.createTo.$error" ng-if="form.createTo.$invalid && !form.createTo.$pristine">
+                                            <label ng-message="date" class="control-data" translate>Ngày
+                                                thực hiện đến không hợp lệ</label>
+                                            <label ng-message="date" class="control-data" translate>Ngày tạo đến không được để trống</label>
+                                        </div>
+                                        <div class="One_icon">
+                                            <i class="fa fa-times" aria-hidden="true"
+                                               ng-click="caller.cancelDateTo('thicong',form.createTo,form.createFrom)"></i>
+                                        </div>
+
+                                    </div>
+                                    <label class="col-md-2 control-label" translate>Tỉnh
+                                        trưởng phụ trách</label>
+
+                                    <div class="col-md-4">
+                                        <auto-search model-label="" caller="caller"
+                                                     template-url="views/popup/gridViewCreateUser.html"
+                                                     header-template="caller.suppervisorHeaderTemplate"
+                                                     template-auto="caller.suppervisorTemplate"
+                                                     page="1" page-size="10" popup-id="ar_deposit_browser_adOrgId"
+                                                     popup-type="gridplusSuppervisor"
+                                                     combo-id="supervisorId"
+                                                     combo-source-link="sysUserCOMSRsService/getSuppervisorAutoComplete"
+                                                     combo-name="fullName" combo-value="sysUserId"
+                                                     combo-code="employeeCode"
+                                                     combo-search="caller.commonSearch" combo-grid="caller.gridCreator"
+                                                     model-id="caller.thiCongItem.supervisorId"
+                                                     model-name="caller.thiCongItem.supervisorName"
+                                                     ng-model="caller.thiCongItem.supervisorName"></auto-search>
+                                    </div>
+                                </div>
+                                <div class="clearfix row margin-top">
+                                    <label class="col-md-2 control-label" translate></label>
+
+                                    <div class="col-md-4 ">
+                                    </div>
+                                    <label class="col-md-2 control-label" translate>Phó giám đốc chuyên trách</label>
+
+                                    <div class="col-md-4">
+                                        <auto-search model-label="" caller="caller"
+                                                     template-url="views/popup/gridViewCreateUser.html"
+                                                     header-template="caller.directorHeaderTemplate"
+                                                     template-auto="caller.directorTemplate"
+                                                     page="1" page-size="10" popup-id="ar_deposit_browser_adOrgId"
+                                                     popup-type="gridplusDirector"
+                                                     combo-id="directorId"
+                                                     combo-source-link="sysUserCOMSRsService/getDirectorAutoComplete"
+                                                     combo-name="fullName" combo-value="sysUserId"
+                                                     combo-code="employeeCode"
+                                                     combo-search="caller.commonSearch" combo-grid="caller.gridCreator"
+                                                     model-id="caller.thiCongItem.directorId"
+                                                     model-name="caller.thiCongItem.directorName"
+                                                     ng-model="caller.thiCongItem.directorName"></auto-search>
+                                    </div>
+                                </div>
+                                <div class="clearfix row margin-top">
+                                    <label class="col-md-2 control-label" translate> Ghi chú</label>
+
+                                    <div class="col-md-10">
+                                        <textarea rows="3" class=" form-control width100" type="text"
+                                                  ng-model="caller.thiCongItem.description"/>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row modal-footer">
+        <div class="col-md-12 text-right">
+            <button type="button"
+                    class="btn btn-qlk padding-search-right closeQLK" id="cancel"
+                    ng-click="caller.cancelEditPopup()" translate>Hủy bỏ
+            </button>
+            <button type="button" id="savepopupApp"
+                    class="btn btn-qlk padding-search-right saveQLK"ng-disabled="caller.disabled||caller.invalidDate"
+                    ng-click="caller.saveThiCongPopup()" translate>Ghi lại
+            </button>
+        </div>
+
+    </div>
+</form>

@@ -1,0 +1,153 @@
+<form style="padding:25px;" name="form">
+    <div class="form-horizontal form-body">
+        <div class="portlet light bordered">
+            <div class="portlet-title background-title">
+                <div class="caption">
+                    <span class="caption-subject bold lowercase" translate>Thông tin công trình</span>
+                </div>
+                <div class="text-right margin-row-title">
+                    <i data-toggle="collapse" data-target="#ttct-ah"
+                       class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div id="ttct-ah" class="padding-width18 clearfix collapse in from-search">
+                <div class="portlet light bordered">
+                    <div class="clearfix">
+                        <div class="form-group col-md-12">
+                            <label class="col-md-2 control-label text-right req" translate>Loại
+                                công việc</label>
+
+                            <div class="col-md-9">
+                                <select kendo-drop-down-list style="width: 100%"
+                                        ng-disabled="true">
+                                    <option>Thi công</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix">
+                        <div class="form-group col-md-12">
+                            <label class="col-md-2 control-label text-right" translate>Tỉnh </label>
+
+                            <div class="col-md-9">
+                                <!--<div class="input-icon right ">-->
+                                <!--<i class="fa fa-search directive"-->
+                                <!--ng-click="caller.openCatProvincePopup()"></i>-->
+                                <!--</div>-->
+                                <input class=" form-control" type="text"
+                                       ng-model="caller.consTask.catProvince"
+                                       ng-disabled="true"/>
+                                <!--kendo-auto-complete k-options="caller.provinceOptions"-->
+                                <!--<div class="One_icon">-->
+                                <!--<i class="fa fa-times" aria-hidden="true"-->
+                                <!--ng-click="caller.resetFormFieldProvince()"></i>-->
+                                <!--</div>-->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix">
+                        <div class="form-group col-md-12">
+                            <label class="col-md-2 control-label text-right req " translate>Công trình</label>
+                            <div class="col-md-6">
+                                <input class="form-control" type="text"
+                                       ng-disabled="true"
+                                       ng-model="caller.consTask.constructionCode"/>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-qlk addQLK width100"
+                               			style="height: 25px;background-position: 4px 0px;"
+                                        ng-click='caller.addWorkItem()'>Gán hạng mục
+                                </button>
+                            </div>
+                            <!--<div class="col-md-1" style="padding-left: 0px !important">-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="form-group col-md-12">
+                            <label class="col-md-2 control-label text-right req" translate>Người thực hiện</label>
+                            <div class="col-md-9">
+                                <div class="input-icon right ">
+                                    <i class="fa fa-search directive"
+                                       ng-click="caller.openTaskPopup()"></i>
+                                </div>
+                                <input
+                                        class=" form-control width100" type="text"
+                                        ng-change="caller.validateConsTaskAdd()"
+                                        ng-model="caller.consTask.performerName" kendo-auto-complete
+                                        k-options="caller.sysUserTaskOptions"/>
+
+                                <div class="One_icon">
+                                    <i class="fa fa-times" aria-hidden="true"
+                                       ng-click="caller.resetFormFieldSysUserTask()"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" align="center">
+                <div id="fuckThisShit" style="height:30px; display:block"></div>
+            </div>
+
+            <!--<div class="portlet light bordered">-->
+                <div class="portlet-title background-title">
+                    <div class="caption">
+                        <span class="caption-subject bold lowercase" translate>Hạng mục</span>
+                    </div>
+                    <div class="text-right margin-row-title">
+                        <i data-toggle="collapse" data-target="#wi-ah"
+                           class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <!--<div class="row ">-->
+                <!--<div class="form-group col-md-12 ">-->
+                <!--<label class="col-md-2 control-label text-right req" translate>Hạng-->
+                <!--mục</label>-->
+                <!--</div>-->
+                <!--</div>-->
+                <div id="wi-ah" class="padding-width18 clearfix collapse in from-search">
+
+                    <div class="row" align="center">
+                        <div class="form-group col-md-12 ">
+                            <div class="col-md-12" style="padding: 0px 8px">
+                                <div id="workItemAddingGrid" kendo-grid="caller.workItemAddingGrid"
+                                     k-options="caller.gridOptions" 
+                                     k-on-change="caller.onGridChange(kendoEvent, { selected: selected }, data)"></div>
+<!-- k-rebind="caller.gridOptions" -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!--</div>-->
+        </div>
+
+        <div class="row modal-footer">
+            <div class="col-md-12 ">
+                <button type="button"
+                        class="btn btn-qlk padding-search-right closeQLK" id="cancel"
+                        ng-click="caller.cancel()" translate>Hủy bỏ
+                </button>
+                <button type="button" id="savepopupApp"
+                        class="btn btn-qlk padding-search-right saveQLK" ng-disabled="caller.disableConsTaskSubmit"
+                        ng-click="caller.saveConstructionTask()"
+                        translate>Ghi lại
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<style>
+    .loadersmall {
+        border: 5px solid #f3f3f3 !important;
+        -webkit-animation: spin 0.4s linear infinite !important;
+        animation: spin 0.4s linear infinite !important;
+        border-top: 2px solid #555 !important;
+        border-radius: 50% !important;
+        width: 60px !important;
+        height: 60px !important;
+    }
+</style>

@@ -1,0 +1,112 @@
+<style>
+    .app-modal-window .modal-dialog {
+        min-width: 1000px;
+    }
+
+    .modal-content {
+        width: 100%;
+        padding: 0;
+    }
+
+    .close-modal-x {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+    }
+
+    .input-half {
+        width: 40%;
+        display: inline;
+    }
+
+    .display-block {
+        display: block;
+        width: 100%;
+    }
+
+    .animate-show-hide.ng-hide {
+        opacity: 0;
+    }
+
+    .animate-show-hide.ng-hide-add,
+    .animate-show-hide.ng-hide-remove {
+        transition: all linear 0.5s;
+    }
+
+    .check-element {
+        border: 1px solid black;
+        opacity: 1;
+        padding: 10px;
+    }
+</style>
+
+<!-- Edit TR Modal -->
+
+<div class="modal-header" style="background-color: #33CCCC;">
+    <h5 class="modal-title">Tạo mới/Sửa cấu hình ban chỉ huy công trường</h5>
+    <button type="button" class="close close-modal-x" data-dismiss="modal" aria-label="Close" ng-click="$dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal row" role="form">
+        <div class="form-body">
+            <div class="portlet light bordered">
+                <div id="tr_details_container" class="collapse in from-search">
+                    <div class="clearfix position-relative">
+                        <div class="clearfix">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div>
+                                        <label class="form-horizontal control-label" translate>Mã hợp đồng</label><span
+                                            style="color:red !important;">*</span>
+                                    </div>
+                                    <input class="form-control display-block" type="text"
+                                           k-options="autoCompleteContractOptions" kendo-auto-complete
+                                           ng-disabled="disableContractCode" ng-model="woConfigContract.contractCode" id="autoCompleteTr"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <div>
+                                        <label class="form-horizontal control-label" translate>Nhân viên thực hiện</label><span
+                                            style="color:red !important;">*</span>
+                                    </div>
+                                    <input class="form-control display-block" type="text"
+                                           k-options="autoCompleteFTOptions" kendo-auto-complete
+                                           ng-model="woConfigContract.userName" maxlength="200"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div>
+                                        <label class="form-horizontal control-label" translate>Quyền nhân viên</label><span style="color:red !important;">*</span>
+                                    </div>
+                                    <select ng-model="woConfigContract.userRole" class="form-control display-block"
+                                            ng-options="userRole.value as userRole.name for userRole in listUserRole">
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <div>
+                                        <label class="form-horizontal control-label" translate>Chức danh</label><span></span>
+                                    </div>
+                                    <input class="form-control display-block"
+                                           ng-model="woConfigContract.userPosition"/>
+                                </div>
+                            </div>
+                            <div id="borderCount"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="$dismiss()">
+        <i class="fa fa-ban"></i> Hủy bỏ
+    </button>
+    <button type="button" class="btn btn-secondary" ng-click="validateCreateNew()?$close():return;">
+        <i class="fa fa-floppy-o azure"></i> Ghi lại
+    </button>
+</div>
+
+<!-- End edit tr Modal -->

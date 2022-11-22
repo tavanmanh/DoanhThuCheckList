@@ -1,0 +1,154 @@
+<style>
+.portlet-title {
+	font-size: 120%;
+	padding: 10px;
+}
+
+.k-link {
+	margin-top: -3px;
+}
+
+.k-upload-files, .k-upload-status {
+	display: none;
+}
+
+#materialPopup {
+	min-width: 200px;
+	min-height: 200px;
+}
+</style>
+<div id="materialPopup">
+	<form class="form-horizontal row" role="form" name="materialForm"
+		id="materialForm" kendo-validator="validator"
+		k-options="validatorOptions">
+		<div class="form-body padding10">
+			<div class="portlet light bordered">
+				<div class="form-body padding10">
+					<div class="portlet light">
+						<div class="portlet-title background-title">
+							<div class="caption">
+								<span class="caption-subject bold lowercase ng-scope"
+									translate="">Danh sách file đính kèm</span>
+							</div>
+							<div class="text-right margin-row-title">
+								<i data-toggle="collapse" data-target="#upload"
+									class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+							</div>
+						</div>
+						<div id="upload"
+							class="portlet light bordered collapse in from-search">
+							<div>
+								<div id="upload2" class="portlet light  collapse in from-search">
+									<div>
+										<div>
+											<center>Kéo thả các file vào đây hoặc click để chọn
+												file</center>
+										</div>
+										<div class="clearfix">
+											<div class="form-group col-md-12">
+												<div class="col-md-12 k-content">
+													<input class="col-md-12" name="attachfile" id="attachfile"
+														k-select="caller.submitAttachFile" type="file"
+														list-file-type="jpeg,jpg,png" />
+
+												</div>
+											</div>
+											<div class="clearfix"></div>
+											<center>
+												<span style="color: gray">Dung lượng &#60;&#61;
+													100MB, định dạng jpeg, jpg, png</span>
+											</center>
+											<div class="clearfix">
+												<div id="attachFileGrid" kendo-grid="caller.attachFileGrid"
+													k-options="caller.attachFileGridOptions" k-editable="false"
+													k-on-change="onGridChange(kendoEvent, { selected: selected }, data)"></div>
+											</div>
+											<script>
+												$(document)
+														.ready(
+																function() {
+																	var caller = angular
+																			.element(
+																					document
+																							.getElementById('materialPopup'))
+																			.scope().caller;
+																	var urlUpload = window.location.protocol
+																			+ '//'
+																			+ window.location.hostname
+																			+ ':'
+																			+ window.location.port;
+
+																	function onSuccess(
+																			data) {
+																		caller
+																				.callback(data);
+																	}
+
+																	//	setTimeout(function(){
+																	$(
+																			"#attachfile")
+																			.kendoUpload(
+																					{
+																						async : {
+																							/* saveUrl : urlUpload
+																							        + API_URL
+																							        + "fileservice/uploadATTT", */
+																							removeUrl : urlUpload
+																									+ API_URL
+																									+ "fileservice/removeFileUpload",
+																						/* autoUpload : true */
+
+																						},
+																						select : caller.submitAttachFile,
+																						validation : {
+																							allowedExtensions : [
+																									".jpeg",
+																									".jpg",
+																									".png" ]
+																						},
+																						success : onSuccess,
+																						localization : {
+																							uploadSelectedFiles : "Chọn tệp"
+																						},
+																						multiple : false
+																					});
+																});
+											</script>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="portlet light bordered">
+						<div class="portlet-title background-title">
+							<div class="caption">
+								<span class="caption-subject bold lowercase" translate>Kết
+									quả: </span>&nbsp;<label class="control-label bold lowercase"
+									id="appCountMaterial">{{caller.countMaterial}}</label><label
+									class="control-label bold lowercase">&nbsp;bản ghi</label>
+
+							</div>
+						</div>
+						<div id="grid" class="collapse in from-search">
+							<div class="clearfix position-relative">
+								<div id="gridMaterialId" kendo-grid="caller.materialGrid"
+									k-options="caller.materialGridOptions"></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="modal-footer" align="right">
+						<button type="button" id="saveData"
+							class="btn btn-qlk   padding-search-right btn pull-right  saveQLK"
+							ng-click="caller.saveAccept()" translate>Xác nhận</button>
+						<button type="button" id="cancel"
+							class="btn btn-qlk padding-search-right margin_right10 closeQLK btn pull-right"
+							ng-click="caller.cancel()" translate>Hủy bỏ</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

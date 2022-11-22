@@ -1,0 +1,160 @@
+<style>
+	.display-block{
+		display: block;
+		width: 100%;
+	}
+
+	.input-half{
+		width: 48%;
+		display: inline;
+	}
+
+	.grey{
+		color: #333;
+	}
+
+	.yellow{
+		color: #E0D014
+	}
+
+	.azure{
+		color: #011995;
+	}
+
+	.mt5{
+		margin-top: 5px;
+	}
+
+	.fs20{
+		font-size: 20px;
+	}
+
+	.mb5{
+		margin-bottom: 5px;
+	}
+
+	.cedtpl{
+		font-size: 25px;
+		text-align: center;
+	}
+
+	.quick-create-wo-table td {
+		padding: 5px;
+	}
+
+</style>
+<div data-ng-controller="workItemDetailsController as vm">
+	<p class="text-breadcrumb" ng-bind-html="vm.breadcrumb"></p>
+	<form class="form-horizontal row" role="form" id="chartReportSearch">
+	
+		<div class="form-body">
+			<div class="portlet light bordered">
+				<div class="portlet-title background-title">
+					<div class="caption">
+						<span class="caption-subject bold lowercase" translate>Thông tin công việc định kỳ</span>
+					</div>
+				</div>
+				<div id="tr_details_container" class="collapse in from-search">
+					<div class="clearfix position-relative">
+						<div class="clearfix">
+
+							<div class="form-group row">
+								<div class="col-md-4">
+									<label class="display-block control-label" style="text-align: left !important;" translate>Mã công việc định kỳ</label>
+									<input class="form-control display-block" disabled placeholder="Mã TR" ng-model="vm.workingWorkItem.workItemCode"/>
+								</div>
+								<div class="col-md-4">
+									<label class="display-block control-label" style="text-align: left !important;" translate>Tên công việc định kỳ</label>
+									<input class="form-control display-block" disabled placeholder="Tên TR" ng-model="vm.workingWorkItem.workItemName" />
+								</div>
+								<div class="col-md-4">
+									<label class="display-block control-label" style="text-align: left !important;" translate>Trạng thái</label>
+									<input class="form-control display-block" disabled placeholder="Trạng thái" ng-model="vm.statusWorkItem"/>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<div class="col-md-4">
+									<label class="display-block control-label" style="text-align: left !important;" translate>Người tạo</label>
+									<input class="form-control display-block" disabled placeholder="Người tạo" ng-model="vm.workingWorkItem.userCreatedFullName"/>
+								</div>
+								<div class="col-md-4">
+									<label class="display-block control-label" style="text-align: left !important;" translate>Ngày tạo</label>
+									<input class="form-control display-block" disabled placeholder="Ngày tạo" ng-model="vm.workingWorkItem.createdDate"/>
+								</div>
+							</div>
+						</div>
+						<div id="borderCount"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<div class="portlet light bordered">
+		<div class="portlet-title background-title">
+			<div class="caption">
+				<span class="caption-subject bold lowercase" translate>Danh sách đầu việc của công việc định kỳ</span>
+			</div>
+		</div>
+
+		<div class="row mt5">
+			<div class="col-md-2">
+<!--				<button type="button" class="btn btn-qlk padding-search-right ng-scope"-->
+<!--						ng-click="vm.addMoreWO()" ng-if="stateCanCreateNewWo && enable.createNewWo"><icon class="icon-plus"></icon> Thêm WO</button>-->
+				<button type="button" class="btn btn-qlk padding-search-right ng-scope"
+						ng-click="vm.add()"><icon class="icon-plus"></icon> Thêm công việc</button>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="collapse in from-search">
+				<div class="clearfix position-relative">
+					<div kendo-grid="vm.dataWIListTable" k-options="vm.dataWIListTableOptions"></div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+<!--	<div class="portlet light bordered" ng-if="(vm.workingTR.state == 'UNASSIGN' || vm.workingTR.state == 'REJECT_CD' || vm.workingTR.state == 'ASSIGN_CD') && permissions.createTR">-->
+<!--		<div class="portlet-title background-title">-->
+<!--			<div class="caption">-->
+<!--				<span class="caption-subject bold lowercase" translate>Giao việc</span>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--		<div class="row mt5">-->
+<!--			<div class="col-md-12" style="text-align: center">-->
+<!--				<button ng-if="vm.workingTR.state != 'ASSIGN_CD'" type="button" class="btn padding-search-right btn-primary" ng-click="vm.openAssignmentModal()">Giao việc</button>-->
+<!--				<button ng-if="vm.workingTR.state == 'ASSIGN_CD'" type="button" class="btn padding-search-right btn-danger" ng-click="vm.openAssignmentModal()">Giao việc lại</button>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</div>-->
+
+<!--	<div class="portlet light bordered" ng-if="isCdTr">-->
+<!--		<div class="portlet-title background-title">-->
+<!--			<div class="caption">-->
+<!--				<span class="caption-subject bold lowercase" translate>Xác nhận công việc</span>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--		<div class="row mt5">-->
+<!--			<div class="col-md-12" style="text-align: center">-->
+<!--				<button type="button" class="btn padding-search-right btn-primary" ng-click="vm.changeStateTr('ACCEPT_CD', 'Bạn muốn tiếp nhận TR?')">Nhận việc</button>-->
+<!--				<button type="button" class="btn padding-search-right btn-danger" ng-click="openRejectModal()">Từ chối</button>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</div>-->
+
+<!--	<div class="portlet light bordered" ng-if="vm.workingTR.state == 'DONE' && permissions.createTR">-->
+<!--		<div class="portlet-title background-title">-->
+<!--			<div class="caption">-->
+<!--				<span class="caption-subject bold lowercase" translate>Phê duyệt</span>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--		<div class="row mt5">-->
+<!--			<div class="col-md-12" style="text-align: center">-->
+<!--				<button type="button" class="btn padding-search-right btn-primary" ng-click="vm.changeStateTr('OK', 'Xác nhận hoàn thành TR?')">Ok</button>-->
+<!--				<button type="button" class="btn padding-search-right btn-danger" ng-click="vm.changeStateTr('NOK', 'Không cho hoàn thành TR?')">Not Ok</button>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</div>-->
+</div>

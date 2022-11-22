@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ktts.service:war">
+    <output-path>$PROJECT_DIR$/coms-dev_2210_bgbts/coms-service/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>ktts.service</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="coms-service.war">
+      <element id="artifact" artifact-name="ktts.service:war exploded" />
+    </root>
+  </artifact>
+</component>
